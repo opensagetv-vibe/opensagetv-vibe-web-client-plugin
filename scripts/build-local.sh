@@ -17,9 +17,31 @@ if [[ ! "$SOURCE_DATE_EPOCH" =~ ^[0-9]+$ ]]; then
   echo "SOURCE_DATE_EPOCH must be an integer Unix timestamp." >&2
   exit 2
 fi
-ZIP_DATE="$(date -u -d "@$SOURCE_DATE_EPOCH" '+%Y-%m-%dT%H:%M:%SZ')"
-# jar's explicit timestamp normalizes both generated class and copied resource
-# entries. The JDK sorts a recursively added tree, yielding a byte-identical WAR
-# for an unchanged source tree and build environment.
-(cd "$BUILD/war" && jar --create --file "$ROOT/dist/SageTVWebPlayer.war" --date="$ZIP_DATE" .)
+# Build the WAR with Python's standard ZIP writer instead of `jar --date`.
+# `jar --date` is unavailable in the Java 11 toolchain that this stock-SageTV
+# plugin supports, while the Python path retains sorted entries, a fixed UTC
+# timestamp, stable permissions, and byte-identical output across JDK versions.
+python3 - "$BUILD/war" "$ROOT/dist/SageTVWebPlayer.war" "$SOURCE_DATE_EPOCH" <<'PY'
+from pathlib import Path
+import time
+import zipfile
+import sys
+
+source = Path(sys.argv[1])
+target = Path(sys.argv[2])
+epoch = max(int(sys.argv[3]), 315532800)  # ZIP timestamps begin in 1980.
+timestamp = time.gmtime(epoch)[:6]
+
+with zipfile.ZipFile(
+    target,
+    "w",
+    compression=zipfile.ZIP_DEFLATED,
+    compresslevel=9,
+) as archive:
+    for path in sorted(item for item in source.rglob("*") if item.is_file()):
+        entry = zipfile.ZipInfo(path.relative_to(source).as_posix(), timestamp)
+        entry.compress_type = zipfile.ZIP_DEFLATED
+        entry.external_attr = 0o100644 << 16
+        archive.writestr(entry, path.read_bytes())
+PY
 echo "Built $ROOT/dist/SageTVWebPlayer.war"
