@@ -342,7 +342,7 @@
   <Package>
     <PackageType>System</PackageType>
     <Location>https://local.invalid/sagetv-webplayer-3.2.30.zip</Location>
-    <MD5>0f0ce3972266a8f0ec50d48c10503462</MD5>
+    <MD5>e2def20fec19abad708f3eabd8d83144</MD5>
     <Overwrite>true</Overwrite>
   </Package>
   <ImplementationClass></ImplementationClass>
