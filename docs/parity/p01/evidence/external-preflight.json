@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-09-25T02:20:36Z",
+  "mse": {
+    "test_id": "MSE-01",
+    "status": "EXTERNAL_ENVIRONMENT_UNAVAILABLE",
+    "assets": [
+      {
+        "name": "mpegts.min.js",
+        "expected_version": "1.8.0",
+        "available": false,
+        "sha256": null,
+        "ambiguous": false
+      },
+      {
+        "name": "hls.min.js",
+        "expected_version": "1.7.3",
+        "available": false,
+        "sha256": null,
+        "ambiguous": false
+      }
+    ],
+    "actual_mse_exercised": false,
+    "reason": "Pinned release metadata was resolved, but this execution environment could not materialize or navigate the vendor bundles/CDN. Real plugin MSE start/advance/pause/resume therefore remains an external acceptance row, not PASS.",
+    "release_metadata": {
+      "mpegts.js": {
+        "version": "1.8.0",
+        "github_release_id": 192241874,
+        "asset_name": "mpegts.js",
+        "asset_id": 215586050,
+        "asset_size": 272955
+      },
+      "hls.js": {
+        "version": "1.7.3",
+        "github_release_id": 387197146,
+        "asset_name": "release.zip",
+        "asset_id": 557628661,
+        "asset_size": 7704258
+      }
+    }
+  },
+  "server": {
+    "test_id": "SERVER-ID",
+    "status": "IDENTIFIED_FROM_LIVE_LOG",
+    "running_server_verified": true,
+    "core_version": "9.2.10.1054",
+    "core_classpath_entry": "Sage.jar",
+    "core_sha256": null,
+    "active_stv": "/opt/sagetv/server/STVs/SageTV7/SageTV7.xml",
+    "stv_sha256": null,
+    "server_kind": "STOCK_CORE_WITH_STANDARD_PLUGINS_AS_REPORTED_BY_RUNTIME_LOG",
+    "extensions_authorized": false,
+    "reason": "Runtime identity and active STV path are established from the supplied server log; cryptographic deployed-file hashes are unavailable and remain an evidence limitation.",
+    "evidence": "docs/parity/p01/SERVER_IDENTITY.json"
+  }
+}

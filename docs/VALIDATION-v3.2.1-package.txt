@@ -1,0 +1,3 @@
+PASS current frontend bytes and all compiled Java-8 classes match WAR
+PASS installer XML version/MD5 and embedded WAR match current compiled artifact
+PASS active BUILD_INFO records v3.2.1, exact baseline SHA, test scope and current WAR SHA

@@ -1,0 +1,1821 @@
+{
+  "schema_version": 1,
+  "revision": 10,
+  "date": "2026-09-25",
+  "canonical": "TASKS.md",
+  "runtime_version": "3.2.12-P08",
+  "implementation_started": true,
+  "instructions": "Generated mirror of TASKS.md. Update both with the same revision/evidence; TASKS.md is authoritative. P07 native DVD wire/input protocol is implemented locally. WP07-001 stock-role negotiation capture remains open; visible PS-to-browser A/V is P08, not a P07 pass.",
+  "phases": [
+    {
+      "id": "P00",
+      "number": 0,
+      "title": "Preserve the working build and publish the plan",
+      "depends_on": [],
+      "goal": "Capture the exact supplied 3.2.4 package and create a durable, source-grounded backlog before runtime implementation.",
+      "scope": "required",
+      "existing_targets": [
+        "README.md",
+        "handoff.md",
+        "CHANGELOG.md",
+        "PROJECT_MANIFEST.sha256"
+      ],
+      "sources": [
+        "U01",
+        "U02",
+        "U03",
+        "B01"
+      ],
+      "tasks": [
+        {
+          "id": "WP00-001",
+          "title": "Freeze baseline identity",
+          "work": "Record the input ZIP, original manifest, packaged WAR, installer and runtime-file hashes. Keep the existing root folder and runnable version.",
+          "acceptance": "All original manifest entries verify; the standalone and packaged WARs and the installer WAR are identical.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/PLANNING_VERIFICATION.json"
+          ]
+        },
+        {
+          "id": "WP00-002",
+          "title": "Pin the requested upstream",
+          "work": "Use the requested Vibe repository source/dev tree and record its current commit, actual Git tree and task revision. Do not substitute source/existing or the older OpenSageTV client.",
+          "acceptance": "Reference lock identifies commit f1ba340e05fe18eaaba939253a933c3dfe6d6caf and tree 06a4c99958b8e07f6ad84b0c0d721a7b92e71918; task revision 71 and v0.5.95 checkpoint are recorded.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/PLANNING_VERIFICATION.json"
+          ]
+        },
+        {
+          "id": "WP00-003",
+          "title": "Record confirmed gaps",
+          "work": "Inspect the local media bridge, settings, caption extraction, capability replies and project limitations against the reviewed Vibe sources.",
+          "acceptance": "The matrix distinguishes missing code, partial implementation, retained behavior, platform adaptation and upstream-open work.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/PLANNING_VERIFICATION.json"
+          ]
+        },
+        {
+          "id": "WP00-004",
+          "title": "Publish all phases",
+          "work": "Create permanent task IDs, dependencies, implementation boundaries and acceptance criteria, plus a test/fixture matrix.",
+          "acceptance": "Every phase has explicit inputs, outputs, tasks and an exit gate; no implementation checkbox is marked complete.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/PLANNING_VERIFICATION.json"
+          ]
+        },
+        {
+          "id": "WP00-005",
+          "title": "Update project navigation",
+          "work": "Link the plan from README, handoff, architecture and changelog while preserving all inherited contents and historical validation.",
+          "acceptance": "The next developer can find the authoritative task list without relying on this chat.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/PLANNING_VERIFICATION.json"
+          ]
+        },
+        {
+          "id": "WP00-006",
+          "title": "Verify the planning archive",
+          "work": "Regenerate the full-project manifest and compare every original entry, runtime resource, build script, test, WAR and installer to the input archive.",
+          "acceptance": "Only declared planning documentation and the manifest change; all original files remain present; package-level checks pass.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/PLANNING_VERIFICATION.json"
+          ]
+        }
+      ],
+      "exit_gate": "Planning documentation and archive integrity only. This phase is not a playback, subtitle, DVD, hardware or regression-test pass.",
+      "status": "COMPLETE_PLANNING_ONLY",
+      "state": "COMPLETE_PLANNING_ONLY"
+    },
+    {
+      "id": "P01",
+      "number": 1,
+      "title": "Complete the upstream fix ledger and regression baseline",
+      "depends_on": [
+        "P00"
+      ],
+      "goal": "Turn \u201call fixes\u201d into an auditable inventory and reproduce the working browser baseline before changing it.",
+      "scope": "required",
+      "existing_targets": [
+        "docs/PYTHON_PORT_AUDIT.md",
+        "docs/VIBE_STREAMING_PORT.md",
+        "docs/VALIDATION.md",
+        "tests/",
+        "scripts/validate.sh"
+      ],
+      "sources": [
+        "U01",
+        "U02",
+        "U03",
+        "U15",
+        "B01"
+      ],
+      "tasks": [
+        {
+          "id": "WP01-001",
+          "title": "Exhaustive change intake",
+          "work": "Enumerate the pinned source/dev feature families, completed upstream task IDs, all changelog fix entries and relevant regression tests. Create a per-fix ledger with upstream evidence, browser disposition and a WP task. The supplied matrix is a reviewed starting inventory, not a claim that every historical commit has been audited.",
+          "acceptance": "Zero unclassified in-scope fix entries at the pinned checkpoint. Any exclusion, duplicate or superseded behavior has a written reason; unseen/local Android changes are not invented.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/UPSTREAM_FIX_LEDGER.json",
+            "docs/parity/p01/LITERAL_CHANGELOG_RECONCILIATION.json",
+            "docs/parity/p01/UPSTREAM_RELEVANT_TESTS.json",
+            "docs/parity/p01/UPSTREAM_TASK_CROSSWALK.json"
+          ],
+          "status_note": "Frozen source intake complete: 1,066 literal changelog bullets scope-classified with zero unclassified; 248 normalized functional records retain per-fix browser dispositions/WP targets; 102 relevant regression-source files inventoried from 162 test files."
+        },
+        {
+          "id": "WP01-002",
+          "title": "Resolve history and open items",
+          "work": "Use current TASKS and runtime behavior when old changelog entries conflict. Preserve open upstream DVD-001, SEEK-001 and audio/device acceptance items separately from completed subfixes.",
+          "acceptance": "DVB is not reintroduced inside CC1/CC2 from an older note; upstream-open gates are not converted into browser passes.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p01/SUPERSESSION_DECISIONS.md",
+            "docs/parity/p01/UPSTREAM_TASK_CROSSWALK.json"
+          ]
+        },
+        {
+          "id": "WP01-003",
+          "title": "Rerun untouched baseline",
+          "work": "Run the existing Java, Node, browser, FFmpeg and packaging suites against the exact original 3.2.4 source and retain unedited transcripts.",
+          "acceptance": "Baseline failures or unavailable dependencies are recorded before patching. Inherited 235-scenario claims are not relabeled as new executions.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p01/evidence/baseline-result.json",
+            "docs/parity/p01/evidence/baseline-validation.log"
+          ]
+        },
+        {
+          "id": "WP01-004",
+          "title": "Exercise actual vendor playback",
+          "work": "Load the real pinned mpegts.js and hls.js assets and run browser MSE playback against the plugin using generated media, not mocked player objects.",
+          "acceptance": "At least one real MPEG-TS and one real HLS browser path starts, advances, pauses and resumes with observed appended media.",
+          "status": "EXTERNAL_ACCEPTANCE_PENDING",
+          "evidence": [
+            "docs/parity/p01/evidence/external-preflight.json"
+          ],
+          "status_note": "Real pinned mpegts.js/hls.js MSE start/advance/pause/resume could not run because the sandbox could not materialize/navigate the vendor assets. Release identities are recorded; mock/browser baseline is not substituted."
+        },
+        {
+          "id": "WP01-005",
+          "title": "Register fixtures and expectations",
+          "work": "Create a durable fixture registry for broadcast captions, DVD menus/stills, multiple audio/subtitle streams, VBR seeks, discontinuities, short and long media. Capture hashes, expected tracks/languages/PIDs/pages and safe sharing rules.",
+          "acceptance": "Each fixture identifies its origin, expected outputs and allowed test operations. Missing private recordings are marked unavailable rather than replaced with a fake pass.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p01/FIXTURE_REGISTRY.json",
+            "docs/parity/p01/evidence/fixture-reference-result.json"
+          ]
+        },
+        {
+          "id": "WP01-006",
+          "title": "Stock and extended server separation",
+          "work": "Record exact Sage.jar identity and STV for the stock gate. Keep a separately labeled extended-Core test profile only when available and approved.",
+          "acceptance": "No test against a Vibe/custom Core is accepted as proof of stock compatibility; test controls use documented public APIs.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p01/SERVER_IDENTITY.json",
+            "docs/parity/p01/SERVER_PROFILES.json",
+            "docs/parity/p01/evidence/external-preflight.json"
+          ],
+          "status_note": "Live server log identifies SageTV 9.2.10.1054, Sage.jar classpath, server mode, and active SageTV7 STV path. Optional extended Core is separately disabled/unapproved; binary hashes unavailable are documented rather than invented."
+        },
+        {
+          "id": "WP01-007",
+          "title": "Regression preservation checklist",
+          "work": "Carry first-FLIPBUFFER gating, crypto ACK ordering, type-5 recovery, the actual Vibe overlay, 3.2.4 video placement, minimal startup and reserve filling into mandatory regression gates.",
+          "acceptance": "Each inherited behavior has a test identifier and a rollback baseline.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p01/REGRESSION_PRESERVATION.md",
+            "docs/parity/p01/BASELINE_TEST_INVENTORY.json"
+          ]
+        },
+        {
+          "id": "WP01-008",
+          "title": "Source delta rule",
+          "work": "Before implementation or release, compare the then-current upstream to the frozen pin and add newly discovered fixes under new IDs; do not silently move the baseline.",
+          "acceptance": "Every pin update has an explicit delta/revision ledger and unchanged completed task history.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p01/SOURCE_DELTA.md",
+            "docs/parity/p01/evidence/upstream-head.json"
+          ]
+        }
+      ],
+      "exit_gate": "Reviewed fix ledger, reproducible baseline and fixture registry exist; genuine failures and unavailable live tests remain explicit.",
+      "status": "COMPLETE_WITH_EXTERNAL_VENDOR_ACCEPTANCE_PENDING",
+      "remaining_gate_summary": "P01 exit gate is met: fix ledger, reproducible untouched baseline and fixture registry exist. WP01-004 remains an explicit external vendor-MSE acceptance row because this environment cannot obtain/run the pinned bundles; this is not a PASS and does not block beginning P02 under the phase exit rule.",
+      "state": "COMPLETE_WITH_EXTERNAL_VENDOR_ACCEPTANCE_PENDING"
+    },
+    {
+      "id": "P02",
+      "number": 2,
+      "title": "Shared playback, track and subtitle architecture",
+      "depends_on": [
+        "P01"
+      ],
+      "goal": "Create the missing per-session infrastructure so captions, bitmaps and DVD state do not become disconnected special cases.",
+      "scope": "required",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/MiniClientMediaBridge.java",
+        "src/main/java/org/opensagetv/webplayer/MediaProbe.java",
+        "src/main/java/org/opensagetv/webplayer/StreamOptions.java",
+        "src/main/java/org/opensagetv/webplayer/HlsSessionManager.java",
+        "src/main/java/org/opensagetv/webplayer/StreamCommand.java",
+        "src/main/webapp/js/miniclient-captions.js",
+        "src/main/webapp/js/miniclient-streaming.js"
+      ],
+      "sources": [
+        "U03",
+        "U05",
+        "U07",
+        "B02",
+        "B03",
+        "B04"
+      ],
+      "tasks": [
+        {
+          "id": "WP02-001",
+          "title": "Session and epoch ownership",
+          "work": "Specify one playback-session identity with separate seek/FLUSH/source generations, selected tracks, clock mapping and cancellation ownership. Every callback and request must reject an obsolete session.",
+          "acceptance": "Two simultaneous browser clients, a replacement recording and a stale response cannot alter one another\u2019s video or captions.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p02/ARCHITECTURE.md",
+            "docs/parity/p02/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP02-002",
+          "title": "Typed service inventory",
+          "work": "Extend probing beyond audio ordinal/index to preserve source PID, codec, language, service/page IDs, composition/ancillary page IDs, accessibility, forced/default flags and evidence quality. Use bounded in-stream discovery when ffprobe metadata is insufficient.",
+          "acceptance": "Inventory distinguishes observed services, metadata-only candidates and unavailable tracks; CEA-608 language remains Unknown.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p02/ARCHITECTURE.md",
+            "docs/parity/p02/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP02-003",
+          "title": "Shared cue contract",
+          "work": "Define versioned text and straight-alpha bitmap cues with session/epoch, presentation timestamp, clear/end semantics, canvas dimensions, placement and bounded payload size.",
+          "acceptance": "Text and bitmap cues can share scheduling but never share an incorrect decoder or render-owner identity.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p02/ARCHITECTURE.md",
+            "docs/parity/p02/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP02-004",
+          "title": "Source-preserving subtitle branch",
+          "work": "Tap/remux selected original subtitle streams before the current -sn/-dn removal and before video encoding. Design a bounded subtitle side channel for both MPEG-TS and HLS delivery without sending source video twice to the browser.",
+          "acceptance": "A hardware-encoded video does not need to preserve subtitle packets to retain captions; subtitle failure does not silently stop A/V.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p02/ARCHITECTURE.md",
+            "docs/parity/p02/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP02-005",
+          "title": "Decoder placement decision",
+          "work": "Approve the architecture for Vibe\u2019s platform-neutral Java Teletext/DVD core and a browser-compatible DVB/PGS decoder adapter. Compare a vetted Java implementation with a capability-probed libavcodec helper. Keep dependencies isolated and licensed; Android Bitmap/Media3 classes are not JVM drop-ins.",
+          "acceptance": "ADR records actual decoder APIs, build/deployment dependencies, license obligations, data limits, cancellation and fallback. No unimplemented decoder is advertised.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p02/ARCHITECTURE.md",
+            "docs/parity/p02/ADR_DECODER_PLACEMENT.md",
+            "docs/parity/p02/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP02-006",
+          "title": "Clock mapping and bounded queues",
+          "work": "Map source PTS, FFmpeg output timestamps, browser currentTime, caption delay and recording-relative time explicitly. Define wrap/discontinuity handling, queue bounds and backpressure rather than arbitrary sleeps.",
+          "acceptance": "Pause freezes presentation, time seeks clear old cues, captions keep advancing when native OSD is hidden, and read-ahead cannot render future cues early.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p02/ARCHITECTURE.md",
+            "docs/parity/p02/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP02-007",
+          "title": "Configuration migration",
+          "work": "Version the profile schema. Preserve bitrate/audio/display/client settings; keep current literal 608 CC1\u2013CC4/708 service selections as explicit compatible choices instead of silently changing their meaning into virtual slots.",
+          "acceptance": "Old 3.2.4 profiles load without resets, explicit Off survives, per-recording indices do not leak into other recordings, and effective values remain visible.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p02/ARCHITECTURE.md",
+            "docs/parity/p02/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP02-008",
+          "title": "Capability truth and resource limits",
+          "work": "Define actual support per source, decoder, transport and renderer, including maximum bitmap dimensions, total decoded bytes, active taps, readers and CPU time.",
+          "acceptance": "Malformed subtitle data, unsupported codecs and exhausted quotas produce bounded errors with normal video remaining usable.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p02/ARCHITECTURE.md",
+            "docs/parity/p02/VALIDATION.md"
+          ]
+        }
+      ],
+      "exit_gate": "Versioned contracts, session isolation, bounded resources, configuration migration and source-preservation tests pass before decoder UI switches are enabled.",
+      "status": "NOT_STARTED",
+      "state": "COMPLETE_LOCAL_ARCHITECTURE"
+    },
+    {
+      "id": "P03",
+      "number": 3,
+      "title": "DVB Teletext subtitle decoding and continuous presentation",
+      "depends_on": [
+        "P02"
+      ],
+      "goal": "Port the Vibe Level-1 subtitle-page behavior, including the OSD-hidden freeze fix, with server-safe multi-client ownership.",
+      "scope": "required",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/MediaProbe.java",
+        "src/main/java/org/opensagetv/webplayer/HlsSessionManager.java",
+        "src/main/java/org/opensagetv/webplayer/StreamCommand.java",
+        "src/main/java/org/opensagetv/webplayer/CaptionsServlet.java",
+        "src/main/webapp/js/miniclient-captions.js"
+      ],
+      "sources": [
+        "U03",
+        "U05",
+        "U06",
+        "U01",
+        "B04"
+      ],
+      "tasks": [
+        {
+          "id": "WP03-001",
+          "title": "Port with per-session ownership",
+          "work": "Adapt TeletextSubtitleEngine into one instance per playback instead of copying its Android process-global active Session/LOCK. Retain provenance and isolate parser state from other browsers.",
+          "acceptance": "Two different page-888 recordings render independently; stopping either leaves the other unchanged.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p03/REPORT.md",
+            "docs/parity/p03/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP03-002",
+          "title": "Discover actual services",
+          "work": "Parse PAT/PMT and stream type 0x06/descriptor 0x56, accepting subtitle service types 2 and 5 with language, magazine and page. Bound tables and account for program changes.",
+          "acceptance": "Breakfast/Classic Holby-style positive fixtures discover expected pages; a Taskmaster-style DVB-only fixture reports no Teletext.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p03/REPORT.md",
+            "docs/parity/p03/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP03-003",
+          "title": "Reassemble transport and PES",
+          "work": "Retain fragment-safe TS/PES/data-unit framing, PTS and expected byte positions; handle supported TS packet sizes, continuity loss, duplicate packets, seek and source replacement.",
+          "acceptance": "Split packets, partial headers, discontinuity and malformed lengths are exercised without stale page emission or unbounded memory.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p03/REPORT.md",
+            "docs/parity/p03/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP03-004",
+          "title": "Match the proven decoder subset",
+          "work": "Port Hamming address/page/row decoding, erase-page handling and broadcast Latin G0/control behavior demonstrated by Vibe. Character-set, color or graphics features beyond that subset require separately identified enhancement tasks.",
+          "acceptance": "Known packet vectors produce expected text and clear events. Documentation does not claim a complete interactive Teletext browser or all national sets.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p03/REPORT.md",
+            "docs/parity/p03/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP03-005",
+          "title": "Independent presentation clock",
+          "work": "Deliver ordered cues from an independent lifecycle-bound clock while the native timeline is hidden. Serialize simultaneous clock drains and apply playback pause/delay correctly.",
+          "acceptance": "A sustained OSD-hidden test continues to show changing cues; pause/resume and delayed-caption tests prove synchronization rather than packet counts alone.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p03/REPORT.md",
+            "docs/parity/p03/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP03-006",
+          "title": "Track selection and restart safety",
+          "work": "Expose discovered Teletext pages through virtual CC profiles and an explicit service selector; re-resolve after late discovery. Clear pending text on seek/FLUSH/source replacement and honor Off.",
+          "acceptance": "Rapid Off/CC1/CC2/Off, same-page reselection, late PMT discovery and seek-away/back show no frozen or duplicate caption.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p03/REPORT.md",
+            "docs/parity/p03/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP03-007",
+          "title": "Preservation diagnostics",
+          "work": "Port a dormant, bounded Teletext preservation probe distinguishing no descriptor, descriptor-only, PES-only, data units and decoded presentation. Do not export decoded text or media payload.",
+          "acceptance": "Diagnostics separately prove transport preservation and rendering, include cancellation, and remain inactive outside an explicit test.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p03/REPORT.md",
+            "docs/parity/p03/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP03-008",
+          "title": "Transport and field gate",
+          "work": "Test original-source, video-copy, hardware-transcode and software-fallback paths through MPEG-TS and HLS, followed by available unchanged UK recordings.",
+          "acceptance": "At least one real-source visible/timing gate is required for a field PASS; generated-only results are labeled separately.",
+          "status": "IMPLEMENTED_AWAITING_FIELD",
+          "evidence": [
+            "docs/parity/p03/REPORT.md",
+            "docs/parity/p03/VALIDATION.md",
+            "docs/parity/p03/FIELD_ACCEPTANCE.md"
+          ]
+        }
+      ],
+      "exit_gate": "Visible, synchronized Teletext pages survive OSD hide, pause, seek and track changes in supported delivery paths without affecting other clients.",
+      "status": "IN_PROGRESS_FIELD_ACCEPTANCE",
+      "state": "IMPLEMENTED_LOCAL_AWAITING_REAL_SOURCE_FIELD"
+    },
+    {
+      "id": "P04",
+      "number": 4,
+      "title": "DVB bitmap subtitles",
+      "depends_on": [
+        "P02"
+      ],
+      "goal": "Add actual DVB bitmap decoding and alpha-aware rendering; do not approximate bitmap subtitles as Teletext or text.",
+      "scope": "required",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/MediaProbe.java",
+        "src/main/java/org/opensagetv/webplayer/StreamCommand.java",
+        "src/main/java/org/opensagetv/webplayer/HlsSessionManager.java",
+        "src/main/java/org/opensagetv/webplayer/CaptionsServlet.java",
+        "src/main/webapp/js/miniclient-captions.js",
+        "src/main/webapp/css/miniclient.css"
+      ],
+      "sources": [
+        "U03",
+        "U07",
+        "U01",
+        "E01",
+        "B03",
+        "B04"
+      ],
+      "tasks": [
+        {
+          "id": "WP04-001",
+          "title": "Discover DVB identity",
+          "work": "Keep the source PID and descriptor 0x59 service metadata, composition/ancillary page identities, language and hearing-impaired designation distinct from ffprobe array positions.",
+          "acceptance": "Multiple services sharing a transport cannot be accidentally selected by a UI ordinal or CEA service number.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p04/REPORT.md",
+            "docs/parity/p04/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP04-002",
+          "title": "Decode complete display sets",
+          "work": "Implement the selected backend for page/region/object/CLUT/display-definition state, 2/4/8-bit pixels, transparency, version changes and partial PES. Preserve clear/end/timeout semantics.",
+          "acceptance": "Known vectors verify exact pixels and alpha, display placement and clears; malformed dimensions/lengths are safely rejected.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p04/REPORT.md",
+            "docs/parity/p04/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP04-003",
+          "title": "Render on a separate bitmap surface",
+          "work": "Send timed bitmap cues or decoded rectangles through the shared contract; render above video with the same source-to-display transform, below browser controls as appropriate.",
+          "acceptance": "PAL/HD, previews, Fill/Fit/Stretch, fullscreen and OSD transitions maintain subtitle geometry without changing video bounds.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p04/REPORT.md",
+            "docs/parity/p04/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP04-004",
+          "title": "Explicit DVB mode",
+          "work": "Add the single top-level DVB choice and a discovered-track selector. Keep DVB out of CC1/CC2 Auto/type mappings, matching the current Android policy.",
+          "acceptance": "Selecting DVB persists after reopening settings and after asynchronous discovery; no Teletext renderer or event-225 text conversion is activated.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p04/REPORT.md",
+            "docs/parity/p04/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP04-005",
+          "title": "PID and disable control",
+          "work": "Provide the ordinary-video media-command-36/type-1 adapter and disabled-track handling without confusing it with DVD private-stream selection.",
+          "acceptance": "PID selection, unknown PID, disable sentinel and late track discovery are tested independently of native DVD sessions.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p04/REPORT.md",
+            "docs/parity/p04/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP04-006",
+          "title": "Preserve through transcoding",
+          "work": "Keep bitmap subtitles outside the video encoder unless an explicit, separately tested burn-in mode is chosen. Capability-check any FFmpeg/library dependency.",
+          "acceptance": "Hardware and software video encoding retain the same selected subtitle pixels; subtitle clearing does not wait for a new video segment.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p04/REPORT.md",
+            "docs/parity/p04/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP04-007",
+          "title": "Lifetime and field validation",
+          "work": "Test Off/On, language change, seek, source PMT change, EOS and reconnect with bounded queues and no stale images. Validate available Taskmaster/UK source samples in addition to generated bitmaps.",
+          "acceptance": "Visible captions and disappearance are recorded; \u201cdecoded bitmap count > 0\u201d alone is not a PASS.",
+          "status": "IMPLEMENTED_AWAITING_FIELD",
+          "evidence": [
+            "docs/parity/p04/REPORT.md",
+            "docs/parity/p04/VALIDATION.md",
+            "docs/parity/p04/FIELD_ACCEPTANCE.md"
+          ]
+        }
+      ],
+      "exit_gate": "DVB remains a distinct, selectable bitmap path with correct timing, transparency, position and cleanup across all supported transports.",
+      "status": "IN_PROGRESS_FIELD_ACCEPTANCE",
+      "state": "IMPLEMENTED_LOCAL_AWAITING_REAL_SOURCE_FIELD"
+    },
+    {
+      "id": "P05",
+      "number": 5,
+      "title": "Stock SageTV CC authority and virtual CC1/CC2",
+      "depends_on": [
+        "P03",
+        "P04"
+      ],
+      "goal": "Port current Vibe selection/ownership rules and stock callback compatibility without coupling CC to file/DVD subtitles.",
+      "scope": "required",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/MiniClientSession.java",
+        "src/main/java/org/opensagetv/webplayer/MiniClientMediaBridge.java",
+        "src/main/java/org/opensagetv/webplayer/StreamOptions.java",
+        "src/main/webapp/miniclient.html",
+        "src/main/webapp/js/miniclient.js",
+        "src/main/webapp/js/miniclient-captions.js"
+      ],
+      "sources": [
+        "U03",
+        "U06",
+        "U07",
+        "U10",
+        "B02",
+        "B05"
+      ],
+      "tasks": [
+        {
+          "id": "WP05-001",
+          "title": "Current caption-mode model",
+          "work": "Implement OFF, CC1, CC2, STV and DVB with two virtual CC profiles using Auto/Teletext/CEA-608/CEA-708 and discovered language/service choices. Keep literal legacy CEA choices addressable.",
+          "acceptance": "DVB never resolves through a virtual CC slot; ordinary SRT/PGS/DVD language preference never enables broadcast CC.",
+          "status": "COMPLETE_LOCAL",
+          "evidence": [
+            "docs/parity/p05/REPORT.md",
+            "docs/parity/p05/VALIDATION.md",
+            "docs/parity/p05/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP05-002",
+          "title": "Evidence-based Auto resolution",
+          "work": "Use English-first, distinct-service preference where appropriate; distinguish real observed CEA from synthetic extractor placeholders. Do not invent CEA-608 language metadata.",
+          "acceptance": "UK Teletext is not displaced by an empty synthetic CEA entry; two described services can resolve independently.",
+          "status": "COMPLETE_LOCAL",
+          "evidence": [
+            "docs/parity/p05/REPORT.md",
+            "docs/parity/p05/VALIDATION.md",
+            "docs/parity/p05/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP05-003",
+          "title": "Legacy event-225 bridge",
+          "work": "Adapt LegacyExtenderCaptionBridge and TeletextCea608Bridge with serialized native writes, correct flags/time units and flush/reset ordering. Negotiate GFX_SUBTITLES/SUBTITLES_CALLBACKS only after the complete callback path exists.",
+          "acceptance": "Stock STV Off/CC1/CC2 selection works through actual native callbacks; no private server patch or invented event is needed.",
+          "status": "IMPLEMENTED_AWAITING_FIELD",
+          "evidence": [
+            "docs/parity/p05/REPORT.md",
+            "docs/parity/p05/VALIDATION.md",
+            "docs/parity/p05/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP05-004",
+          "title": "Single caption renderer",
+          "work": "Explicit local modes must reset/drain the legacy caption path before local presentation. STV mode must stop the local owner and respect actual server state when available.",
+          "acceptance": "Switching STV -> CC1 -> DVB -> Off leaves only the intended caption renderer and no previously painted ghost text.",
+          "status": "COMPLETE_LOCAL",
+          "evidence": [
+            "docs/parity/p05/REPORT.md",
+            "docs/parity/p05/VALIDATION.md",
+            "docs/parity/p05/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP05-005",
+          "title": "Stock-server authority fallback",
+          "work": "Handle stock servers that do not transmit VIDEO_CC_STATE; use the proven legacy callback contract rather than assuming the property always arrives. Keep ordinary DVB selection via command 36 separate.",
+          "acceptance": "Both property-present and property-absent server peers pass; unsupported stock DVB control remains truthfully local-selectable.",
+          "status": "IMPLEMENTED_AWAITING_FIELD",
+          "evidence": [
+            "docs/parity/p05/REPORT.md",
+            "docs/parity/p05/VALIDATION.md",
+            "docs/parity/p05/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP05-006",
+          "title": "CEA regression and completeness audit",
+          "work": "Retest the current CEA-608/708 implementation against real service discovery, field/channel mapping, control/clear sequences, 708 windows and caption offset. Add missing relevant upstream behavior only with vectors and evidence.",
+          "acceptance": "608 CC1\u2013CC4 and selected 708 services remain accessible; any styling/service limitation is documented rather than certified by a menu label.",
+          "status": "IMPLEMENTED_AWAITING_FIELD",
+          "evidence": [
+            "docs/parity/p05/REPORT.md",
+            "docs/parity/p05/VALIDATION.md",
+            "docs/parity/p05/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP05-007",
+          "title": "UI and persistence",
+          "work": "Use the existing Vibe overlay caption icon to open compact nested settings with live inventory and effective-source labels. Preserve parent focus and explicit selection after track refresh.",
+          "acceptance": "Keyboard/touch/remote navigation reaches every control; reopening the menu never silently changes DVB to STV or an unavailable service.",
+          "status": "COMPLETE_LOCAL",
+          "evidence": [
+            "docs/parity/p05/REPORT.md",
+            "docs/parity/p05/VALIDATION.md",
+            "docs/parity/p05/FIELD_ACCEPTANCE.md"
+          ]
+        }
+      ],
+      "exit_gate": "Stock STV authority, virtual text-caption slots and explicit local DVB have mutually consistent, nonduplicating behavior with separate ordinary subtitles.",
+      "status": "IMPLEMENTED_AWAITING_FIELD"
+    },
+    {
+      "id": "P06",
+      "number": 6,
+      "title": "Ordinary text, PGS and VobSub/file subtitles",
+      "depends_on": [
+        "P02"
+      ],
+      "goal": "Close the ordinary subtitle gap independently of broadcast CC and native DVD menu graphics.",
+      "scope": "required",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/MediaProbe.java",
+        "src/main/java/org/opensagetv/webplayer/MediaSourceFactory.java",
+        "src/main/java/org/opensagetv/webplayer/HlsSessionManager.java",
+        "src/main/java/org/opensagetv/webplayer/CaptionsServlet.java",
+        "src/main/webapp/js/miniclient-captions.js",
+        "src/main/webapp/miniclient.html"
+      ],
+      "sources": [
+        "U03",
+        "U07",
+        "E01",
+        "B03",
+        "B04"
+      ],
+      "tasks": [
+        {
+          "id": "WP06-001",
+          "title": "Embedded and sidecar discovery",
+          "work": "Discover supported embedded text/PGS/VobSub tracks and explicitly associated sidecar files using the active authorized MediaFile. Preserve language/title/default/forced metadata.",
+          "acceptance": "Track identities survive refresh and unrelated same-basename files or paths cannot be read through a subtitle request.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p06/REPORT.md",
+            "docs/parity/p06/VALIDATION.md",
+            "docs/parity/p06/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP06-002",
+          "title": "Text conversion and rendering",
+          "work": "Provide SRT/WebVTT and only the additional text formats confirmed by the ledger through safe browser cues; document any ASS/SSA style loss or unsupported variants. Never insert subtitle text as executable HTML.",
+          "acceptance": "Unicode, overlapping cues, clear/end behavior, basic positioning and hostile markup tests pass.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p06/REPORT.md",
+            "docs/parity/p06/VALIDATION.md",
+            "docs/parity/p06/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP06-003",
+          "title": "PGS bitmap adapter",
+          "work": "Implement composition/palette/object/clear handling with correct canvas and forced flags through the selected vetted backend. Treat PGS subtitles in files separately from Blu-ray navigation.",
+          "acceptance": "A PGS-bearing MKV renders and clears correctly; this does not count as BDMV/BD-J playback support.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p06/REPORT.md",
+            "docs/parity/p06/VALIDATION.md",
+            "docs/parity/p06/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP06-004",
+          "title": "VobSub and palette context",
+          "work": "Support selected file-based DVD/VobSub bitmaps with required IDX/extradata/IFO palette context where present. Do not infer a correct DVD palette solely from a concatenated VOB.",
+          "acceptance": "Palette-present, palette-missing and forced-only cases have visible verified behavior or explicit unsupported errors.",
+          "status": "IMPLEMENTED_AWAITING_FIELD",
+          "evidence": [
+            "docs/parity/p06/REPORT.md",
+            "docs/parity/p06/VALIDATION.md",
+            "docs/parity/p06/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP06-005",
+          "title": "Independent selection and scope",
+          "work": "Add ordinary subtitle Off/Auto/track, language, delay and forced-only policy separate from CC. Define when intentionally enabling file subtitles and broadcast captions may coexist.",
+          "acceptance": "Changing CC does not alter ordinary subtitles; Off remains authoritative; session-only and saved defaults are distinguished.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p06/REPORT.md",
+            "docs/parity/p06/VALIDATION.md",
+            "docs/parity/p06/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP06-006",
+          "title": "Seek and lifecycle coverage",
+          "work": "Use the shared epoch clock, bounds and cancellation; validate video copy/transcode, pause, subtitle offsets, seek, file end and rapid switching.",
+          "acceptance": "No stale text/bitmap or orphan extraction process after stop/reconnect; unsupported formats never appear as working choices.",
+          "status": "DONE",
+          "evidence": [
+            "docs/parity/p06/REPORT.md",
+            "docs/parity/p06/VALIDATION.md",
+            "docs/parity/p06/FIELD_ACCEPTANCE.md"
+          ]
+        }
+      ],
+      "exit_gate": "Supported ordinary subtitle types have real decoding/rendering and independent controls; remaining format limitations are explicit.",
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "P07",
+      "number": 7,
+      "title": "Native DVD protocol and pushed-media session",
+      "depends_on": [
+        "P02"
+      ],
+      "goal": "Implement the native MiniDVDPlayer wire session that the current browser bridge does not consume.",
+      "scope": "required",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/MiniClientMediaBridge.java",
+        "src/main/java/org/opensagetv/webplayer/MiniClientSession.java",
+        "src/main/java/org/opensagetv/webplayer/MiniClientSessionManager.java",
+        "src/main/java/org/opensagetv/webplayer/HlsSessionManager.java"
+      ],
+      "sources": [
+        "U04",
+        "U08",
+        "U10",
+        "U03",
+        "B02",
+        "B05"
+      ],
+      "tasks": [
+        {
+          "id": "WP07-001",
+          "title": "Capability and role gate",
+          "work": "Audit stock MiniClientSageRenderer/VideoFrame selection of DVD paths, including INPUT_DEVICES and MPEG-2 capability identity. Do not merely add DVD_REMOTE_NAV or TV while pushed-media handling is absent; retain browser mouse/touch through a tested adaptation.",
+          "acceptance": "Captured stock negotiation selects the intended native DVD path only when the backend is available; ordinary SageMC input is unchanged.",
+          "status": "IMPLEMENTED_AWAITING_FIELD",
+          "evidence": [
+            "docs/parity/p07/REPORT.md",
+            "docs/parity/p07/VALIDATION.md",
+            "docs/parity/p07/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP07-002",
+          "title": "INIT without OPENURL",
+          "work": "Add a lazily initialized DVD session with correct prebuffer capacity; distinguish real MPEG-PS/metadata/drain polls from startup bandwidth probes.",
+          "acceptance": "INIT -> GETMEDIATIME -> empty poll -> DVD metadata -> PUSHBUFFER works without OPENURL, while four synthetic 16 KiB probes never start a DVD player.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p07/REPORT.md",
+            "docs/parity/p07/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP07-003",
+          "title": "Mandatory reply contracts",
+          "work": "Implement commands 32\u201337 with bounds-checked payloads and the required four-byte replies on success, missing-player and error paths. Keep SEEK reply length and ordinary media behavior unchanged.",
+          "acceptance": "A real-socket peer verifies exact reply lengths with malformed data and interleaved control; no media-socket desynchronization or 30-second stall.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p07/REPORT.md",
+            "docs/parity/p07/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP07-004",
+          "title": "Real pushed-byte ownership",
+          "work": "Introduce a bounded DVD MPEG-PS input queue/spool and producer-consumer backpressure. Stop treating accepted media bytes as a capacity-only probe.",
+          "acceptance": "Every accepted byte is accounted for exactly once; full buffers apply truthful backpressure and memory/disk use stay bounded.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p07/REPORT.md",
+            "docs/parity/p07/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP07-005",
+          "title": "Transient segment EOS and drain",
+          "work": "Implement 0x80 segment end and 0x100 drain polling with -2 only at the appropriate decoder/input boundary. Never declare a title complete simply because a DVD menu/cell ended.",
+          "acceptance": "Short menu cells advance, long buffered titles are not discarded, and drain state cannot deadlock against the producer.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p07/REPORT.md",
+            "docs/parity/p07/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP07-006",
+          "title": "FLUSH epochs and cancellation",
+          "work": "Ignore the harmless pre-data DVD initialization flush; post-data FLUSH creates a new byte/decoder generation while retaining required playback intent. Scope drain one-shot state to generation, not byte count.",
+          "acceptance": "Two equal-sized consecutive menu cells work; stale reader callbacks and Stop/DEINIT cannot revive a retired DVD generation.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p07/REPORT.md",
+            "docs/parity/p07/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP07-007",
+          "title": "Clock and format commands",
+          "work": "Define STC/NEWCELL interpretation and explicit DVD clock conversion before accepting them. Preserve DVD four-byte GETMEDIATIME/PUSHBUFFER responses independently of optional ordinary-Push telemetry.",
+          "acceptance": "Native time and all later command replies remain aligned across cell, seek and format changes.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p07/REPORT.md",
+            "docs/parity/p07/VALIDATION.md"
+          ]
+        },
+        {
+          "id": "WP07-008",
+          "title": "Failure isolation",
+          "work": "Keep protocol readers responsive; run blocking FFmpeg startup/cleanup outside native reply locks with bounded deadlines and visible errors.",
+          "acceptance": "Encoder startup failure leaves a valid GFX connection and a truthful failed playback state, not a forged successful DVD capability.",
+          "status": "PASS_LOCAL_AT_P07_BOUNDARY",
+          "evidence": [
+            "docs/parity/p07/REPORT.md",
+            "docs/parity/p07/VALIDATION.md"
+          ]
+        }
+      ],
+      "exit_gate": "A stock-compatible native DVD session accepts real bytes and controls, handles all mandatory replies, drains and resets without changing the GFX startup/authentication invariants.",
+      "status": "COMPLETE_LOCAL_WITH_FIELD_GATE",
+      "state": "COMPLETE_LOCAL_WITH_FIELD_GATE"
+    },
+    {
+      "id": "P08",
+      "number": 8,
+      "title": "DVD MPEG-PS A/V conversion, timing and still menus",
+      "depends_on": [
+        "P07"
+      ],
+      "goal": "Make native DVD media actually play in the browser while preserving VM navigation and original timing.",
+      "scope": "required",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/HlsSessionManager.java",
+        "src/main/java/org/opensagetv/webplayer/StreamCommand.java",
+        "src/main/java/org/opensagetv/webplayer/MediaProbe.java",
+        "src/main/java/org/opensagetv/webplayer/MiniClientMediaBridge.java",
+        "src/main/webapp/js/miniclient-playback.js"
+      ],
+      "sources": [
+        "U04",
+        "U09",
+        "U11",
+        "U12",
+        "B02",
+        "B04"
+      ],
+      "tasks": [
+        {
+          "id": "WP08-001",
+          "title": "PS/PES boundary handling",
+          "work": "Feed the native PS input to the browser-compatible conversion path without concatenating unrelated titles/VOBs. Handle system/private-stream headers and partial packets safely.",
+          "acceptance": "Both generated menu and moving-title PS streams produce actual decodable browser media.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p08/REPORT.md",
+            "docs/parity/p08/VALIDATION.md",
+            "docs/parity/p08/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP08-002",
+          "title": "Physical audio-stream identity",
+          "work": "Map the DVD wire audio code to its physical AC-3/LPCM/MPEG/DTS substream according to supported decoder capability, not the UI track ordinal; never mix private streams into one decoder.",
+          "acceptance": "A multi-language disc changes to the requested authored audio stream; unsupported formats fail visibly rather than select the wrong language.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p08/REPORT.md",
+            "docs/parity/p08/VALIDATION.md",
+            "docs/parity/p08/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP08-003",
+          "title": "Browser-compatible output",
+          "work": "Use actual H.264/AAC conversion with the existing encoder policy; measure and preserve MPEG-TS/HLS latency and discontinuity behavior. Keep decoding, filtering and encoding acceleration reported separately.",
+          "acceptance": "Software and an available physical hardware encoder each produce playable output; unavailable vendors remain untested.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p08/REPORT.md",
+            "docs/parity/p08/VALIDATION.md",
+            "docs/parity/p08/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP08-004",
+          "title": "DVD presentation clock",
+          "work": "Port relevant PTS wrap/cell-offset/discontinuity logic; keep SPU-only packets from consuming a pending A/V rebase. Map browser output time back to the server DVD clock.",
+          "acceptance": "Cell transitions, PAL/NTSC, seeks and audio changes do not reset the title timeline to zero or accumulate drift.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p08/REPORT.md",
+            "docs/parity/p08/VALIDATION.md",
+            "docs/parity/p08/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP08-005",
+          "title": "Sparse timestamps and cadence",
+          "work": "Characterize FFmpeg behavior for sparse DVD MPEG-2 picture timestamps, frame rates and interlace/telecine; adapt the upstream behavior only when applicable to this conversion backend.",
+          "acceptance": "A repeated authored cadence fixture and sustained motion show correct speed; Android-specific Media3 timestamp patches are not copied blindly into FFmpeg.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p08/REPORT.md",
+            "docs/parity/p08/VALIDATION.md",
+            "docs/parity/p08/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP08-006",
+          "title": "Still-frame menus",
+          "work": "Preserve authored still backgrounds, audio and button/subpicture updates even for one-picture menus and tiny audio-only or video-first cells. Provide an explicit still presentation state when the browser media queue ends.",
+          "acceptance": "A menu remains visible and interactive with or without ongoing audio; the reserve target cannot prevent short cells from starting or draining.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p08/REPORT.md",
+            "docs/parity/p08/VALIDATION.md",
+            "docs/parity/p08/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP08-007",
+          "title": "Interactive buffering profile",
+          "work": "Separate DVD menu/drain buffering from long-title reserve filling. Evaluate the upstream 5-second/12-second Android values as reference evidence, not automatically optimal browser defaults.",
+          "acceptance": "Menus start promptly, moving titles build a reserve, and pause/VM waits do not trigger blind playback restarts.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p08/REPORT.md",
+            "docs/parity/p08/VALIDATION.md",
+            "docs/parity/p08/FIELD_ACCEPTANCE.md"
+          ]
+        },
+        {
+          "id": "WP08-008",
+          "title": "Seek/reload/teardown",
+          "work": "Keep server-owned disc seeks and local display refresh distinct; preserve audio selection, logical clock, menu state and pause intent where appropriate.",
+          "acceptance": "Title seeks, chapter transitions, Stop, replay and repeated disconnects leave no orphan FFmpeg process, spool or clock pump.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p08/REPORT.md",
+            "docs/parity/p08/VALIDATION.md",
+            "docs/parity/p08/FIELD_ACCEPTANCE.md"
+          ]
+        }
+      ],
+      "exit_gate": "Real DVD menu/title PS is converted and presented in the browser with correct audio, clock, cadence, still behavior and bounded streaming; protocol-only success is insufficient.",
+      "status": "COMPLETE_LOCAL",
+      "state": "COMPLETE_LOCAL"
+    },
+    {
+      "id": "P09",
+      "number": 9,
+      "title": "DVD SPU subtitles, highlights and interactive navigation",
+      "depends_on": [
+        "P08"
+      ],
+      "goal": "Port authored DVD subpictures and menu interaction, not just main-feature video.",
+      "scope": "required",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/MiniClientMediaBridge.java",
+        "src/main/webapp/js/miniclient.js",
+        "src/main/webapp/js/miniclient-core.js",
+        "src/main/webapp/css/miniclient.css"
+      ],
+      "sources": [
+        "U08",
+        "U09",
+        "U12",
+        "U03"
+      ],
+      "tasks": [
+        {
+          "id": "WP09-001",
+          "title": "Platform-neutral SPU core",
+          "work": "Adapt DvdSpuAssembler, DvdSpuDecoder, compositor, highlight, palette and related bounded core types with preserved license/source provenance. Replace Android Bitmap publishing with the shared browser bitmap contract.",
+          "acceptance": "The upstream pure-core SPU vectors plus browser-adapter tests pass without adding Android runtime dependencies.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP09-002",
+          "title": "Full SPU control behavior",
+          "work": "Support fragment reassembly, RLE fields, display/stop/forced commands, authored coordinates, CLUT, alpha, CHG_COLCON region palettes and selected/activated button colors.",
+          "acceptance": "Pixel/hash vectors cover normal and region palettes, truncated input and control loops; clears do not resurrect an old frame.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP09-003",
+          "title": "Correct subtitle enable semantics",
+          "work": "Handle DVD physical SPU selection and disable flags independently of ordinary-video DVB PID commands and broadcast Off. Permit authored menu highlights when title subtitles are off.",
+          "acceptance": "Menu navigation stays visible with title subtitles disabled; a forced movie SPU is not shown against an authoritative Off policy unless an explicitly supported policy says otherwise.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP09-004",
+          "title": "Generation-correct scheduling",
+          "work": "Retain queued future SPU events across repeated same-CLUT/highlight commands; invalidate only on genuine session/stream/epoch changes. Recompose the currently presented frame, not a future buffered subtitle.",
+          "acceptance": "Repeated CLUT and rapid navigation cannot cancel every pending subtitle, display a future menu or replay a cleared image.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP09-005",
+          "title": "Aspect and display alignment",
+          "work": "Map 720-wide PAL/NTSC subtitle canvases, sample/display aspect, preview and Fill/Fit/Stretch transforms to the same visible video rectangle.",
+          "acceptance": "Highlight rectangles and authored buttons align in all supported display modes without shrinking the video when the OSD hides.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP09-006",
+          "title": "Remote and mouse interaction",
+          "work": "Send DVD D-pad/Select/Back/Menu/chapter actions to the server VM using supported native/public interfaces. Map pointer coordinates only through a verified DVD hit-test contract; unsupported pointer selection must not pretend to work.",
+          "acceptance": "Root, language submenu, title menu, chapter and return transitions work; the long-press browser overlay still opens without clicking an authored button underneath.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP09-007",
+          "title": "Authored and real-disc acceptance",
+          "work": "Use an authored fixture with multiple menu cells, equal-sized transitions, languages, chapters and SPUs, then available representative menu and menu-less discs.",
+          "acceptance": "Visible menus/highlights plus advancing A/V and successful Stop are required; playing the largest VOB or main title alone cannot close this phase.",
+          "status": "PLANNED",
+          "evidence": []
+        }
+      ],
+      "exit_gate": "Interactive root/submenu/title navigation, highlights, title subtitles, language/chapter selection and teardown work through the actual browser path.",
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "P10",
+      "number": 10,
+      "title": "Disc sources, title selection and library metadata",
+      "depends_on": [
+        "P08",
+        "P09"
+      ],
+      "goal": "Handle supported disc source forms and timeline metadata without hiding server filesystem or mounting failures.",
+      "scope": "required",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/MediaSourceFactory.java",
+        "src/main/java/org/opensagetv/webplayer/SageApiBridge.java",
+        "src/main/java/org/opensagetv/webplayer/MiniClientMediaBridge.java",
+        "src/main/java/org/opensagetv/webplayer/MediaProbe.java",
+        "src/main/webapp/miniclient.html"
+      ],
+      "sources": [
+        "U03",
+        "U13",
+        "E02",
+        "B02",
+        "B06"
+      ],
+      "tasks": [
+        {
+          "id": "WP10-001",
+          "title": "Disc source taxonomy",
+          "work": "Separate VIDEO_TS directories, a parent folder, already-mounted images, ISO files, individual VOBs, imported MKVs and BDMV. Resolve paths through authorized MediaFiles, not arbitrary user-supplied paths.",
+          "acceptance": "Each input form has a documented supported route or exact unsupported stage; a VOB/MKV is not mislabeled a navigable DVD.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP10-002",
+          "title": "Path and duplicate-name safety",
+          "work": "Audit percent decoding, spaces, plus signs, Unicode, case sensitivity, UNC/mapped roots and basename fallback. Require an unambiguous match rather than selecting the first same-name recording.",
+          "acceptance": "Two identically named files in different folders cannot be confused; nonexistent paths never launch unrelated media.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP10-003",
+          "title": "ISO mount boundary",
+          "work": "Detect and report native stock-server ISO mount prerequisites separately from browser/DVD decoding. Do not add sudo/root or silently change container privileges. Evaluate a plugin-owned read-only route only as an explicit architecture task.",
+          "acceptance": "The supplied earlier ISO-mount failure is not hidden behind a generic decoder error; VIDEO_TS remains independently testable.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP10-004",
+          "title": "Title and chapter metadata",
+          "work": "Use disc VM/IFO-derived identity and public SageTV APIs where supported; distinguish title duration, chapter time and recording time. Do not equate title 1 or the largest VOB with the main feature.",
+          "acceptance": "A multi-title fixture with extras and non-first main feature selects and reports the intended title/chapter.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP10-005",
+          "title": "Movie-only compatibility option",
+          "work": "Design an explicitly labeled main-feature/title conversion option only after actual FFmpeg dvdvideo/library capability probing. Keep it separate from native-menu playback and optional Core transform negotiation.",
+          "acceptance": "Movie-only mode never claims menu parity; absent libraries produce a clear capability message rather than silent fallback to concatenated VOBs.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP10-006",
+          "title": "Invalid imported metadata",
+          "work": "Detect impossible duration/stream metadata without modifying the library automatically. Offer a narrow documented repair path with user approval and backup requirements; broad reindex is not a playback side effect.",
+          "acceptance": "A 1 ms imported duration is reported as server metadata, not treated as the user\u2019s intended seek; history and recordings stay untouched.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP10-007",
+          "title": "Disc scope and unsupported media",
+          "work": "Keep Blu-ray/BDMV, BD-J, encrypted-disc handling and secure/DRM playback separate from proven DVD work. Carry upstream-uncommissioned items as pending scope, not completed fixes.",
+          "acceptance": "The support table explicitly distinguishes DVD Native, movie-only, ISO environment prerequisites and out-of-scope disc/DRM features.",
+          "status": "PLANNED",
+          "evidence": []
+        }
+      ],
+      "exit_gate": "Disc input and metadata handling is deterministic and safe; environment limitations are explicit, and movie-only conversion is not substituted for interactive DVD.",
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "P11",
+      "number": 11,
+      "title": "Seek, Comskip, growing files and sustained buffering",
+      "depends_on": [
+        "P02"
+      ],
+      "goal": "Port relevant timeline/recovery fixes and retain quick startup followed by continuous reserve filling.",
+      "scope": "required",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/MiniClientMediaBridge.java",
+        "src/main/java/org/opensagetv/webplayer/HlsSessionManager.java",
+        "src/main/java/org/opensagetv/webplayer/RecordingFollower.java",
+        "src/main/java/org/opensagetv/webplayer/SageMediaServerSource.java",
+        "src/main/java/org/opensagetv/webplayer/ContinuousFilePump.java",
+        "src/main/webapp/js/miniclient-playback.js",
+        "src/main/webapp/js/commercial-skip.js"
+      ],
+      "sources": [
+        "U01",
+        "U02",
+        "U03",
+        "U04",
+        "B02",
+        "B07"
+      ],
+      "tasks": [
+        {
+          "id": "WP11-001",
+          "title": "Eliminate guessed time-to-byte seeks",
+          "work": "Replace the inherited proportional-byte fallback with a validated timestamp/index seek strategy for VBR and remote/pipe sources. Explicitly retain keyframe limitations where video is copied.",
+          "acceptance": "Large forward/backward targets and tail seeks land within a documented measured tolerance; no guessed offset is reported as frame-accurate.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP11-002",
+          "title": "Stable seek and FLUSH timeline",
+          "work": "Carry the last proven time during bounded transitional states, and apply the mux-end versus epoch-start correction only to actual ordinary-Push paths that need it.",
+          "acceptance": "Rapid skips/Comskip cannot target zero or repeatedly back up; DVD and direct-source clocks do not receive an irrelevant Push offset.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP11-003",
+          "title": "Public server seek ownership",
+          "work": "Separate absolute recording seeks, VM chapter/navigation and browser-local buffered time. Use context-specific public Seek/Watch APIs when server ownership is required.",
+          "acceptance": "The intended MiniClient alone moves; no private commissioning events 230\u2013233, wrong UI context or duplicate EDL skip is emitted.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP11-004",
+          "title": "Growing and completed EOF",
+          "work": "Use available server recording state, segment growth and bounded tail rechecks. Handle real live program/PID/format transitions and exact completed EOF.",
+          "acceptance": "Temporary EOF does not end a recording still being written; completed files do not buffer forever; old source state cannot leak into the next program.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP11-005",
+          "title": "Quick start then reserve",
+          "work": "Preserve minimal first-play delay with separate 30\u2013600-second configured reserve targets. Validate continuous TS byte-resume and HLS refill while playing and paused, accounting for browser quota and the real live edge.",
+          "acceptance": "An actual browser sustains playback well beyond the initial buffered window; pausing fills available reserve without resuming itself.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP11-006",
+          "title": "Progress-aware recovery",
+          "work": "Classify source/read, probe, parser, browser decode, encoder, audio, quota and transport errors. Do not restart while useful reads or decoding progress continue; use bounded, reason-specific retries and same-position fallback.",
+          "acceptance": "A slow or cold source is not repeatedly discarded; malformed media and genuine stalled producers still fail within documented bounds.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP11-007",
+          "title": "Cache and spool lifecycle",
+          "work": "Scope probe/seek hints to exact file identity and invalidate on growth/changes. Bound per-session and global output, active readers and idle producers; preserve byte-resume contracts while cleaning retired epochs.",
+          "acceptance": "Long recordings, concurrent clients and low disk cannot consume unbounded resources or serve overwritten offsets as original bytes.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP11-008",
+          "title": "Long-run and changeover gate",
+          "work": "Exercise a three-hour-plus/5.5-hour-class recording, rapid control stress, late seeks, growing-to-complete transition and repeated recording/channel changes.",
+          "acceptance": "Timeline/OSD clears normally, reserve refills, no clock drift loop or orphan work occurs; unavailable multi-hour live evidence remains pending.",
+          "status": "PLANNED",
+          "evidence": []
+        }
+      ],
+      "exit_gate": "Measured seeking, source growth/EOF and sustained buffering remain correct under real playback and control stress, not just mocked buffer snapshots.",
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "P12",
+      "number": 12,
+      "title": "Audio, playback controls and quality-policy parity",
+      "depends_on": [
+        "P02",
+        "P11"
+      ],
+      "goal": "Adapt applicable Android playback settings and safety fixes to the browser/FFmpeg backend without advertising Android-only APIs.",
+      "scope": "required",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/StreamOptions.java",
+        "src/main/java/org/opensagetv/webplayer/StreamPlan.java",
+        "src/main/java/org/opensagetv/webplayer/StreamCommand.java",
+        "src/main/java/org/opensagetv/webplayer/TranscoderManager.java",
+        "src/main/java/org/opensagetv/webplayer/MiniClientMediaBridge.java",
+        "src/main/webapp/js/miniclient-streaming.js",
+        "src/main/webapp/miniclient.html"
+      ],
+      "sources": [
+        "U01",
+        "U02",
+        "U03",
+        "B03",
+        "B04"
+      ],
+      "tasks": [
+        {
+          "id": "WP12-001",
+          "title": "Primary audio and source changes",
+          "work": "Preserve stream identity, prefer the requested primary-language audio over commentary/narration when evidence supports that policy, and safely handle late discovery, PMT changes and channel layout transitions.",
+          "acceptance": "A leading NAR track does not override an explicit primary choice; absent desired audio is reported and fallback follows saved policy.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP12-002",
+          "title": "Output and delay scope",
+          "work": "Port applicable session/default scope, signed delay and effective-output reporting. Evaluate the Android -4000..+4000 ms/25 ms user controls without pretending browser output provides AudioTrack/HDMI APIs.",
+          "acceptance": "Positive delay means audio later; both signs and reset are demonstrated against a synchronized fixture; settings say when a restart/re-anchor is required.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP12-003",
+          "title": "Debounced live changes",
+          "work": "Apply rapid offset/quality/audio-track changes through one cancelable, same-position operation after settling; preserve pause, chosen captions and the native GFX session.",
+          "acceptance": "Rapid slider input cannot spawn many encoders, deadlock readers or let an obsolete change win.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP12-004",
+          "title": "Encoder/decode truth",
+          "work": "Report requested versus effective decoder/filter/encoder and fallback reason. Preserve strict no-fallback/copy semantics and separate server GPU encoding from browser decoding proof.",
+          "acceptance": "Presence of a codec name or low CPU is not accepted as hardware evidence; currently CPU-decode/filter + hardware-encode is not labeled end-to-end GPU.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP12-005",
+          "title": "Remaining quality controls",
+          "work": "Audit Android bitrate/FPS/resolution/keyframe/B-frame/deinterlace and remux preferences against the FFmpeg plan. Add only supported knobs with valid cross-field constraints and migration.",
+          "acceptance": "Every enabled control changes verified command/runtime behavior; copied video clearly ignores encoding bitrate/GOP settings.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP12-006",
+          "title": "Rate, frame-step and transport controls",
+          "work": "Reconcile existing 0.25\u20134x browser rate handling with upstream functional capability names and actual supported behavior. Add frame-step/seek-scan only with a real backend contract; do not simulate unsupported reverse playback as accepted.",
+          "acceptance": "Return values match effective action; server and local controls do not fight, and DVD navigation retains its key mappings.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP12-007",
+          "title": "A/V calibration and regression",
+          "work": "Add an explicitly invoked generated synchronization/calibration test that restores prior media state, mute and settings. Keep receiver/ARC acceptance distinct from timestamp/controller tests.",
+          "acceptance": "Actual audible/visible synchronization, track changes, pause/seek and teardown are measured where equipment exists; upstream-open audio gates remain open otherwise.",
+          "status": "PLANNED",
+          "evidence": []
+        }
+      ],
+      "exit_gate": "Browser-supported audio/quality/control behavior is verified and truthfully labeled; Android decoder selection, HDMI passthrough or receiver latency are not promised by browser settings.",
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "P13",
+      "number": 13,
+      "title": "Remaining GFX, input, lifecycle and optional unified surfaces",
+      "depends_on": [
+        "P02"
+      ],
+      "goal": "Audit and adapt relevant renderer/lifecycle fixes while protecting the working full-browser display and long-press overlay.",
+      "scope": "required",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/MiniClientSession.java",
+        "src/main/java/org/opensagetv/webplayer/MiniClientCrypto.java",
+        "src/main/webapp/js/miniclient.js",
+        "src/main/webapp/js/miniclient-core.js",
+        "src/main/webapp/css/miniclient.css",
+        "src/main/webapp/sw.js"
+      ],
+      "sources": [
+        "U01",
+        "U10",
+        "U14",
+        "B01",
+        "B05"
+      ],
+      "tasks": [
+        {
+          "id": "WP13-001",
+          "title": "GFX opcode parity ledger",
+          "work": "Compare draw/image/cache/font/surface/transform/batch handling against the pinned Android code and native server contracts. Implement missing relevant operations instead of silently ignoring them.",
+          "acceptance": "Each encountered opcode is implemented, safely negotiated off, or explicitly reported with a reproducer and task.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP13-002",
+          "title": "Preserve startup and recovery",
+          "work": "Keep first-FLIPBUFFER gating, binary crypto handling/old-mode ACKs, serialized replies, generation-safe type-5 retry and cache ownership. Characterize any currently unadvertised ZLIB path before enabling it.",
+          "acceptance": "Early UI event/NPE, encrypted-session boundaries, partial packets, retry rejection and shutdown races stay covered.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP13-003",
+          "title": "Opt-in unified graphics",
+          "work": "Implement format-256 Y/UV image allocation/update/conversion, cache lifecycle and unsupported-video-handle fallback before advertising GFX_YUV_IMAGE_CACHE=UNIFIED. Keep current off behavior unchanged.",
+          "acceptance": "Repeated Y/UV updates work and stock DVB/Push compatibility is validated in OFF/ON A/B runs; a capability string alone cannot close the task.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP13-004",
+          "title": "Full-window and subtitle transforms",
+          "work": "Use one consistent geometry model for UI, video, previews, DVD highlights, bitmap captions and pointer mapping. Respect 3.2.4 mask-versus-geometry separation and OSD translucency.",
+          "acceptance": "Menu hide/show, resize, fullscreen, high DPI and Fill/Fit/Stretch do not reintroduce cut-off video or shifted click targets.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP13-005",
+          "title": "Browser input equivalents",
+          "work": "Audit Stop, D-pad repeat/cancel, Back, keyboard entry, browser shortcuts, long-press and touch across overlays/menus. Port behavior, not Android scan-code or API-level implementation details.",
+          "acceptance": "No stuck repeat, duplicate selection, browser Back accident or DVD key theft across mouse/touch/keyboard tests.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP13-006",
+          "title": "Visibility and session recovery",
+          "work": "Handle tab background/foreground, sleep/network interruption, bfcache/pagehide, reload and duplicate tabs with session-scoped timers and cancellation. Define browser timer-throttling limits rather than promising Android Service behavior.",
+          "acceptance": "A retired tab cannot stop a newer session; return/reconnect restores only the intended state with no stale captions.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP13-007",
+          "title": "Concurrency and telemetry",
+          "work": "Audit main-thread work, media-event priority, image decode, subtitle pumps and server locks. Measure real worker availability; propose GFX OffscreenCanvas/Worker only as separately scoped architecture if needed.",
+          "acceptance": "\u201casync\u201d is not called multithreading; diagnostics distinguish configured from observed worker/decoder behavior and retained main-thread tasks.",
+          "status": "PLANNED",
+          "evidence": []
+        }
+      ],
+      "exit_gate": "Relevant graphics/input/lifecycle parity is tracked and regression-tested, with no blind negotiation of unsupported surfaces or loss of the accepted overlay/display fixes.",
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "P14",
+      "number": 14,
+      "title": "Diagnostics, configuration profiles and server-share workflows",
+      "depends_on": [
+        "P02"
+      ],
+      "goal": "Bring over relevant troubleshooting and configuration behaviors with browser/server-specific security boundaries.",
+      "scope": "required",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/MiniClientServlet.java",
+        "src/main/java/org/opensagetv/webplayer/TranscodeStatusServlet.java",
+        "src/main/java/org/opensagetv/webplayer/SageApiBridge.java",
+        "src/main/webapp/js/miniclient.js",
+        "src/main/webapp/js/miniclient-streaming.js",
+        "src/main/webapp/miniclient.html"
+      ],
+      "sources": [
+        "U01",
+        "U02",
+        "U03",
+        "U15",
+        "B01"
+      ],
+      "tasks": [
+        {
+          "id": "WP14-001",
+          "title": "Useful parity diagnostics",
+          "work": "Add active subtitle codec/PID/page, resolved CC slots, render owner, queue age, timestamp epoch, DVD cell/drain/SPU/audio state and actual effective transcode mode. Export counters, not media/subtitle content or secrets.",
+          "acceptance": "A report distinguishes missing packets, failed decoding, mistimed cues and invisible presentation without exposing Authorization, session keys or share credentials.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p14/REPORT.md",
+            "docs/parity/p14/VALIDATION.md",
+            "tests/test-p14-support.js",
+            "tests/P14DiagnosticSupportSmoke.java"
+          ]
+        },
+        {
+          "id": "WP14-002",
+          "title": "Real Test Current Video",
+          "work": "Replace the current two-second observation with an explicitly invoked bounded test for cadence, buffering, safe pause/resume, reversible seeks and subtitle/disc state where applicable.",
+          "acceptance": "Original position, playback/mute and settings are restored on success, failure and cancellation; unsafe live/DVD-menu operations are skipped with a reason.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p14/REPORT.md",
+            "docs/parity/p14/VALIDATION.md",
+            "tests/browser-p14-smoke.py"
+          ]
+        },
+        {
+          "id": "WP14-003",
+          "title": "Durable report export",
+          "work": "Provide bounded redacted ZIP reports with hashes, recent tests and failure snapshot, retaining immediate export before Reconnect. Make optional automatic capture default-off and lifecycle-safe.",
+          "acceptance": "Reports survive a failed stream without unlimited logs, media payloads, authentication data or stale cross-client content.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p14/REPORT.md",
+            "docs/parity/p14/VALIDATION.md",
+            "tests/P14DiagnosticSupportSmoke.java",
+            "tests/browser-p14-smoke.py"
+          ]
+        },
+        {
+          "id": "WP14-004",
+          "title": "Configuration import/export and scope",
+          "work": "Audit Android settings transactions/profile behavior and design schema-versioned browser/server profile import/export. Separate client identity, per-session overrides, saved defaults and administrator settings.",
+          "acceptance": "Import preview/migration is explicit, unknown keys are bounded, unrelated preferences survive, and interrupted test restoration is recoverable.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p14/REPORT.md",
+            "docs/parity/p14/VALIDATION.md",
+            "tests/test-p14-support.js",
+            "tests/browser-p14-smoke.py"
+          ]
+        },
+        {
+          "id": "WP14-005",
+          "title": "Server-side share/mapping equivalents",
+          "work": "Inventory useful SMB media/config/diagnostic workflows. Prefer already-mounted server paths or a plugin-owned authenticated connector; browsers do not receive SMB credentials or directly open smb:// URLs. Keep diagnostic destination independent from the media share.",
+          "acceptance": "A security-reviewed design exists before dependencies or writes; read-only media verification never creates files.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p14/SERVER_DESTINATION_DESIGN.md",
+            "docs/parity/p14/REPORT.md",
+            "tests/P14DiagnosticSupportSmoke.java"
+          ]
+        },
+        {
+          "id": "WP14-006",
+          "title": "Approved connection tests and spooling",
+          "work": "For an explicitly configured writable diagnostics/config destination, implement a bounded write/read/hash/delete test, retry spool and atomic output with cancellation. Require opt-in for external writes.",
+          "acceptance": "No tests write into recordings or delete user files; failure leaves a bounded recoverable export and a redacted stage-specific error.",
+          "status": "IMPLEMENTED_AWAITING_FIELD",
+          "evidence": [
+            "docs/parity/p14/REPORT.md",
+            "docs/parity/p14/VALIDATION.md",
+            "docs/parity/p14/FIELD_ACCEPTANCE.md",
+            "tests/P14DiagnosticSupportSmoke.java"
+          ]
+        },
+        {
+          "id": "WP14-007",
+          "title": "Accessible settings and reporting",
+          "work": "Adapt the upstream non-truncating nested dialogs and D-pad focus behavior to the existing Vibe browser overlay. Show relevant decoder/track choices dynamically and preserve focus on return.",
+          "acceptance": "Narrow/tall/short windows and touch/keyboard use reach all settings without fake unsupported choices or losing the selected mode.",
+          "status": "PASS_LOCAL",
+          "evidence": [
+            "docs/parity/p14/REPORT.md",
+            "docs/parity/p14/VALIDATION.md",
+            "tests/browser-p14-smoke.py"
+          ]
+        }
+      ],
+      "exit_gate": "Diagnostics and profiles are useful, bounded and secret-safe; any server/share mutation is explicit and independent of normal playback.",
+      "status": "IMPLEMENTED_LOCAL_AWAITING_FIELD"
+    },
+    {
+      "id": "P15",
+      "number": 15,
+      "title": "Optional extended-Core/provider integration",
+      "depends_on": [
+        "P07",
+        "P08",
+        "P10"
+      ],
+      "goal": "Track relevant upstream extension work without making it a requirement for the stock-server plugin.",
+      "scope": "optional",
+      "existing_targets": [
+        "src/main/java/org/opensagetv/webplayer/MiniClientSession.java",
+        "src/main/java/org/opensagetv/webplayer/MiniClientMediaBridge.java",
+        "src/main/java/org/opensagetv/webplayer/TranscoderManager.java",
+        "docs/parity/DECISIONS.md"
+      ],
+      "sources": [
+        "U01",
+        "U02",
+        "U03",
+        "U10"
+      ],
+      "tasks": [
+        {
+          "id": "WP15-001",
+          "title": "Extension capability negotiation",
+          "work": "After separate approval, negotiate only supported functional DVD_DISC_* and VIDEO_PLAYBACK_RATE names and keep unknown GET/SET behavior safe. No new VIBE_* aliases are emitted to imitate removed protocol names.",
+          "acceptance": "A stock peer ignores/does not offer the extension and retains its proven native path; an extended peer reports actual negotiated features.",
+          "status": "AWAITING_SEPARATE_APPROVAL",
+          "evidence": []
+        },
+        {
+          "id": "WP15-002",
+          "title": "Provider-neutral DVD representation",
+          "work": "Implement dvd_mpegts_v1/transformed_main_feature only against a verified extended-Core/provider contract; keep native interactive DVD separate.",
+          "acceptance": "Transport telemetry proves the provider path really ran; fallback is explicit, not incorrectly labeled transformed hardware playback.",
+          "status": "AWAITING_SEPARATE_APPROVAL",
+          "evidence": []
+        },
+        {
+          "id": "WP15-003",
+          "title": "Skip menus/previews and hybrid policy",
+          "work": "Treat client-requested menu/preview skipping and hybrid-native transition as optional Core-dependent behavior. Do not patch Sage.jar or change global transcoder settings under a plugin-only task.",
+          "acceptance": "Unsupported stock options are hidden/disabled with a reason; authored native navigation remains available.",
+          "status": "AWAITING_SEPARATE_APPROVAL",
+          "evidence": []
+        },
+        {
+          "id": "WP15-004",
+          "title": "Negotiate richer metadata/rate safely",
+          "work": "Consume richer completed/growing metadata and rate controls only when actual support is established. Keep public APIs and ordinary FF/REW/skip behavior for stock peers.",
+          "acceptance": "Loss or absence of an extension cannot break local playback, controls or caption ownership.",
+          "status": "AWAITING_SEPARATE_APPROVAL",
+          "evidence": []
+        },
+        {
+          "id": "WP15-005",
+          "title": "Separate release and rollback",
+          "work": "Package any approved Core/provider changes in separate artifacts/branches with exact compatibility and reversal instructions; never silently include them in the WAR.",
+          "acceptance": "The stock package works with the original Sage.jar and external MIM/FFmpeg; optional dependencies do not block stock parity sign-off.",
+          "status": "AWAITING_SEPARATE_APPROVAL",
+          "evidence": []
+        }
+      ],
+      "exit_gate": "Optional only. All tasks remain awaiting separate approval and do not block stock-compatible implementation or release.",
+      "status": "OPTIONAL_NOT_STARTED"
+    },
+    {
+      "id": "P16",
+      "number": 16,
+      "title": "End-to-end parity acceptance matrix",
+      "depends_on": [
+        "P03",
+        "P04",
+        "P05",
+        "P06",
+        "P09",
+        "P10",
+        "P11",
+        "P12",
+        "P13",
+        "P14"
+      ],
+      "goal": "Prove the browser implementation on real playback paths rather than inheriting Android or mocked-test results.",
+      "scope": "required",
+      "existing_targets": [
+        "tests/",
+        "docs/TEST_PLAN.md",
+        "docs/VALIDATION.md",
+        "docs/parity/TEST_MATRIX.md"
+      ],
+      "sources": [
+        "U01",
+        "U03",
+        "U15",
+        "B01"
+      ],
+      "tasks": [
+        {
+          "id": "WP16-001",
+          "title": "Unit, malformed and isolation gates",
+          "work": "Run parser/decoder golden vectors, full protocol reply tests, timing/epoch cases, resource bounds and two-client concurrency before field testing.",
+          "acceptance": "Every changed module has positive, negative, cancellation and wrong-session evidence.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP16-002",
+          "title": "Real browser delivery matrix",
+          "work": "Exercise actual mpegts.js, hls.js and native HLS where supported with the plugin, not player stubs. Cover copied and transcoded output, foreground/background and cold/warm assets.",
+          "acceptance": "Every advertised transport/browser combination has advancing decoded A/V and timing evidence or remains explicitly unavailable/untested.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP16-003",
+          "title": "Caption matrix",
+          "work": "Validate Teletext positive and negative sources, DVB bitmap, CEA, ordinary text and file bitmaps with STV/local modes, language/service changes, offset, OSD hidden, pause and seek.",
+          "acceptance": "One intended caption owner, correct visible content/clear timing and no transport-specific subtitle loss.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP16-004",
+          "title": "DVD matrix",
+          "work": "Exercise authored root/submenus/stills, multi-title and menu-less discs, physical audio mapping, SPU/highlights, chapters, time seeks and Stop/replay.",
+          "acceptance": "Real browser video plus authored menu interaction is required; protocol logs or main-title playback alone do not count.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP16-005",
+          "title": "Hardware and fallback matrix",
+          "work": "Use available server GPUs and browsers with explicit requested/effective codec evidence; test strict modes and allowed fallback. Record each untested vendor/OS separately.",
+          "acceptance": "Hardware encoding/decode claims are backed by observed evidence, not configuration. Android physical passes do not transfer to Chrome/Safari.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP16-006",
+          "title": "Long-run and stress matrix",
+          "work": "Run sustained recording/live/DVD playback, rapid skips/settings/track changes, reconnections, malformed input, disk pressure and multi-client tests.",
+          "acceptance": "No leak, deadlock, stale ownership, silent cue corruption or repeated zero-timeline loop; test duration and resource peaks recorded.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP16-007",
+          "title": "User acceptance and issue closure",
+          "work": "Reproduce the user\u2019s affected media with available safe fixtures and capture immediate diagnostics for failures. Keep upstream-open receiver/device cases pending when evidence is absent.",
+          "acceptance": "The user-visible Teletext, DVB and interactive DVD acceptance rows are explicitly signed off or listed as unresolved; no universal \u201call fixed\u201d claim.",
+          "status": "PLANNED",
+          "evidence": []
+        }
+      ],
+      "exit_gate": "All required rows for advertised scope pass on the intended stock-server/browser paths; skipped, unavailable, mock-only and unresolved rows stay visible.",
+      "status": "NOT_STARTED"
+    },
+    {
+      "id": "P17",
+      "number": 17,
+      "title": "Release, manifests and future parity maintenance",
+      "depends_on": [
+        "P01",
+        "P16"
+      ],
+      "goal": "Deliver independently verifiable builds and a durable parity ledger without regressing the working installation.",
+      "scope": "required",
+      "existing_targets": [
+        "README.md",
+        "handoff.md",
+        "CHANGELOG.md",
+        "BUILD_INFO.json",
+        "PROJECT_MANIFEST.sha256",
+        "scripts/package-local-plugin.py",
+        "dist/"
+      ],
+      "sources": [
+        "U01",
+        "U02",
+        "B01"
+      ],
+      "tasks": [
+        {
+          "id": "WP17-001",
+          "title": "Close the fix ledger",
+          "work": "Reconcile every pinned upstream relevant fix with implemented behavior, evidence and final status. Keep superseded, platform-specific and optional entries with reasons.",
+          "acceptance": "No unresolved in-scope fix is silently omitted; source and browser statuses remain distinct.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP17-002",
+          "title": "Versioned release metadata",
+          "work": "After actual code changes and tests, assign the runtime release version and synchronize UI, health, build, local installer and release notes. This planning revision does not bump 3.2.4.",
+          "acceptance": "Only implemented/verified support is listed; stock-versus-optional requirements and remaining limitations are visible.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP17-003",
+          "title": "Independent build and archive check",
+          "work": "Build from a clean Git-less extraction, run required suites, verify compiled/runtime resources against source, and verify the installer contains the same WAR.",
+          "acceptance": "Reproducible build evidence, unedited test transcripts and exact artifact hashes are retained; no raw private logs are packaged.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP17-004",
+          "title": "Preserve upgrade and rollback",
+          "work": "Keep the root folder and canonical WAR install path, client identity, profiles, player cache and external FFmpeg/MIM. Document rollback data compatibility and do not clear user recordings/properties.",
+          "acceptance": "Existing 3.2.4 settings migrate in place, and rollback is tested against saved baseline artifacts.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP17-005",
+          "title": "Keep task history durable",
+          "work": "For every completed or reopened task, update TASKS.md, its mirror, evidence and revision ledger in the same change. Never silently remove completed IDs; add new findings under new IDs.",
+          "acceptance": "Task/progress summaries are generated from the project files, not reconstructed from chat.",
+          "status": "PLANNED",
+          "evidence": []
+        },
+        {
+          "id": "WP17-006",
+          "title": "Publication and upstream deltas",
+          "work": "Create commits/PRs/tags/releases or remote uploads only on explicit user request. Schedule no background monitoring automatically; future upstream reviews record a new pin and delta.",
+          "acceptance": "Local ZIP delivery is distinct from approved remote publication; no surprise changes to either repository.",
+          "status": "PLANNED",
+          "evidence": []
+        }
+      ],
+      "exit_gate": "Independent artifact/source validation, honest support notes, exact hashes, task evidence and a safe upgrade/rollback path are complete.",
+      "status": "NOT_STARTED"
+    }
+  ],
+  "package_kind": "P01_COMPLETE_LOCAL_WITH_EXTERNAL_VENDOR_GATE",
+  "progress": {
+    "completed": 58,
+    "total": 127
+  },
+  "next_task": "WP09-001",
+  "release_status": "P05 caption-authority local/generated checkpoint; stock SageTV/STV callback and CEA field acceptance remains pending; P04/P03/P01 field rows also remain open."
+}

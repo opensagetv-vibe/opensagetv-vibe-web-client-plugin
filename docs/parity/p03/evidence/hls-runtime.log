@@ -1,0 +1,11 @@
+PASS growing file EOF waits and follows appended bytes
+PASS segment rollover follows new file and drains final bytes before EOF
+PASS byte-offset feeder spans completed segments
+PASS cancellation terminates EOF wait promptly
+PASS playlist duration ignores invalid/nonfinite/negative entries
+PASS FFmpeg probe cache reuse and explicit invalidation
+PASS real MPEG-2/AC-3 to H.264/AAC EVENT HLS transcode, duration and ENDLIST
+PASS pipe input does not force MPEG-TS on MPEG-PS recordings
+PASS separate monitor/stderr threads track producer growth beyond startup without browser polling
+PASS 240-second synthetic recording continues producing beyond the 180-second browser target and ends cleanly
+HLS runtime: 10 tests PASS (synthetic media; no hardware/SageTV live test)

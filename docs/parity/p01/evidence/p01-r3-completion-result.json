@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "status": "PASS_WITH_EXTERNAL_VENDOR_ACCEPTANCE_PENDING",
+  "runtime_version": "3.2.4",
+  "p01_exit_gate_met": true,
+  "p01_tasks_done": 7,
+  "p01_external_acceptance_pending": [
+    "WP01-004"
+  ],
+  "tests": {
+    "p01_python_unit_tests": {
+      "count": 26,
+      "status": "PASS",
+      "log": "p01-r3-tooling.log",
+      "sha256": "ee50b1ab38548fbcab80771f30385554bbf89bb618f7e3e4c7b512c403354dde"
+    },
+    "fixture_validation": {
+      "count": 30,
+      "status": "PASS",
+      "result": "p01-r3-fixture-result.json",
+      "sha256": "fafcc7009c4b20cc5176d458f17863f3371f3cd64fdf63719adfda1c48f43d01"
+    },
+    "generated_cea": {
+      "count": 1,
+      "status": "PASS",
+      "log": "p01-r3-cea.log",
+      "sha256": "a34ba3d18ff65aeddef4077850fbe98cc6f9d8b0d7f1a1b0cd3bc92943d2d455"
+    },
+    "manifest_task_verify": {
+      "status": "PASS",
+      "log": "p01-r3-verify.log",
+      "sha256": "b6ea3bda40f5075e0ba746878a397cc03ed84df2743a5c15f891a63f1c3cb0c8"
+    },
+    "untouched_baseline": {
+      "status": "PASS",
+      "counted_scenarios": 235,
+      "chromium_scenarios": 71,
+      "result": "baseline-result.json",
+      "validation_log": "baseline-validation.log"
+    }
+  },
+  "source_census": {
+    "literal_changelog_bullets": 1066,
+    "literal_unclassified": 0,
+    "relevant_test_files": 102,
+    "relevant_test_unclassified": 0
+  },
+  "stock_server_identity": {
+    "version": "9.2.10.1054",
+    "active_stv": "/opt/sagetv/server/STVs/SageTV7/SageTV7.xml",
+    "binary_hashes_available": false
+  },
+  "vendor_mse": {
+    "status": "NOT_RUN_EXTERNAL_ENVIRONMENT_UNAVAILABLE",
+    "pass": false,
+    "mpegts_version": "1.8.0",
+    "hls_version": "1.7.3"
+  },
+  "runtime_war_sha256": "069ec4cd1b080f896311e98a63a6c9168bdc9091039f4326e1506f54f965742d",
+  "runtime_changed": false
+}

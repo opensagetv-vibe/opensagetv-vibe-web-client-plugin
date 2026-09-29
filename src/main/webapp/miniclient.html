@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>SageTV MiniClient · 3.2.30</title>
+  <link rel="stylesheet" href="css/miniclient.css?v=3.2.30">
+</head>
+<body>
+<div id="app" class="mc-app">
+  <header id="toolbar" class="mc-toolbar">
+    <div class="mc-title">SageTV MiniClient <span class="mc-subtitle">3.2.30 · Vibe browser port</span></div>
+    <div class="mc-toolbar-actions">
+      <span id="connectionStatus" class="mc-status" role="status">Connecting…</span>
+      <span id="bufferStatus" class="mc-status"></span>
+      <button id="remoteToggle" type="button" aria-controls="remotePanel" aria-expanded="false">Remote</button>
+      <button id="settingsToggle" type="button">Settings</button>
+      <button id="statsToggle" type="button" aria-pressed="false">Buffer info</button>
+      <button id="fullscreenBtn" type="button">Fullscreen</button>
+      <button id="reconnectBtn" type="button">Reconnect</button>
+      <button id="connectionDiagnosticsBtn" type="button" hidden>Download diagnostics</button>
+      <a class="mc-link" href="index.html">Web Player</a>
+    </div>
+  </header>
+  <main id="stage" class="mc-stage" tabindex="0" aria-label="SageTV MiniClient. Hold a click or touch to open the remote.">
+    <div id="videoBounds" class="mc-video-bounds" hidden>
+      <video id="videoPlane" class="mc-video" playsinline preload="auto" x-webkit-airplay="allow"></video>
+      <canvas id="dvdStillFrame" class="mc-dvd-still" width="720" height="480" aria-hidden="true" hidden></canvas>
+      <canvas id="dvbCaptions" class="mc-dvb-captions" width="720" height="576" aria-hidden="true"></canvas>
+      <canvas id="dvdSpuCanvas" class="mc-dvd-spu-canvas" width="720" height="576" aria-hidden="true"></canvas>
+      <canvas id="fileSubtitleCanvas" class="mc-file-subtitle-canvas" width="720" height="576" aria-hidden="true"></canvas>
+      <div id="fileSubtitles" class="mc-file-subtitles" aria-live="off"></div>
+      <div id="localCaptions" class="mc-local-captions" aria-live="off"></div>
+    </div>
+    <canvas id="gfxCanvas" class="mc-gfx" width="1280" height="720" aria-label="SageTV graphics"></canvas>
+    <div id="osdMessage" class="mc-message" role="status">Connecting to SageTV MiniClient…</div>
+    <button id="autoplayBtn" class="mc-autoplay" type="button" hidden>Play video</button>
+    <pre id="stats" class="mc-stats" hidden></pre>
+  <div id="remotePanel" class="mc-remote-overlay" role="dialog" aria-modal="true" aria-label="Vibe Android remote overlay" aria-hidden="true" hidden>
+    <section class="mc-remote-card" aria-label="Remote controls">
+      <div class="vibe-top">
+        <button id="nav_home" data-dismiss="true" class="vibe-icon" type="button" aria-label="Home" title="Home" data-command="28" ><img src="icons/vibe/home.png" alt="" draggable="false"></button>
+        <div class="vibe-top-right"><button id="remoteHelp" class="vibe-icon" type="button" aria-label="Help and additional controls" title="Help and additional controls" aria-expanded="false" aria-controls="remoteTools"><img src="icons/vibe/help_outline.svg" alt="" draggable="false"></button><button id="closeRemote" class="vibe-icon" type="button" aria-label="Close remote" title="Close remote" ><img src="icons/vibe/close.png" alt="" draggable="false"></button></div>
+      </div>
+      <div class="vibe-middle">
+        <div class="vibe-dpad" role="group" aria-label="Navigation"><button id="nav_options" data-dismiss="true" class="vibe-icon" type="button" aria-label="Options" title="Options" data-command="29" style="grid-column:1;grid-row:1" ><img src="icons/vibe/menu.svg" alt="" draggable="false"></button><button id="nav_info" data-dismiss="true" class="vibe-icon" type="button" aria-label="Info" title="Info" data-command="24" style="grid-column:2;grid-row:1" ><img src="icons/vibe/info_outline.svg" alt="" draggable="false"></button><button id="nav_back" class="vibe-icon" type="button" aria-label="Back" title="Back" data-command="75" style="grid-column:3;grid-row:1" ><img src="icons/vibe/undo.svg" alt="" draggable="false"></button><button id="nav_up" class="vibe-icon" type="button" aria-label="Up" title="Up" data-command="4" data-repeat="true" style="grid-column:2;grid-row:2" ><img src="icons/vibe/arrow_upward.svg" alt="" draggable="false"></button><button id="nav_left" class="vibe-icon" type="button" aria-label="Left" title="Left" data-command="2" data-repeat="true" style="grid-column:1;grid-row:3" ><img src="icons/vibe/arrow_back.svg" alt="" draggable="false"></button><button id="nav_select" class="vibe-icon" type="button" aria-label="OK / Select" title="OK / Select" data-command="20" style="grid-column:2;grid-row:3" ><img src="icons/vibe/fiber_manual_record.svg" alt="" draggable="false"></button><button id="nav_right" class="vibe-icon" type="button" aria-label="Right" title="Right" data-command="3" data-repeat="true" style="grid-column:3;grid-row:3" ><img src="icons/vibe/arrow_forward.svg" alt="" draggable="false"></button><button id="nav_down" class="vibe-icon" type="button" aria-label="Down" title="Down" data-command="5" data-repeat="true" style="grid-column:2;grid-row:4" ><img src="icons/vibe/arrow_downward.svg" alt="" draggable="false"></button></div>
+        <div class="vibe-pages" role="group" aria-label="Page controls"><button id="hideRemote" class="vibe-icon" type="button" aria-label="Hide remote" title="Hide remote" style="grid-column:1;grid-row:1" ><img src="icons/vibe/exit_to_app.svg" alt="" draggable="false"></button><button id="nav_pgup" class="vibe-icon" type="button" aria-label="Page up" title="Page up" data-command="55" data-repeat="true" style="grid-column:1;grid-row:2" ><img src="icons/vibe/vertical_align_top.svg" alt="" draggable="false"></button><button id="nav_pgdn" class="vibe-icon" type="button" aria-label="Page down" title="Page down" data-command="56" data-repeat="true" style="grid-column:1;grid-row:4" ><img src="icons/vibe/vertical_align_bottom.svg" alt="" draggable="false"></button></div>
+      </div>
+      <div class="vibe-bottom">
+        <div class="vibe-keyboard"><button id="keyboardToggle" class="vibe-icon" type="button" aria-label="Keyboard" title="Keyboard" aria-expanded="false" aria-controls="keyboardPanel"><img src="icons/vibe/keyboard.svg" alt="" draggable="false"></button></div>
+        <div class="vibe-transport" role="group" aria-label="Playback"><button id="nav_media_skip_back_2" class="vibe-icon" type="button" aria-label="Skip back" title="Skip back" data-command="62" data-repeat="true" ><img src="icons/vibe/skip_previous.svg" alt="" draggable="false"></button><button id="nav_media_skip_back" class="vibe-icon" type="button" aria-label="Rewind" title="Rewind" data-command="9" data-repeat="true" ><img src="icons/vibe/fast_rewind.svg" alt="" draggable="false"></button><button id="nav_media_stop" data-dismiss="true" class="vibe-icon" type="button" aria-label="Stop" title="Stop" data-command="89" ><img src="icons/vibe/stop.svg" alt="" draggable="false"></button><button id="nav_media_pause" class="vibe-icon" type="button" aria-label="Pause" title="Pause" data-command="6" ><img src="icons/vibe/pause.svg" alt="" draggable="false"></button><button id="nav_media_play" data-dismiss="true" class="vibe-icon" type="button" aria-label="Play" title="Play" data-command="7" ><img src="icons/vibe/play_arrow.svg" alt="" draggable="false"></button><button id="nav_media_skip_forward" class="vibe-icon" type="button" aria-label="Forward" title="Forward" data-command="8" data-repeat="true" ><img src="icons/vibe/fast_forward.svg" alt="" draggable="false"></button><button id="nav_media_skip_forward_2" class="vibe-icon" type="button" aria-label="Skip ahead" title="Skip ahead" data-command="61" data-repeat="true" ><img src="icons/vibe/skip_next.svg" alt="" draggable="false"></button></div>
+        <div class="vibe-utilities" role="group" aria-label="Playback tools"><button id="videoInfoBtn" class="vibe-icon" type="button" aria-label="Video information" title="Video information" style="grid-column:1;grid-row:1" ><img src="icons/vibe/vid_info.svg" alt="" draggable="false"></button><button id="diagnosticsBtn" class="vibe-icon" type="button" aria-label="Download diagnostics" title="Download diagnostics" style="grid-column:2;grid-row:1" ><img src="icons/vibe/bug_report.svg" alt="" draggable="false"></button><button id="testVideoBtn" class="vibe-icon" type="button" aria-label="Check browser playback" title="Check browser playback" style="grid-column:3;grid-row:1" ><img src="icons/vibe/video_test.svg" alt="" draggable="false"></button><button id="remoteStats" class="vibe-icon" type="button" aria-label="Show playback statistics" title="Show playback statistics" style="grid-column:4;grid-row:1" ><img src="icons/vibe/equalizer.svg" alt="" draggable="false"></button><button id="aspectToggle" class="vibe-icon" type="button" aria-label="Video display mode" title="Video display mode" style="grid-column:2;grid-row:2" ><img src="icons/vibe/aspect_ratio.svg" alt="" draggable="false"></button><button id="remoteSettings" class="vibe-icon" type="button" aria-label="Video settings" title="Video settings" style="grid-column:3;grid-row:2" ><img src="icons/vibe/video_settings.svg" alt="" draggable="false"></button><button id="audioSettings" class="vibe-icon" type="button" aria-label="Audio output and sync" title="Audio output and sync" style="grid-column:4;grid-row:2" ><img src="icons/vibe/audio_tune.svg" alt="" draggable="false"></button><button id="captionSettings" class="vibe-icon" type="button" aria-label="Broadcast captions" title="Broadcast captions" style="grid-column:5;grid-row:2" ><img src="icons/vibe/closed_caption.svg" alt="" draggable="false"></button></div>
+      </div>
+      <section id="remoteTools" class="vibe-drawer" aria-label="Help and additional controls" hidden>
+        <header class="mc-panel-header"><strong>Additional controls</strong><button id="closeRemoteTools" type="button" aria-label="Close additional controls">×</button></header>
+        <p class="mc-note">The edge controls follow the Vibe Android overlay. Hold arrows, page or skip buttons to repeat. Options opens SageTV’s menu; × or the green arrow hides this local overlay. These extra controls are browser additions.</p>
+        <div class="mc-remote-grid"><button type="button" data-command="18">Guide</button><button type="button" data-command="86">Recordings</button><button type="button" data-command="25">Record</button><button type="button" data-command="13" data-repeat="true">Vol +</button><button type="button" data-command="26">Mute</button><button type="button" data-command="14" data-repeat="true">Vol −</button><button type="button" data-command="11" data-repeat="true">Ch +</button><button type="button" data-command="60">Last channel</button><button type="button" data-command="12" data-repeat="true">Ch −</button><button type="button" data-command="31">1</button><button type="button" data-command="32">2</button><button type="button" data-command="33">3</button><button type="button" data-command="34">4</button><button type="button" data-command="35">5</button><button type="button" data-command="36">6</button><button type="button" data-command="37">7</button><button type="button" data-command="38">8</button><button type="button" data-command="39">9</button><button type="button" data-command="95">−</button><button type="button" data-command="30">0</button><button type="button" data-command="59">Play / Pause</button></div>
+      <div class="mc-timeline">
+        <label for="seekRange">Recording <span id="timelineTime">No video</span></label>
+        <input id="seekRange" type="range" min="0" max="1" value="0" step="1" disabled aria-label="Seek across the full recording">
+        <div id="timelineBuffer" class="mc-note">The range uses SageTV's media duration, not the buffered fragment.</div>
+      </div>
+        <div class="mc-panel-tools"><button id="renderOnlyBtn" type="button">Render-only view</button><button id="allSettings" type="button">All settings</button></div>
+      </section>
+      <div id="keyboardPanel" class="mc-keyboard" hidden><button id="closeKeyboard" type="button" aria-label="Close keyboard">Close keyboard</button>
+        <label for="keyboardInput">Text to type into SageTV</label>
+        <input id="keyboardInput" type="text" maxlength="512" autocomplete="off" spellcheck="false" placeholder="Text is sent as keys, not remote shortcuts">
+        <button id="keyboardSend" type="button">Send text</button>
+        <button id="keyboardBackspace" type="button">Backspace</button>
+        <button id="keyboardEnter" type="button">Enter</button>
+      </div>
+
+      <section id="videoInfoPanel" class="vibe-drawer" aria-label="Video information" hidden>
+        <header class="mc-panel-header"><strong>Video information</strong><button id="closeVideoInfo" type="button" aria-label="Close video information">×</button></header>
+        <pre id="videoInfoText" class="mc-stream-actual"></pre>
+      </section>
+    </section>
+  </div>
+  </main>
+
+  <div id="settingsPanel" class="mc-settings-overlay" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" hidden>
+    <section class="mc-settings-card">
+      <header class="mc-panel-header"><strong id="settingsTitle">MiniClient settings</strong><button id="closeSettings" type="button" aria-label="Close settings">✕</button></header>
+
+      <details id="streamingPreferences" class="mc-streaming" open>
+        <summary>Streaming and transcoding</summary>
+        <p class="mc-note">Vibe Android-style controls, adapted for browser playback. Settings belong to this browser, not to global SageTV or MIM configuration.</p>
+        <fieldset id="streamVideoSection"><legend>Player and video</legend>
+          <label>Player<select id="stream_player"><option value="auto">Automatic — MPEG-TS preferred</option><option value="mpegts">Continuous MPEG-TS (mpegts.js)</option><option value="hls">Compatibility — HLS</option></select></label>
+          <label>Video processing<select id="stream_videoMode"><option value="auto">Transcode when needed</option><option value="transcode">Always transcode</option><option value="copy">Copy</option></select></label>
+          <label>Video encoder<select id="stream_encoder"><option value="auto">Automatic — hardware first</option><option value="qsv">Intel Quick Sync (QSV)</option><option value="nvenc">NVIDIA NVENC</option><option value="vaapi">Linux VAAPI</option><option value="amf">AMD AMF</option><option value="videotoolbox">Apple VideoToolbox</option><option value="software">Software H.264 (libx264)</option></select></label>
+          <label>Video bitrate (kbps)<input id="stream_videoKbps" type="number" min="250" max="50000" step="250" list="videoBitrates"></label>
+          <label>Keyframe interval (seconds)<input id="stream_keyFrameSeconds" type="number" min="1" max="10" step="1"></label>
+          <label>B-frames<select id="stream_bFrames"><option value="0">0 — low latency</option><option value="1">1</option><option value="2">2</option><option value="3">3</option></select></label>
+          <datalist id="videoBitrates"><option value="2000"><option value="4000"><option value="6000"><option value="8000"><option value="12000"><option value="20000"></datalist>
+          <label>Maximum video height<select id="stream_resolution"><option value="source">Use source</option><option value="480">480p</option><option value="720">720p</option><option value="1080">1080p</option><option value="2160">2160p</option></select></label>
+          <label>Frame rate<select id="stream_fps"><option value="source">Use source</option><option>23.976</option><option>24</option><option>25</option><option>29.97</option><option>30</option><option>50</option><option>59.94</option><option>60</option></select></label>
+          <label>Deinterlace<select id="stream_deinterlace"><option value="auto">Automatic — interlaced frames</option><option value="on">Always</option><option value="off">Off</option></select></label>
+          <label class="mc-check"><input id="stream_allowFallback" type="checkbox"> Allow hardware → software / MPEG-TS → HLS fallback</label>
+          <p class="mc-note">Bitrate is a target, not an exact measured rate. Encoder and video bitrate apply only when video is transcoded. Copy keeps the source video codec and remuxes/resegments it without video encoding. With Copy, Automatic fallback may restart as H.264 if the browser advances playback but produces no video frames. Copy requires Source resolution/FPS and Deinterlace Auto/Off.</p>
+        </fieldset>
+        <fieldset id="streamAudioSection"><legend>Audio</legend>
+          <label>Track in current recording<select id="stream_audioTrack"><option value="-1">Automatic / preferred language</option></select></label>
+          <label>Preferred language<input id="stream_audioLanguage" type="text" maxlength="35" placeholder="en / eng / en-US"></label>
+          <label>When preferred audio is missing<select id="stream_audioFallback"><option value="default">Best primary/default track</option><option value="first">First audio track</option><option value="strict">Fail instead of falling back</option></select></label>
+          <label>Audio output<select id="stream_audioCodec"><option value="auto">Automatic — copy compatible / AAC</option><option value="aac">AAC (browser compatible)</option><option value="ac3">AC-3 (browser support required)</option><option value="copy">Copy audio (strict)</option></select></label>
+          <label>Audio bitrate (kbps)<select id="stream_audioKbps"><option>64</option><option>96</option><option>128</option><option>160</option><option>192</option><option>256</option><option>320</option><option>384</option><option>448</option><option>512</option><option>640</option></select></label>
+          <label>Channels<select id="stream_audioChannels"><option value="source">Use source</option><option value="1">Mono</option><option value="2">Stereo</option><option value="6">5.1 (device support required)</option></select></label>
+          <label>Audio delay (ms)<input id="stream_audioOffsetMs" type="number" min="-4000" max="4000" step="25"></label>
+          <p class="mc-note">Positive delay plays audio later. Delay range is -4000..+4000 ms in 25 ms steps. Track index is session-only; a new recording returns to language/automatic selection. Commentary/audio-description tracks are deprioritized unless explicitly selected. Browser output has no AudioTrack/HDMI passthrough control; changing track/delay/quality restarts only the media stream at the same reported position.</p>
+        </fieldset>
+        <fieldset id="streamCaptionSection"><legend>Broadcast captions (local browser)</legend>
+          <label>Caption mode<select id="captionAuthorityMode"><option value="off">OFF</option><option value="cc1">CC1</option><option value="cc2">CC2</option><option value="stv">STV / SageTV</option><option value="dvb">DVB bitmap</option></select></label>
+          <div id="virtualCaptionSlots" class="mc-caption-slots"><label>CC1 type<select id="cc1Type"><option value="auto">Auto</option><option value="teletext">Teletext</option><option value="cea608">CEA-608</option><option value="cea708">CEA-708</option></select></label><label>CC1 language<input id="cc1Language" maxlength="35" placeholder="Auto / eng"></label><label>CC1 channel/service<input id="cc1Service" type="number" min="1" max="63" value="1"></label><label>CC2 type<select id="cc2Type"><option value="auto">Auto</option><option value="teletext">Teletext</option><option value="cea608">CEA-608</option><option value="cea708">CEA-708</option></select></label><label>CC2 language<input id="cc2Language" maxlength="35" placeholder="Auto / spa"></label><label>CC2 channel/service<input id="cc2Service" type="number" min="1" max="63" value="2"></label></div>
+          <p id="captionAuthorityEffective" class="mc-note">Effective caption source: Off</p>
+          <label hidden>Caption transport<select id="stream_captions"><option value="off">Off</option><option value="608">CEA-608</option><option value="708">CEA-708</option><option value="teletext">DVB Teletext subtitles</option><option value="dvb">DVB bitmap subtitles</option></select></label>
+          <label>CEA channel / service<input id="stream_captionService" type="number" min="1" max="63" step="1"></label>
+          <label>Teletext service<select id="stream_teletextService"><option value="">Auto / preferred page</option></select></label>
+          <label>Preferred Teletext page<input id="stream_captionPage" type="number" min="100" max="899" step="1"></label>
+          <label>DVB bitmap service<select id="stream_dvbService"><option value="">Auto / preferred language</option></select></label>
+          <label>DVB source PID<input id="stream_captionPid" type="number" min="-1" max="8191" step="1"></label>
+          <label>DVB composition page<input id="stream_captionCompositionPage" type="number" min="-1" max="65535" step="1"></label>
+          <label>Preferred caption language<input id="stream_captionLanguage" maxlength="35" placeholder="eng"></label>
+          <label>Caption delay (ms)<input id="stream_captionOffsetMs" type="number" min="-5000" max="5000" step="50"></label>
+          <p class="mc-note">CEA is extracted from original compressed video. DVB Teletext is decoded from the original transport stream before video encoding, so QSV/NVENC/VAAPI/software transcoding does not need to preserve Teletext packets. Teletext here is the Level-1 subtitle-page subset, not an interactive Teletext browser. DVB bitmap is decoded independently to an RGBA overlay and stays outside the video encoder. PGS/DVD bitmap and ordinary file subtitles remain later phases.</p>
+        </fieldset>
+
+        <fieldset id="streamSubtitleSection"><legend>Ordinary subtitles (file / embedded)</legend>
+          <label>Subtitles<select id="stream_subtitleMode"><option value="off">Off</option><option value="auto">Auto / preferred language</option><option value="track">Selected track</option></select></label>
+          <label>Track<select id="stream_subtitleTrack"><option value="-1">Automatic</option></select></label>
+          <label>Preferred language<input id="stream_subtitleLanguage" maxlength="35" placeholder="eng"></label>
+          <label>Subtitle delay (ms)<input id="stream_subtitleOffsetMs" type="number" min="-10000" max="10000" step="50"></label>
+          <label class="mc-check"><input id="stream_subtitleForcedOnly" type="checkbox"> Forced subtitles only</label>
+          <p class="mc-note">Independent of Broadcast captions. Text uses sanitized browser text cues. PGS and DVD/VobSub bitmap tracks are adapted through FFmpeg to the local bitmap decoder; VobSub requires palette context from the container or an associated IDX file. ASS/SSA advanced styling is flattened.</p>
+        </fieldset>
+        <div class="mc-panel-tools"><button id="saveStreaming" type="button">Save for next recording</button><button id="applyStreaming" type="button">Apply now / restart stream</button><button id="refreshTracks" type="button">Refresh tracks</button><button id="resetStreaming" type="button">Load defaults</button><button id="preparePlayerAssets" type="button">Prepare player assets</button></div>
+        <p id="streamingResult" class="mc-note" role="status">Apply now preserves the reported position and pause state. Native GFX and SageMC remain connected.</p>
+        <pre id="streamingActual" class="mc-stream-actual">No active recording.</pre>
+      </details>
+
+      <details id="supportPreferences" class="mc-streaming">
+        <summary>Diagnostics, profiles and server destination</summary>
+        <p class="mc-note">Diagnostic exports are bounded and redact recognized credentials/content fields. A server destination must be configured and enabled by the SageTV administrator; this browser never receives SMB credentials or opens smb:// URLs.</p>
+        <label class="mc-check"><input id="autoDiagnosticCapture" type="checkbox"> Automatically capture a report after terminal connection failure (default off)</label>
+        <label class="mc-check"><input id="saveDiagnosticsToServer" type="checkbox"> Also save diagnostic downloads to the configured server destination</label>
+        <div class="mc-panel-tools"><button id="exportProfile" type="button">Export profile</button><button id="importProfile" type="button">Import profile…</button><button id="applyProfile" type="button" disabled>Apply imported profile</button><button id="testDiagnosticDestination" type="button">Test server destination</button><button id="retryDiagnosticSpool" type="button">Retry spooled reports</button><button id="cancelDiagnosticAction" type="button" disabled>Cancel server action</button></div>
+        <input id="profileFile" type="file" accept="application/json,.json" hidden>
+        <pre id="profilePreview" class="mc-stream-actual">No profile import pending.</pre>
+        <p id="diagnosticDestinationStatus" class="mc-note" role="status">Checking server diagnostic destination…</p>
+      </details>
+      <label>Buffer profile<select id="bufferPreset"><option value="auto">Fast start, then fill reserve</option><option value="lowdelay">Fast start / quicker resume</option><option value="stable">Larger startup safety buffer</option></select></label>
+      <label>Startup segments<select id="startSegments"><option value="0">Automatic (first published segment)</option><option value="1">1 segment</option><option value="2">2 segments</option><option value="3">3 segments</option><option value="4">4 segments</option><option value="6">6 segments</option><option value="10">10 segments</option></select></label>
+      <label>Browser buffer target<select id="maxBufferSeconds"><option value="30">30 seconds</option><option value="60">60 seconds</option><option value="90">90 seconds</option><option value="180">180 seconds</option><option value="300">300 seconds</option><option value="600">600 seconds</option></select></label>
+      <p class="mc-note">Playback starts from a small buffer, then continues filling the selected forward reserve. HLS reserve changes apply immediately; MPEG-TS buffer changes apply on the next recording/seek or Apply now. Startup-segment choices apply only to HLS; MPEG-TS starts on available decodable data. Browser memory may reduce the achievable reserve. Native Safari controls its own buffer.</p>
+      <label>Open local remote<select id="osdTrigger"><option value="left_long">Left click / touch hold (575 ms)</option><option value="right_long">Right click hold</option><option value="left_double">Left double click</option><option value="right_double">Right double click</option><option value="center_click">Middle click</option></select></label>
+      <label>SageTV click behavior<select id="clickMode"><option value="native">Native move + press + release + click</option><option value="press_release">Press / release only</option><option value="double_select">First click focuses; second selects</option></select></label>
+      <label>Physical keyboard<select id="inputMode"><option value="remote">Remote shortcuts</option><option value="text">Literal text / SageTV key events</option></select></label>
+      <label>SageTV UI resolution<select id="uiResolution"><option value="window">Automatic — fit the browser window</option><option value="1280x720">1280 × 720 — preserve 16:9</option><option value="1920x1080">1920 × 1080 — preserve 16:9</option></select></label>
+      <p class="mc-note">Automatic asks SageTV to lay out the UI for the available window. Fixed resolutions fit the whole picture without cropping. A ?ui=WIDTHxHEIGHT URL overrides this setting. Video aspect is separate.</p>
+      <label>Video display mode<select id="videoFit"><option value="cover">Fill browser — preserve aspect, crop edges</option><option value="source">Fit — whole picture, bars when necessary</option><option value="fill">Stretch — whole picture, no bars</option><option value="zoom">Zoom / crop (legacy)</option><option value="4x3">Force 4:3</option><option value="16x9">Force 16:9</option></select></label>
+      <label>Video placement<select id="videoViewport"><option value="browser">Browser area — full playback / native previews</option><option value="native">Follow SageTV rectangles exactly</option></select></label>
+      <p class="mc-note">Fill browser removes added bars while preserving aspect, so edges may be cropped on a differently shaped window. Fit shows every source edge with bars as needed. Stretch shows every edge without bars, but changes proportions. Black bars encoded in the recording are part of the video; this setting does not detect/remove those.</p>
+      <label class="mc-check"><input id="guideAssist" type="checkbox"> Guide click → OK assist (SageMC)</label>
+      <label class="mc-check"><input id="videoMaskAssist" type="checkbox"> SageTV video-mask / preview assist</label>
+      <label class="mc-check"><input id="unifiedGraphics" type="checkbox"> Experimental HD200/HD300 unified Y/UV graphics surfaces (reconnect required)</label>
+      <label class="mc-check"><input id="mouseBack" type="checkbox"> Mouse side button → SageTV Back</label>
+      <label class="mc-check"><input id="showStats" type="checkbox"> Show buffer / FFmpeg statistics</label>
+      <label class="mc-check"><input id="mute" type="checkbox"> Mute browser video</label>
+      <label class="mc-check"><input id="fullscreenOnConnect" type="checkbox"> Start in render-only view (no toolbar)</label>
+      <button id="resetSettings" type="button">Reset browser settings</button>
+      <p class="mc-note">Saved in this browser. No Sage.jar or Python server changes are required. Diagnostics may include server addresses and media paths; review before sharing.</p>
+    </section>
+  </div>
+</div>
+<script src="js/miniclient-core.js?v=3.2.30"></script>
+<script src="js/miniclient-streaming.js?v=3.2.30"></script>
+<script src="js/atsc-captions.js?v=3.2.30"></script>
+<script src="js/miniclient-caption-authority.js?v=3.2.30"></script>
+<script src="js/miniclient-captions.js?v=3.2.30"></script>
+<script src="js/miniclient-subtitles.js?v=3.2.30"></script>
+<script src="js/miniclient-dvd-spu.js?v=3.2.30"></script>
+<script src="js/miniclient-playback.js?v=3.2.30"></script>
+<script src="js/miniclient-support.js?v=3.2.30"></script>
+<script src="js/miniclient.js?v=3.2.30"></script>
+</body>
+</html>

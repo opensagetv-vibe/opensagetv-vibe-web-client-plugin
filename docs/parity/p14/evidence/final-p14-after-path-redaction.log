@@ -1,0 +1,54 @@
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+Built /mnt/data/sagetv_phase14_work/sagetv-webplayer-v30-vibe/dist/SageTVWebPlayer.war
+/mnt/data/sagetv_phase14_work/sagetv-webplayer-v30-vibe/dist/local-install/SageTVPluginsDev.d/sagetv-webplayer-3.2.17.zip
+/mnt/data/sagetv_phase14_work/sagetv-webplayer-v30-vibe/dist/local-install/SageTVPluginsDev.d/sagetv-webplayer.xml
+MD5 32052eeb15d967fd7a9212c4205c2626
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS server sanitizer removes credentials and subtitle content
+PASS server sanitizer retains safe counters
+PASS diagnostic ZIP contains report/hash/readme entries
+PASS ZIP report is redacted without dropping safe stream counters
+PASS ZIP hash matches report bytes
+PASS external report writes are default-off
+PASS destination test supports cooperative cancellation before creating a probe
+PASS configured destination passes bounded write/read/hash/delete test
+PASS destination test deletes only its own temporary probe
+PASS report uses opt-in atomic external save
+PASS browser status reveals destination label but not full server path
+PASS destination failure detail redacts configured server path
+PASS failed configured destination falls back to bounded local spool without path disclosure
+PASS spool retry supports cooperative cancellation between bounded file steps
+PASS spooled report retries to recovered destination
+P14 diagnostic support: 15 tests PASS
+PASS profile has explicit kind/schema
+PASS profile declares scope boundaries
+PASS identity and per-session track choices are excluded
+PASS per-session PID/page choices are excluded
+PASS import preview reports unknown keys
+PASS import preview retains approved saved defaults
+PASS unknown import keys are bounded
+PASS future profile schema fails closed
+PASS recognized credentials are redacted
+PASS caption/media content is omitted while counters survive
+PASS caption diagnostics resolve slot/codec/PID/page/render owner
+PASS ordinary subtitle diagnostics expose timing counters without subtitle text
+PASS effective transcode diagnostics distinguish encode/decode mode
+P14 support/profile helpers: 13 tests PASS
+PASS settings D-pad ArrowDown advances focus through the nested support controls
+PASS server destination test is explicit/confirmed and reports bounded write-read-hash-delete success
+PASS bounded retry spool is an explicit separate action
+PASS profile export is schema-scoped and excludes administrator/server identity state
+PASS support settings remain reachable in a narrow browser without horizontal truncation
+PASS Test Current Video safely skips short/unsafe mutation and restores pause/audio test state
+PASS Test Current Video exercises cadence/pause/resume/reversible seek and restores the original long-recording state
+PASS manual ZIP report carries effective transcode/timestamp counters without client identity, SMB URL or credentials
+PASS interrupted video-test state is recoverable only onto the matching recording
+PASS stale interrupted-test restoration clears safely without seeking a different recording
+PASS automatic failure capture is default-off, opt-in, and preserves the terminal failure snapshot
+Chromium P14 diagnostics/profiles/accessibility: 11 tests PASS

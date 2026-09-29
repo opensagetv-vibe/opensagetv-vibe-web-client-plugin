@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "phase": "P02",
+  "runtime_version": "3.2.5-P02",
+  "date": "2026-09-24",
+  "status": "COMPLETE_LOCAL_ARCHITECTURE",
+  "scope_boundary": {
+    "teletext_visible_playback": false,
+    "dvb_bitmap_visible_playback": false,
+    "pgs_visible_playback": false,
+    "vobsub_visible_playback": false,
+    "real_vendor_mpegts_hls_mse": false,
+    "live_sagetv_server_this_phase": false,
+    "physical_gpu_this_phase": false
+  },
+  "groups": [
+    {
+      "name": "PlaybackArchitectureSmoke",
+      "passed": 33,
+      "evidence": "local executable architecture/session/inventory/queue/source-preservation/FFmpeg side-channel"
+    },
+    {
+      "name": "StreamingServletSmoke",
+      "passed": 16,
+      "evidence": "/api/subtitles due-cue/stale-session behavior plus existing servlet security"
+    },
+    {
+      "name": "StreamingRuntimeSmoke",
+      "passed": 14,
+      "evidence": "actual FFmpeg software transcode/remux and caption preservation regression"
+    },
+    {
+      "name": "HlsRuntimeSmoke",
+      "passed": 10,
+      "evidence": "actual 240-second FFmpeg producer and >180-second reserve regression"
+    },
+    {
+      "name": "Node MPEGTS/settings/captions",
+      "passed": 17,
+      "evidence": "profile schema migration plus inherited adapter/caption checks; vendor mpegts adapter remains mocked"
+    },
+    {
+      "name": "Native recovery",
+      "passed": 11
+    },
+    {
+      "name": "Native startup",
+      "passed": 13
+    },
+    {
+      "name": "Native authentication",
+      "passed": 14
+    },
+    {
+      "name": "Chromium browser baseline",
+      "passed": 71,
+      "evidence": "15 remote/GFX + 12 layout + 12 streaming + 10 recovery + 22 Vibe/display; native/vendor transport mocked"
+    }
+  ],
+  "execution_note": "Long combined validation commands exceeded the execution timeout. The unfinished HLS group and final Chromium group were rerun independently and passed; no monolithic exit-0 is claimed.",
+  "next_task": "WP03-001"
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "profiles": [
+    {
+      "id": "stock-primary",
+      "kind": "UNVERIFIED",
+      "enabled": false,
+      "server_url": null,
+      "running_core_sha256": null,
+      "running_stv": null,
+      "running_stv_sha256": null,
+      "extensions_allowed": false,
+      "allowed_control": "Public API/normal MiniClient operations only; identify exact active UI context",
+      "status": "BLOCKED",
+      "reason": "No running stock Core/STV identity established"
+    },
+    {
+      "id": "extended-optional",
+      "kind": "extended",
+      "enabled": false,
+      "explicit_approval_received": false,
+      "server_url": null,
+      "running_core_sha256": null,
+      "running_stv_sha256": null,
+      "status": "NOT_AUTHORIZED",
+      "reason": "P15 is optional and not a stock acceptance substitute"
+    }
+  ],
+  "credentials_in_this_file": false
+}

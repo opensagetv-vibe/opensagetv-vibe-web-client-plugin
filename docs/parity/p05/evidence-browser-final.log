@@ -1,0 +1,2 @@
+PASS live typed inventory populates explicit Teletext page/PID/language selector
+PASS live typed inventory populates explicit DVB PID/page/language selector

@@ -1,0 +1,30 @@
+PASS production scripts connect and render actual GFX packets without errors
+PASS real pointer hold opens remote with no underlying click
+PASS real short click sends exactly one atomic click
+PASS held remote key repeats and stops on pointer release
+PASS SageTV Options remains distinct from local hold menu
+PASS keyboard text delivered literally as UTF-8 POST
+PASS Guide click adds SELECT assist after native click
+PASS right-hold setting opens remote without native context menu
+PASS drag sends release but never activation click
+PASS render-only view fits logical 16:9 canvas and Escape restores toolbar
+PASS mobile remote fits viewport without horizontal clipping
+PASS dark SageTV CLEAR_RECT reveals active video instead of covering it black
+PASS menu remains opaque while color-key preview moves/resizes underlying video
+PASS negative texture dimensions do not mirror text or erase surrounding menu
+PASS no browser JavaScript exceptions throughout gestures/settings
+Chromium browser smoke: 15 tests PASS (offline mocked transport; not live playback)
+PASS 1912x800 window uses full area below toolbar with all four GFX corners visible
+PASS initial server connection receives the actual usable UI dimensions
+PASS desktop, portrait, landscape and large windows resize without clipping or page overflow
+PASS window changes send real resize API requests and redraw at the new native size
+PASS image handle allocated only at connection remains valid after four native resizes
+PASS fixed 720p option contains the entire 16:9 UI rather than zooming/cropping
+PASS bottom-right pointer clicks map to the new native coordinates
+PASS render-only view and toolbar restoration renegotiate usable height
+PASS fullscreen entry and exit preserve the complete native drawing surface
+PASS video startup/control and reserve promotion do not wait behind a blocked GFX image decode
+PASS large GFX batch yields to browser tasks before completion while preserving draw order
+PASS no JavaScript exceptions in auto-resize, cache reuse or independent media scheduling
+Chromium layout/scheduling: 12 tests PASS (mock native transport, no live SageMC/video)
+Browser GFX/layout group exit: 0

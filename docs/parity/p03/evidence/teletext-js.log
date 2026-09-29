@@ -1,0 +1,6 @@
+PASS Teletext controller renders service while no SageTV OSD event is present
+PASS Teletext controller advances from independent browser video clock
+PASS Teletext polling continues while UI/OSD is idle
+PASS Teletext clear cue removes local text
+PASS stopping playback cancels Teletext poll lifecycle
+P03 browser Teletext controller: 5 PASS

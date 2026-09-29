@@ -1,0 +1,27 @@
+test_ambiguous_vendor_remains_blocked (test_p01_tools.P01ToolsTests.test_ambiguous_vendor_remains_blocked) ... ok
+test_baseline_rejects_output_inside_source (test_p01_tools.P01ToolsTests.test_baseline_rejects_output_inside_source) ... ok
+test_changelog_intake_keeps_top_level_and_continuations (test_p01_tools.P01ToolsTests.test_changelog_intake_keeps_top_level_and_continuations) ... ok
+test_crc_roundtrip (test_p01_tools.P01ToolsTests.test_crc_roundtrip) ... ok
+test_dvb_depth_vectors_and_clear_not_teletext (test_p01_tools.P01ToolsTests.test_dvb_depth_vectors_and_clear_not_teletext) ... ok
+test_fixture_generation_never_overwrites_media (test_p01_tools.P01ToolsTests.test_fixture_generation_never_overwrites_media) ... ok
+test_generated_registry_does_not_claim_field_acceptance (test_p01_tools.P01ToolsTests.test_generated_registry_does_not_claim_field_acceptance) ... ok
+test_manifest_accepts_project_relative_path (test_p01_tools.P01ToolsTests.test_manifest_accepts_project_relative_path) ... ok
+test_manifest_rejects_path_traversal (test_p01_tools.P01ToolsTests.test_manifest_rejects_path_traversal) ... ok
+test_matching_upstream_is_unchanged (test_p01_tools.P01ToolsTests.test_matching_upstream_is_unchanged) ... ok
+test_missing_server_never_implies_stock (test_p01_tools.P01ToolsTests.test_missing_server_never_implies_stock) ... ok
+test_missing_vendor_is_blocked (test_p01_tools.P01ToolsTests.test_missing_vendor_is_blocked) ... ok
+test_new_head_does_not_advance_pin (test_p01_tools.P01ToolsTests.test_new_head_does_not_advance_pin) ... ok
+test_open_intake_is_not_falsely_closed (test_p01_tools.P01ToolsTests.test_open_intake_is_not_falsely_closed) ... ok
+test_packetization_has_188_byte_alignment (test_p01_tools.P01ToolsTests.test_packetization_has_188_byte_alignment) ... ok
+test_pgs_has_timestamped_display_and_clear (test_p01_tools.P01ToolsTests.test_pgs_has_timestamped_display_and_clear) ... ok
+test_present_vendor_is_not_a_playback_pass (test_p01_tools.P01ToolsTests.test_present_vendor_is_not_a_playback_pass) ... ok
+test_pts_wrap_and_markers (test_p01_tools.P01ToolsTests.test_pts_wrap_and_markers) ... ok
+test_review_ledger_has_no_dangling_task_ids (test_p01_tools.P01ToolsTests.test_review_ledger_has_no_dangling_task_ids) ... ok
+test_short_or_unsafe_head_rejected (test_p01_tools.P01ToolsTests.test_short_or_unsafe_head_rejected) ... ok
+test_teletext_has_fixed_header_and_valid_pes_multiple (test_p01_tools.P01ToolsTests.test_teletext_has_fixed_header_and_valid_pes_multiple) ... ok
+test_teletext_text_odd_parity (test_p01_tools.P01ToolsTests.test_teletext_text_odd_parity) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.008s
+
+OK

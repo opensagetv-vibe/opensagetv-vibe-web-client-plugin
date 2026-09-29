@@ -1,0 +1,766 @@
+{
+  "reference_commit": "f1ba340e05fe18eaaba939253a933c3dfe6d6caf",
+  "upstream_checklist_revision": 71,
+  "named_task_count": 68,
+  "scope": "Named task IDs; nested unnumbered checks are retained as parent-gate caveats, not invented new IDs.",
+  "tasks": [
+    {
+      "id": "FOUND-001",
+      "title": "Stock-server-first compatibility",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP01-006",
+        "WP16-002"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-002",
+      "title": "Diagnostics overlay",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP14-001"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-003",
+      "title": "Test Current Video",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP14-002"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-004",
+      "title": "Diagnostic bundle export",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP14-003"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-005",
+      "title": "Generated regression fixtures",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP01-005"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-006",
+      "title": "Native DVD and compatibility foundation",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP07-001",
+        "WP08-001",
+        "WP09-001"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-007",
+      "title": "Player and remote foundation",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP13-005",
+        "WP12-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-008",
+      "title": "ONN hardware commissioning",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP16-005"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-009",
+      "title": "Same-file Pull seek investigation",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP11-001",
+        "WP11-007"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-010",
+      "title": "Long-recording control gate",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP16-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-011",
+      "title": "Durable fixture registry",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP01-005"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-012",
+      "title": "DVD MIM integration",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP15-002"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-013",
+      "title": "Fixed-settings type migration",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP02-007"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-014",
+      "title": "Public API commissioning",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP11-003"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-015",
+      "title": "Local DVD output refresh",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP08-008"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-016",
+      "title": "Functional capability names",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP15-001"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "FOUND-017",
+      "title": "Provider-neutral DVD transform",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP15-002"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android completion is reference evidence only; web implementation and its exact acceptance are separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "ONN-001",
+      "title": "Capability-based hardware correction",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP12-004"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Do not introduce an Android device-model workaround in the browser.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "ONN-002",
+      "title": "Stop-key compatibility",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP13-005"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Retain normal DVD navigation ownership and map actual browser input.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "ONN-003",
+      "title": "Persistent long-recording OSD",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP13-004",
+        "WP16-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Non-reproduction on another device is not closure.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "PULL-001",
+      "title": "Growing-position backward guard",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP11-004"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Preserve explicit seek and completed-file behavior; affected long-run report remains separate.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "CC-004",
+      "title": "Explicit DVB mode",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP04-004"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "DVB remains a distinct bitmap mode.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "CC-005",
+      "title": "Broadcast/file subtitle separation",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP05-001"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "CC does not select SRT/PGS/DVD.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "CC-006",
+      "title": "Single renderer ownership",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP05-004"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Reset old callback-rendered captions before local presentation.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "CC-007",
+      "title": "DVB excluded from CC virtual slots",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP05-001"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Supersedes older broad CC slot menu.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "UNIFIED-001",
+      "title": "Opt-in HD YUV graphics",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP13-003"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Capability is enabled only after actual format-256 support.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "D1",
+      "title": "Error classification",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP11-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Port failure-domain policy, not Android exception class names.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "D2",
+      "title": "Policy-filtered initialization fallback",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP12-004"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Strict choices remain strict.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "D3",
+      "title": "Decoder-attempt telemetry",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP14-001"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Browser counters/identities may be unavailable.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "D4",
+      "title": "Session-local fatal-codec quarantine",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP11-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Only proven codec failures; no persistent guessed blacklist.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "D5",
+      "title": "Transition/audio evidence",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP16-001"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Generate and verify format/discontinuity cases separately.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "D6",
+      "title": "Hardware-only regression matrix",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP16-005"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android hardware passes do not cover browser/GPU combinations.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "AUDIO-001",
+      "title": "Matched Pro/non-Pro sync characterization",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP12-007"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Original receiver/ARC measurement is still open.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "AUDIO-002",
+      "title": "Live decoded-audio offset",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP12-002"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Preserve sign, bounded range and session/default scope.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "AUDIO-003",
+      "title": "Delegation and truthful offset support",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP12-004"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Unsupported output APIs are not presented as working.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "AUDIO-004",
+      "title": "Encoded output safety boundary",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP12-004"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Never modify encoded bursts to simulate delay.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "AUDIO-005",
+      "title": "Physical offset matrix",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP12-007"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Several subtests passed; full physical route gate remains open.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "AUDIO-006",
+      "title": "Encoded-passthrough offset",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP12-002",
+        "WP12-007"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Opt-in timestamp adapters and ANR fix exist; receiver/ARC matrix remains open.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "DVD-001",
+      "title": "Pro sustained DVD/GFX recovery",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP07-005",
+        "WP13-002"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Reserve/retry/diagnostic subfixes exist; exact forced recovery and Unified gate remain open.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "DEVICE-001",
+      "title": "Tablet compatibility",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP16-005"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android5 minSdk exclusion is known; affected Android8 hardware evidence remains open.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "MATRIX-001",
+      "title": "ONN video matrix",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP16-002"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Only observed Android combinations passed.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "MATRIX-001-MKV3",
+      "title": "Third MKV reference",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP16-002"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Do not promote three real Android files to universal browser compatibility.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "MATRIX-002",
+      "title": "ONN disc matrix",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP16-004"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Actual authored and physical disc evidence is required again for the web backend.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "MATRIX-003",
+      "title": "Deferred cross-device matrix",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP16-005"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Not automatically authorized or inherited.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "MATRIX-004",
+      "title": "Cross-device evidence synchronization",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP17-001"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Await exact future acceptance evidence.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "SMB-001",
+      "title": "Server-first SMB configuration",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP14-005"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Implement a server-side equivalent, not browser SMB sockets.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "SMB-002",
+      "title": "SMB editor D-pad focus",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP14-007"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Browser focus contract needs its own tests.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "TTX-001",
+      "title": "Teletext preservation probe",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP03-007"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Metadata preservation is not decoded/visible caption acceptance.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "TTX-002",
+      "title": "Teletext decoder and renderer",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP03-004",
+        "WP03-005"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Independent clock, actual pages and single owner are part of the feature.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "TTX-003",
+      "title": "Virtual caption slots",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP05-002"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Apply later CC-007 rule excluding DVB.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "UI-001",
+      "title": "Consolidated playback controls",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP13-005",
+        "WP14-007"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Icons are retained; unported submenu functionality is still explicit.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "SEEK-001",
+      "title": "Precise skip/Comskip landing",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP11-002"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Completed zero/anchor subfixes do not imply final user-visible Pro sign-off.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "EXT-001",
+      "title": "Predictive Back migration",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP13-005"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android platform work, not native browser API support.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "EXT-002",
+      "title": "Blu-ray/BDMV commissioning",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP10-007"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "No Blu-ray or decryption support claim.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "EXT-003",
+      "title": "Secure decoder/DRM",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP10-007"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Clear synthetic media cannot validate DRM.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "EXT-004",
+      "title": "Full extender-firmware audit",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP13-001"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Future evidence task; no copying proprietary firmware.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "GH-001",
+      "title": "Android publication workflow checkpoint 1",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP17-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Reference release history only. This task does not authorize publishing or pushing this browser project.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "GH-002",
+      "title": "Android publication workflow checkpoint 2",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP17-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Reference release history only. This task does not authorize publishing or pushing this browser project.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "GH-003",
+      "title": "Android publication workflow checkpoint 3",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP17-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Reference release history only. This task does not authorize publishing or pushing this browser project.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "GH-004",
+      "title": "Android publication workflow checkpoint 4",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP17-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Reference release history only. This task does not authorize publishing or pushing this browser project.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "GH-005",
+      "title": "Android publication workflow checkpoint 5",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP17-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Reference release history only. This task does not authorize publishing or pushing this browser project.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "GH-006",
+      "title": "Android publication workflow checkpoint 6",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP17-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Reference release history only. This task does not authorize publishing or pushing this browser project.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "GH-007",
+      "title": "Android publication workflow checkpoint 7",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP17-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Reference release history only. This task does not authorize publishing or pushing this browser project.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "GH-008",
+      "title": "Android publication workflow checkpoint 8",
+      "upstream_status": "DONE",
+      "target_task_ids": [
+        "WP17-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Reference release history only. This task does not authorize publishing or pushing this browser project.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "STORE-001",
+      "title": "Production APK inspection",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP17-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android store task is not a browser playback port and is not silently started.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "STORE-002",
+      "title": "Production signing ownership",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP17-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android store task is not a browser playback port and is not silently started.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "STORE-003",
+      "title": "Store console/listing readiness",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP17-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android store task is not a browser playback port and is not silently started.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    },
+    {
+      "id": "STORE-004",
+      "title": "Production store bundle",
+      "upstream_status": "OPEN",
+      "target_task_ids": [
+        "WP17-006"
+      ],
+      "source": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md",
+      "reason": "Android store task is not a browser playback port and is not silently started.",
+      "browser_status": "NOT_INHERITED_FROM_ANDROID"
+    }
+  ]
+}

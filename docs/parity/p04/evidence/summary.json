@@ -1,0 +1,35 @@
+{
+  "phase": "P04",
+  "version": "3.2.7",
+  "status": "IMPLEMENTED_AWAITING_FIELD",
+  "date": "2026-09-25",
+  "generated_acceptance": {
+    "dvb_java": 32,
+    "dvb_node": 3,
+    "dvb_chromium": 6
+  },
+  "retained": {
+    "p02_architecture": 33,
+    "teletext_java": 28,
+    "teletext_node": 5,
+    "streaming_servlet": 16,
+    "streaming_runtime_ffmpeg": 14,
+    "hls_runtime": 10,
+    "mpegts_settings": 16,
+    "native_recovery": 11,
+    "native_startup": 13,
+    "native_authentication": 14,
+    "chromium_total": 82
+  },
+  "artifact": {
+    "war_sha256": "3b8f3ff513b9b99dcc1fab4964a2ec774b2f5ca5c8194a4212fa304aa4d78409",
+    "installer_sha256": "51c2e1d70ce7cf6b5d57e5ed22fb6ea36e6945c341efd9b74987c0a2be0207f6",
+    "installer_md5": "8e9f30c4f60c1f5f7c5c3ccd92acd536"
+  },
+  "field": {
+    "real_uk_dvb_bitmap": "pending",
+    "live_sagetv": "not_tested",
+    "physical_gpu": "not_tested",
+    "real_vendor_mse": "pending_from_p01"
+  }
+}

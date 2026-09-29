@@ -1,0 +1,43 @@
+PASS automatic UI fills browser content below toolbar without added borders
+PASS all 30 bundled Android icon bytes decode with accessible labels
+PASS transparent edge overlay has original Home/help, D-pad, transport and tool groups
+PASS native inset black CLEAR_RECT no longer changes fullscreen video bounds
+PASS full-playback edge mattes reveal video instead of adding server black bars
+PASS OSD show/hide preserves translucent native panels without moving video
+PASS opening and dismissing browser overlay never pauses/restarts/seeks native playback
+PASS native Source aspect notification does not override selected Fill browser mode
+PASS aspect icon cycles Fill, Fit and Stretch without transcoder restart
+PASS video, audio and caption icons open the working browser settings sections
+PASS info, scoped playback check, stats and nested Escape are functional
+PASS diagnostic ZIP request contains redacted browser snapshot, placement and P14 version
+PASS keypad/timeline extras remain under Help and keyboard sends literal text
+PASS small native/color-key previews still match native coordinates through menu changes
+PASS native placement override is available and browser placement restores edge-to-edge
+PASS mouse coordinates use the same full-window UI transform
+PASS desktop, phone, short-landscape and capped-native layouts stay in bounds without icon overlap
+PASS render-only enter/exit reflows video and UI to the actual browser height
+PASS no JavaScript exceptions throughout production UI/layout test
+PASS one-time default migration does not overwrite a subsequent explicit Fit choice
+PASS fixed 16:9 UI mode does not limit independent fullscreen video area
+PASS real H.264 fixture decodes with Fill/Fit/Stretch and stable OSD geometry
+Vibe overlay/display Chromium: 22 tests PASS (synthetic native/vendor transport; actual bundled assets and local video)
+PASS unified graphics is OFF in the production connection by default
+PASS browser opt-in reconnects and scopes UNIFIED capability to the replacement session
+PASS format-256 Y plus interleaved UV rows render through the production Canvas handle path
+PASS physical D-pad repeat is bounded by browser ownership and stops on keyup
+PASS pagehide retires its own native session with a session-scoped beacon
+PASS bfcache pageshow opens a fresh generation and preserves explicit unified preference
+PASS service-worker shell includes all current MiniClient modules and no longer restores partial old script sets
+Chromium P13 GFX/input/lifecycle: 7 tests PASS
+PASS settings D-pad ArrowDown advances focus through the nested support controls
+PASS server destination test is explicit/confirmed and reports bounded write-read-hash-delete success
+PASS bounded retry spool is an explicit separate action
+PASS profile export is schema-scoped and excludes administrator/server identity state
+PASS support settings remain reachable in a narrow browser without horizontal truncation
+PASS Test Current Video safely skips short/unsafe mutation and restores pause/audio test state
+PASS Test Current Video exercises cadence/pause/resume/reversible seek and restores the original long-recording state
+PASS manual ZIP report carries effective transcode/timestamp counters without client identity, SMB URL or credentials
+PASS interrupted video-test state is recoverable only onto the matching recording
+PASS stale interrupted-test restoration clears safely without seeking a different recording
+PASS automatic failure capture is default-off, opt-in, and preserves the terminal failure snapshot
+Chromium P14 diagnostics/profiles/accessibility: 11 tests PASS

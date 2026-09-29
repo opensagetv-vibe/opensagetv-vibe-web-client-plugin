@@ -1,0 +1,218 @@
+{
+  packets: 3,
+  continuityErrors: 0,
+  pmtPid: 256,
+  videoPid: 257,
+  videoStreamType: 2,
+  cea608Pairs: 2,
+  cea708Triples: 0,
+  captionServices: [],
+  queuedCues: 1,
+  selectedService: 'CC1'
+}
+OUT= "HI"
+{
+  packets: 3,
+  continuityErrors: 0,
+  pmtPid: 256,
+  videoPid: 257,
+  videoStreamType: 2,
+  cea608Pairs: 0,
+  cea708Triples: 2,
+  captionServices: [],
+  queuedCues: 1,
+  selectedService: '708-1'
+}
+OUT= "OK"
+performance watchdog PASS
+session state PASS
+session state v2 PASS
+library utils PASS
+commercial skip PASS
+PASS fast startup stays one segment regardless of reserve or producer rate
+PASS buffer settings clamp and validate
+PASS short finished clip can start with one segment
+PASS separate startup and ongoing reserve targets
+PASS recording buffering cannot force live-edge jumps or rate catch-up
+PASS bounded back buffer and worker-enabled transmuxer
+PASS auto resolution follows usable window and caps rendering load
+PASS fixed rendering resolution does not crop desktop or portrait windows
+PASS short click sends one click and suppresses browser duplicate
+PASS hold opens at 575ms, never clicks underlying item
+PASS touch primary pointer supports hold
+PASS secondary touch cannot steal hold
+PASS drag cancels hold and releases without activating
+PASS 12px tolerance uses CSS rather than canvas pixels
+PASS cancelled hold and synthetic click cannot select
+PASS cancelled drag still releases
+PASS right hold opens remote; short right click remains native
+PASS left double-click opens without prior activation
+PASS single click with double-click trigger delivered after window
+PASS right double-click opens and middle-click trigger works
+PASS mouse X-button back is a command, not a click
+PASS Guide hint parser avoids unrelated menu names
+PASS ENDLIST does not recover before normal buffered end
+PASS bounded recovery budget does not silently reset
+PASS video-mask assist accepts color key and clips trusted preview
+PASS dark clear can reveal fullscreen video, not tiny black UI buttons
+PASS menu navigation suppresses stale black-fill video hole
+MiniClient core: 27 tests PASS
+PASS new default uses browser-owned cover viewport
+PASS explicit fit/stretch/native remain selectable
+PASS window canvas fills all CSS pixels despite native size cap
+PASS fixed UI preserves complete logical picture
+PASS inset near-full native video is expanded once, not fitted twice
+PASS explicit small native preview remains native
+PASS preview positioning uses same axes as UI pointer mapping
+PASS fullscreen video ignores fixed-UI letterbox offsets
+PASS native override preserves exact destination even near full
+PASS invalid geometry falls back to sane screen rectangle
+PASS fullscreen border mattes recognized without geometry mutation
+PASS translucent native OSD and colored panels are retained
+PASS menu suspension and native preview do not erase mattes
+PASS small black UI button is never a fullscreen border matte
+MiniClient display policy: 14 tests PASS
+PASS 30 Vibe Android assets: recorded shapes/colors, SHA-256, PNG Git blobs, HTML and offline shell references
+PASS starts on one published segment, no fixed 10-second gate
+PASS manual startup threshold respected without blocking
+PASS short completed media does not wait for nonexistent segments
+PASS starvation pauses, replenished buffer resumes without undefined variable
+PASS user pause is not overridden by buffer refill
+PASS rebuffering reports play intent, not temporary video.pause
+PASS finished producer with unplayed content is not restarted
+PASS premature end recovery includes atomic absolute position and expected session
+PASS recovery counter persists across recovery sessions and caps at six
+PASS old asynchronous vendor load cannot attach to new recording
+PASS old status response cannot replace new session status
+PASS concurrent status polls share one request
+PASS seek startup reports offset without retaining prior currentTime
+PASS seek preserves pause intent
+PASS autoplay denied displays user action; gesture retries
+PASS normal end does not loop recovery
+PASS native HLS uses same startup and pause policy
+PASS old interrupted play promise cannot mutate replacement
+PASS completed recording duration replaces scheduled duration
+PASS first appended fragment expands 6s startup target to 180s without reloading
+PASS low-delay startup still fills a large ongoing reserve
+PASS forward reserve change applies while playing without resetting playback
+PASS settings unrelated to buffering preserve a library memory reduction
+PASS loader is woken with 20s still buffered instead of waiting to stall
+PASS refill continues while paused without autoplaying
+PASS normal appends fill reserve and continue topping up during long playback
+PASS no refill restart at target or when producer has no additional data
+PASS active slow fragment gets its timeout before a loader wakeup
+PASS buffer quota pressure reduces reserve and remains reduced
+PASS new recording resets phase and ignores old buffered callbacks
+PASS available server reserve is not discarded when producer stops advancing
+MiniClient playback: 31 tests PASS
+XML/package/WAR/MD5/new streaming classes OK
+  major version: 52
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS two browser playback sessions are isolated
+PASS seek retires only its own prior epoch
+PASS FLUSH has an independent generation
+PASS source replacement/stop invalidates stale callbacks without touching another client
+PASS text cue accepted inside current epoch
+PASS read-ahead cue does not render before presentation clock
+PASS due cue drains on presentation time
+PASS stale cue is rejected after seek
+PASS straight-alpha bitmap cue shares the versioned queue
+PASS bitmap dimension limit fails closed
+PASS text payload limit fails closed
+PASS 33-bit source PTS wrap maps to monotonic recording time
+PASS caption delay maps independently from source timestamps
+PASS cue-count backpressure is bounded
+PASS ffprobe inventory preserves source PID and disposition
+PASS CEA-608 language remains Unknown instead of inheriting guessed metadata
+PASS bounded PAT/PMT inventory discovers Teletext and DVB subtitle services
+PASS service inventory retains distinct descriptor identities instead of collapsing by UI ordinal
+PASS Teletext inventory preserves PID/language/type/magazine/page and observed evidence
+PASS DVB inventory preserves PID/composition/ancillary page identity
+PASS inventory reports capabilities without advertising unfinished decoders
+PASS 3.2.4 profile with no schema migrates through schema 3 without changing Off
+PASS literal CEA-608 CC4 and unrelated stream settings survive migration
+PASS per-recording audio/subtitle indices do not leak into the next recording
+PASS literal CEA-708 service selections remain addressable
+PASS TS source branch copies only selected original PID packets
+PASS subtitle branch does not duplicate source video packets
+PASS subtitle preservation is transport-independent from TS/HLS A/V outputs and video encoder stripping
+PASS unavailable selected subtitle track fails before replacing playback
+PASS ffprobe typed inventory discovers container subtitle track
+PASS container subtitle stream-copy branch preserves original subtitle stream independently of video encode
+PASS preserved container side channel remains probeable as subtitle media
+PASS capability/resource contract advertises only completed Teletext while retaining resource bounds
+P02 playback architecture: 33 PASS
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+MiniClient protocol smoke PASS (first-frame/explicit resize + repaint, commands, mouse, text and bounds)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS type-5 recovery, 0 initial rejection(s), partial header, retained media/cache
+PASS type-5 recovery, 2 initial rejection(s), partial body, retained media/cache
+PASS pre-first-frame reset is terminal
+PASS unnegotiated reset is terminal
+PASS three rejected reconnects fail visibly without a fourth handshake
+PASS close cancels an in-flight reconnect handshake and prevents resurrection
+PASS explicit close terminates media/GFX without reconnect
+PASS server DEINIT closes cleanly instead of reconnecting
+PASS rejected startup cleans up both media and pending GFX socket
+PASS diagnostic property trace is bounded and omits property values
+PASS same-ID refresh retires old native sockets; stale stop cannot kill replacement
+Native recovery tests: 11 PASS (real loopback sockets, synthetic SageTV peer)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS INIT replies without resize/repaint while server UI is unconstructed
+PASS all property and filesystem replies still arrive during startup
+PASS first frame allocation replies remain live; STARTFRAME alone does not open gate
+PASS first completed frame ACK precedes one initial resize and repaint
+PASS startup resize flood coalesces to latest size and one full repaint
+PASS mouse keyboard text and Sage commands are dropped rather than replayed at login
+PASS media-update events are coalesced until video frame owner exists
+PASS media protocol replies are independent of GFX readiness
+PASS runtime resize repaint and input still work after readiness
+PASS later FLIPBUFFER does not repeat initial resize/repaint
+PASS driver re-INIT closes event gate until another completed frame
+PASS close before first frame discards deferred events and cannot reopen
+PASS invalid startup sizes are rejected before queuing
+Native startup ordering: 13 PASS (real TCP; synthetic server readiness boundary).
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS ordinary no-auth startup remains plaintext after capability query
+PASS RSA-1024 binary key exchange, encrypted properties, first GFX frame
+PASS RSA-2048 binary key exchange, encrypted properties, first GFX frame
+PASS premature enable and missing public key rejected without false success
+PASS unsupported algorithms, invalid RSA key, malformed boolean, unknown crypto rejected
+PASS truncated and mismatched property lengths rejected without changing mode
+PASS all outbound families use correct padding; empty payload stays empty
+PASS enable/disable ACK uses old mode atomically with concurrent keyboard input
+PASS active encrypted link rejects rekey/downgrade and keeps current cipher
+PASS keys and auth payloads excluded from browser events and diagnostic values
+PASS reset while encrypted closes without unsafe type-5 resumption
+PASS type-5 recovery allowed again after server disables encryption
+PASS fresh secret for independent session 1
+PASS fresh secret for independent session 2
+Native authentication tests: 14 PASS (real RSA/Blowfish + loopback TCP; synthetic server)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS growing file EOF waits and follows appended bytes
+PASS segment rollover follows new file and drains final bytes before EOF
+PASS byte-offset feeder spans completed segments
+PASS cancellation terminates EOF wait promptly
+PASS playlist duration ignores invalid/nonfinite/negative entries
+PASS FFmpeg probe cache reuse and explicit invalidation
+PASS real MPEG-2/AC-3 to H.264/AAC EVENT HLS transcode, duration and ENDLIST
+PASS pipe input does not force MPEG-TS on MPEG-PS recordings
+PASS separate monitor/stderr threads track producer growth beyond startup without browser polling

@@ -1,0 +1,1249 @@
+--- a/src/main/java/org/opensagetv/webplayer/PluginVersion.java
++++ b/src/main/java/org/opensagetv/webplayer/PluginVersion.java
+@@ -1,7 +1,7 @@
+ package org.opensagetv.webplayer;
+ 
+ final class PluginVersion {
+-    static final String VERSION = "3.2.3";
++    static final String VERSION = "3.2.4";
+     static final String LIBMEDIA_VERSION = "1.3.1";
+     static final String HLSJS_VERSION = "1.7.3";
+     static final String MPEGTSJS_VERSION = "1.8.0";
+--- a/src/main/webapp/WEB-INF/licenses/VibeAndroid-APACHE-2.0.txt
++++ b/src/main/webapp/WEB-INF/licenses/VibeAndroid-APACHE-2.0.txt
+@@ -0,0 +1,202 @@
++
++                                 Apache License
++                           Version 2.0, January 2004
++                        http://www.apache.org/licenses/
++
++   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
++
++   1. Definitions.
++
++      "License" shall mean the terms and conditions for use, reproduction,
++      and distribution as defined by Sections 1 through 9 of this document.
++
++      "Licensor" shall mean the copyright owner or entity authorized by
++      the copyright owner that is granting the License.
++
++      "Legal Entity" shall mean the union of the acting entity and all
++      other entities that control, are controlled by, or are under common
++      control with that entity. For the purposes of this definition,
++      "control" means (i) the power, direct or indirect, to cause the
++      direction or management of such entity, whether by contract or
++      otherwise, or (ii) ownership of fifty percent (50%) or more of the
++      outstanding shares, or (iii) beneficial ownership of such entity.
++
++      "You" (or "Your") shall mean an individual or Legal Entity
++      exercising permissions granted by this License.
++
++      "Source" form shall mean the preferred form for making modifications,
++      including but not limited to software source code, documentation
++      source, and configuration files.
++
++      "Object" form shall mean any form resulting from mechanical
++      transformation or translation of a Source form, including but
++      not limited to compiled object code, generated documentation,
++      and conversions to other media types.
++
++      "Work" shall mean the work of authorship, whether in Source or
++      Object form, made available under the License, as indicated by a
++      copyright notice that is included in or attached to the work
++      (an example is provided in the Appendix below).
++
++      "Derivative Works" shall mean any work, whether in Source or Object
++      form, that is based on (or derived from) the Work and for which the
++      editorial revisions, annotations, elaborations, or other modifications
++      represent, as a whole, an original work of authorship. For the purposes
++      of this License, Derivative Works shall not include works that remain
++      separable from, or merely link (or bind by name) to the interfaces of,
++      the Work and Derivative Works thereof.
++
++      "Contribution" shall mean any work of authorship, including
++      the original version of the Work and any modifications or additions
++      to that Work or Derivative Works thereof, that is intentionally
++      submitted to Licensor for inclusion in the Work by the copyright owner
++      or by an individual or Legal Entity authorized to submit on behalf of
++      the copyright owner. For the purposes of this definition, "submitted"
++      means any form of electronic, verbal, or written communication sent
++      to the Licensor or its representatives, including but not limited to
++      communication on electronic mailing lists, source code control systems,
++      and issue tracking systems that are managed by, or on behalf of, the
++      Licensor for the purpose of discussing and improving the Work, but
++      excluding communication that is conspicuously marked or otherwise
++      designated in writing by the copyright owner as "Not a Contribution."
++
++      "Contributor" shall mean Licensor and any individual or Legal Entity
++      on behalf of whom a Contribution has been received by Licensor and
++      subsequently incorporated within the Work.
++
++   2. Grant of Copyright License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      copyright license to reproduce, prepare Derivative Works of,
++      publicly display, publicly perform, sublicense, and distribute the
++      Work and such Derivative Works in Source or Object form.
++
++   3. Grant of Patent License. Subject to the terms and conditions of
++      this License, each Contributor hereby grants to You a perpetual,
++      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
++      (except as stated in this section) patent license to make, have made,
++      use, offer to sell, sell, import, and otherwise transfer the Work,
++      where such license applies only to those patent claims licensable
++      by such Contributor that are necessarily infringed by their
++      Contribution(s) alone or by combination of their Contribution(s)
++      with the Work to which such Contribution(s) was submitted. If You
++      institute patent litigation against any entity (including a
++      cross-claim or counterclaim in a lawsuit) alleging that the Work
++      or a Contribution incorporated within the Work constitutes direct
++      or contributory patent infringement, then any patent licenses
++      granted to You under this License for that Work shall terminate
++      as of the date such litigation is filed.
++
++   4. Redistribution. You may reproduce and distribute copies of the
++      Work or Derivative Works thereof in any medium, with or without
++      modifications, and in Source or Object form, provided that You
++      meet the following conditions:
++
++      (a) You must give any other recipients of the Work or
++          Derivative Works a copy of this License; and
++
++      (b) You must cause any modified files to carry prominent notices
++          stating that You changed the files; and
++
++      (c) You must retain, in the Source form of any Derivative Works
++          that You distribute, all copyright, patent, trademark, and
++          attribution notices from the Source form of the Work,
++          excluding those notices that do not pertain to any part of
++          the Derivative Works; and
++
++      (d) If the Work includes a "NOTICE" text file as part of its
++          distribution, then any Derivative Works that You distribute must
++          include a readable copy of the attribution notices contained
++          within such NOTICE file, excluding those notices that do not
++          pertain to any part of the Derivative Works, in at least one
++          of the following places: within a NOTICE text file distributed
++          as part of the Derivative Works; within the Source form or
++          documentation, if provided along with the Derivative Works; or,
++          within a display generated by the Derivative Works, if and
++          wherever such third-party notices normally appear. The contents
++          of the NOTICE file are for informational purposes only and
++          do not modify the License. You may add Your own attribution
++          notices within Derivative Works that You distribute, alongside
++          or as an addendum to the NOTICE text from the Work, provided
++          that such additional attribution notices cannot be construed
++          as modifying the License.
++
++      You may add Your own copyright statement to Your modifications and
++      may provide additional or different license terms and conditions
++      for use, reproduction, or distribution of Your modifications, or
++      for any such Derivative Works as a whole, provided Your use,
++      reproduction, and distribution of the Work otherwise complies with
++      the conditions stated in this License.
++
++   5. Submission of Contributions. Unless You explicitly state otherwise,
++      any Contribution intentionally submitted for inclusion in the Work
++      by You to the Licensor shall be under the terms and conditions of
++      this License, without any additional terms or conditions.
++      Notwithstanding the above, nothing herein shall supersede or modify
++      the terms of any separate license agreement you may have executed
++      with Licensor regarding such Contributions.
++
++   6. Trademarks. This License does not grant permission to use the trade
++      names, trademarks, service marks, or product names of the Licensor,
++      except as required for reasonable and customary use in describing the
++      origin of the Work and reproducing the content of the NOTICE file.
++
++   7. Disclaimer of Warranty. Unless required by applicable law or
++      agreed to in writing, Licensor provides the Work (and each
++      Contributor provides its Contributions) on an "AS IS" BASIS,
++      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
++      implied, including, without limitation, any warranties or conditions
++      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
++      PARTICULAR PURPOSE. You are solely responsible for determining the
++      appropriateness of using or redistributing the Work and assume any
++      risks associated with Your exercise of permissions under this License.
++
++   8. Limitation of Liability. In no event and under no legal theory,
++      whether in tort (including negligence), contract, or otherwise,
++      unless required by applicable law (such as deliberate and grossly
++      negligent acts) or agreed to in writing, shall any Contributor be
++      liable to You for damages, including any direct, indirect, special,
++      incidental, or consequential damages of any character arising as a
++      result of this License or out of the use or inability to use the
++      Work (including but not limited to damages for loss of goodwill,
++      work stoppage, computer failure or malfunction, or any and all
++      other commercial damages or losses), even if such Contributor
++      has been advised of the possibility of such damages.
++
++   9. Accepting Warranty or Additional Liability. While redistributing
++      the Work or Derivative Works thereof, You may choose to offer,
++      and charge a fee for, acceptance of support, warranty, indemnity,
++      or other liability obligations and/or rights consistent with this
++      License. However, in accepting such obligations, You may act only
++      on Your own behalf and on Your sole responsibility, not on behalf
++      of any other Contributor, and only if You agree to indemnify,
++      defend, and hold each Contributor harmless for any liability
++      incurred by, or claims asserted against, such Contributor by reason
++      of your accepting any such warranty or additional liability.
++
++   END OF TERMS AND CONDITIONS
++
++   APPENDIX: How to apply the Apache License to your work.
++
++      To apply the Apache License to your work, attach the following
++      boilerplate notice, with the fields enclosed by brackets "[]"
++      replaced with your own identifying information. (Don't include
++      the brackets!)  The text should be enclosed in the appropriate
++      comment syntax for the file format. We also recommend that a
++      file or class name and description of purpose be included on the
++      same "printed page" as the copyright notice for easier
++      identification within third-party archives.
++
++   Copyright [yyyy] [name of copyright owner]
++
++   Licensed under the Apache License, Version 2.0 (the "License");
++   you may not use this file except in compliance with the License.
++   You may obtain a copy of the License at
++
++       http://www.apache.org/licenses/LICENSE-2.0
++
++   Unless required by applicable law or agreed to in writing, software
++   distributed under the License is distributed on an "AS IS" BASIS,
++   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
++   See the License for the specific language governing permissions and
++   limitations under the License.
+--- a/src/main/webapp/WEB-INF/licenses/VibeAndroid-NOTICE.txt
++++ b/src/main/webapp/WEB-INF/licenses/VibeAndroid-NOTICE.txt
+@@ -0,0 +1,11 @@
++Vibe Android navigation overlay/icon port for SageTV Web Player 3.2.4.
++Derived from OpenSageTV Vibe Android Client and The SageTV Authors,
++https://github.com/opensagetv-vibe/opensagetv-vibe-android-client
++Reference tree f1ba340e05fe18eaaba939253a933c3dfe6d6caf; source/dev.
++NavigationDialog source credits seans (2015). Individual UI resources are
++licensed under the repository Apache License, Version2.0. See included license
++and per-file source IDs in vibe-icons.json.
++
++Modifications: vector drawable pathData converted to SVG d with source color;
++HTML/CSS responsive edge layout and browser action wiring. PNG Home/Close bytes
++are unchanged. No Android runtime or font is bundled.
+--- a/src/main/webapp/WEB-INF/licenses/vibe-icons.json
++++ b/src/main/webapp/WEB-INF/licenses/vibe-icons.json
+@@ -0,0 +1,389 @@
++{
++  "repository": "opensagetv-vibe/opensagetv-vibe-android-client",
++  "ref": "f1ba340e05fe18eaaba939253a933c3dfe6d6caf",
++  "layoutBlob": "b55d384b6dcb9c86bf2cfa771f1a9d615710ed77",
++  "assets": [
++    {
++      "name": "help_outline",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_help_outline_white_24dp.xml",
++      "blobSha": "69982342feef36884f91e6be53580986ffbe0772",
++      "output": "icons/vibe/help_outline.svg",
++      "paths": [
++        "M11,18h2v-2h-2v2zM12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM12,20c-4.41,0 -8,-3.59 -8,-8s3.59,-8 8,-8 8,3.59 8,8 -3.59,8 -8,8zM12,6c-2.21,0 -4,1.79 -4,4h2c0,-1.1 0.9,-2 2,-2s2,0.9 2,2c0,2 -3,1.75 -3,5h2c0,-2.25 3,-2.5 3,-5 0,-2.21 -1.79,-4 -4,-4z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "4b7c6bbc06cf61a6bab9aa33cc1e38f442d2f6e8339efc89b11f7a598f984158"
++    },
++    {
++      "name": "menu",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_menu_white_24dp.xml",
++      "blobSha": "cf37e2a393cbf3e8d08165d60dfaf0a29c8cfc3d",
++      "output": "icons/vibe/menu.svg",
++      "paths": [
++        "M3,18h18v-2L3,16v2zM3,13h18v-2L3,11v2zM3,6v2h18L21,6L3,6z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "1c022dfd1bee49d4d7c093404015f96135f5c198aacba71788ab33f03f267733"
++    },
++    {
++      "name": "info_outline",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_info_outline_white_24dp.xml",
++      "blobSha": "9567ecd7754dd13715860c5dfeae0f92256d4eb4",
++      "output": "icons/vibe/info_outline.svg",
++      "paths": [
++        "M11,17h2v-6h-2v6zM12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM12,20c-4.41,0 -8,-3.59 -8,-8s3.59,-8 8,-8 8,3.59 8,8 -3.59,8 -8,8zM11,9h2L13,7h-2v2z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "6b0cbbf48f01e77ac92f1d9954154ab9a8afbe4bf7fb67f3eb97d10686293115"
++    },
++    {
++      "name": "undo",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_undo_white_24dp.xml",
++      "blobSha": "d624b8b7eb121fa360dd6762fb54bbbfdfd48f19",
++      "output": "icons/vibe/undo.svg",
++      "paths": [
++        "M12.5,8c-2.65,0 -5.05,0.99 -6.9,2.6L2,7v9h9l-3.62,-3.62c1.39,-1.16 3.16,-1.88 5.12,-1.88 3.54,0 6.55,2.31 7.6,5.5l2.37,-0.78C21.08,11.03 17.15,8 12.5,8z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "6554e47e17e4e995ca77aaeaa892c46feca6367b377f4213de2c9fa435cb10c0"
++    },
++    {
++      "name": "arrow_upward",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_arrow_upward_white_24dp.xml",
++      "blobSha": "a8dfcd29134aa072fab4b7014d4e8cb8b1100458",
++      "output": "icons/vibe/arrow_upward.svg",
++      "paths": [
++        "M4,12l1.41,1.41L11,7.83V20h2V7.83l5.58,5.59L20,12l-8,-8 -8,8z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "0e26137dd5d28f790f336654af4150ab322a584b7b76057d18cddbb1674eb5ce"
++    },
++    {
++      "name": "arrow_back",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_arrow_back_white_24dp.xml",
++      "blobSha": "38fbc261b7a2a89876009fc0a04e096f5aa03822",
++      "output": "icons/vibe/arrow_back.svg",
++      "paths": [
++        "M20,11H7.83l5.59,-5.59L12,4l-8,8 8,8 1.41,-1.41L7.83,13H20v-2z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "fde008af8dc9cb19f1cb5d37a4deb474a5b7ba32695d3a28442575790761e534"
++    },
++    {
++      "name": "arrow_forward",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_arrow_forward_white_24dp.xml",
++      "blobSha": "5304b93e183f60d76706bf6d76db923221245b7b",
++      "output": "icons/vibe/arrow_forward.svg",
++      "paths": [
++        "M12,4l-1.41,1.41L16.17,11H4v2h12.17l-5.58,5.59L12,20l8,-8z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "c99e8a9ea214ce257d166bd7ca38c81a0fe35e09940595377828a8a28c08db2a"
++    },
++    {
++      "name": "arrow_downward",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_arrow_downward_white_24dp.xml",
++      "blobSha": "b4c7b17e5b9c1ade30d57eb2db4b345ec6bfb3ec",
++      "output": "icons/vibe/arrow_downward.svg",
++      "paths": [
++        "M20,12l-1.41,-1.41L13,16.17V4h-2v12.17l-5.58,-5.59L4,12l8,8 8,-8z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "6e3ddf3925eef5844bc841465170834c2c5126b9ea35fe0683c54801be5d67f1"
++    },
++    {
++      "name": "fiber_manual_record",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_fiber_manual_record_white_24dp.xml",
++      "blobSha": "5cc678f28f341d098f9f876763200ce8f81ff441",
++      "output": "icons/vibe/fiber_manual_record.svg",
++      "paths": [
++        "M12,12m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "b58e61815a54448b9a51349b2b3f9124f2700dd038c706e9d3745b4b959e72c0"
++    },
++    {
++      "name": "exit_to_app",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_exit_to_app_green_24dp.xml",
++      "blobSha": "dbee1978f0eacf63de6f2c47d436e7751dc0d524",
++      "output": "icons/vibe/exit_to_app.svg",
++      "paths": [
++        "M10.09,15.59L11.5,17l5,-5 -5,-5 -1.41,1.41L12.67,11H3v2h9.67l-2.58,2.59zM19,3H5c-1.11,0 -2,0.9 -2,2v4h2V5h14v14H5v-4H3v4c0,1.1 0.89,2 2,2h14c1.1,0 2,-0.9 2,-2V5c0,-1.1 -0.9,-2 -2,-2z"
++      ],
++      "colors": [
++        "#00ff00"
++      ],
++      "sha256": "781ce9a791b015d911325e1602e84937afdddb5ff5aa96ed1103ecf502411eb5"
++    },
++    {
++      "name": "vertical_align_top",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_vertical_align_top_white_24dp.xml",
++      "blobSha": "59c30adf84e60c636c5173d859b824c5978fbc0f",
++      "output": "icons/vibe/vertical_align_top.svg",
++      "paths": [
++        "M8,11h3v10h2V11h3l-4,-4 -4,4zM4,3v2h16V3H4z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "f489b1ed11d560ca4349cb2e8574885cff58dea48bef0abf3643813d6300f3af"
++    },
++    {
++      "name": "vertical_align_bottom",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_vertical_align_bottom_white_24dp.xml",
++      "blobSha": "a75a234a30bdc0e3cf6df3c60ac4906df358faef",
++      "output": "icons/vibe/vertical_align_bottom.svg",
++      "paths": [
++        "M16,13h-3V3h-2v10H8l4,4 4,-4zM4,19v2h16v-2H4z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "2e72fa87ebfb94f0b90c81a6162a0c63370be800c4a5ab2cfc9ad6992cafac96"
++    },
++    {
++      "name": "keyboard",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_keyboard_white_24dp.xml",
++      "blobSha": "0515c9b9e73e9aa5f254bbb27b94787133ab0bf9",
++      "output": "icons/vibe/keyboard.svg",
++      "paths": [
++        "M20,5L4,5c-1.1,0 -1.99,0.9 -1.99,2L2,17c0,1.1 0.9,2 2,2h16c1.1,0 2,-0.9 2,-2L22,7c0,-1.1 -0.9,-2 -2,-2zM11,8h2v2h-2L11,8zM11,11h2v2h-2v-2zM8,8h2v2L8,10L8,8zM8,11h2v2L8,13v-2zM7,13L5,13v-2h2v2zM7,10L5,10L5,8h2v2zM16,17L8,17v-2h8v2zM16,13h-2v-2h2v2zM16,10h-2L14,8h2v2zM19,13h-2v-2h2v2zM19,10h-2L17,8h2v2z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "da0227bb41c6f658323f026d7b477a9e9053e95f48a7670e1409b4f08ff65fc6"
++    },
++    {
++      "name": "skip_previous",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_skip_previous_white_24dp.xml",
++      "blobSha": "752878575efc105e0508e889bbcb856bf7183a3c",
++      "output": "icons/vibe/skip_previous.svg",
++      "paths": [
++        "M6,6h2v12L6,18zM9.5,12l8.5,6L18,6z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "2724bdf4c5ac22df851098859877f036b5a63674fe30d25a980a427e52d23e9d"
++    },
++    {
++      "name": "fast_rewind",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_fast_rewind_white_24dp.xml",
++      "blobSha": "30a196e02dd93d2d62ef8730bdf2e0c197d8d5e1",
++      "output": "icons/vibe/fast_rewind.svg",
++      "paths": [
++        "M11,18L11,6l-8.5,6 8.5,6zM11.5,12l8.5,6L20,6l-8.5,6z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "3bc6686bd754c0b15bb8b61a7cf9cabb679fc1326537695e107d6646e4ab5f75"
++    },
++    {
++      "name": "stop",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_stop_white_24dp.xml",
++      "blobSha": "c5b211a7776e968338839fec673af9744f51ba3b",
++      "output": "icons/vibe/stop.svg",
++      "paths": [
++        "M6,6h12v12H6z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "fd9dfe46d34a32e154abdd2e64cdafbc1d8c7d08079ebe9e7cbe4a856d54dbf9"
++    },
++    {
++      "name": "pause",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_pause_white_24dp.xml",
++      "blobSha": "8356ff57f5bf91a84abbca66ee8bff17cafe730a",
++      "output": "icons/vibe/pause.svg",
++      "paths": [
++        "M6,19h4L10,5L6,5v14zM14,5v14h4L18,5h-4z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "11dec8add5f40f3ff1c69c97427b143e2a9e9ec7216744a8fb597758f8fabdca"
++    },
++    {
++      "name": "play_arrow",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_play_arrow_white_24dp.xml",
++      "blobSha": "81a8f74f6e3f711a9b58e04512533a533f4b7f3c",
++      "output": "icons/vibe/play_arrow.svg",
++      "paths": [
++        "M8,5v14l11,-7z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "26b057a754ed979fafbd36e4de034ccf459289663e29a6773fe858661d72d119"
++    },
++    {
++      "name": "fast_forward",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_fast_forward_white_24dp.xml",
++      "blobSha": "5ca4d224fa1de50aae71b9223eddbf4ea282aa4e",
++      "output": "icons/vibe/fast_forward.svg",
++      "paths": [
++        "M4,18l8.5,-6L4,6v12zM13,6v12l8.5,-6L13,6z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "974c277c09577c0ed61e189f36ce94d15456e06e3a1a5e720956686a25f8e381"
++    },
++    {
++      "name": "skip_next",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_skip_next_white_24dp.xml",
++      "blobSha": "5d1017b1c2e576d00f1037bf7eb496c61e3b13db",
++      "output": "icons/vibe/skip_next.svg",
++      "paths": [
++        "M6,18l8.5,-6L6,6v12zM16,6v12h2V6h-2z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "dffdf18c061ef46ab4e2acb19ab55776671c49f7338d835450b4ff0e8d89107a"
++    },
++    {
++      "name": "aspect_ratio",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_aspect_ratio_white_24dp.xml",
++      "blobSha": "97f6055a85475be59e7d919e2d793bb7dd1fc1f6",
++      "output": "icons/vibe/aspect_ratio.svg",
++      "paths": [
++        "M19,12h-2v3h-3v2h5v-5zM7,9h3L10,7L5,7v5h2L7,9zM21,3L3,3c-1.1,0 -2,0.9 -2,2v14c0,1.1 0.9,2 2,2h18c1.1,0 2,-0.9 2,-2L23,5c0,-1.1 -0.9,-2 -2,-2zM21,19.01L3,19.01L3,4.99h18v14.02z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "a355b0d48e09f30c07d94cc49019f71632dc02374f3ccf8b8faf83a81f9ee421"
++    },
++    {
++      "name": "vid_info",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_vid_info_white_24dp.xml",
++      "blobSha": "601872896b538024648f20479c11944570095341",
++      "output": "icons/vibe/vid_info.svg",
++      "paths": [
++        "M12,7.77L18.39,18H5.61L12,7.77M12,4L2,20h20L12,4z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "4693d0042c714c4c227f2e42eec307ab85a864d7ea4e5490548651fba3410e2b"
++    },
++    {
++      "name": "bug_report",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_bug_report_white_24dp.xml",
++      "blobSha": "b84f96ef2e9f50ed1fd2bb084bf01ba6170364a1",
++      "output": "icons/vibe/bug_report.svg",
++      "paths": [
++        "M20,8h-2.81c-0.45,-0.78 -1.07,-1.45 -1.82,-1.96L17,4.41 15.59,3l-2.17,2.17C12.96,5.06 12.49,5 12,5s-0.96,0.06 -1.41,0.17L8.41,3 7,4.41l1.62,1.63C7.88,6.55 7.26,7.22 6.81,8H4v2h2.09c-0.05,0.33 -0.09,0.66 -0.09,1v1H4v2h2v1c0,0.34 0.04,0.67 0.09,1H4v2h2.81C7.85,19.79 9.78,21 12,21s4.15,-1.21 5.19,-3H20v-2h-2.09c0.05,-0.33 0.09,-0.66 0.09,-1v-1h2v-2h-2v-1c0,-0.34 -0.04,-0.67 -0.09,-1H20V8zM14,16h-4v-2h4v2zM14,12h-4v-2h4v2z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "eb3d27ccd670dc6e197edd18a3a1e6a0776a440220551180305859a585248714"
++    },
++    {
++      "name": "video_test",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_video_test_white_24dp.xml",
++      "blobSha": "20dd9ba74f90448419daa851bfcfa876fd401899",
++      "output": "icons/vibe/video_test.svg",
++      "paths": [
++        "M3,5c-1.1,0 -2,0.9 -2,2v10c0,1.1 0.9,2 2,2h18c1.1,0 2,-0.9 2,-2V7c0,-1.1 -0.9,-2 -2,-2H3zM3,7h18v10H3V7zM10,8.5v7l5.5,-3.5L10,8.5z",
++        "M4,13h2l1,-2 1.5,4 1,-2H11v2H8.3l0,-1.1 -1.2,2.4 -1.4,-2.8L5.2,15H4z"
++      ],
++      "colors": [
++        "#ffffff",
++        "#ffffff"
++      ],
++      "sha256": "c504259096a4f946443143978a89a1fe9989887ba19b407ab28fe3f6b9bb55cb"
++    },
++    {
++      "name": "equalizer",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_equalizer_white_24dp.xml",
++      "blobSha": "a3e047a9a4f117cd0f6b0010a95b56bfc914a116",
++      "output": "icons/vibe/equalizer.svg",
++      "paths": [
++        "M5,9.2h3V19H5V9.2zM10.5,5h3v14h-3V5zM16,12.5h3V19h-3V12.5z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "4604d7e40c6dc15abdb1de4aba82907bf7fee29b2c6849fdab21465250e5d330"
++    },
++    {
++      "name": "closed_caption",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_closed_caption_white_24dp.xml",
++      "blobSha": "086e598375dc5147967457921436b149edf6034c",
++      "output": "icons/vibe/closed_caption.svg",
++      "paths": [
++        "M20,4L4,4c-1.1,0 -2,0.9 -2,2v12c0,1.1 0.9,2 2,2h16c1.1,0 2,-0.9 2,-2L22,6c0,-1.1 -0.9,-2 -2,-2zM4,12h4v2L4,14v-2zM14,18L4,18v-2h10v2zM20,18h-4v-2h4v2zM20,14L10,14v-2h10v2z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "8132b50d05eca0a4d0a4d0ba3980857e7cd5128036338991044480ee59ddd8ea"
++    },
++    {
++      "name": "video_settings",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_video_settings_white_24dp.xml",
++      "blobSha": "ee93358f6689c8e4040f7b82bdef6fcd5a1d224e",
++      "output": "icons/vibe/video_settings.svg",
++      "paths": [
++        "M3,6c-0.55,0 -1,0.45 -1,1v10c0,0.55 0.45,1 1,1h13c0.55,0 1,-0.45 1,-1v-3.5l5,4v-11l-5,4V7c0,-0.55 -0.45,-1 -1,-1H3z"
++      ],
++      "colors": [
++        "#ffffff"
++      ],
++      "sha256": "31c8d43f833a939109f89e2b8bc0bb59f3898a557c835900b94832a540830f29"
++    },
++    {
++      "name": "audio_tune",
++      "source": "source/dev/android-shared/src/main/res/drawable/ic_audio_tune_white_24dp.xml",
++      "blobSha": "b2430a2a5cb09f8b5afd7e19b3290ccce526df5a",
++      "output": "icons/vibe/audio_tune.svg",
++      "paths": [
++        "M3,9v6h4l5,4V5L7,9H3zM16,12c0,-1.41 -0.81,-2.63 -2,-3.22v6.44c1.19,-0.59 2,-1.81 2,-3.22zM14,3.23v2.06c2.89,0.86 5,3.54 5,6.71s-2.11,5.85 -5,6.71v2.06c4.01,-0.91 7,-4.49 7,-8.77s-2.99,-7.86 -7,-8.77z",
++        "M2,20h8v2H2z"
++      ],
++      "colors": [
++        "#ffffff",
++        "#00bcd4"
++      ],
++      "sha256": "0ebad1ee0cfcf04f5fda96d7c3ecf7caaa22d2bba83d22f5eb1f7e0b35d9acbe"
++    },
++    {
++      "name": "home",
++      "source": "source/dev/android-shared/src/main/res/drawable-xxxhdpi/ic_home_white_24dp.png",
++      "blobSha": "a2a59d7b0a2c4382a6d43474b5d64ae3161b850d",
++      "output": "icons/vibe/home.png",
++      "sha256": "ae5332db05841677272a3a3de3ad338435123e832f1279c90ae94539f07a0fb6"
++    },
++    {
++      "name": "close",
++      "source": "source/dev/android-shared/src/main/res/drawable-xxxhdpi/ic_close_white_24dp.png",
++      "blobSha": "9ef2d8f9fbe5914285f0776e412c4d1be25d17aa",
++      "output": "icons/vibe/close.png",
++      "sha256": "d1d2fac160ff33e854621747466f02160d8c382176c48204db93e1009ee5e4cf"
++    }
++  ]
++}
+--- a/src/main/webapp/client.html
++++ b/src/main/webapp/client.html
+@@ -23,7 +23,7 @@
+     <button data-page="player">Player</button>
+     <button data-page="more">More</button>
+   </nav>
+-  <div class="client-top-actions"><a class="button-link" href="miniclient.html">MiniClient / SageMC</a><a class="button-link" href="index.html">Simple Player</a><span class="version">v3.2.3</span></div>
++  <div class="client-top-actions"><a class="button-link" href="miniclient.html">MiniClient / SageMC</a><a class="button-link" href="index.html">Simple Player</a><span class="version">v3.2.4</span></div>
+ </header>
+ <main class="client-main">
+   <section class="client-page" data-client-page="home">
+--- a/src/main/webapp/css/miniclient.css
++++ b/src/main/webapp/css/miniclient.css
+@@ -45,3 +45,31 @@
+ /* A failed render-only/fullscreen session must never hide its recovery tools. */
+ body.mc-connection-lost .mc-toolbar{display:flex!important}
+ body.mc-connection-lost .mc-status{color:#ffc9be}
++
++/* 3.2.4: port of Vibe Android navigation.xml / NavIconButton. The original
++   uses #A0000000 buttons on a transparent full-screen, non-dimming overlay. */
++.mc-remote-overlay{position:absolute;inset:0;z-index:30;padding:0;background:transparent;display:block;overflow:hidden;touch-action:none}
++.mc-remote-card{--nav-size:clamp(44px,4.2vw,64px);position:absolute;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:hidden;pointer-events:none}
++.vibe-top{position:absolute;top:max(4px,env(safe-area-inset-top));left:max(4px,env(safe-area-inset-left));right:max(4px,env(safe-area-inset-right));display:flex;justify-content:space-between;align-items:start}
++.vibe-top-right,.vibe-transport{display:flex}
++.vibe-icon{width:var(--nav-size);height:var(--nav-size);min-width:0;min-height:0;display:grid;place-items:center;padding:calc(var(--nav-size)*5/45);margin:0;border:0;border-radius:0;background:#000000a0;color:#fff;pointer-events:auto;touch-action:none}
++.vibe-icon img{display:block;width:100%;height:100%;object-fit:contain;pointer-events:none;user-select:none;-webkit-user-drag:none}
++.vibe-icon:hover{background:#263238d9}.vibe-icon:active,.vibe-icon:focus-visible{background:#009688;outline:2px solid #80cbc4;outline-offset:-2px}.vibe-icon[aria-pressed="true"]{box-shadow:inset 0 -3px #00ff00}
++.vibe-middle{position:absolute;inset:calc(var(--nav-size) + 12px) max(4px,env(safe-area-inset-right)) calc(var(--nav-size)*2 + 16px) max(4px,env(safe-area-inset-left));display:flex;justify-content:space-between;align-items:center}
++.vibe-dpad{display:grid;grid-template-columns:repeat(3,var(--nav-size));grid-template-rows:repeat(4,var(--nav-size))}
++.vibe-pages{display:grid;grid-template-columns:var(--nav-size);grid-template-rows:repeat(4,var(--nav-size))}
++.vibe-bottom{position:absolute;left:max(4px,env(safe-area-inset-left));right:max(4px,env(safe-area-inset-right));bottom:max(4px,env(safe-area-inset-bottom));display:flex;align-items:end;justify-content:space-between;gap:4px}
++.vibe-keyboard{width:calc(var(--nav-size)*3)}
++.vibe-utilities{display:grid;grid-template-columns:repeat(6,var(--nav-size));grid-template-rows:repeat(2,var(--nav-size))}
++.vibe-drawer,.mc-remote-card .mc-keyboard{position:absolute;z-index:3;left:50%;top:50%;transform:translate(-50%,-50%);width:min(38rem,calc(100% - 24px));max-height:calc(100% - 24px);overflow:auto;pointer-events:auto;touch-action:auto;background:#0c131bf5;border:1px solid #53677a;border-radius:9px;padding:1rem}
++.mc-remote-card .mc-keyboard{flex-wrap:wrap;margin:0}.vibe-drawer .mc-panel-header{position:sticky;top:-1rem;background:#0c131b;padding:.3rem 0;z-index:2}
++.vibe-drawer pre{max-height:55vh;overflow:auto}.mc-remote-card .mc-keyboard input{min-width:0}
++@media(max-width:760px){.mc-remote-card{--nav-size:44px}.vibe-bottom{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:6px}.vibe-keyboard{width:auto;grid-row:1;grid-column:1;align-self:end}.vibe-utilities{grid-row:1;grid-column:2}.vibe-transport{grid-row:2;grid-column:1/3;justify-content:center}.vibe-middle{bottom:calc(var(--nav-size)*3 + 20px)}}
++
++
++
++.vibe-utilities [aria-pressed="true"] img{filter:brightness(0) saturate(100%) invert(67%) sepia(96%) saturate(5391%) hue-rotate(83deg) brightness(119%) contrast(122%)}
++
++/* Stage height, not window height: the wrapping toolbar also consumes space. */
++.mc-stage{container-type:size}
++@container (max-height:392px){.mc-remote-card{--nav-size:clamp(24px,calc((100cqh - 40px)/8),44px)}}
+--- a/src/main/webapp/index.html
++++ b/src/main/webapp/index.html
+@@ -16,7 +16,7 @@
+ <main class="simple-main">
+   <header class="simple-header">
+     <div><h1>SageTV Web Player</h1><p>Choose a recording and press Watch.</p></div>
+-    <div class="hero-actions"><a class="button-link" href="miniclient.html">MiniClient / SageMC</a><a class="button-link" href="client.html">Web Admin</a><button id="installApp" hidden>Install App</button><span class="version">v3.2.3</span></div>
++    <div class="hero-actions"><a class="button-link" href="miniclient.html">MiniClient / SageMC</a><a class="button-link" href="client.html">Web Admin</a><button id="installApp" hidden>Install App</button><span class="version">v3.2.4</span></div>
+   </header>
+ 
+   <section class="card simple-status-card">
+--- a/src/main/webapp/js/miniclient-core.js
++++ b/src/main/webapp/js/miniclient-core.js
+@@ -14,7 +14,7 @@
+     bufferPreset: 'auto', startSegments: 0, maxBufferSeconds: 180, uiResolution: 'window',
+     osdTrigger: 'left_long', clickMode: 'native', guideAssist: true,
+     mouseBack: true, showStats: false, renderOnly: false, videoMaskAssist: true,
+-    videoFit: 'source', mute: false, fullscreenOnConnect: false,
++    videoFit: 'cover', videoViewport: 'browser', displayPolicyVersion: 2, mute: false, fullscreenOnConnect: false,
+     inputMode: 'remote'
+   });
+   const ENUMS = {
+@@ -22,7 +22,8 @@
+     uiResolution: ['window', '1280x720', '1920x1080'],
+     osdTrigger: ['left_long', 'right_long', 'left_double', 'right_double', 'center_click'],
+     clickMode: ['native', 'press_release', 'double_select'],
+-    videoFit: ['source', 'fill', 'zoom', '4x3', '16x9'],
++    videoFit: ['source', 'cover', 'fill', 'zoom', '4x3', '16x9'],
++    videoViewport: ['browser', 'native'],
+     inputMode: ['remote', 'text']
+   };
+   function finite(value, fallback) {
+@@ -85,6 +86,42 @@
+     // short windows use a bounded logical minimum and are fitted without crop.
+     const scale=Math.min(1,1920/width,1080/height);
+     return {w:Math.max(320,Math.round(width*scale/2)*2),h:Math.max(240,Math.round(height*scale/2)*2)};
++  }
++  /** Canvas coordinates and media presentation are separate. Window mode uses
++   * every CSS pixel even when logical dimensions were rounded/capped. Fixed UI
++   * resolutions retain their aspect; fullscreen video still owns the stage. */
++  function stageRect(width, height, uiWidth, uiHeight, auto) {
++    return auto ? {left:0,top:0,width:Math.max(1,finite(width,1)),height:Math.max(1,finite(height,1))}
++      : fitRect(width,height,uiWidth,uiHeight);
++  }
++  function videoPresentation(rect, uiWidth, uiHeight, viewport) {
++    const screen=[0,0,Math.max(1,uiWidth),Math.max(1,uiHeight)];
++    const valid=Array.isArray(rect)&&rect.length>=4&&rect.slice(0,4).every(Number.isFinite)&&rect[2]>0&&rect[3]>0;
++    const raw=valid?rect.slice(0,4):screen.slice();
++    const hit=rectIntersection(raw,screen);
++    // A small, explicit native rectangle is a menu preview. Near-fullscreen
++    // destinations often contain server overscan or an old display aspect;
++    // they must not double-letterbox the independent browser video plane.
++    const full=!hit || (hit[2]/screen[2]>=.60 && hit[3]/screen[3]>=.60);
++    return {kind:viewport==='native'?'native':full?'fullscreen':'preview',
++      rect:viewport==='native'?raw:full?screen:raw, nativeRect:raw};
++  }
++  function videoLayerRect(presentation, display, stageWidth, stageHeight, uiWidth, uiHeight) {
++    if(presentation.kind==='fullscreen')return {left:0,top:0,width:stageWidth,height:stageHeight};
++    const r=presentation.rect;
++    return {left:display.left+r[0]*display.width/uiWidth,top:display.top+r[1]*display.height/uiHeight,
++      width:r[2]*display.width/uiWidth,height:r[3]*display.height/uiHeight};
++  }
++  function fullscreenMatte(color, rect, screen, presentation, suspended) {
++    if(!presentation || presentation.kind!=='fullscreen' || suspended)return false;
++    const n=color>>>0,a=n>>>24,r=(n>>>16)&255,g=(n>>>8)&255,b=n&255;
++    // Do not erase translucent native OSD panels or opaque colored menus.
++    if(a<250 || r>8 || g>8 || b>8)return false;
++    const hit=rectIntersection(rect,screen);if(!hit)return false;
++    const [x,y,w,h]=hit,sw=screen[2],sh=screen[3],eps=2;
++    const vertical=(x<=eps||x+w>=sw-eps)&&w<=sw*.25&&h>=sh*.65;
++    const horizontal=(y<=eps||y+h>=sh-eps)&&h<=sh*.25&&w>=sw*.65;
++    return vertical||horizontal;
+   }
+   function bufferedAhead(video) {
+     if (!video || !video.buffered) return 0;
+@@ -233,6 +270,6 @@
+       this.o.click(point, 1);
+     }
+   }
+-  return {DEFAULTS, fitRect, logicalSize, normalizeSettings, requiredStartSegments, startupReady, hlsConfig,
++  return {DEFAULTS, fitRect, logicalSize, stageRect, videoPresentation, videoLayerRect, fullscreenMatte, normalizeSettings, requiredStartSegments, startupReady, hlsConfig,
+     bufferedAhead, resumeTarget, incompleteEnd, menuIsGuide, rectIntersection, videoMask, timeText, RecoveryBudget, PointerGesture};
+ });
+--- a/src/main/webapp/js/miniclient.js
++++ b/src/main/webapp/js/miniclient.js
+@@ -4,6 +4,7 @@
+ const stage=$('stage'),visible=$('gfxCanvas'),visibleCtx=visible.getContext('2d',{alpha:true});
+ const video=$('videoPlane'),videoBounds=$('videoBounds'),statusEl=$('connectionStatus'),msgEl=$('osdMessage'),statsEl=$('stats');
+ const remotePanel=$('remotePanel'),settingsPanel=$('settingsPanel');
++let videoTestGeneration=0;
+ const SETTINGS_KEY='sagetvWebMiniClientSettings.v1';
+ const Streaming=window.SageMiniStreaming,STREAMING_KEY='sagetvWebStreaming.v1';
+ let streaming=loadStreaming(),mpegtsScriptPromise=null;
+@@ -16,12 +17,22 @@
+ let resizeTimer=null,stateTimer=null,hlsScriptPromise=null,currentMenuHint='',menuEpoch=0,guideTimer=null;
+ let uiW=1280,uiH=720,currentTarget=0,mainSurface=makeCanvas(uiW,uiH);
+ let displayRect={left:0,top:0,width:1280,height:720},currentVideoBounds=[0,0,1280,720];
++let nativeVideoBounds=[0,0,1280,720],nativeVideoSource=null,videoBoundsOrigin='initial',serverVideoAspect='source';
++let videoPresentation=Core.videoPresentation(nativeVideoBounds,1280,720,'browser'),videoLayerRect=null;
+ let frame=0,gfxCount=0,imageCount=0,lastEventAt=0,lastError='',videoAspect=settings.videoFit;
+ let videoBoundsTrusted=false,lastTrustedVideoBounds=null,videoPresentationSuspended=false,frameHadClearRect=false;
+ let seeking=false,lastMove=0,lastBackAt=0,lastClick=null,repeatTimer=null,repeatInterval=null;
+ const repeatConsumed=new WeakMap(),surfaces=new Map([[0,mainSurface]]),images=new Map(),logs=[];
+ const COLORKEY=[8,0,16];
+-function loadSettings(){try{return Core.normalizeSettings(JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}'));}catch(_){return Core.normalizeSettings({});}}
++function loadSettings(){try{
++  const saved=JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}');
++  // One-time migration of the old implicit Source default for the requested
++  // edge-to-edge policy. Future explicit Fit choices are never overwritten.
++  if(saved.displayPolicyVersion!==2 && (!saved.videoFit||saved.videoFit==='source'))saved.videoFit='cover';
++  const normalized=Core.normalizeSettings(saved);
++  try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(normalized));}catch(_){}
++  return normalized;
++}catch(_){return Core.normalizeSettings({});}}
+ function log(message){logs.push({at:new Date().toISOString(),message:String(message)});if(logs.length>200)logs.shift();}
+ function setError(e){lastError=e&&e.message?e.message:String(e);log(lastError);}
+ function saveSettings(){settings=Core.normalizeSettings(settings);try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings));}catch(_){}applySettings();}
+@@ -94,18 +105,18 @@
+ 
+ function layoutStage(){
+   const sr=stage.getBoundingClientRect();
+-  displayRect=Core.fitRect(sr.width,sr.height,uiW,uiH);
++  displayRect=Core.stageRect(sr.width,sr.height,uiW,uiH,settings.uiResolution==='window'&&!new URLSearchParams(location.search).has('ui'));
+   const d=displayRect;
+   visible.style.left=d.left+'px';visible.style.top=d.top+'px';
+   visible.style.width=d.width+'px';visible.style.height=d.height+'px';
+-  applyVideoBounds(currentVideoBounds);
++  applyVideoBounds();
+ }
+ function resetRenderer(w,h){
+   rendererGeneration++;
+   uiW=Math.max(1,w|0);uiH=Math.max(1,h|0);
+   visible.width=uiW;visible.height=uiH;document.documentElement.style.setProperty('--ui-aspect',String(uiW/uiH));
+   mainSurface=makeCanvas(uiW,uiH);surfaces.clear();surfaces.set(0,mainSurface);images.clear();currentTarget=0;
+-  visibleCtx.clearRect(0,0,uiW,uiH);currentVideoBounds=[0,0,uiW,uiH];videoBoundsTrusted=false;lastTrustedVideoBounds=null;videoPresentationSuspended=false;frame=0;gfxCount=0;imageCount=0;layoutStage();
++  visibleCtx.clearRect(0,0,uiW,uiH);currentVideoBounds=[0,0,uiW,uiH];nativeVideoBounds=currentVideoBounds.slice();nativeVideoSource=null;videoBoundsOrigin='initial';videoBoundsTrusted=false;lastTrustedVideoBounds=null;videoPresentationSuspended=false;frame=0;gfxCount=0;imageCount=0;layoutStage();
+ }
+ function startFrame(){currentTarget=0;frameHadClearRect=false;const c=mainSurface.getContext('2d',{alpha:true});c.save();c.setTransform(1,0,0,1,0,0);c.globalCompositeOperation='copy';c.clearRect(0,0,uiW,uiH);c.restore();}
+ function flip(){if(playback.id&&!frameHadClearRect)videoPresentationSuspended=true;visibleCtx.save();visibleCtx.setTransform(1,0,0,1,0,0);visibleCtx.globalCompositeOperation='copy';visibleCtx.clearRect(0,0,uiW,uiH);visibleCtx.drawImage(mainSurface,0,0);visibleCtx.restore();frame++;if(frame===1&&!playback.id)message('');}
+@@ -183,7 +194,7 @@
+     case 44: break; // offline image cache not advertised
+     case 45:{const h=getI(b,0),w=getI(b,4),hh=getI(b,8);allocateImage(h,w,hh);break;}
+     case 46:{const h=getI(b,0),w=getI(b,4),hh=getI(b,8);if(!images.has(h))allocateImage(h,w,hh);break;}
+-    case 130:{if(b.length>=44){const dx=getI(b,20),dy=getI(b,24),dw=getI(b,28),dh=getI(b,32);applyVideoBounds([dx,dy,dw,dh],true);}break;}
++    case 130:{if(b.length>=44){const dx=getI(b,20),dy=getI(b,24),dw=getI(b,28),dh=getI(b,32);applyVideoBounds([dx,dy,dw,dh],true,'gfx-video-property');}break;}
+     default: break;
+   }
+ }
+@@ -191,34 +202,47 @@
+ 
+ function clearVideoMask(ctx,rect,color,isClear){
+   if(!settings.videoMaskAssist||!playback.id||currentTarget!==0)return false;
+-  const hit=Core.videoMask(color,rect,[0,0,uiW,uiH],currentVideoBounds,lastTrustedVideoBounds,isClear,videoPresentationSuspended,videoBoundsTrusted);
+-  if(!hit)return false;
+-  videoPresentationSuspended=false;applyVideoBounds(hit,true);
+-  ctx.clearRect(hit[0]-1,hit[1]-1,hit[2]+2,hit[3]+2);return true;
+-}
+-function applyVideoBounds(rect,trusted){
+-  if(!Array.isArray(rect)||rect.length<4)return;
+-  const raw=rect.slice(0,4).map(Number),hasArea=raw.every(Number.isFinite)&&raw[2]>0&&raw[3]>0;
+-  if(trusted!==undefined){videoBoundsTrusted=!!trusted&&hasArea;if(videoBoundsTrusted)lastTrustedVideoBounds=raw.slice();}
+-  // Keep playback alive behind the UI while SageTV changes menus/bounds, but
+-  // never use untrusted fallback bounds to punch a transparent GUI hole.
+-  currentVideoBounds=hasArea?raw:(playback.id?(lastTrustedVideoBounds||[0,0,uiW,uiH]).slice():[0,0,0,0]);
+-  const [x,y,w,h]=currentVideoBounds,d=displayRect;
+-  videoBounds.hidden=!(w>0&&h>0)||!playback.id;
+-  if(!(w>0&&h>0))return;
+-  const width=d.width*w/uiW,height=d.height*h/uiH;
+-  videoBounds.style.left=(d.left+d.width*x/uiW)+'px';videoBounds.style.top=(d.top+d.height*y/uiH)+'px';
+-  videoBounds.style.width=width+'px';videoBounds.style.height=height+'px';
+-  video.style.objectFit=videoAspect==='fill'?'fill':videoAspect==='zoom'?'cover':'contain';
+-  video.style.width='100%';video.style.height='100%';
++  const alpha=(color>>>24)&255;
++  if(alpha>=13&&alpha<250&&!isColorKey(color))return false; // translucent OSD is not a video hole
++  const screen=[0,0,uiW,uiH],hit=Core.videoMask(color,rect,screen,currentVideoBounds,lastTrustedVideoBounds,isClear,videoPresentationSuspended,videoBoundsTrusted);
++  const matte=Core.fullscreenMatte(color,rect,screen,videoPresentation,videoPresentationSuspended);
++  if(!hit&&!matte)return false;
++  const mask=hit||Core.rectIntersection(rect,screen);
++  // A clear is a paint operation, NOT SETVIDEORECT. Only the explicit color
++  // key may establish a small legacy preview. Ordinary black clearing and
++  // letterbox mattes never shrink or pan the fullscreen HTML video element.
++  if(isColorKey(color))applyVideoBounds(mask,true,'color-key');
++  else if(isClear&&mask[2]>=uiW*.85&&mask[3]>=uiH*.85&&videoBoundsOrigin==='color-key')
++    applyVideoBounds(screen,true,'clear-fullscreen');
++  videoPresentationSuspended=false;
++  ctx.clearRect(mask[0]-1,mask[1]-1,mask[2]+2,mask[3]+2);return true;
++}
++function applyVideoBounds(rect,trusted,origin){
++  if(Array.isArray(rect)&&rect.length>=4&&trusted!==undefined){
++    const raw=rect.slice(0,4).map(Number),valid=raw.every(Number.isFinite)&&raw[2]>0&&raw[3]>0;
++    videoBoundsTrusted=!!trusted&&valid;
++    if(valid){nativeVideoBounds=raw;lastTrustedVideoBounds=raw.slice();videoBoundsOrigin=origin||'native';}
++    else if(!playback.id)nativeVideoBounds=[0,0,uiW,uiH];
++  }
++  videoPresentation=Core.videoPresentation(nativeVideoBounds,uiW,uiH,settings.videoViewport);
++  currentVideoBounds=videoPresentation.rect.slice();
++  const sr=stage.getBoundingClientRect();
++  videoLayerRect=Core.videoLayerRect(videoPresentation,displayRect,sr.width,sr.height,uiW,uiH);
++  const d=videoLayerRect;
++  videoBounds.hidden=!playback.id;
++  videoBounds.style.left=d.left+'px';videoBounds.style.top=d.top+'px';
++  videoBounds.style.width=d.width+'px';videoBounds.style.height=d.height+'px';
++  videoBounds.dataset.presentation=videoPresentation.kind;
++  video.style.objectFit=videoAspect==='fill'?'fill':(videoAspect==='cover'||videoAspect==='zoom')?'cover':'contain';
++  video.style.objectPosition='50% 50%';video.style.width='100%';video.style.height='100%';
+   if(videoAspect==='4x3'||videoAspect==='16x9'){
+-    const ratio=videoAspect==='4x3'?4/3:16/9,wantedWidth=Math.min(width,height*ratio);
++    const ratio=videoAspect==='4x3'?4/3:16/9,wantedWidth=Math.min(d.width,d.height*ratio);
+     video.style.width=wantedWidth+'px';video.style.height=(wantedWidth/ratio)+'px';video.style.objectFit='fill';
+   }
+ }
+ function destroyVideo(){captions.stop();playback.stop();videoBoundsTrusted=false;lastTrustedVideoBounds=null;videoPresentationSuspended=false;videoBounds.hidden=true;updateStats();}
+ function startVideo(ev){
+-  captions.stop();const started=playback.start(ev);applyVideoBounds(currentVideoBounds);showStreamActual(ev.streamSettings);
++  captions.stop();const started=playback.start(ev);applyVideoBounds();showStreamActual(ev.streamSettings);
+   return started.then(()=>{if(playback.id===ev.hlsSession)captions.start(ev);});
+ }
+ function absoluteMediaTime(){return playback.absoluteTime();}
+@@ -243,14 +267,14 @@
+   if(ev.type==='gfx'){await gfx(ev);return;}
+   if(ev.type==='videoStart'){startVideo(ev).catch(setError);return;}
+   if(ev.type==='videoStop'){destroyVideo();return;}
+-  if(ev.type==='videoBounds'){applyVideoBounds(ev.dst,true);return;}
++  if(ev.type==='videoBounds'){nativeVideoSource=ev.src||null;applyVideoBounds(ev.dst,true,'native');return;}
+   if(ev.type==='media'){
+     playback.control(ev.action,ev.value);if(ev.action==='stop')videoBounds.hidden=true;
+     browserState();return;
+   }
+-  if(ev.type==='menuHint'){currentMenuHint=String(ev.value||'');menuEpoch++;return;}
++  if(ev.type==='menuHint'){currentMenuHint=String(ev.value||'');menuEpoch++;layoutStage();return;}
+   if(ev.type==='aspect'){
+-    const aspect=String(ev.value||'').toLowerCase();if(['source','fill','zoom','4x3','16x9'].includes(aspect)){videoAspect=aspect;applyVideoBounds(currentVideoBounds);}return;
++    serverVideoAspect=String(ev.value||'').toLowerCase();log('Server video aspect: '+serverVideoAspect+'; browser mode: '+settings.videoFit);applyVideoBounds();return;
+   }
+   if(ev.type==='channel'||ev.type==='captionState'||ev.type==='uiAspect'){log(ev.type+': '+String(ev.value||''));return;}
+   if(ev.type==='resize'){resizeLocal(ev.width,ev.height);return;}
+@@ -374,6 +398,8 @@
+   // A native resize does not unload SageTV image handles. Clearing the entire
+   // image map here loses cached menu text/textures that the server may reuse.
+   const old=mainSurface,oldW=uiW,oldH=uiH;
++  nativeVideoBounds=[nativeVideoBounds[0]*w/oldW,nativeVideoBounds[1]*h/oldH,nativeVideoBounds[2]*w/oldW,nativeVideoBounds[3]*h/oldH];
++  if(lastTrustedVideoBounds)lastTrustedVideoBounds=nativeVideoBounds.slice();
+   uiW=w;uiH=h;mainSurface=makeCanvas(w,h);
+   mainSurface.getContext('2d').drawImage(old,0,0,oldW,oldH,0,0,w,h);surfaces.set(0,mainSurface);
+   visible.width=w;visible.height=h;visibleCtx.drawImage(mainSurface,0,0);
+@@ -452,10 +478,74 @@
+   if(e.button!==3||!settings.mouseBack)return;e.preventDefault();e.stopPropagation();if(name==='mousedown')sendBack();
+ },true));
+ function clearRepeats(){clearTimeout(repeatTimer);clearInterval(repeatInterval);repeatTimer=null;repeatInterval=null;}
+-function openRemote(){remotePanel.hidden=false;remotePanel.setAttribute('aria-hidden','false');$('remoteToggle').setAttribute('aria-expanded','true');$('closeRemote').focus();updateStats();}
+-function closeRemote(){clearRepeats();remotePanel.hidden=true;remotePanel.setAttribute('aria-hidden','true');$('remoteToggle').setAttribute('aria-expanded','false');stage.focus();}
+-function openSettings(){closeRemote();settingsPanel.hidden=false;fillStreamingForm();refreshStreamTracks().catch(setError);$('closeSettings').focus();}
+-function closeSettings(){settingsPanel.hidden=true;stage.focus();}
++function hideRemoteDrawers(){
++  videoTestGeneration++;
++  for(const id of ['remoteTools','keyboardPanel','videoInfoPanel'])$(id).hidden=true;
++  $('keyboardToggle').setAttribute('aria-expanded','false');$('remoteHelp').setAttribute('aria-expanded','false');
++}
++function openRemote(){
++  hideRemoteDrawers();remotePanel.hidden=false;remotePanel.setAttribute('aria-hidden','false');
++  $('remoteToggle').setAttribute('aria-expanded','true');
++  (playback.id?$('nav_media_pause'):$('nav_options')).focus({preventScroll:true});layoutStage();updateStats();
++}
++function closeRemote(){
++  clearRepeats();hideRemoteDrawers();remotePanel.hidden=true;remotePanel.setAttribute('aria-hidden','true');
++  $('remoteToggle').setAttribute('aria-expanded','false');stage.focus({preventScroll:true});layoutStage();
++}
++function openSettings(section){
++  closeRemote();settingsPanel.hidden=false;fillStreamingForm();refreshStreamTracks().catch(setError);
++  const field=typeof section==='string'?$(section):null;
++  if(field){$('streamingPreferences').open=true;field.scrollIntoView({block:'center'});field.focus({preventScroll:true});}
++  else $('closeSettings').focus({preventScroll:true});
++}
++function closeSettings(){settingsPanel.hidden=true;stage.focus({preventScroll:true});layoutStage();}
++function showDrawer(id,focusId){hideRemoteDrawers();$(id).hidden=false;$(focusId).focus({preventScroll:true});}
++function layoutSnapshot(){
++  const r=stage.getBoundingClientRect();
++  return {stage:{width:r.width,height:r.height},nativeBounds:nativeVideoBounds.slice(),source:nativeVideoSource,
++    origin:videoBoundsOrigin,presentation:videoPresentation,cssRect:videoLayerRect,
++    serverAspect:serverVideoAspect,browserAspect:videoAspect,objectFit:video.style.objectFit};
++}
++function showVideoInformation(){
++  showDrawer('videoInfoPanel','closeVideoInfo');
++  $('videoInfoText').textContent=JSON.stringify({scope:'Browser playback and plugin status; not Android device diagnostics',
++    layout:layoutSnapshot(),video:{width:video.videoWidth,height:video.videoHeight,readyState:video.readyState,
++      networkState:video.networkState,error:video.error?{code:video.error.code,message:video.error.message}:null},
++    playback:playback.snapshot(),captions:captions.snapshot()},null,2);
++}
++async function testCurrentVideo(){
++  showDrawer('videoInfoPanel','closeVideoInfo');const generation=videoTestGeneration,id=playback.id;
++  const box=$('videoInfoText');
++  if(!id){box.textContent='Not tested: no active video. This check only samples the current browser player; it does not start a recording.';return;}
++  const before={time:video.currentTime,paused:video.paused,frames:video.getVideoPlaybackQuality?video.getVideoPlaybackQuality().totalVideoFrames:null};
++  box.textContent='Checking current browser playback for 2 seconds… Playback, buffering and pause state are not changed.';
++  await sleep(2000);
++  if(generation!==videoTestGeneration||remotePanel.hidden||$('videoInfoPanel').hidden)return;
++  const after={time:video.currentTime,paused:video.paused,frames:video.getVideoPlaybackQuality?video.getVideoPlaybackQuality().totalVideoFrames:null};
++  let result;
++  if(id!==playback.id)result='Not tested: recording changed during sample.';
++  else if(before.paused||after.paused||playback.intentPaused)result='Not tested for progress: player is paused. Pause was preserved.';
++  else if(video.error)result='Player error '+video.error.code+': '+video.error.message;
++  else result=after.time-before.time>.25?'Browser playback time advanced during sample.':'No advancing playback clock observed; inspect buffer and player errors.';
++  const report={result,scope:'2-second browser sample only; not an Android/hardware/codec compatibility test',
++    before,after,bufferAhead:Core.bufferedAhead(video),layout:layoutSnapshot()};
++  box.textContent=JSON.stringify(report,null,2);log('Browser video check: '+result);
++}
++$('hideRemote').addEventListener('click',closeRemote);
++$('remoteHelp').addEventListener('click',()=>{showDrawer('remoteTools','closeRemoteTools');$('remoteHelp').setAttribute('aria-expanded','true');});
++$('closeRemoteTools').addEventListener('click',()=>{hideRemoteDrawers();$('remoteHelp').focus({preventScroll:true});});
++$('closeKeyboard').addEventListener('click',()=>{hideRemoteDrawers();$('keyboardToggle').focus({preventScroll:true});});
++$('closeVideoInfo').addEventListener('click',()=>{hideRemoteDrawers();$('videoInfoBtn').focus({preventScroll:true});});
++$('allSettings').addEventListener('click',()=>openSettings());
++$('audioSettings').addEventListener('click',()=>openSettings('stream_audioCodec'));
++$('captionSettings').addEventListener('click',()=>openSettings('stream_captions'));
++$('videoInfoBtn').addEventListener('click',showVideoInformation);
++$('testVideoBtn').addEventListener('click',()=>testCurrentVideo().catch(setError));
++$('remoteStats').addEventListener('click',()=>{settings.showStats=!settings.showStats;saveSettings();closeRemote();});
++$('aspectToggle').addEventListener('click',()=>{
++  const modes=['cover','source','fill'];settings.videoFit=modes[(modes.indexOf(settings.videoFit)+1)%modes.length];
++  saveSettings();log('Browser display mode: '+settings.videoFit);
++});
+ remotePanel.addEventListener('pointerdown',e=>{
+   const button=e.target.closest('button[data-command][data-repeat="true"]');if(!button||e.button!==0)return;
+   clearRepeats();repeatConsumed.set(button,Date.now()+1000);sendCommand(Number(button.dataset.command));
+@@ -466,14 +556,15 @@
+   if(e.target===remotePanel){closeRemote();return;}
+   const button=e.target.closest('[data-command]');if(!button)return;
+   if(e.detail!==0&&(repeatConsumed.get(button)||0)>Date.now())return;
++  if(button.dataset.dismiss==='true')closeRemote();
+   sendCommand(Number(button.dataset.command));
+ });
+ ['pointerup','pointercancel','lostpointercapture'].forEach(name=>remotePanel.addEventListener(name,clearRepeats));
+ window.addEventListener('pointerup',clearRepeats);
+ window.addEventListener('blur',()=>{gesture.cancel();clearRepeats();});
+-document.addEventListener('visibilitychange',()=>{if(document.hidden){gesture.cancel();clearRepeats();}else{browserState();if(session)queueInput('repaint',{x:0,y:0,width:uiW,height:uiH});}});
++document.addEventListener('visibilitychange',()=>{if(document.hidden){gesture.cancel();clearRepeats();}else{layoutStage();requestResize();browserState();if(session)queueInput('repaint',{x:0,y:0,width:uiW,height:uiH});}});
+ $('remoteToggle').addEventListener('click',()=>remotePanel.hidden?openRemote():closeRemote());
+-$('closeRemote').addEventListener('click',closeRemote);$('settingsToggle').addEventListener('click',openSettings);$('remoteSettings').addEventListener('click',openSettings);$('closeSettings').addEventListener('click',closeSettings);
++$('closeRemote').addEventListener('click',closeRemote);$('settingsToggle').addEventListener('click',openSettings);$('remoteSettings').addEventListener('click',()=>openSettings('stream_videoMode'));$('closeSettings').addEventListener('click',closeSettings);
+ settingsPanel.addEventListener('click',e=>{if(e.target===settingsPanel)closeSettings();});
+ function fillStreamingForm(value=streaming){
+   for(const k of Object.keys(Streaming.DEFAULTS)){const el=$('stream_'+k);if(!el)continue;if(el.type==='checkbox')el.checked=!!value[k];else el.value=String(value[k]);}
+@@ -531,13 +622,17 @@
+ function applySettings(){
+   Object.keys(Core.DEFAULTS).forEach(key=>{const el=$(key);if(!el)return;if(el.type==='checkbox')el.checked=settings[key];else el.value=String(settings[key]);});
+   statsEl.hidden=!settings.showStats;$('statsToggle').setAttribute('aria-pressed',String(settings.showStats));
+-  video.muted=settings.mute;videoAspect=settings.videoFit;applyVideoBounds(currentVideoBounds);
++  $('remoteStats').setAttribute('aria-pressed',String(settings.showStats));
++  const fitLabel={cover:'Fill browser',source:'Fit',fill:'Stretch',zoom:'Zoom','4x3':'4:3','16x9':'16:9'}[settings.videoFit];
++  $('aspectToggle').title='Video display: '+fitLabel+' — click to cycle Fill, Fit, Stretch';
++  $('aspectToggle').setAttribute('aria-label',$('aspectToggle').title);
++  video.muted=settings.mute;videoAspect=settings.videoFit;applyVideoBounds();
+   playback.updateBufferSettings();requestResize();
+ }
+ Object.keys(Core.DEFAULTS).forEach(key=>{const el=$(key);if(!el)return;el.addEventListener('change',()=>{settings[key]=el.type==='checkbox'?el.checked:el.value;saveSettings();});});
+ $('resetSettings').addEventListener('click',()=>{settings=Core.normalizeSettings({});saveSettings();setRenderOnly(false);});
+ $('statsToggle').addEventListener('click',()=>{settings.showStats=!settings.showStats;saveSettings();});
+-$('keyboardToggle').addEventListener('click',()=>{const panel=$('keyboardPanel');panel.hidden=!panel.hidden;$('keyboardToggle').setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden)$('keyboardInput').focus();});
++$('keyboardToggle').addEventListener('click',()=>{showDrawer('keyboardPanel','keyboardInput');$('keyboardToggle').setAttribute('aria-expanded','true');});
+ function sendText(){const field=$('keyboardInput'),text=field.value;if(!text)return;queueInput('text',{text}).then(sent=>{if(sent&&field.value===text)field.value='';});field.focus();}
+ $('keyboardSend').addEventListener('click',sendText);$('keyboardInput').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();sendText();}});
+ $('keyboardBackspace').addEventListener('click',()=>sendKey(8,0,8));$('keyboardEnter').addEventListener('click',()=>sendKey(13,0,13));
+@@ -551,16 +646,17 @@
+ window.addEventListener('keydown',e=>{
+   if(e.key==='Escape'){
+     if(!settingsPanel.hidden){e.preventDefault();closeSettings();return;}
+-    if(!remotePanel.hidden){e.preventDefault();closeRemote();return;}
++    if(!remotePanel.hidden){e.preventDefault();if(['remoteTools','keyboardPanel','videoInfoPanel'].some(id=>!$(id).hidden)){hideRemoteDrawers();$('nav_options').focus({preventScroll:true});}else closeRemote();return;}
+     if(document.body.classList.contains('mc-render-only')){e.preventDefault();setRenderOnly(false);return;}
+   }
+-  const modal=!settingsPanel.hidden?settingsPanel:!remotePanel.hidden?remotePanel:null;
++  const drawer=!remotePanel.hidden?['remoteTools','keyboardPanel','videoInfoPanel'].map($).find(el=>!el.hidden):null;
++  const modal=!settingsPanel.hidden?settingsPanel:drawer||(!remotePanel.hidden?remotePanel:null);
+   if(e.key==='Tab'&&modal){
+     const focusable=[...modal.querySelectorAll('button,input,select,a[href]')].filter(el=>!el.disabled&&el.getClientRects().length);
+     if(!focusable.length)return;const first=focusable[0],last=focusable[focusable.length-1];
+     if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}return;
+   }
+-  if(!settingsPanel.hidden)return;
++  if(!settingsPanel.hidden||drawer)return;
+   if(e.target&&(/INPUT|TEXTAREA|SELECT/.test(e.target.tagName)||(/BUTTON|A/.test(e.target.tagName)&&(!remotePanel.contains(e.target)||e.key==='Enter'||e.key===' '))))return;
+   if(e.ctrlKey||e.metaKey||e.altKey)return;
+   if(settings.inputMode==='text'){
+@@ -590,7 +686,7 @@
+   const targetText=snap.hlsVersion||snap.workerEnabled?snap.bufferTargetSeconds+'s target':'browser-managed target';
+   const threads=st.threading||{},threadText=key=>threads[key]?'active':'idle';
+   const ranges=[];try{for(let i=0;i<Math.min(video.buffered.length,6);i++)ranges.push(video.buffered.start(i).toFixed(1)+'–'+video.buffered.end(i).toFixed(1));}catch(_){}
+-  statsEl.textContent=`MiniClient 3.2.3 · ${uiW}×${uiH} native → ${Math.round(displayRect.width)}×${Math.round(displayRect.height)} displayed · ${phase}\n`+
++  statsEl.textContent=`MiniClient 3.2.4 · ${uiW}×${uiH} native → ${Math.round(displayRect.width)}×${Math.round(displayRect.height)} displayed · ${phase}\n`+
+     `Time ${Core.timeText(snap.timeMs)} / ${Core.timeText(snap.durationMs)} · browser ahead ${snap.ahead.toFixed(1)}s / ${targetText} · ${snap.bufferPhase}\n`+
+     `Server ahead ${serverAhead.toFixed(1)}s · produced ${produced.toFixed(1)}s · segments ${st.segments||0} · fill ${Number(st.recentFillRate||0).toFixed(2)}× recent / ${Number(st.hlsFillRate||0).toFixed(2)}× average\n`+
+     `FFmpeg ${st.encoder||'—'} · ${st.encoder==='copy'?'video copied (no encoding/decoding)':(st.hardware?'hardware':'software')+' encode / '+(st.hardwareDecode?'hardware':'software')+' decode'} · ${st.inputMode||'—'}\n`+
+@@ -607,8 +703,9 @@
+ }
+ $('diagnosticsBtn').addEventListener('click',async()=>{
+   const button=$('diagnosticsBtn');button.disabled=true;
+-  const report={version:'3.2.3',generatedAt:new Date().toISOString(),userAgent:navigator.userAgent,
++  const report={version:'3.2.4',generatedAt:new Date().toISOString(),userAgent:navigator.userAgent,
+     clientId:stableClientId(),session,ui:{width:uiW,height:uiH,display:displayRect,viewport:{width:innerWidth,height:innerHeight},requested:lastRequestedSize,frame,gfxCount,images:images.size,lastEventAt,menuHint:currentMenuHint,rendererThread:'main (time-sliced)',renderQueued,renderQueuedBytes},
++    videoLayout:layoutSnapshot(),
+     failureSnapshot,nativeRecoveryCount,settings,streaming,captions:captions.snapshot(),browserCapabilities:Streaming.browserCapabilities(window),playback:playback.snapshot(),logs:logs.slice()};
+   try{report.serverConnection=session?await requestJson('api/miniclient','status',{session},'GET',3000):null;}
+   catch(e){report.serverConnection={error:e.message||String(e)};}
+@@ -616,11 +713,12 @@
+   const url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:'application/json'})),a=document.createElement('a');
+   a.href=url;a.download='SageTV-MiniClient-diagnostics-'+new Date().toISOString().replace(/[:.]/g,'-')+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ });
+-video.addEventListener('loadedmetadata',()=>{browserState();if(session)api('mediaUpdate',{session},'POST').catch(setError);});
++video.addEventListener('resize',layoutStage);
++video.addEventListener('loadedmetadata',()=>{layoutStage();browserState();if(session)api('mediaUpdate',{session},'POST').catch(setError);});
+ video.addEventListener('timeupdate',()=>playback.progress());video.addEventListener('playing',()=>playback.promoteBuffer());video.addEventListener('canplay',()=>playback.maybePlay());
+ if('ResizeObserver' in window)new ResizeObserver(()=>{$('localCaptions').style.fontSize=Math.max(8,Math.min(36,videoBounds.clientHeight*.047))+'px';}).observe(videoBounds);
+ video.addEventListener('volumechange',browserState);video.addEventListener('ended',()=>playback.ended().catch(setError));
+-window.addEventListener('resize',requestResize);if('ResizeObserver' in window)new ResizeObserver(requestResize).observe(stage);
++window.addEventListener('resize',requestResize);if(window.visualViewport)window.visualViewport.addEventListener('resize',requestResize);if('ResizeObserver' in window)new ResizeObserver(requestResize).observe(stage);
+ window.addEventListener('beforeunload',()=>{stopped=true;connectionGeneration++;gesture.cancel();clearRepeats();if(eventController)eventController.abort();captions.stop();playback.stop();if(session)try{navigator.sendBeacon(new URL('api/miniclient?action=stop',location.href),new URLSearchParams({session}));}catch(_){}});
+ if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').then(reg=>reg.update()).catch(()=>{});
+ fillStreamingForm();applySettings();if(settings.renderOnly)setRenderOnly(true);setInterval(updateStats,750);connect();
+--- a/src/main/webapp/miniclient.html
++++ b/src/main/webapp/miniclient.html
+@@ -6,13 +6,13 @@
+   <meta name="theme-color" content="#000000">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+-  <title>SageTV MiniClient · 3.2.3</title>
+-  <link rel="stylesheet" href="css/miniclient.css?v=3.2.3">
++  <title>SageTV MiniClient · 3.2.4</title>
++  <link rel="stylesheet" href="css/miniclient.css?v=3.2.4">
+ </head>
+ <body>
+ <div id="app" class="mc-app">
+   <header id="toolbar" class="mc-toolbar">
+-    <div class="mc-title">SageTV MiniClient <span class="mc-subtitle">3.2.3 · Vibe browser port</span></div>
++    <div class="mc-title">SageTV MiniClient <span class="mc-subtitle">3.2.4 · Vibe browser port</span></div>
+     <div class="mc-toolbar-actions">
+       <span id="connectionStatus" class="mc-status" role="status">Connecting…</span>
+       <span id="bufferStatus" class="mc-status"></span>
+@@ -34,51 +34,47 @@
+     <div id="osdMessage" class="mc-message" role="status">Connecting to SageTV MiniClient…</div>
+     <button id="autoplayBtn" class="mc-autoplay" type="button" hidden>Play video</button>
+     <pre id="stats" class="mc-stats" hidden></pre>
+-  </main>
+-
+-  <div id="remotePanel" class="mc-remote-overlay" role="dialog" aria-modal="true" aria-label="MiniClient remote" aria-hidden="true" hidden>
+-    <section class="mc-remote-card">
+-      <header class="mc-panel-header"><strong>MiniClient remote</strong><button id="closeRemote" type="button" aria-label="Close remote">✕</button></header>
+-      <div class="mc-remote-columns">
+-        <div class="mc-remote-grid">
+-          <button data-command="28">Home</button><button data-command="18">Guide</button><button data-command="24">Info</button>
+-          <button data-command="75">Back</button><button data-command="29">Options</button><button data-command="86">Recordings</button>
+-          <button data-command="55" data-repeat="true">Page ↑</button><button data-command="4" data-repeat="true" class="dpad" aria-label="Up">▲</button><button data-command="56" data-repeat="true">Page ↓</button>
+-          <button data-command="2" data-repeat="true" class="dpad" aria-label="Left">◀</button><button data-command="20" class="dpad select">OK</button><button data-command="3" data-repeat="true" class="dpad" aria-label="Right">▶</button>
+-          <button data-command="13" data-repeat="true">Vol +</button><button data-command="5" data-repeat="true" class="dpad" aria-label="Down">▼</button><button data-command="11" data-repeat="true">Ch +</button>
+-          <button data-command="14" data-repeat="true">Vol −</button><button data-command="26">Mute</button><button data-command="12" data-repeat="true">Ch −</button>
+-        </div>
+-        <div class="mc-remote-grid">
+-          <button data-command="9" data-repeat="true">Rewind</button><button data-command="59">Play / Pause</button><button data-command="8" data-repeat="true">Forward</button>
+-          <button data-command="62" data-repeat="true">Skip back</button><button data-command="89">Stop</button><button data-command="61" data-repeat="true">Skip ahead</button>
+-          <button data-command="7">Play</button><button data-command="6">Pause</button><button data-command="25">Record</button>
+-          <button data-command="31">1</button><button data-command="32">2</button><button data-command="33">3</button>
+-          <button data-command="34">4</button><button data-command="35">5</button><button data-command="36">6</button>
+-          <button data-command="37">7</button><button data-command="38">8</button><button data-command="39">9</button>
+-          <button data-command="95">−</button><button data-command="30">0</button><button data-command="60">Last channel</button>
+-        </div>
++  <div id="remotePanel" class="mc-remote-overlay" role="dialog" aria-modal="true" aria-label="Vibe Android remote overlay" aria-hidden="true" hidden>
++    <section class="mc-remote-card" aria-label="Remote controls">
++      <div class="vibe-top">
++        <button id="nav_home" data-dismiss="true" class="vibe-icon" type="button" aria-label="Home" title="Home" data-command="28" ><img src="icons/vibe/home.png" alt="" draggable="false"></button>
++        <div class="vibe-top-right"><button id="remoteHelp" class="vibe-icon" type="button" aria-label="Help and additional controls" title="Help and additional controls" aria-expanded="false" aria-controls="remoteTools"><img src="icons/vibe/help_outline.svg" alt="" draggable="false"></button><button id="closeRemote" class="vibe-icon" type="button" aria-label="Close remote" title="Close remote" ><img src="icons/vibe/close.png" alt="" draggable="false"></button></div>
+       </div>
++      <div class="vibe-middle">
++        <div class="vibe-dpad" role="group" aria-label="Navigation"><button id="nav_options" data-dismiss="true" class="vibe-icon" type="button" aria-label="Options" title="Options" data-command="29" style="grid-column:1;grid-row:1" ><img src="icons/vibe/menu.svg" alt="" draggable="false"></button><button id="nav_info" data-dismiss="true" class="vibe-icon" type="button" aria-label="Info" title="Info" data-command="24" style="grid-column:2;grid-row:1" ><img src="icons/vibe/info_outline.svg" alt="" draggable="false"></button><button id="nav_back" class="vibe-icon" type="button" aria-label="Back" title="Back" data-command="75" style="grid-column:3;grid-row:1" ><img src="icons/vibe/undo.svg" alt="" draggable="false"></button><button id="nav_up" class="vibe-icon" type="button" aria-label="Up" title="Up" data-command="4" data-repeat="true" style="grid-column:2;grid-row:2" ><img src="icons/vibe/arrow_upward.svg" alt="" draggable="false"></button><button id="nav_left" class="vibe-icon" type="button" aria-label="Left" title="Left" data-command="2" data-repeat="true" style="grid-column:1;grid-row:3" ><img src="icons/vibe/arrow_back.svg" alt="" draggable="false"></button><button id="nav_select" class="vibe-icon" type="button" aria-label="OK / Select" title="OK / Select" data-command="20" style="grid-column:2;grid-row:3" ><img src="icons/vibe/fiber_manual_record.svg" alt="" draggable="false"></button><button id="nav_right" class="vibe-icon" type="button" aria-label="Right" title="Right" data-command="3" data-repeat="true" style="grid-column:3;grid-row:3" ><img src="icons/vibe/arrow_forward.svg" alt="" draggable="false"></button><button id="nav_down" class="vibe-icon" type="button" aria-label="Down" title="Down" data-command="5" data-repeat="true" style="grid-column:2;grid-row:4" ><img src="icons/vibe/arrow_downward.svg" alt="" draggable="false"></button></div>
++        <div class="vibe-pages" role="group" aria-label="Page controls"><button id="hideRemote" class="vibe-icon" type="button" aria-label="Hide remote" title="Hide remote" style="grid-column:1;grid-row:1" ><img src="icons/vibe/exit_to_app.svg" alt="" draggable="false"></button><button id="nav_pgup" class="vibe-icon" type="button" aria-label="Page up" title="Page up" data-command="55" data-repeat="true" style="grid-column:1;grid-row:2" ><img src="icons/vibe/vertical_align_top.svg" alt="" draggable="false"></button><button id="nav_pgdn" class="vibe-icon" type="button" aria-label="Page down" title="Page down" data-command="56" data-repeat="true" style="grid-column:1;grid-row:4" ><img src="icons/vibe/vertical_align_bottom.svg" alt="" draggable="false"></button></div>
++      </div>
++      <div class="vibe-bottom">
++        <div class="vibe-keyboard"><button id="keyboardToggle" class="vibe-icon" type="button" aria-label="Keyboard" title="Keyboard" aria-expanded="false" aria-controls="keyboardPanel"><img src="icons/vibe/keyboard.svg" alt="" draggable="false"></button></div>
++        <div class="vibe-transport" role="group" aria-label="Playback"><button id="nav_media_skip_back_2" class="vibe-icon" type="button" aria-label="Skip back" title="Skip back" data-command="62" data-repeat="true" ><img src="icons/vibe/skip_previous.svg" alt="" draggable="false"></button><button id="nav_media_skip_back" class="vibe-icon" type="button" aria-label="Rewind" title="Rewind" data-command="9" data-repeat="true" ><img src="icons/vibe/fast_rewind.svg" alt="" draggable="false"></button><button id="nav_media_stop" data-dismiss="true" class="vibe-icon" type="button" aria-label="Stop" title="Stop" data-command="89" ><img src="icons/vibe/stop.svg" alt="" draggable="false"></button><button id="nav_media_pause" class="vibe-icon" type="button" aria-label="Pause" title="Pause" data-command="6" ><img src="icons/vibe/pause.svg" alt="" draggable="false"></button><button id="nav_media_play" data-dismiss="true" class="vibe-icon" type="button" aria-label="Play" title="Play" data-command="7" ><img src="icons/vibe/play_arrow.svg" alt="" draggable="false"></button><button id="nav_media_skip_forward" class="vibe-icon" type="button" aria-label="Forward" title="Forward" data-command="8" data-repeat="true" ><img src="icons/vibe/fast_forward.svg" alt="" draggable="false"></button><button id="nav_media_skip_forward_2" class="vibe-icon" type="button" aria-label="Skip ahead" title="Skip ahead" data-command="61" data-repeat="true" ><img src="icons/vibe/skip_next.svg" alt="" draggable="false"></button></div>
++        <div class="vibe-utilities" role="group" aria-label="Playback tools"><button id="videoInfoBtn" class="vibe-icon" type="button" aria-label="Video information" title="Video information" style="grid-column:1;grid-row:1" ><img src="icons/vibe/vid_info.svg" alt="" draggable="false"></button><button id="diagnosticsBtn" class="vibe-icon" type="button" aria-label="Download diagnostics" title="Download diagnostics" style="grid-column:2;grid-row:1" ><img src="icons/vibe/bug_report.svg" alt="" draggable="false"></button><button id="testVideoBtn" class="vibe-icon" type="button" aria-label="Check browser playback" title="Check browser playback" style="grid-column:3;grid-row:1" ><img src="icons/vibe/video_test.svg" alt="" draggable="false"></button><button id="remoteStats" class="vibe-icon" type="button" aria-label="Show playback statistics" title="Show playback statistics" style="grid-column:4;grid-row:1" ><img src="icons/vibe/equalizer.svg" alt="" draggable="false"></button><button id="aspectToggle" class="vibe-icon" type="button" aria-label="Video display mode" title="Video display mode" style="grid-column:2;grid-row:2" ><img src="icons/vibe/aspect_ratio.svg" alt="" draggable="false"></button><button id="remoteSettings" class="vibe-icon" type="button" aria-label="Video settings" title="Video settings" style="grid-column:3;grid-row:2" ><img src="icons/vibe/video_settings.svg" alt="" draggable="false"></button><button id="audioSettings" class="vibe-icon" type="button" aria-label="Audio output and sync" title="Audio output and sync" style="grid-column:4;grid-row:2" ><img src="icons/vibe/audio_tune.svg" alt="" draggable="false"></button><button id="captionSettings" class="vibe-icon" type="button" aria-label="Broadcast captions" title="Broadcast captions" style="grid-column:5;grid-row:2" ><img src="icons/vibe/closed_caption.svg" alt="" draggable="false"></button></div>
++      </div>
++      <section id="remoteTools" class="vibe-drawer" aria-label="Help and additional controls" hidden>
++        <header class="mc-panel-header"><strong>Additional controls</strong><button id="closeRemoteTools" type="button" aria-label="Close additional controls">×</button></header>
++        <p class="mc-note">The edge controls follow the Vibe Android overlay. Hold arrows, page or skip buttons to repeat. Options opens SageTV’s menu; × or the green arrow hides this local overlay. These extra controls are browser additions.</p>
++        <div class="mc-remote-grid"><button type="button" data-command="18">Guide</button><button type="button" data-command="86">Recordings</button><button type="button" data-command="25">Record</button><button type="button" data-command="13" data-repeat="true">Vol +</button><button type="button" data-command="26">Mute</button><button type="button" data-command="14" data-repeat="true">Vol −</button><button type="button" data-command="11" data-repeat="true">Ch +</button><button type="button" data-command="60">Last channel</button><button type="button" data-command="12" data-repeat="true">Ch −</button><button type="button" data-command="31">1</button><button type="button" data-command="32">2</button><button type="button" data-command="33">3</button><button type="button" data-command="34">4</button><button type="button" data-command="35">5</button><button type="button" data-command="36">6</button><button type="button" data-command="37">7</button><button type="button" data-command="38">8</button><button type="button" data-command="39">9</button><button type="button" data-command="95">−</button><button type="button" data-command="30">0</button><button type="button" data-command="59">Play / Pause</button></div>
+       <div class="mc-timeline">
+         <label for="seekRange">Recording <span id="timelineTime">No video</span></label>
+         <input id="seekRange" type="range" min="0" max="1" value="0" step="1" disabled aria-label="Seek across the full recording">
+         <div id="timelineBuffer" class="mc-note">The range uses SageTV's media duration, not the buffered fragment.</div>
+       </div>
+-      <div class="mc-panel-tools">
+-        <button id="keyboardToggle" type="button" aria-expanded="false">Keyboard</button>
+-        <button id="renderOnlyBtn" type="button">Render-only view</button>
+-        <button id="remoteSettings" type="button">Settings</button>
+-        <button id="diagnosticsBtn" type="button">Download diagnostics</button>
+-      </div>
+-      <div id="keyboardPanel" class="mc-keyboard" hidden>
++        <div class="mc-panel-tools"><button id="renderOnlyBtn" type="button">Render-only view</button><button id="allSettings" type="button">All settings</button></div>
++      </section>
++      <div id="keyboardPanel" class="mc-keyboard" hidden><button id="closeKeyboard" type="button" aria-label="Close keyboard">Close keyboard</button>
+         <label for="keyboardInput">Text to type into SageTV</label>
+         <input id="keyboardInput" type="text" maxlength="512" autocomplete="off" spellcheck="false" placeholder="Text is sent as keys, not remote shortcuts">
+         <button id="keyboardSend" type="button">Send text</button>
+         <button id="keyboardBackspace" type="button">Backspace</button>
+         <button id="keyboardEnter" type="button">Enter</button>
+       </div>
+-      <p class="mc-note">Hold a directional, volume, channel, or skip button to repeat. Options opens SageTV's menu; this panel is local to the browser.</p>
++
++      <section id="videoInfoPanel" class="vibe-drawer" aria-label="Video information" hidden>
++        <header class="mc-panel-header"><strong>Video information</strong><button id="closeVideoInfo" type="button" aria-label="Close video information">×</button></header>
++        <pre id="videoInfoText" class="mc-stream-actual"></pre>
++      </section>
+     </section>
+   </div>
++  </main>
+ 
+   <div id="settingsPanel" class="mc-settings-overlay" role="dialog" aria-modal="true" aria-labelledby="settingsTitle" hidden>
+     <section class="mc-settings-card">
+@@ -87,7 +83,7 @@
+       <details id="streamingPreferences" class="mc-streaming" open>
+         <summary>Streaming and transcoding</summary>
+         <p class="mc-note">Vibe Android-style controls, adapted for browser playback. Settings belong to this browser, not to global SageTV or MIM configuration.</p>
+-        <fieldset><legend>Player and video</legend>
++        <fieldset id="streamVideoSection"><legend>Player and video</legend>
+           <label>Player<select id="stream_player"><option value="auto">Automatic — MPEG-TS preferred</option><option value="mpegts">Continuous MPEG-TS (mpegts.js)</option><option value="hls">Compatibility — HLS</option></select></label>
+           <label>Video processing<select id="stream_videoMode"><option value="auto">Transcode when needed</option><option value="transcode">Always transcode</option><option value="copy">Copy video only (strict)</option></select></label>
+           <label>Video encoder<select id="stream_encoder"><option value="auto">Automatic — hardware first</option><option value="qsv">Intel Quick Sync (QSV)</option><option value="nvenc">NVIDIA NVENC</option><option value="vaapi">Linux VAAPI</option><option value="amf">AMD AMF</option><option value="videotoolbox">Apple VideoToolbox</option><option value="software">Software H.264 (libx264)</option></select></label>
+@@ -99,7 +95,7 @@
+           <label class="mc-check"><input id="stream_allowFallback" type="checkbox"> Allow hardware → software / MPEG-TS → HLS fallback</label>
+           <p class="mc-note">Bitrate is a target, not an exact measured rate. Encoder and video bitrate apply only when video is transcoded. Source size/FPS and compatible video may be copied. Hardware encoding uses software decoding/filtering in this portable path.</p>
+         </fieldset>
+-        <fieldset><legend>Audio</legend>
++        <fieldset id="streamAudioSection"><legend>Audio</legend>
+           <label>Track in current recording<select id="stream_audioTrack"><option value="-1">Automatic / preferred language</option></select></label>
+           <label>Preferred language<input id="stream_audioLanguage" type="text" maxlength="35" placeholder="en / eng / en-US"></label>
+           <label>Audio output<select id="stream_audioCodec"><option value="auto">Automatic — copy compatible / AAC</option><option value="aac">AAC (browser compatible)</option><option value="ac3">AC-3 (browser support required)</option><option value="copy">Copy audio (strict)</option></select></label>
+@@ -108,7 +104,7 @@
+           <label>Audio delay (ms)<input id="stream_audioOffsetMs" type="number" min="-3000" max="3000" step="50"></label>
+           <p class="mc-note">Positive delay plays audio later. Track index is for the current recording; Apply now selects it. A new recording returns to language/automatic selection. Audio encoding is software; video can remain hardware encoded.</p>
+         </fieldset>
+-        <fieldset><legend>Broadcast captions (local browser)</legend>
++        <fieldset id="streamCaptionSection"><legend>Broadcast captions (local browser)</legend>
+           <label>Caption type<select id="stream_captions"><option value="off">Off</option><option value="608">CEA-608 (CC1–CC4)</option><option value="708">CEA-708 (service 1–63)</option></select></label>
+           <label>Channel / service<input id="stream_captionService" type="number" min="1" max="63" step="1"></label>
+           <label>Caption delay (ms)<input id="stream_captionOffsetMs" type="number" min="-5000" max="5000" step="50"></label>
+@@ -127,7 +123,9 @@
+       <label>Physical keyboard<select id="inputMode"><option value="remote">Remote shortcuts</option><option value="text">Literal text / SageTV key events</option></select></label>
+       <label>SageTV UI resolution<select id="uiResolution"><option value="window">Automatic — fit the browser window</option><option value="1280x720">1280 × 720 — preserve 16:9</option><option value="1920x1080">1920 × 1080 — preserve 16:9</option></select></label>
+       <p class="mc-note">Automatic asks SageTV to lay out the UI for the available window. Fixed resolutions fit the whole picture without cropping. A ?ui=WIDTHxHEIGHT URL overrides this setting. Video aspect is separate.</p>
+-      <label>Video aspect<select id="videoFit"><option value="source">Source aspect (letterbox / pillarbox)</option><option value="fill">Fill / stretch</option><option value="zoom">Zoom / crop</option><option value="4x3">4:3</option><option value="16x9">16:9</option></select></label>
++      <label>Video display mode<select id="videoFit"><option value="cover">Fill browser — preserve aspect, crop edges</option><option value="source">Fit — whole picture, bars when necessary</option><option value="fill">Stretch — whole picture, no bars</option><option value="zoom">Zoom / crop (legacy)</option><option value="4x3">Force 4:3</option><option value="16x9">Force 16:9</option></select></label>
++      <label>Video placement<select id="videoViewport"><option value="browser">Browser area — full playback / native previews</option><option value="native">Follow SageTV rectangles exactly</option></select></label>
++      <p class="mc-note">Fill browser removes added bars while preserving aspect, so edges may be cropped on a differently shaped window. Fit shows every source edge with bars as needed. Stretch shows every edge without bars, but changes proportions. Black bars encoded in the recording are part of the video; this setting does not detect/remove those.</p>
+       <label class="mc-check"><input id="guideAssist" type="checkbox"> Guide click → OK assist (SageMC)</label>
+       <label class="mc-check"><input id="videoMaskAssist" type="checkbox"> SageTV video-mask / preview assist</label>
+       <label class="mc-check"><input id="mouseBack" type="checkbox"> Mouse side button → SageTV Back</label>
+@@ -139,11 +137,11 @@
+     </section>
+   </div>
+ </div>
+-<script src="js/miniclient-core.js?v=3.2.3"></script>
+-<script src="js/miniclient-streaming.js?v=3.2.3"></script>
+-<script src="js/atsc-captions.js?v=3.2.3"></script>
+-<script src="js/miniclient-captions.js?v=3.2.3"></script>
+-<script src="js/miniclient-playback.js?v=3.2.3"></script>
+-<script src="js/miniclient.js?v=3.2.3"></script>
++<script src="js/miniclient-core.js?v=3.2.4"></script>
++<script src="js/miniclient-streaming.js?v=3.2.4"></script>
++<script src="js/atsc-captions.js?v=3.2.4"></script>
++<script src="js/miniclient-captions.js?v=3.2.4"></script>
++<script src="js/miniclient-playback.js?v=3.2.4"></script>
++<script src="js/miniclient.js?v=3.2.4"></script>
+ </body>
+ </html>
+--- a/src/main/webapp/sw.js
++++ b/src/main/webapp/sw.js
+@@ -1,5 +1,5 @@
+-const CACHE='sagetv-webplayer-shell-v3.2.3';
+-const SHELL=['./','index.html','client.html','miniclient.html','css/app.css','css/miniclient.css','js/session-state.js','js/library-utils.js','js/atsc-captions.js','js/performance-watchdog.js','js/wasm-decoder-adapter.js','js/fmp4-fallback.js','js/commercial-skip.js','js/remote-navigation.js','js/app.js','js/advanced-ui.js','js/client-shell.js','js/miniclient-core.js','js/miniclient-streaming.js','js/miniclient-captions.js','js/miniclient-playback.js','js/miniclient.js','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png'];
++const CACHE='sagetv-webplayer-shell-v3.2.4';
++const SHELL=['./','index.html','client.html','miniclient.html','css/app.css','css/miniclient.css','js/session-state.js','js/library-utils.js','js/atsc-captions.js','js/performance-watchdog.js','js/wasm-decoder-adapter.js','js/fmp4-fallback.js','js/commercial-skip.js','js/remote-navigation.js','js/app.js','js/advanced-ui.js','js/client-shell.js','js/miniclient-core.js','js/miniclient-streaming.js','js/miniclient-captions.js','js/miniclient-playback.js','js/miniclient.js','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png','icons/vibe/help_outline.svg','icons/vibe/menu.svg','icons/vibe/info_outline.svg','icons/vibe/undo.svg','icons/vibe/arrow_upward.svg','icons/vibe/arrow_back.svg','icons/vibe/arrow_forward.svg','icons/vibe/arrow_downward.svg','icons/vibe/fiber_manual_record.svg','icons/vibe/exit_to_app.svg','icons/vibe/vertical_align_top.svg','icons/vibe/vertical_align_bottom.svg','icons/vibe/keyboard.svg','icons/vibe/skip_previous.svg','icons/vibe/fast_rewind.svg','icons/vibe/stop.svg','icons/vibe/pause.svg','icons/vibe/play_arrow.svg','icons/vibe/fast_forward.svg','icons/vibe/skip_next.svg','icons/vibe/aspect_ratio.svg','icons/vibe/vid_info.svg','icons/vibe/bug_report.svg','icons/vibe/video_test.svg','icons/vibe/equalizer.svg','icons/vibe/closed_caption.svg','icons/vibe/video_settings.svg','icons/vibe/audio_tune.svg','icons/vibe/home.png','icons/vibe/close.png'];
+ self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting())));
+ self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('sagetv-webplayer-shell-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+ // Network-first shell updates prevent an old cached script hiding a plugin upgrade.

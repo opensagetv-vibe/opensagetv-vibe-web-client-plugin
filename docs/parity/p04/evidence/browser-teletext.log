@@ -1,0 +1,6 @@
+PASS live typed inventory populates explicit Teletext page/PID/language selector
+PASS Teletext service selection updates durable page/language preference
+PASS production browser overlay renders local Teletext text cue
+PASS Teletext clock/poll continues while SageTV OSD is hidden and idle
+PASS timed Teletext clear removes overlay without a new GFX/OSD frame
+Chromium Teletext P03: 5 tests PASS (mock native/vendor transport; production DOM/controller)

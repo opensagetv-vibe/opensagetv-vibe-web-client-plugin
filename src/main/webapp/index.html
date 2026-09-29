@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>SageTV Web Player</title>
+  <meta name="theme-color" content="#15202b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="SageTV">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="simple-ui">
+<main class="simple-main">
+  <header class="simple-header">
+    <div><h1>SageTV Web Player</h1><p>Choose a recording and press Watch.</p></div>
+    <div class="hero-actions"><a class="button-link" href="miniclient.html">MiniClient / SageMC</a><a class="button-link" href="client.html">Web Admin</a><button id="installApp" hidden>Install App</button><span class="version">v3.2.30</span></div>
+  </header>
+
+  <section class="card simple-status-card">
+    <details>
+      <summary>Server / playback status</summary>
+      <div class="simple-status-grid">
+        <div><h3>Server</h3><pre id="health">Checking…</pre></div>
+        <div><h3>Decoder assets</h3><pre id="assetStatus">Checking…</pre><button id="prefetchAssets">Cache decoder assets</button></div>
+        <div><h3>Compatibility transcoder</h3><pre id="transcoderStatus">Checking…</pre></div>
+      </div>
+    </details>
+  </section>
+
+  <section class="card simple-recordings-card">
+    <div class="section-head"><h2>Recordings</h2><button id="refreshRecordings">Refresh</button></div>
+    <div id="librarySummary" class="library-summary">Loading recordings…</div>
+    <div id="recordingList" class="simple-recording-listbox">Loading…</div>
+  </section>
+
+  <section class="card player-card simple-player-card">
+    <div class="section-head"><h2>Player</h2><span id="modeBadge" class="badge">IDLE</span></div>
+    <p id="capability" class="muted"></p>
+
+    <div id="playerStage" class="player-stage">
+      <video id="nativeVideo" controls playsinline x-webkit-airplay="allow"></video>
+      <div id="wasmPlayer" class="wasm-player"></div>
+      <div id="fallbackPlayer" class="fallback-player"></div>
+      <div id="captionOverlay" class="caption-overlay" aria-live="polite"></div>
+      <div id="stageMessage" class="stage-message">Choose a recording and press Watch.</div>
+    </div>
+
+    <div class="buttons simple-player-controls">
+      <button id="skipBack" disabled>−15s</button>
+      <button id="pause" disabled>Pause</button>
+      <button id="resume" disabled>Play</button>
+      <button id="skipForward" disabled>+30s</button>
+      <button id="toggleCaptions">CC</button>
+      <button id="stop" disabled>Stop</button>
+      <button id="fullscreen">Fullscreen</button>
+    </div>
+
+    <div class="seek-row">
+      <span id="timeNow">0:00</span>
+      <input id="seek" type="range" min="0" max="1" step="0.1" value="0" disabled>
+      <span id="timeTotal">0:00</span>
+    </div>
+    <div class="buffer-row" aria-live="polite">
+      <progress id="bufferProgress" max="1" value="0"></progress>
+      <span id="bufferInfo">Buffer: idle</span>
+    </div>
+
+    <div class="simple-quick-settings">
+      <label>Audio <select id="audioTrack" disabled><option>Load recording first</option></select></label>
+      <label>Captions <select id="captionService"><option value="CC1">CC1</option><option value="CC2">CC2</option><option value="CC3">CC3</option><option value="CC4">CC4</option><option value="708-1">CEA-708 service 1</option></select></label>
+      <label class="check"><input id="captionsEnabled" type="checkbox" checked> On</label>
+      <label>Volume <input id="volume" type="range" min="0" max="1" step="0.05" value="1"></label>
+    </div>
+
+    <details class="simple-options">
+      <summary>Playback options</summary>
+      <div class="buttons">
+        <button id="playAuto" disabled>Auto</button>
+        <button id="playWasm" disabled>Original + Wasm</button>
+        <button id="playNative" disabled>Original Native</button>
+        <button id="playCompat" disabled>Compatibility (FFmpeg)</button>
+      </div>
+      <div class="control-grid">
+        <label class="check"><input id="autoFallback" type="checkbox" checked> Auto fallback to compatibility mode</label>
+        <label class="check"><input id="resumeEnabled" type="checkbox" checked> Resume unfinished recordings</label>
+        <label>Preferred audio <select id="preferredAudioLang"><option value="auto">Auto / first track</option><option value="eng">English</option><option value="spa">Spanish</option><option value="fra">French</option><option value="deu">German</option></select></label>
+        <label class="check"><input id="startLiveAtEdge" type="checkbox" checked> Start active recordings at live edge</label>
+        <label class="check"><input id="autoReconnectLive" type="checkbox" checked> Auto reconnect live playback</label>
+        <label class="check"><input id="offlineOnly" type="checkbox"> Decoder assets: local cache only</label>
+        <label class="check"><input id="autoSkipCommercials" type="checkbox"> Auto-skip Comskip commercials</label>
+        <label class="check"><input id="syncSageProgress" type="checkbox"> Sync playback progress to SageTV</label>
+        <label>Speed <select id="rate"><option value="0.5">0.5×</option><option value="0.75">0.75×</option><option value="1" selected>1×</option><option value="1.25">1.25×</option><option value="1.5">1.5×</option><option value="2">2×</option></select></label>
+      </div>
+    </details>
+
+    <div id="commercialBar" class="commercial-bar" hidden><span id="commercialText">No commercial markers.</span><button id="skipCommercial" disabled>Skip commercial</button></div>
+    <div id="resumeBar" class="resume-bar" hidden><span id="resumeText"></span><button id="clearResume">Clear resume</button></div>
+    <div id="seriesStatus" class="series-status" hidden></div>
+    <pre id="playerStatus">No playback session.</pre>
+
+    <details>
+      <summary>Diagnostics</summary>
+      <pre id="performanceStatus">Waiting for playback.</pre>
+      <pre id="decoderStats">No decoder session.</pre>
+      <pre id="captionStats">No transport stream parsed yet.</pre>
+      <div class="buttons"><button id="downloadDiagnostics">Download diagnostics</button><button id="copyDiagnostics">Copy diagnostics</button></div>
+    </details>
+  </section>
+</main>
+
+<!-- Internal compatibility elements. These keep the mature playback controller intact while the visible UI stays simple. -->
+<div class="internal-ui-stubs" hidden aria-hidden="true">
+  <form id="mediaForm"><input id="mediaId" type="number"><input id="segment" type="number" value="0"><button type="submit">Load</button></form>
+  <div id="mediaSummary"></div><pre id="mediaInfo"></pre>
+  <input id="recordingSearch" value=""><select id="recordingView"><option value="all" selected>All</option></select>
+  <select id="recordingCategory"><option value="all" selected>All</option></select><select id="recordingSort"><option value="recent" selected>Recent</option></select>
+  <input id="recordingLimit" type="number" value="300"><input id="activeOnly" type="checkbox">
+  <input id="favoriteChannelsOnly" type="checkbox"><input id="guideSearch"><select id="guideHours"><option value="4" selected>4</option></select>
+  <button id="guideNow"></button><button id="guideBack"></button><button id="guideForward"></button><button id="refreshGuide"></button><div id="guideRange"></div><div id="guideGrid"></div>
+  <button id="refreshDvr"></button><div id="dvrSummary"></div><div id="scheduledList"></div><div id="conflictList"></div>
+  <button id="previousEpisode"></button><button id="nextEpisode"></button><button id="mute"></button><button id="favoriteCurrent"></button><button id="queueCurrent"></button><button id="channelDown"></button><button id="channelUp"></button><button id="liveEdge"></button><button id="pictureInPicture"></button>
+  <input id="autoPlayNext" type="checkbox"><input id="tenFootMode" type="checkbox"><input id="autoPlayQueue" type="checkbox" checked><select id="sleepTimer"><option value="0" selected>Off</option></select>
+  <a id="rawLink" href="#"></a>
+</div>
+
+<dialog id="detailsDialog"><div id="detailsContent"></div></dialog>
+
+<script src="js/session-state.js"></script>
+<script src="js/library-utils.js"></script>
+<script src="js/atsc-captions.js"></script>
+<script src="js/performance-watchdog.js"></script>
+<script src="js/wasm-decoder-adapter.js"></script>
+<script src="js/fmp4-fallback.js"></script>
+<script src="js/commercial-skip.js"></script>
+<script src="js/remote-navigation.js"></script>
+<script src="js/app.js"></script>
+<script src="js/pwa.js"></script>
+</body>
+</html>

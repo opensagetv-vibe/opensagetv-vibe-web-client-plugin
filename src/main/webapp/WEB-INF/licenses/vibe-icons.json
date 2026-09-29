@@ -1,0 +1,389 @@
+{
+  "repository": "opensagetv-vibe/opensagetv-vibe-android-client",
+  "ref": "f1ba340e05fe18eaaba939253a933c3dfe6d6caf",
+  "layoutBlob": "b55d384b6dcb9c86bf2cfa771f1a9d615710ed77",
+  "assets": [
+    {
+      "name": "help_outline",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_help_outline_white_24dp.xml",
+      "blobSha": "69982342feef36884f91e6be53580986ffbe0772",
+      "output": "icons/vibe/help_outline.svg",
+      "paths": [
+        "M11,18h2v-2h-2v2zM12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM12,20c-4.41,0 -8,-3.59 -8,-8s3.59,-8 8,-8 8,3.59 8,8 -3.59,8 -8,8zM12,6c-2.21,0 -4,1.79 -4,4h2c0,-1.1 0.9,-2 2,-2s2,0.9 2,2c0,2 -3,1.75 -3,5h2c0,-2.25 3,-2.5 3,-5 0,-2.21 -1.79,-4 -4,-4z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "4b7c6bbc06cf61a6bab9aa33cc1e38f442d2f6e8339efc89b11f7a598f984158"
+    },
+    {
+      "name": "menu",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_menu_white_24dp.xml",
+      "blobSha": "cf37e2a393cbf3e8d08165d60dfaf0a29c8cfc3d",
+      "output": "icons/vibe/menu.svg",
+      "paths": [
+        "M3,18h18v-2L3,16v2zM3,13h18v-2L3,11v2zM3,6v2h18L21,6L3,6z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "1c022dfd1bee49d4d7c093404015f96135f5c198aacba71788ab33f03f267733"
+    },
+    {
+      "name": "info_outline",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_info_outline_white_24dp.xml",
+      "blobSha": "9567ecd7754dd13715860c5dfeae0f92256d4eb4",
+      "output": "icons/vibe/info_outline.svg",
+      "paths": [
+        "M11,17h2v-6h-2v6zM12,2C6.48,2 2,6.48 2,12s4.48,10 10,10 10,-4.48 10,-10S17.52,2 12,2zM12,20c-4.41,0 -8,-3.59 -8,-8s3.59,-8 8,-8 8,3.59 8,8 -3.59,8 -8,8zM11,9h2L13,7h-2v2z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "6b0cbbf48f01e77ac92f1d9954154ab9a8afbe4bf7fb67f3eb97d10686293115"
+    },
+    {
+      "name": "undo",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_undo_white_24dp.xml",
+      "blobSha": "d624b8b7eb121fa360dd6762fb54bbbfdfd48f19",
+      "output": "icons/vibe/undo.svg",
+      "paths": [
+        "M12.5,8c-2.65,0 -5.05,0.99 -6.9,2.6L2,7v9h9l-3.62,-3.62c1.39,-1.16 3.16,-1.88 5.12,-1.88 3.54,0 6.55,2.31 7.6,5.5l2.37,-0.78C21.08,11.03 17.15,8 12.5,8z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "6554e47e17e4e995ca77aaeaa892c46feca6367b377f4213de2c9fa435cb10c0"
+    },
+    {
+      "name": "arrow_upward",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_arrow_upward_white_24dp.xml",
+      "blobSha": "a8dfcd29134aa072fab4b7014d4e8cb8b1100458",
+      "output": "icons/vibe/arrow_upward.svg",
+      "paths": [
+        "M4,12l1.41,1.41L11,7.83V20h2V7.83l5.58,5.59L20,12l-8,-8 -8,8z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "0e26137dd5d28f790f336654af4150ab322a584b7b76057d18cddbb1674eb5ce"
+    },
+    {
+      "name": "arrow_back",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_arrow_back_white_24dp.xml",
+      "blobSha": "38fbc261b7a2a89876009fc0a04e096f5aa03822",
+      "output": "icons/vibe/arrow_back.svg",
+      "paths": [
+        "M20,11H7.83l5.59,-5.59L12,4l-8,8 8,8 1.41,-1.41L7.83,13H20v-2z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "fde008af8dc9cb19f1cb5d37a4deb474a5b7ba32695d3a28442575790761e534"
+    },
+    {
+      "name": "arrow_forward",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_arrow_forward_white_24dp.xml",
+      "blobSha": "5304b93e183f60d76706bf6d76db923221245b7b",
+      "output": "icons/vibe/arrow_forward.svg",
+      "paths": [
+        "M12,4l-1.41,1.41L16.17,11H4v2h12.17l-5.58,5.59L12,20l8,-8z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "c99e8a9ea214ce257d166bd7ca38c81a0fe35e09940595377828a8a28c08db2a"
+    },
+    {
+      "name": "arrow_downward",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_arrow_downward_white_24dp.xml",
+      "blobSha": "b4c7b17e5b9c1ade30d57eb2db4b345ec6bfb3ec",
+      "output": "icons/vibe/arrow_downward.svg",
+      "paths": [
+        "M20,12l-1.41,-1.41L13,16.17V4h-2v12.17l-5.58,-5.59L4,12l8,8 8,-8z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "6e3ddf3925eef5844bc841465170834c2c5126b9ea35fe0683c54801be5d67f1"
+    },
+    {
+      "name": "fiber_manual_record",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_fiber_manual_record_white_24dp.xml",
+      "blobSha": "5cc678f28f341d098f9f876763200ce8f81ff441",
+      "output": "icons/vibe/fiber_manual_record.svg",
+      "paths": [
+        "M12,12m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "b58e61815a54448b9a51349b2b3f9124f2700dd038c706e9d3745b4b959e72c0"
+    },
+    {
+      "name": "exit_to_app",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_exit_to_app_green_24dp.xml",
+      "blobSha": "dbee1978f0eacf63de6f2c47d436e7751dc0d524",
+      "output": "icons/vibe/exit_to_app.svg",
+      "paths": [
+        "M10.09,15.59L11.5,17l5,-5 -5,-5 -1.41,1.41L12.67,11H3v2h9.67l-2.58,2.59zM19,3H5c-1.11,0 -2,0.9 -2,2v4h2V5h14v14H5v-4H3v4c0,1.1 0.89,2 2,2h14c1.1,0 2,-0.9 2,-2V5c0,-1.1 -0.9,-2 -2,-2z"
+      ],
+      "colors": [
+        "#00ff00"
+      ],
+      "sha256": "781ce9a791b015d911325e1602e84937afdddb5ff5aa96ed1103ecf502411eb5"
+    },
+    {
+      "name": "vertical_align_top",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_vertical_align_top_white_24dp.xml",
+      "blobSha": "59c30adf84e60c636c5173d859b824c5978fbc0f",
+      "output": "icons/vibe/vertical_align_top.svg",
+      "paths": [
+        "M8,11h3v10h2V11h3l-4,-4 -4,4zM4,3v2h16V3H4z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "f489b1ed11d560ca4349cb2e8574885cff58dea48bef0abf3643813d6300f3af"
+    },
+    {
+      "name": "vertical_align_bottom",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_vertical_align_bottom_white_24dp.xml",
+      "blobSha": "a75a234a30bdc0e3cf6df3c60ac4906df358faef",
+      "output": "icons/vibe/vertical_align_bottom.svg",
+      "paths": [
+        "M16,13h-3V3h-2v10H8l4,4 4,-4zM4,19v2h16v-2H4z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "2e72fa87ebfb94f0b90c81a6162a0c63370be800c4a5ab2cfc9ad6992cafac96"
+    },
+    {
+      "name": "keyboard",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_keyboard_white_24dp.xml",
+      "blobSha": "0515c9b9e73e9aa5f254bbb27b94787133ab0bf9",
+      "output": "icons/vibe/keyboard.svg",
+      "paths": [
+        "M20,5L4,5c-1.1,0 -1.99,0.9 -1.99,2L2,17c0,1.1 0.9,2 2,2h16c1.1,0 2,-0.9 2,-2L22,7c0,-1.1 -0.9,-2 -2,-2zM11,8h2v2h-2L11,8zM11,11h2v2h-2v-2zM8,8h2v2L8,10L8,8zM8,11h2v2L8,13v-2zM7,13L5,13v-2h2v2zM7,10L5,10L5,8h2v2zM16,17L8,17v-2h8v2zM16,13h-2v-2h2v2zM16,10h-2L14,8h2v2zM19,13h-2v-2h2v2zM19,10h-2L17,8h2v2z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "da0227bb41c6f658323f026d7b477a9e9053e95f48a7670e1409b4f08ff65fc6"
+    },
+    {
+      "name": "skip_previous",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_skip_previous_white_24dp.xml",
+      "blobSha": "752878575efc105e0508e889bbcb856bf7183a3c",
+      "output": "icons/vibe/skip_previous.svg",
+      "paths": [
+        "M6,6h2v12L6,18zM9.5,12l8.5,6L18,6z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "2724bdf4c5ac22df851098859877f036b5a63674fe30d25a980a427e52d23e9d"
+    },
+    {
+      "name": "fast_rewind",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_fast_rewind_white_24dp.xml",
+      "blobSha": "30a196e02dd93d2d62ef8730bdf2e0c197d8d5e1",
+      "output": "icons/vibe/fast_rewind.svg",
+      "paths": [
+        "M11,18L11,6l-8.5,6 8.5,6zM11.5,12l8.5,6L20,6l-8.5,6z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "3bc6686bd754c0b15bb8b61a7cf9cabb679fc1326537695e107d6646e4ab5f75"
+    },
+    {
+      "name": "stop",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_stop_white_24dp.xml",
+      "blobSha": "c5b211a7776e968338839fec673af9744f51ba3b",
+      "output": "icons/vibe/stop.svg",
+      "paths": [
+        "M6,6h12v12H6z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "fd9dfe46d34a32e154abdd2e64cdafbc1d8c7d08079ebe9e7cbe4a856d54dbf9"
+    },
+    {
+      "name": "pause",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_pause_white_24dp.xml",
+      "blobSha": "8356ff57f5bf91a84abbca66ee8bff17cafe730a",
+      "output": "icons/vibe/pause.svg",
+      "paths": [
+        "M6,19h4L10,5L6,5v14zM14,5v14h4L18,5h-4z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "11dec8add5f40f3ff1c69c97427b143e2a9e9ec7216744a8fb597758f8fabdca"
+    },
+    {
+      "name": "play_arrow",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_play_arrow_white_24dp.xml",
+      "blobSha": "81a8f74f6e3f711a9b58e04512533a533f4b7f3c",
+      "output": "icons/vibe/play_arrow.svg",
+      "paths": [
+        "M8,5v14l11,-7z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "26b057a754ed979fafbd36e4de034ccf459289663e29a6773fe858661d72d119"
+    },
+    {
+      "name": "fast_forward",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_fast_forward_white_24dp.xml",
+      "blobSha": "5ca4d224fa1de50aae71b9223eddbf4ea282aa4e",
+      "output": "icons/vibe/fast_forward.svg",
+      "paths": [
+        "M4,18l8.5,-6L4,6v12zM13,6v12l8.5,-6L13,6z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "974c277c09577c0ed61e189f36ce94d15456e06e3a1a5e720956686a25f8e381"
+    },
+    {
+      "name": "skip_next",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_skip_next_white_24dp.xml",
+      "blobSha": "5d1017b1c2e576d00f1037bf7eb496c61e3b13db",
+      "output": "icons/vibe/skip_next.svg",
+      "paths": [
+        "M6,18l8.5,-6L6,6v12zM16,6v12h2V6h-2z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "dffdf18c061ef46ab4e2acb19ab55776671c49f7338d835450b4ff0e8d89107a"
+    },
+    {
+      "name": "aspect_ratio",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_aspect_ratio_white_24dp.xml",
+      "blobSha": "97f6055a85475be59e7d919e2d793bb7dd1fc1f6",
+      "output": "icons/vibe/aspect_ratio.svg",
+      "paths": [
+        "M19,12h-2v3h-3v2h5v-5zM7,9h3L10,7L5,7v5h2L7,9zM21,3L3,3c-1.1,0 -2,0.9 -2,2v14c0,1.1 0.9,2 2,2h18c1.1,0 2,-0.9 2,-2L23,5c0,-1.1 -0.9,-2 -2,-2zM21,19.01L3,19.01L3,4.99h18v14.02z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "a355b0d48e09f30c07d94cc49019f71632dc02374f3ccf8b8faf83a81f9ee421"
+    },
+    {
+      "name": "vid_info",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_vid_info_white_24dp.xml",
+      "blobSha": "601872896b538024648f20479c11944570095341",
+      "output": "icons/vibe/vid_info.svg",
+      "paths": [
+        "M12,7.77L18.39,18H5.61L12,7.77M12,4L2,20h20L12,4z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "4693d0042c714c4c227f2e42eec307ab85a864d7ea4e5490548651fba3410e2b"
+    },
+    {
+      "name": "bug_report",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_bug_report_white_24dp.xml",
+      "blobSha": "b84f96ef2e9f50ed1fd2bb084bf01ba6170364a1",
+      "output": "icons/vibe/bug_report.svg",
+      "paths": [
+        "M20,8h-2.81c-0.45,-0.78 -1.07,-1.45 -1.82,-1.96L17,4.41 15.59,3l-2.17,2.17C12.96,5.06 12.49,5 12,5s-0.96,0.06 -1.41,0.17L8.41,3 7,4.41l1.62,1.63C7.88,6.55 7.26,7.22 6.81,8H4v2h2.09c-0.05,0.33 -0.09,0.66 -0.09,1v1H4v2h2v1c0,0.34 0.04,0.67 0.09,1H4v2h2.81C7.85,19.79 9.78,21 12,21s4.15,-1.21 5.19,-3H20v-2h-2.09c0.05,-0.33 0.09,-0.66 0.09,-1v-1h2v-2h-2v-1c0,-0.34 -0.04,-0.67 -0.09,-1H20V8zM14,16h-4v-2h4v2zM14,12h-4v-2h4v2z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "eb3d27ccd670dc6e197edd18a3a1e6a0776a440220551180305859a585248714"
+    },
+    {
+      "name": "video_test",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_video_test_white_24dp.xml",
+      "blobSha": "20dd9ba74f90448419daa851bfcfa876fd401899",
+      "output": "icons/vibe/video_test.svg",
+      "paths": [
+        "M3,5c-1.1,0 -2,0.9 -2,2v10c0,1.1 0.9,2 2,2h18c1.1,0 2,-0.9 2,-2V7c0,-1.1 -0.9,-2 -2,-2H3zM3,7h18v10H3V7zM10,8.5v7l5.5,-3.5L10,8.5z",
+        "M4,13h2l1,-2 1.5,4 1,-2H11v2H8.3l0,-1.1 -1.2,2.4 -1.4,-2.8L5.2,15H4z"
+      ],
+      "colors": [
+        "#ffffff",
+        "#ffffff"
+      ],
+      "sha256": "c504259096a4f946443143978a89a1fe9989887ba19b407ab28fe3f6b9bb55cb"
+    },
+    {
+      "name": "equalizer",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_equalizer_white_24dp.xml",
+      "blobSha": "a3e047a9a4f117cd0f6b0010a95b56bfc914a116",
+      "output": "icons/vibe/equalizer.svg",
+      "paths": [
+        "M5,9.2h3V19H5V9.2zM10.5,5h3v14h-3V5zM16,12.5h3V19h-3V12.5z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "4604d7e40c6dc15abdb1de4aba82907bf7fee29b2c6849fdab21465250e5d330"
+    },
+    {
+      "name": "closed_caption",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_closed_caption_white_24dp.xml",
+      "blobSha": "086e598375dc5147967457921436b149edf6034c",
+      "output": "icons/vibe/closed_caption.svg",
+      "paths": [
+        "M20,4L4,4c-1.1,0 -2,0.9 -2,2v12c0,1.1 0.9,2 2,2h16c1.1,0 2,-0.9 2,-2L22,6c0,-1.1 -0.9,-2 -2,-2zM4,12h4v2L4,14v-2zM14,18L4,18v-2h10v2zM20,18h-4v-2h4v2zM20,14L10,14v-2h10v2z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "8132b50d05eca0a4d0a4d0ba3980857e7cd5128036338991044480ee59ddd8ea"
+    },
+    {
+      "name": "video_settings",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_video_settings_white_24dp.xml",
+      "blobSha": "ee93358f6689c8e4040f7b82bdef6fcd5a1d224e",
+      "output": "icons/vibe/video_settings.svg",
+      "paths": [
+        "M3,6c-0.55,0 -1,0.45 -1,1v10c0,0.55 0.45,1 1,1h13c0.55,0 1,-0.45 1,-1v-3.5l5,4v-11l-5,4V7c0,-0.55 -0.45,-1 -1,-1H3z"
+      ],
+      "colors": [
+        "#ffffff"
+      ],
+      "sha256": "31c8d43f833a939109f89e2b8bc0bb59f3898a557c835900b94832a540830f29"
+    },
+    {
+      "name": "audio_tune",
+      "source": "source/dev/android-shared/src/main/res/drawable/ic_audio_tune_white_24dp.xml",
+      "blobSha": "b2430a2a5cb09f8b5afd7e19b3290ccce526df5a",
+      "output": "icons/vibe/audio_tune.svg",
+      "paths": [
+        "M3,9v6h4l5,4V5L7,9H3zM16,12c0,-1.41 -0.81,-2.63 -2,-3.22v6.44c1.19,-0.59 2,-1.81 2,-3.22zM14,3.23v2.06c2.89,0.86 5,3.54 5,6.71s-2.11,5.85 -5,6.71v2.06c4.01,-0.91 7,-4.49 7,-8.77s-2.99,-7.86 -7,-8.77z",
+        "M2,20h8v2H2z"
+      ],
+      "colors": [
+        "#ffffff",
+        "#00bcd4"
+      ],
+      "sha256": "0ebad1ee0cfcf04f5fda96d7c3ecf7caaa22d2bba83d22f5eb1f7e0b35d9acbe"
+    },
+    {
+      "name": "home",
+      "source": "source/dev/android-shared/src/main/res/drawable-xxxhdpi/ic_home_white_24dp.png",
+      "blobSha": "a2a59d7b0a2c4382a6d43474b5d64ae3161b850d",
+      "output": "icons/vibe/home.png",
+      "sha256": "ae5332db05841677272a3a3de3ad338435123e832f1279c90ae94539f07a0fb6"
+    },
+    {
+      "name": "close",
+      "source": "source/dev/android-shared/src/main/res/drawable-xxxhdpi/ic_close_white_24dp.png",
+      "blobSha": "9ef2d8f9fbe5914285f0776e412c4d1be25d17aa",
+      "output": "icons/vibe/close.png",
+      "sha256": "d1d2fac160ff33e854621747466f02160d8c382176c48204db93e1009ee5e4cf"
+    }
+  ]
+}

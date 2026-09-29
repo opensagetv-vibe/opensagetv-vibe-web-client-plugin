@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "input_package": "SageTV-WebPlayer-Local-Plugin-v3.2.4-Parity-Plan-r1.zip",
+  "input_sha256": "a8eebaae50842afc045bd83cf690d5ddc11470a2458054a527b1a38944901116",
+  "runtime_version": "3.2.4",
+  "original_war_sha256": "069ec4cd1b080f896311e98a63a6c9168bdc9091039f4326e1506f54f965742d",
+  "build_exit": 0,
+  "validation_exit": 0,
+  "monolithic_validation_finished": true,
+  "counted_scenarios": 235,
+  "chromium_scenarios": 71,
+  "suites": [
+    {
+      "suite": "MiniClient core",
+      "scenarios": 27,
+      "summary": "MiniClient core: 27 tests PASS"
+    },
+    {
+      "suite": "MiniClient display policy",
+      "scenarios": 14,
+      "summary": "MiniClient display policy: 14 tests PASS"
+    },
+    {
+      "suite": "MiniClient playback",
+      "scenarios": 31,
+      "summary": "MiniClient playback: 31 tests PASS"
+    },
+    {
+      "suite": "Native recovery tests",
+      "scenarios": 11,
+      "summary": "Native recovery tests: 11 PASS (real loopback sockets, synthetic SageTV peer)"
+    },
+    {
+      "suite": "Native startup ordering",
+      "scenarios": 13,
+      "summary": "Native startup ordering: 13 PASS (real TCP; synthetic server readiness boundary)."
+    },
+    {
+      "suite": "Native authentication tests",
+      "scenarios": 14,
+      "summary": "Native authentication tests: 14 PASS (real RSA/Blowfish + loopback TCP; synthetic server)"
+    },
+    {
+      "suite": "HLS runtime",
+      "scenarios": 10,
+      "summary": "HLS runtime: 10 tests PASS (synthetic media; no hardware/SageTV live test)"
+    },
+    {
+      "suite": "Streaming servlet tests",
+      "scenarios": 13,
+      "summary": "Streaming servlet tests: 13 PASS (mock Servlet API; real async workers/file IO)"
+    },
+    {
+      "suite": "Streaming runtime",
+      "scenarios": 14,
+      "summary": "Streaming runtime: 14 tests PASS; real FFmpeg software path, no GPU or live SageTV test"
+    },
+    {
+      "suite": "MPEG-TS/settings/captions",
+      "scenarios": 17,
+      "summary": "MPEG-TS/settings/captions: 17 tests PASS (mpegts.js adapter mocked; codec/CC parser tests real)"
+    },
+    {
+      "suite": "Chromium browser smoke",
+      "scenarios": 15,
+      "summary": "Chromium browser smoke: 15 tests PASS (offline mocked transport; not live playback)"
+    },
+    {
+      "suite": "Chromium layout/scheduling",
+      "scenarios": 12,
+      "summary": "Chromium layout/scheduling: 12 tests PASS (mock native transport, no live SageMC/video)"
+    },
+    {
+      "suite": "Chromium streaming settings",
+      "scenarios": 12,
+      "summary": "Chromium streaming settings: 12 tests PASS (mock vendor/SageTV, real DOM/CC decoder)"
+    },
+    {
+      "suite": "Browser recovery",
+      "scenarios": 10,
+      "summary": "Browser recovery: 10 tests PASS (production DOM/JavaScript, mocked HTTP)"
+    },
+    {
+      "suite": "Vibe overlay/display Chromium",
+      "scenarios": 22,
+      "summary": "Vibe overlay/display Chromium: 22 tests PASS (synthetic native/vendor transport; actual bundled assets and local video)"
+    }
+  ],
+  "additional_checks": [
+    "MiniClientProtocolSmoke",
+    "Seven legacy Node entry points",
+    "17 JavaScript syntax checks",
+    "30 asset provenance entries",
+    "XML/WAR/installer checksum/classfile checks"
+  ],
+  "real_vendor_mse": false,
+  "live_sagetv_server": false,
+  "physical_gpu": false,
+  "versions": {
+    "python": "Python 3.13.5",
+    "node": "v22.16.0",
+    "java": "openjdk version \"21.0.11\" 2026-04-21",
+    "javac": "javac 21.0.11",
+    "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe": "ffprobe version 7.1.5-0+deb13u1 Copyright (c) 2007-2026 the FFmpeg developers",
+    "chromium": "Chromium 144.0.7559.96 built on Debian GNU/Linux 13 (trixie)"
+  },
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "logs": {
+    "baseline-build.log": "00f3edc6eadca6430e9c3363589069d3853d4b85e7cc6dc7d2f6ceba21bae7df",
+    "baseline-validation.log": "a94a6cf61717e8303a0066e531814ec2a0319ac958708f39a13a8f4be7457fa2"
+  }
+}

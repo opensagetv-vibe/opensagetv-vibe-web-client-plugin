@@ -1,0 +1,4 @@
+PASS DVB controller renders straight-alpha RGBA cue on the bitmap path
+PASS DVB cue timeout clears stale bitmap without waiting for a new video segment
+PASS stopping playback cancels DVB bitmap poll lifecycle
+P04 browser DVB controller: 3 PASS

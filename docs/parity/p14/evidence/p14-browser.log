@@ -1,0 +1,12 @@
+PASS settings D-pad ArrowDown advances focus through the nested support controls
+PASS server destination test is explicit/confirmed and reports bounded write-read-hash-delete success
+PASS bounded retry spool is an explicit separate action
+PASS profile export is schema-scoped and excludes administrator/server identity state
+PASS support settings remain reachable in a narrow browser without horizontal truncation
+PASS Test Current Video safely skips short/unsafe mutation and restores pause/audio test state
+PASS Test Current Video exercises cadence/pause/resume/reversible seek and restores the original long-recording state
+PASS manual ZIP report carries effective transcode/timestamp counters without client identity, SMB URL or credentials
+PASS interrupted video-test state is recoverable only onto the matching recording
+PASS stale interrupted-test restoration clears safely without seeking a different recording
+PASS automatic failure capture is default-off, opt-in, and preserves the terminal failure snapshot
+Chromium P14 diagnostics/profiles/accessibility: 11 tests PASS

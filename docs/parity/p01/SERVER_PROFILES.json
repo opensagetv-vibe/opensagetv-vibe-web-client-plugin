@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "profiles": [
+    {
+      "id": "stock-primary",
+      "kind": "stock",
+      "enabled_for_identity_record": true,
+      "live_playback_gate_executed_in_p01": false,
+      "server_version": "9.2.10.1054",
+      "server_root": "/opt/sagetv/server",
+      "running_stv": "/opt/sagetv/server/STVs/SageTV7/SageTV7.xml",
+      "core_sha256": null,
+      "stv_sha256": null,
+      "extensions_allowed_for_stock_claim": false,
+      "allowed_control": "Normal MiniClient/public API in the exact UI context only",
+      "status": "IDENTIFIED_FROM_LIVE_LOG",
+      "reason": "Runtime identity established; binary hashes unavailable. Standard plugins are not treated as a patched Core."
+    },
+    {
+      "id": "extended-optional",
+      "kind": "extended",
+      "enabled": false,
+      "explicit_approval_received": false,
+      "server_url": null,
+      "running_core_sha256": null,
+      "running_stv_sha256": null,
+      "status": "NOT_AUTHORIZED",
+      "reason": "P15 remains optional and is not a stock acceptance substitute"
+    }
+  ],
+  "credentials_in_this_file": false
+}

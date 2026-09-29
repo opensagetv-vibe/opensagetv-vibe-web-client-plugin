@@ -1,0 +1,7 @@
+PASS all WAR web resources byte-identical to source
+PASS all compiled classes present and identical in WAR; target52
+PASS compiled startup gate, diagnostics and version3.2.3 present
+PASS installer contains byte-identical canonical WAR
+PASS local plugin XML plain version3.2.3 and MD5 match
+PASS git diff --check
+WAR SHA256 6cc66f3d78526bfed96909fc51bfde3e4ce2016e599a05d5f5f970fbc7d0c10a

@@ -1,0 +1,1211 @@
+--- a/scripts/package-local-plugin.py
++++ b/scripts/package-local-plugin.py
+@@ -6,7 +6,7 @@
+ DIST = ROOT / 'dist'
+ DEV = DIST / 'local-install' / 'SageTVPluginsDev.d'
+ WAR = DIST / 'SageTVWebPlayer.war'
+-VERSION = '3.2.0'
++VERSION = '3.2.1'
+ PKG = DEV / f'sagetv-webplayer-{VERSION}.zip'
+ MANIFEST = DEV / 'sagetv-webplayer.xml'
+ 
+@@ -31,6 +31,17 @@
+   <Desktop>false</Desktop>
+   <ResourcePath>sagetvwebplayer</ResourcePath>
+   <ReleaseNotes><![CDATA[
++3.2.1
++- Enable negotiated native GFX type-5 reconnect after first frame, with three bounded attempts.
++- Preserve the media connection and image handles on successful native recovery.
++- Never dispatch a partial GFX frame after reconnect; serialize event writes across sockets.
++- Retire an old in-plugin session before opening another with the same server/client ID.
++- Stop retrying the HTTP event stream when its native session is dead.
++- Reveal Reconnect and Download diagnostics even in render-only/fullscreen view.
++- Record bounded protocol-stage/recovery diagnostics without new property-value logging.
++- Add 11 loopback TCP recovery scenarios and 10 browser failure/recovery tests.
++- The source of the user's original server reset is not established; live SageTV remains untested.
++
+ 3.2.0
+ - Add pinned mpegts.js 1.8.0 continuous MPEG-TS with exact byte-resume delivery.
+ - Use opensagetv-vibe/opensagetv-vibe-android-client/source/dev settings as the reference.
+--- a/scripts/validate.sh
++++ b/scripts/validate.sh
+@@ -55,9 +55,9 @@
+ manifest_path=root/'dist/local-install/SageTVPluginsDev.d/sagetv-webplayer.xml'
+ ET.parse(manifest_path)
+ manifest=manifest_path.read_text()
+-m=re.search(r'<Version>([^<]+)</Version>',manifest); assert m and m.group(1)=='3.2.0'
++m=re.search(r'<Version>([^<]+)</Version>',manifest); assert m and m.group(1)=='3.2.1'
+ m2=re.search(r'<MD5>([0-9a-f]+)</MD5>',manifest)
+-pkg=root/'dist/local-install/SageTVPluginsDev.d/sagetv-webplayer-3.2.0.zip'
++pkg=root/'dist/local-install/SageTVPluginsDev.d/sagetv-webplayer-3.2.1.zip'
+ actual=hashlib.md5(pkg.read_bytes()).hexdigest()
+ assert m2 and m2.group(1)==actual,(m2.group(1) if m2 else None,actual)
+ with zipfile.ZipFile(pkg) as z:
+@@ -68,13 +68,15 @@
+         assert required in names, required
+     for cls in ['ContinuousStreamServlet','StreamOptions','StreamPlan','StreamCommand','A53CaptionTap','CaptionsServlet','MediaProbe','ContinuousFilePump']:
+         assert 'WEB-INF/classes/org/opensagetv/webplayer/'+cls+'.class' in names,cls
+-    assert '3.2.0' in z.read('miniclient.html').decode()
++    assert '3.2.1' in z.read('miniclient.html').decode()
+ print('XML/package/WAR/MD5/new streaming classes OK')
+ PY
+ javap -verbose build/manual/classes/org/opensagetv/webplayer/HealthServlet.class | grep 'major version: 52'
+ mkdir -p build/manual/test-classes
+ javac --release 8 -cp build/manual/classes -d build/manual/test-classes tests/MiniClientProtocolSmoke.java
+ java -cp build/manual/classes:build/manual/test-classes org.opensagetv.webplayer.MiniClientProtocolSmoke
++javac --release 8 -cp build/manual/classes -d build/manual/test-classes tests/MiniClientRecoverySmoke.java
++java -cp build/manual/classes:build/manual/test-classes org.opensagetv.webplayer.MiniClientRecoverySmoke
+ if [[ -x "${TEST_FFMPEG:-/usr/bin/ffmpeg}" ]]; then
+   javac --release 8 -cp build/manual/classes -d build/manual/test-classes tests/HlsRuntimeSmoke.java
+   java -cp build/manual/classes:build/manual/test-classes org.opensagetv.webplayer.HlsRuntimeSmoke
+@@ -95,6 +97,7 @@
+   python tests/browser-smoke.py
+   python tests/browser-layout-smoke.py
+   python tests/browser-streaming-smoke.py
++  python tests/browser-recovery-smoke.py
+ else
+   echo 'SKIP offline Chromium smoke: use RUN_BROWSER_TESTS=1 with playwright/Chromium installed'
+ fi
+--- a/src/main/java/org/opensagetv/webplayer/MiniClientSession.java
++++ b/src/main/java/org/opensagetv/webplayer/MiniClientSession.java
+@@ -1,5 +1,6 @@
+ package org.opensagetv.webplayer;
+ 
++import java.io.ByteArrayOutputStream;
+ import java.io.DataInputStream;
+ import java.io.DataOutputStream;
+ import java.io.File;
+@@ -15,8 +16,10 @@
+ import java.util.Base64;
+ import java.util.List;
+ import java.util.Locale;
++import java.util.concurrent.CountDownLatch;
+ import java.util.concurrent.LinkedBlockingQueue;
+ import java.util.concurrent.TimeUnit;
++import java.util.concurrent.atomic.AtomicBoolean;
+ import java.util.concurrent.atomic.AtomicInteger;
+ 
+ /**
+@@ -69,10 +72,22 @@
+     private volatile int width;
+     private volatile int height;
+     private volatile boolean alive;
+-    private Socket mediaSocket;
+-    private Socket gfxSocket;
+-    private DataInputStream gfxIn;
+-    private DataOutputStream eventOut;
++    private volatile Socket mediaSocket;
++    private volatile Socket gfxSocket;
++    private volatile DataInputStream gfxIn;
++    private volatile DataOutputStream eventOut;
++    private final Object lifecycleLock = new Object();
++    private final Object eventLock = new Object();
++    private final AtomicBoolean closed = new AtomicBoolean();
++    private final List<Socket> openingSockets = new ArrayList<Socket>();
++    private final CountDownLatch mediaReady = new CountDownLatch(1);
++    private volatile boolean reconnectAllowed, firstFrameStarted, reconnecting;
++    private volatile long closedAt;
++    private volatile String phase = "created", lastGfxCommand = "none", lastMediaCommand = "none";
++    private volatile String lastTransportError = "";
++    private final AtomicInteger gfxFrames = new AtomicInteger(), reconnectAttempts = new AtomicInteger();
++    private final AtomicInteger reconnectSuccesses = new AtomicInteger();
++    private final List<String> trace = new ArrayList<String>();
+     private Thread mediaThread;
+     private Thread gfxThread;
+     private final LinkedBlockingQueue<String> events = new LinkedBlockingQueue<String>(20000);
+@@ -109,70 +124,163 @@
+     String lastError() { return lastError; }
+     MiniClientMediaBridge media() { return mediaBridge; }
+ 
++    String identityKey() { return server.toLowerCase(Locale.ROOT) + ":" + port + "/" + clientId; }
++    long closedAt() { return closedAt; }
++
+     void start() throws IOException {
++        phase = "connecting";
++        note("start: media type 1, then GFX type 0");
+         enqueue(statusJson("connecting"));
+-        mediaSocket = establish(1);
+-        gfxSocket = establish(0);
+-        alive = true;
+-        mediaThread = new Thread(new Runnable() { @Override public void run() { mediaLoop(); } }, "web-vibe-media-" + shortId());
+-        mediaThread.setDaemon(true);
+-        mediaThread.start();
+-        gfxThread = new Thread(new Runnable() { @Override public void run() { gfxLoop(); } }, "web-vibe-gfx-" + shortId());
+-        gfxThread.setDaemon(true);
+-        gfxThread.start();
+-        enqueue(statusJson("connected"));
+-    }
+-
+-    private Socket establish(int connectionType) throws IOException {
++        try {
++            if (!installMedia(establish(1, 30000))) throw new IOException("Connection was closed during startup");
++            if (!installGfx(establish(0, 30000))) throw new IOException("Connection was closed during startup");
++            synchronized (lifecycleLock) {
++                if (closed.get()) throw new IOException("Connection was closed during startup");
++                alive = true;
++            }
++            mediaThread = new Thread(new Runnable() { @Override public void run() { mediaLoop(); } }, "web-vibe-media-" + shortId());
++            mediaThread.setDaemon(true);
++            mediaThread.start();
++            try {
++                if (!mediaReady.await(2, TimeUnit.SECONDS)) throw new IOException("Media worker readiness timed out");
++            } catch (InterruptedException e) {
++                Thread.currentThread().interrupt(); throw new IOException("Startup interrupted", e);
++            }
++            if (!alive) throw new IOException("Connection closed before GFX worker startup");
++            phase = "negotiating";
++            note("media worker ready; starting GFX worker");
++            // Publish before launching the reader so a fast failure cannot be
++            // followed by an incorrect late 'connected' event.
++            enqueue(statusJson("connected"));
++            gfxThread = new Thread(new Runnable() { @Override public void run() { gfxLoop(); } }, "web-vibe-gfx-" + shortId());
++            gfxThread.setDaemon(true);
++            gfxThread.start();
++        } catch (IOException e) {
++            fail("MiniClient startup failed: " + exceptionText(e));
++            throw e;
++        }
++    }
++
++    private Socket establish(int connectionType, int timeoutMs) throws IOException {
+         Socket s = new Socket();
+-        s.connect(new InetSocketAddress(server, port), 30000);
+-        s.setSoTimeout(30000);
+-        s.setTcpNoDelay(true);
+-        s.setKeepAlive(true);
+-        OutputStream out = s.getOutputStream();
+-        InputStream in = s.getInputStream();
+-        byte[] msg = new byte[7];
+-        msg[0] = 1;
+-        byte[] mac = clientIdBytes(clientId);
+-        System.arraycopy(mac, 0, msg, 1, Math.min(6, mac.length));
+-        out.write(msg);
+-        out.write(connectionType);
+-        out.flush();
+-        int reply = in.read();
+-        if (reply != 2) {
+-            try { s.close(); } catch (Exception ignored) {}
+-            throw new IOException("SageTV MiniClient connection type " + connectionType + " rejected with reply " + reply);
+-        }
+-        s.setSoTimeout(0);
+-        return s;
++        boolean accepted = false;
++        synchronized (lifecycleLock) {
++            if (closed.get()) throw new IOException("MiniClient is closed");
++            openingSockets.add(s);
++        }
++        note("handshake type " + connectionType + " started");
++        try {
++            s.connect(new InetSocketAddress(server, port), timeoutMs);
++            s.setSoTimeout(timeoutMs);
++            s.setTcpNoDelay(true);
++            s.setKeepAlive(true);
++            OutputStream out = s.getOutputStream();
++            byte[] msg = new byte[8]; msg[0] = 1;
++            System.arraycopy(clientIdBytes(clientId), 0, msg, 1, 6);
++            msg[7] = (byte) connectionType;
++            out.write(msg); out.flush();
++            int reply = s.getInputStream().read();
++            if (reply != 2) throw new IOException("SageTV MiniClient handshake type " + connectionType + " rejected with reply " + reply);
++            if (closed.get()) throw new IOException("Connection closed during handshake");
++            s.setSoTimeout(0); accepted = true;
++            note("handshake type " + connectionType + " accepted");
++            return s;
++        } finally {
++            synchronized (lifecycleLock) { openingSockets.remove(s); }
++            if (!accepted) closeSocket(s);
++        }
++    }
++
++    private boolean installMedia(Socket s) {
++        synchronized (lifecycleLock) {
++            if (closed.get()) { closeSocket(s); return false; }
++            mediaSocket = s; return true;
++        }
++    }
++
++    private boolean installGfx(Socket s) throws IOException {
++        try {
++            DataInputStream in = new DataInputStream(s.getInputStream());
++            DataOutputStream out = new DataOutputStream(s.getOutputStream());
++            synchronized (lifecycleLock) {
++                if (closed.get()) { closeSocket(s); return false; }
++                synchronized (eventLock) { gfxSocket = s; gfxIn = in; eventOut = out; }
++            }
++            return true;
++        } catch (IOException e) { closeSocket(s); throw e; }
+     }
+ 
+     private void gfxLoop() {
+         try {
+-            gfxIn = new DataInputStream(gfxSocket.getInputStream());
+-            eventOut = new DataOutputStream(gfxSocket.getOutputStream());
+             while (alive) {
+-                byte[] header = new byte[4];
+-                gfxIn.readFully(header);
+-                int type = header[0] & 0xff;
+-                int len = ((header[1] & 0xff) << 16) | ((header[2] & 0xff) << 8) | (header[3] & 0xff);
+-                byte[] body = new byte[len];
+-                gfxIn.readFully(body);
+-                if (type == DRAWING_CMD_TYPE) handleGfx(body, len);
+-                else if (type == GET_PROPERTY_CMD_TYPE) handleGetProperty(body, len);
+-                else if (type == SET_PROPERTY_CMD_TYPE) handleSetProperty(body, len);
+-                else if (type == FS_CMD_TYPE) handleFs(body, len);
++                try {
++                    DataInputStream input = gfxIn;
++                    byte[] header = new byte[4];
++                    input.readFully(header);
++                    int type = header[0] & 0xff;
++                    int len = ((header[1] & 0xff) << 16) | ((header[2] & 0xff) << 8) | (header[3] & 0xff);
++                    byte[] body = new byte[len];
++                    input.readFully(body);
++                    // Never dispatch a partially read frame, including after a
++                    // successful type-5 reconnect. Start at a new header instead.
++                    gfxFrames.incrementAndGet();
++                    if (type == DRAWING_CMD_TYPE) handleGfx(body, len);
++                    else if (type == GET_PROPERTY_CMD_TYPE) handleGetProperty(body, len);
++                    else if (type == SET_PROPERTY_CMD_TYPE) handleSetProperty(body, len);
++                    else if (type == FS_CMD_TYPE) { lastGfxCommand = "filesystem"; handleFs(body, len); }
++                    else note("ignored GFX envelope type " + type + " bytes " + len);
++                } catch (IOException e) {
++                    if (!alive) break;
++                    lastTransportError = exceptionText(e);
++                    note("GFX I/O failed after " + lastGfxCommand + ": " + lastTransportError);
++                    if (reconnectAllowed && firstFrameStarted && recoverGfx()) continue;
++                    if (alive) fail("GFX connection ended: " + lastTransportError);
++                    break;
++                }
+             }
+         } catch (Exception e) {
+-            if (alive) fail("GFX connection ended: " + compact(e.getMessage()));
+-        } finally {
+-            close();
+-        }
++            if (alive) fail("GFX protocol failure after " + lastGfxCommand + ": " + exceptionText(e));
++        } finally { close(); }
++    }
++
++    private boolean recoverGfx() {
++        reconnecting = true; phase = "gfx-reconnecting";
++        enqueue(statusJson("gfx-reconnecting"));
++        // Close first to unblock any writer holding eventLock.
++        closeSocket(gfxSocket);
++        synchronized (eventLock) { eventOut = null; gfxIn = null; }
++        final long[] delays = {0L, 150L, 350L};
++        try {
++            for (long delay : delays) {
++                if (!alive || closed.get()) return false;
++                try {
++                    if (delay > 0L) Thread.sleep(delay);
++                    if (!alive || closed.get()) return false;
++                    reconnectAttempts.incrementAndGet();
++                    if (!installGfx(establish(5, 5000))) return false;
++                    reconnectSuccesses.incrementAndGet(); phase = "active";
++                    note("GFX type-5 recovery succeeded; media and image handles retained");
++                    reconnecting = false;
++                    enqueue(statusJson("gfx-reconnected"));
++                    return true;
++                } catch (InterruptedException e) {
++                    Thread.currentThread().interrupt(); return false;
++                } catch (IOException e) { note("GFX recovery attempt failed: " + exceptionText(e)); }
++            }
++            note("GFX recovery exhausted three attempts");
++            return false;
++        } finally { reconnecting = false; }
+     }
+ 
+     private void handleGfx(byte[] body, int len) throws IOException {
+-        if (len < 4) return;
++        if (len < 4) throw new IllegalArgumentException("GFX command shorter than four-byte header");
+         int cmd = body[0] & 0xff;
++        lastGfxCommand = "draw " + cmd + " (" + len + " bytes)";
++        if (cmd == GFX_STARTFRAME) {
++            if (!firstFrameStarted) note("first GFX STARTFRAME");
++            firstFrameStarted = true; phase = "active";
++        }
++        if (cmd == GFX_DEINIT) { note("server GFX DEINIT"); close(); return; }
+         if (cmd == GFX_MEDIA_RECONNECT) {
+             try { if (mediaSocket != null) mediaSocket.close(); } catch (Exception ignored) {}
+             return;
+@@ -213,6 +321,8 @@
+ 
+     private void handleGetProperty(byte[] body, int len) throws IOException {
+         String name = new String(body, 0, len, StandardCharsets.ISO_8859_1).trim();
++        lastGfxCommand = "get property " + safeName(name);
++        note(lastGfxCommand);
+         String value = property(name);
+         writeReply(GET_PROPERTY_CMD_TYPE, value.getBytes(StandardCharsets.ISO_8859_1));
+         enqueue("{\"type\":\"property\",\"name\":\"" + HttpUtil.json(name) + "\",\"value\":\"" + HttpUtil.json(value) + "\"}");
+@@ -273,10 +383,15 @@
+             if (4 + nl <= len) name = new String(body, 4, Math.min(nl, len - 4), StandardCharsets.ISO_8859_1);
+             if (4 + nl + vl <= len) value = new String(body, 4 + nl, vl, StandardCharsets.ISO_8859_1);
+         }
++        lastGfxCommand = "set property " + safeName(name);
++        note(lastGfxCommand);
+         if ("CRYPTO_EVENTS_ENABLE".equals(name) && "TRUE".equalsIgnoreCase(value)) result = 1;
+         if ("ZLIB_COMM_XFER".equals(name) && "TRUE".equalsIgnoreCase(value)) result = 1;
+         if ("ADVANCED_IMAGE_CACHING".equals(name) && "TRUE".equalsIgnoreCase(value)) result = 1;
+-        if ("RECONNECT_SUPPORTED".equals(name) && "TRUE".equalsIgnoreCase(value)) result = 1;
++        if ("RECONNECT_SUPPORTED".equals(name)) {
++            reconnectAllowed = "TRUE".equalsIgnoreCase(value);
++            note("native GFX reconnect negotiated " + reconnectAllowed);
++        }
+         if ("SUBTITLES_CALLBACKS".equals(name) && "TRUE".equalsIgnoreCase(value)) result = 1;
+         if ("GFX_RESOLUTION".equals(name)) {
+             java.util.regex.Matcher size = java.util.regex.Pattern.compile("^(\\d{3,4})x(\\d{3,4})(?:[pi].*)?$", java.util.regex.Pattern.CASE_INSENSITIVE).matcher(value.trim());
+@@ -306,47 +421,51 @@
+     }
+ 
+     private void writeReply(int type, byte[] payload) throws IOException {
+-        DataOutputStream out = eventOut;
+-        if (out == null) return;
+-        synchronized (out) {
+-            int n = payload == null ? 0 : payload.length;
+-            out.write(type);
+-            out.write((n >> 16) & 0xff);
+-            out.write((n >> 8) & 0xff);
+-            out.write(n & 0xff);
+-            out.writeInt(0);
+-            out.writeInt(replyCount.getAndIncrement());
+-            out.writeInt(0);
+-            if (n > 0) out.write(payload);
+-            out.flush();
++        synchronized (eventLock) {
++            DataOutputStream out = eventOut;
++            if (!alive || closed.get() || reconnecting || out == null)
++                throw new IOException("Native GFX channel is not ready (" + phase + ")");
++            try {
++                int n = payload == null ? 0 : payload.length;
++                out.write(type); out.write((n >> 16) & 0xff); out.write((n >> 8) & 0xff); out.write(n & 0xff);
++                out.writeInt(0); out.writeInt(replyCount.getAndIncrement()); out.writeInt(0);
++                if (n > 0) out.write(payload);
++                out.flush();
++            } catch (IOException e) {
++                // Wake the reader; it alone owns type-5 recovery.
++                closeSocket(gfxSocket); throw e;
++            }
+         }
+     }
+ 
+     private void mediaLoop() {
++        mediaReady.countDown();
+         while (alive) {
++            Socket current = mediaSocket;
+             try {
+-                DataInputStream in = new DataInputStream(mediaSocket.getInputStream());
+-                OutputStream out = mediaSocket.getOutputStream();
++                DataInputStream in = new DataInputStream(current.getInputStream());
++                OutputStream out = current.getOutputStream();
+                 while (alive) {
+-                    byte[] h = new byte[4];
+-                    in.readFully(h);
++                    byte[] h = new byte[4]; in.readFully(h);
+                     int cmd = h[0] & 0xff;
+                     int len = ((h[1] & 0xff) << 16) | ((h[2] & 0xff) << 8) | (h[3] & 0xff);
+-                    byte[] body = new byte[len];
+-                    in.readFully(body);
++                    byte[] body = new byte[len]; in.readFully(body);
++                    lastMediaCommand = "media " + cmd + " (" + len + " bytes)";
+                     byte[] reply = mediaBridge.handle(cmd, body);
+                     if (reply != null && reply.length > 0) { out.write(reply); out.flush(); }
+-                    if (cmd == 1) break; // MEDIACMD_DEINIT: recycle media socket like Vibe Android.
++                    if (cmd == 1) break;
+                 }
+             } catch (Exception e) {
+-                if (alive) enqueue(errorJson("Media connection: " + compact(e.getMessage())));
++                if (alive) { note("media I/O after " + lastMediaCommand + ": " + exceptionText(e)); enqueue(errorJson("Media connection: " + exceptionText(e))); }
+             } finally {
+-                try { if (mediaSocket != null) mediaSocket.close(); } catch (Exception ignored) {}
+-                mediaSocket = null;
++                closeSocket(current);
++                synchronized (lifecycleLock) { if (mediaSocket == current) mediaSocket = null; }
+             }
+             if (!alive) break;
+-            try { mediaSocket = establish(1); enqueue(statusJson("media-reconnected")); }
+-            catch (Exception e) { fail("Media reconnect failed: " + compact(e.getMessage())); break; }
++            try {
++                if (!installMedia(establish(1, 30000))) break;
++                if (alive) enqueue(statusJson("media-reconnected"));
++            } catch (Exception e) { if (alive) fail("Media reconnect failed: " + exceptionText(e)); break; }
+         }
+     }
+ 
+@@ -356,40 +475,28 @@
+     }
+ 
+     void sendKey(int keyCode, int modifiers, int keyChar) throws IOException {
+-        DataOutputStream out = eventOut;
+-        if (out == null) return;
+-        synchronized (out) {
+-            out.write(KB_EVENT_REPLY_TYPE); out.write(0); out.writeShort(10);
+-            out.writeInt(0); out.writeInt(replyCount.getAndIncrement()); out.writeInt(0);
+-            out.writeInt(keyCode); out.writeChar((char) keyChar); out.writeInt(modifiers); out.flush();
+-        }
++        ByteArrayOutputStream bytes = new ByteArrayOutputStream(10);
++        DataOutputStream data = new DataOutputStream(bytes);
++        data.writeInt(keyCode); data.writeChar((char) keyChar); data.writeInt(modifiers);
++        writeReply(KB_EVENT_REPLY_TYPE, bytes.toByteArray());
+     }
+ 
+     void sendMouse(int type, int x, int y, int button, int modifiers, int clicks) throws IOException {
+         if (type < 130 || type > 135) throw new IllegalArgumentException("Invalid mouse event type");
+         if (button < 0 || button > 3) throw new IllegalArgumentException("Invalid mouse button");
+         if (clicks < -127 || clicks > 127) throw new IllegalArgumentException("Invalid click/wheel count");
+-        DataOutputStream out = eventOut;
+-        if (out == null) return;
+-        synchronized (out) {
+-            out.write(type); out.write(0); out.writeShort(14);
+-            out.writeInt(0); out.writeInt(replyCount.getAndIncrement()); out.writeInt(0);
+-            out.writeInt(x); out.writeInt(y); out.writeInt(modifiers);
+-            out.writeByte(type == MWHEEL_EVENT_REPLY_TYPE ? clicks : Math.max(0, clicks));
+-            out.writeByte(Math.max(0, button));
+-            out.flush();
+-        }
+-    }
+-
+-    /** A full click is one HTTP request and one event-stream critical section.
+-     * Parallel servlet workers cannot invert press/release/click ordering. */
++        ByteArrayOutputStream bytes = new ByteArrayOutputStream(14);
++        DataOutputStream data = new DataOutputStream(bytes);
++        data.writeInt(x); data.writeInt(y); data.writeInt(modifiers);
++        data.writeByte(type == MWHEEL_EVENT_REPLY_TYPE ? clicks : Math.max(0, clicks)); data.writeByte(button);
++        writeReply(type, bytes.toByteArray());
++    }
++
++    /** Keep a complete click atomic with respect to all other native writes. */
+     void sendMouseClick(int x, int y, int button, boolean includeClick) throws IOException {
+         if (button < 1 || button > 3) throw new IllegalArgumentException("Invalid click button");
+-        DataOutputStream out = eventOut; if (out == null) return;
+-        synchronized (out) {
+-            sendMouse(133,x,y,0,0,0);
+-            sendMouse(130,x,y,button,0,1);
+-            sendMouse(131,x,y,button,0,1);
++        synchronized (eventLock) {
++            sendMouse(133,x,y,0,0,0); sendMouse(130,x,y,button,0,1); sendMouse(131,x,y,button,0,1);
+             if (includeClick) sendMouse(132,x,y,button,0,1);
+         }
+     }
+@@ -397,50 +504,30 @@
+     void sendText(String text) throws IOException {
+         if (text == null) return;
+         if (text.length() > 512) throw new IllegalArgumentException("Text is limited to 512 UTF-16 code units per request");
+-        DataOutputStream out = eventOut; if (out == null) return;
+-        synchronized (out) {
+-            for (int i=0; i<text.length(); i++) {
+-                char ch=text.charAt(i);
+-                sendKey(ch=='\n'?13:0, 0, ch);
+-            }
++        synchronized (eventLock) {
++            for (int i=0; i<text.length(); i++) { char ch=text.charAt(i); sendKey(ch=='\n'?13:0,0,ch); }
+         }
+     }
+ 
+     void sendResize(int w, int h) throws IOException {
+         if (w < 320 || w > 1920 || h < 240 || h > 1080) throw new IllegalArgumentException("UI size must be 320..1920 by 240..1080");
+-        DataOutputStream out = eventOut;
+-        if (out == null) return;
+-        synchronized (out) {
+-            width=w;height=h;
+-            enqueue(resizeJson());
+-            out.write(UI_RESIZE_EVENT_REPLY_TYPE); out.write(0); out.writeShort(8);
+-            out.writeInt(0); out.writeInt(replyCount.getAndIncrement()); out.writeInt(0);
+-            out.writeInt(width); out.writeInt(height); out.flush();
+-            sendRepaint(0,0,width,height);
++        synchronized (eventLock) {
++            ByteArrayOutputStream bytes = new ByteArrayOutputStream(8);
++            DataOutputStream data = new DataOutputStream(bytes); data.writeInt(w); data.writeInt(h);
++            writeReply(UI_RESIZE_EVENT_REPLY_TYPE, bytes.toByteArray());
++            width=w; height=h; enqueue(resizeJson()); sendRepaint(0,0,width,height);
+         }
+     }
+ 
+     private String resizeJson() { return "{\"type\":\"resize\",\"width\":" + width + ",\"height\":" + height + "}"; }
+ 
+     void sendRepaint(int x, int y, int w, int h) throws IOException {
+-        DataOutputStream out = eventOut;
+-        if (out == null) return;
+-        synchronized (out) {
+-            out.write(UI_REPAINT_EVENT_REPLY_TYPE); out.write(0); out.writeShort(16);
+-            out.writeInt(0); out.writeInt(replyCount.getAndIncrement()); out.writeInt(0);
+-            out.writeInt(x); out.writeInt(y); out.writeInt(w); out.writeInt(h); out.flush();
+-        }
+-    }
+-
+-    private void writeEventInt(int type, int value) throws IOException {
+-        DataOutputStream out = eventOut;
+-        if (out == null) return;
+-        synchronized (out) {
+-            out.write(type); out.write(0); out.writeShort(4);
+-            out.writeInt(0); out.writeInt(replyCount.getAndIncrement()); out.writeInt(0);
+-            out.writeInt(value); out.flush();
+-        }
+-    }
++        ByteArrayOutputStream bytes = new ByteArrayOutputStream(16);
++        DataOutputStream data = new DataOutputStream(bytes); data.writeInt(x); data.writeInt(y); data.writeInt(w); data.writeInt(h);
++        writeReply(UI_REPAINT_EVENT_REPLY_TYPE, bytes.toByteArray());
++    }
++
++    private void writeEventInt(int type, int value) throws IOException { writeReply(type, intBytes(value)); }
+ 
+     List<String> pollEvents(int max, long waitMs) throws InterruptedException {
+         List<String> result = new ArrayList<String>();
+@@ -460,15 +547,7 @@
+     boolean recoverMedia(String expected, long timeMs) throws Exception { return mediaBridge.recoverFromBrowserPosition(expected,timeMs); }
+     boolean seekMedia(String expected, long timeMs) throws Exception { return mediaBridge.seekFromBrowser(expected,timeMs); }
+ 
+-    void sendMediaPlayerUpdate() throws IOException {
+-        DataOutputStream out = eventOut;
+-        if (out == null) return;
+-        synchronized (out) {
+-            out.write(201); out.write(0); out.writeShort(0);
+-            out.writeInt(0); out.writeInt(replyCount.getAndIncrement()); out.writeInt(0);
+-            out.flush();
+-        }
+-    }
++    void sendMediaPlayerUpdate() throws IOException { writeReply(201, new byte[0]); }
+ 
+     int browserVideoWidth() { return browserVideoWidth; }
+     int browserVideoHeight() { return browserVideoHeight; }
+@@ -480,7 +559,7 @@
+             // Losing one command leaves the browser's image-handle state corrupt.
+             if (!events.offer(json, 2L, TimeUnit.SECONDS)) {
+                 lastError="Browser GFX queue overflow; reconnect required (no drawing commands silently dropped)";
+-                alive=false;events.clear();events.offer(errorJson(lastError));
++                alive=false;events.clear();events.offer(fatalErrorJson(lastError));
+                 try { if(gfxSocket!=null) gfxSocket.close(); } catch(IOException ignored) {}
+                 try { if(mediaSocket!=null) mediaSocket.close(); } catch(IOException ignored) {}
+             }
+@@ -490,28 +569,51 @@
+     boolean hasEvents() { return !events.isEmpty(); }
+ 
+     void fail(String message) {
++        if (closed.get()) return;
+         lastError = message == null ? "MiniClient session failed" : message;
+-        enqueue(errorJson(lastError));
+-        alive = false;
+-    }
+-
+-    synchronized void close() {
+-        if (!alive && mediaSocket == null && gfxSocket == null) return;
+-        alive = false;
++        note(lastError); enqueue(fatalErrorJson(lastError)); close();
++    }
++
++    void supersede() { fail("This client ID was opened by another browser connection. Close the other tab before reconnecting."); }
++
++    void close() {
++        synchronized (lifecycleLock) {
++            if (!closed.compareAndSet(false, true)) return;
++            alive = false; phase = "closed"; closedAt = System.currentTimeMillis();
++            // Closing sockets first wakes blocked readers/handshakes even when
++            // FFmpeg/player cleanup is waiting for its own lock.
++            closeSocket(mediaSocket); closeSocket(gfxSocket);
++            for (Socket s : openingSockets) closeSocket(s);
++            mediaSocket = null; gfxSocket = null; gfxIn = null; eventOut = null;
++        }
+         mediaBridge.close();
+-        try { if (mediaSocket != null) mediaSocket.close(); } catch (Exception ignored) {}
+-        try { if (gfxSocket != null) gfxSocket.close(); } catch (Exception ignored) {}
+-        mediaSocket = null; gfxSocket = null; gfxIn = null; eventOut = null;
+-        enqueue(statusJson("closed"));
++        note("closed"); enqueue(statusJson("closed"));
++    }
++
++    private static void closeSocket(Socket s) { if (s != null) try { s.close(); } catch (IOException ignored) {} }
++    private static String exceptionText(Throwable e) { return e.getClass().getSimpleName() + ": " + compact(e.getMessage()); }
++    private static String safeName(String name) { String safe = name.replaceAll("[^A-Za-z0-9_]", "?"); return safe.substring(0, Math.min(100, safe.length())); }
++    private void note(String message) {
++        synchronized (trace) {
++            if (trace.size() >= 64) trace.remove(0);
++            trace.add("{\"atMs\":" + System.currentTimeMillis() + ",\"event\":\"" + HttpUtil.json(message) + "\"}");
++        }
+     }
+ 
+     String statusJson(String state) {
+-        return "{\"type\":\"status\",\"state\":\"" + HttpUtil.json(state) + "\",\"server\":\"" + HttpUtil.json(server + ":" + port) + "\",\"clientId\":\"" + HttpUtil.json(clientId) + "\"}";
++        return "{\"type\":\"status\",\"state\":\"" + HttpUtil.json(state) + "\",\"server\":\"" + HttpUtil.json(server + ":" + port) + "\",\"clientId\":\"" + HttpUtil.json(clientId) + "\",\"error\":\"" + HttpUtil.json(lastError) + "\"}";
+     }
+     private String errorJson(String message) { return "{\"type\":\"error\",\"message\":\"" + HttpUtil.json(message) + "\"}"; }
++    private String fatalErrorJson(String message) { return "{\"type\":\"error\",\"fatal\":true,\"message\":\"" + HttpUtil.json(message) + "\"}"; }
+     String json() {
++        StringBuilder history = new StringBuilder("[");
++        synchronized (trace) { for (String entry : trace) { if (history.length() > 1) history.append(','); history.append(entry); } }
++        history.append(']');
+         return "{\"session\":\"" + HttpUtil.json(id) + "\",\"alive\":" + alive + ",\"server\":\"" + HttpUtil.json(server + ":" + port) + "\",\"clientId\":\"" + HttpUtil.json(clientId) + "\",\"width\":" + width + ",\"height\":" + height + ",\"queuedEvents\":" + events.size() + ",\"peakQueuedEvents\":" + eventQueuePeak +
+-            ",\"threading\":{\"gfxReader\":" + (gfxThread!=null&&gfxThread.isAlive()) + ",\"mediaReader\":" + (mediaThread!=null&&mediaThread.isAlive()) + "},\"error\":\"" + HttpUtil.json(lastError) + "\"}";
++            ",\"threading\":{\"gfxReader\":" + (gfxThread!=null&&gfxThread.isAlive()) + ",\"mediaReader\":" + (mediaThread!=null&&mediaThread.isAlive()) + "},\"error\":\"" + HttpUtil.json(lastError) + "\",\"connection\":{\"phase\":\"" + phase +
++            "\",\"firstFrameStarted\":" + firstFrameStarted + ",\"reconnectAllowed\":" + reconnectAllowed + ",\"reconnecting\":" + reconnecting + ",\"gfxPackets\":" + gfxFrames.get() +
++            ",\"reconnectAttempts\":" + reconnectAttempts.get() + ",\"reconnectSuccesses\":" + reconnectSuccesses.get() + ",\"lastGfxCommand\":\"" + HttpUtil.json(lastGfxCommand) + "\",\"lastMediaCommand\":\"" + HttpUtil.json(lastMediaCommand) +
++            "\",\"lastTransportError\":\"" + HttpUtil.json(lastTransportError) + "\",\"trace\":" + history + "}}";
+     }
+     private String shortId() { return id.substring(0, Math.min(8, id.length())); }
+ 
+--- a/src/main/java/org/opensagetv/webplayer/MiniClientSessionManager.java
++++ b/src/main/java/org/opensagetv/webplayer/MiniClientSessionManager.java
+@@ -15,6 +15,11 @@
+ final class MiniClientSessionManager {
+     private static final Map<String, MiniClientSession> SESSIONS = new ConcurrentHashMap<String, MiniClientSession>();
+ 
++    // Serialize replacements of the same native client ID, without blocking all
++    // browser sessions on one network handshake. Failed sessions remain briefly
++    // available to the diagnostics endpoint.
++    private static final Object[] START_LOCKS = new Object[32];
++    static { for (int i=0; i<START_LOCKS.length; i++) START_LOCKS[i] = new Object(); }
+     private MiniClientSessionManager() {}
+ 
+     static MiniClientSession start(String server, String clientId, int width, int height) throws IOException {
+@@ -24,14 +29,17 @@
+         String id = UUID.randomUUID().toString().replace("-", "");
+         MiniClientSession session = new MiniClientSession(id, server, clientId, width, height);
+         session.media().configure(options);
+-        SESSIONS.put(id, session);
+-        try {
+-            session.start();
+-            return session;
+-        } catch (IOException e) {
+-            SESSIONS.remove(id);
+-            session.close();
+-            throw e;
++        String key = session.identityKey();
++        synchronized (START_LOCKS[(key.hashCode() & 0x7fffffff) % START_LOCKS.length]) {
++            long cutoff = System.currentTimeMillis() - 10 * 60 * 1000L;
++            for (Map.Entry<String, MiniClientSession> entry : SESSIONS.entrySet()) {
++                MiniClientSession old = entry.getValue();
++                if (old.isAlive() && key.equals(old.identityKey())) old.supersede();
++                if (old.closedAt() > 0L && old.closedAt() < cutoff) SESSIONS.remove(entry.getKey(), old);
++            }
++            SESSIONS.put(id, session);
++            try { session.start(); return session; }
++            catch (IOException e) { SESSIONS.remove(id); session.close(); throw e; }
+         }
+     }
+ 
+--- a/src/main/java/org/opensagetv/webplayer/PluginVersion.java
++++ b/src/main/java/org/opensagetv/webplayer/PluginVersion.java
+@@ -1,7 +1,7 @@
+ package org.opensagetv.webplayer;
+ 
+ final class PluginVersion {
+-    static final String VERSION = "3.2.0";
++    static final String VERSION = "3.2.1";
+     static final String LIBMEDIA_VERSION = "1.3.1";
+     static final String HLSJS_VERSION = "1.7.3";
+     static final String MPEGTSJS_VERSION = "1.8.0";
+--- a/src/main/webapp/client.html
++++ b/src/main/webapp/client.html
+@@ -23,7 +23,7 @@
+     <button data-page="player">Player</button>
+     <button data-page="more">More</button>
+   </nav>
+-  <div class="client-top-actions"><a class="button-link" href="miniclient.html">MiniClient / SageMC</a><a class="button-link" href="index.html">Simple Player</a><span class="version">v3.2.0</span></div>
++  <div class="client-top-actions"><a class="button-link" href="miniclient.html">MiniClient / SageMC</a><a class="button-link" href="index.html">Simple Player</a><span class="version">v3.2.1</span></div>
+ </header>
+ <main class="client-main">
+   <section class="client-page" data-client-page="home">
+--- a/src/main/webapp/css/miniclient.css
++++ b/src/main/webapp/css/miniclient.css
+@@ -41,3 +41,7 @@
+ .mc-local-captions .caption-608{position:absolute;bottom:6%;left:50%;transform:translateX(-50%);max-width:94%;background:rgba(0,0,0,.8);text-align:center;line-height:1.2;padding:.12em .3em}
+ .mc-local-captions .caption-708-window{position:absolute;line-height:1.15;max-width:96%;padding:.08em .18em;white-space:pre-wrap}
+ .mc-settings-card .mc-panel-header{position:sticky;top:-.8rem;z-index:2;background:#0c131b;padding:.6rem 0}
++
++/* A failed render-only/fullscreen session must never hide its recovery tools. */
++body.mc-connection-lost .mc-toolbar{display:flex!important}
++body.mc-connection-lost .mc-status{color:#ffc9be}
+--- a/src/main/webapp/index.html
++++ b/src/main/webapp/index.html
+@@ -16,7 +16,7 @@
+ <main class="simple-main">
+   <header class="simple-header">
+     <div><h1>SageTV Web Player</h1><p>Choose a recording and press Watch.</p></div>
+-    <div class="hero-actions"><a class="button-link" href="miniclient.html">MiniClient / SageMC</a><a class="button-link" href="client.html">Web Admin</a><button id="installApp" hidden>Install App</button><span class="version">v3.2.0</span></div>
++    <div class="hero-actions"><a class="button-link" href="miniclient.html">MiniClient / SageMC</a><a class="button-link" href="client.html">Web Admin</a><button id="installApp" hidden>Install App</button><span class="version">v3.2.1</span></div>
+   </header>
+ 
+   <section class="card simple-status-card">
+--- a/src/main/webapp/js/miniclient.js
++++ b/src/main/webapp/js/miniclient.js
+@@ -9,6 +9,7 @@
+ let streaming=loadStreaming(),mpegtsScriptPromise=null;
+ function loadStreaming(){try{return Streaming.normalize(Object.assign({},JSON.parse(localStorage.getItem(STREAMING_KEY)||'{}'),{audioTrack:-1}));}catch(_){return Streaming.normalize({});}}
+ let settings=loadSettings(),session='',stopped=false,connectionGeneration=0,rendererGeneration=0;
++let failureSnapshot=null,nativeRecoveryCount=0;
+ let eventController=null,eventChain=Promise.resolve(),inputChain=Promise.resolve(),inputPending=0,stateBusy=false;
+ let lastRequestedSize='',resizeInFlight=false,resizeAgain=false;
+ let renderQueued=0,renderQueuedBytes=0;
+@@ -30,7 +31,7 @@
+   const options={method:method||'GET',cache:'no-store'},controller=new AbortController();options.signal=controller.signal;
+   if(options.method==='GET')body.forEach((v,k)=>u.searchParams.set(k,v));else{options.body=body;options.headers={'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'};}
+   const timer=setTimeout(()=>controller.abort(),timeoutMs||15000);
+-  try{const r=await fetch(u.href,options);const t=await r.text();let j={};try{j=t?JSON.parse(t):{};}catch(_){j={error:t.slice(0,500)};}if(!r.ok)throw new Error(j.error||('HTTP '+r.status));return j;}
++  try{const r=await fetch(u.href,options);const t=await r.text();let j={};try{j=t?JSON.parse(t):{};}catch(_){j={error:t.slice(0,500)};}if(!r.ok){const error=new Error(j.error||('HTTP '+r.status));error.httpStatus=r.status;throw error;}return j;}
+   finally{clearTimeout(timer);}
+ }
+ function api(action,params,method){return requestJson('api/miniclient',action,params,method,['recover','seek','start','fallback','streamSettings'].includes(action)?60000:15000);}
+@@ -222,10 +223,20 @@
+ }
+ function absoluteMediaTime(){return playback.absoluteTime();}
+ async function browserState(){
+-  if(!session||!playback.id||stateBusy)return;stateBusy=true;
++  if(!session||stopped||!playback.id||stateBusy)return;stateBusy=true;
+   const id=session,serial=connectionGeneration;
+   try{await api('state',Object.assign({session:id},playback.state()),'POST');}
+   catch(e){if(serial===connectionGeneration)setError(e);}finally{stateBusy=false;}
++}
++function nativeConnectionClosed(reason){
++  if(stopped)return;
++  failureSnapshot={at:new Date().toISOString(),reason:String(reason||'SageTV closed the native connection'),playback:playback.snapshot()};
++  stopped=true;clearInterval(stateTimer);clearTimeout(guideTimer);gesture.cancel();clearRepeats();
++  if(eventController)eventController.abort();
++  destroyVideo();setError(failureSnapshot.reason);setStatus('Disconnected · use Reconnect');
++  message(lastError+' — Download diagnostics before using Reconnect.');
++  document.body.classList.add('mc-connection-lost');
++  $('reconnectBtn').disabled=false;$('connectionDiagnosticsBtn').hidden=false;
+ }
+ async function processEvent(ev){
+   if(!ev)return;lastEventAt=Date.now();
+@@ -243,8 +254,15 @@
+   }
+   if(ev.type==='channel'||ev.type==='captionState'||ev.type==='uiAspect'){log(ev.type+': '+String(ev.value||''));return;}
+   if(ev.type==='resize'){resizeLocal(ev.width,ev.height);return;}
+-  if(ev.type==='status'){setStatus((ev.state||'connected')+(ev.clientId?' · '+ev.clientId:''));if(ev.state==='connected')message('Waiting for SageTV / SageMC…');return;}
+-  if(ev.type==='error'){setError(ev.message||'MiniClient error');message(lastError);return;}
++  if(ev.type==='status'){
++    log('Native status: '+ev.state);
++    if(ev.state==='closed'){nativeConnectionClosed(ev.error||lastError||'SageTV closed the native connection');return;}
++    if(ev.state==='gfx-reconnecting'){setStatus('Recovering native GFX connection…');message('Recovering SageTV graphics connection…');return;}
++    if(ev.state==='gfx-reconnected'){nativeRecoveryCount++;setStatus('Connected · GFX recovered');message('');return;}
++    setStatus((ev.state||'connected')+(ev.clientId?' · '+ev.clientId:''));
++    if(ev.state==='connected')message('Waiting for SageTV / SageMC…');return;
++  }
++  if(ev.type==='error'){if(ev.fatal){nativeConnectionClosed(ev.message);return;}setError(ev.message||'MiniClient error');message(lastError);return;}
+ }
+ function sleep(ms){return new Promise(resolve=>setTimeout(resolve,ms));}
+ async function eventLoop(serial,id){
+@@ -254,7 +272,7 @@
+   const consume=ev=>{
+     // Playback control must not wait behind PNG decoding or thousands of GFX
+     // commands. These methods preserve media-event order through generations.
+-    if(['videoStart','videoStop','media'].includes(ev.type)){
++    if(['videoStart','videoStop','media','status','error'].includes(ev.type)){
+       if(active())processEvent(ev).catch(setError);return;
+     }
+     const bytes=typeof ev.payload==='string'?ev.payload.length:256;
+@@ -272,10 +290,17 @@
+     try{
+       if(!window.ReadableStream||!window.TextDecoder){
+         const events=await requestJson('api/miniclient','events',{session:id,max:500,wait:25000},'GET',30000);
+-        if(active()&&Array.isArray(events)){events.forEach(consume);await eventChain;}continue;
++        if(active()&&Array.isArray(events)){
++          events.forEach(consume);await eventChain;
++          if(active()&&events.length===0){
++            const status=await requestJson('api/miniclient','status',{session:id},'GET',3000);
++            if(active()&&status.alive===false)nativeConnectionClosed(status.error||'Native SageTV connection ended');
++          }
++        }continue;
+       }
+       const url=new URL('api/miniclient',location.href);url.searchParams.set('action','stream');url.searchParams.set('session',id);
+       const response=await fetch(url.href,{cache:'no-store',signal:controller.signal});
++      if(response.status===404){nativeConnectionClosed('MiniClient session no longer exists; reconnect to SageTV.');break;}
+       if(!response.ok)throw new Error('MiniClient stream HTTP '+response.status);
+       reader=response.body.getReader();const decoder=new TextDecoder();let pending='';
+       while(active()){
+@@ -292,8 +317,17 @@
+         // not blocked by image decode. Bound outstanding GFX work / memory.
+         while(active()&&(renderQueued>4096||renderQueuedBytes>8*1024*1024))await sleep(4);
+       }
+-      if(active()){setStatus('Reconnecting event stream…');await sleep(700);}
+-    }catch(e){if(active()&&e.name!=='AbortError'){setError(e);setStatus('Reconnecting event stream…');await sleep(700);}}
++      if(active()){
++        // EOF of HTTP is not proof that the native SageTV socket can recover.
++        // Inspect the owning session before opening another empty HTTP stream.
++        const status=await requestJson('api/miniclient','status',{session:id},'GET',3000);
++        if(active()&&status.alive===false){nativeConnectionClosed(status.error||'Native SageTV connection ended');break;}
++        if(active()){setStatus('Reconnecting event stream…');await sleep(700);}
++      }
++    }catch(e){if(active()&&e.name!=='AbortError'){
++      if(e.httpStatus===404){nativeConnectionClosed('MiniClient session no longer exists; reconnect to SageTV.');break;}
++      setError(e);setStatus('Reconnecting event stream…');await sleep(700);
++    }}
+     finally{if(reader)try{await reader.cancel();}catch(_){} }
+   }
+   if(eventController===controller)eventController=null;
+@@ -314,7 +348,8 @@
+   return Core.logicalSize(rect.width,rect.height,settings.uiResolution);
+ }
+ async function connect(){
+-  const serial=++connectionGeneration,old=session;session='';stopped=false;
++  const serial=++connectionGeneration,old=session;session='';stopped=false;failureSnapshot=null;
++  document.body.classList.remove('mc-connection-lost');$('connectionDiagnosticsBtn').hidden=true;lastError='';
+   if(eventController)eventController.abort();gesture.cancel();clearRepeats();clearTimeout(guideTimer);clearInterval(stateTimer);
+   destroyVideo();message('Connecting to SageTV MiniClient…');setStatus('Connecting…');$('reconnectBtn').disabled=true;
+   const sz=desiredSize();lastRequestedSize=sz.w+'x'+sz.h;resetRenderer(sz.w,sz.h);
+@@ -324,11 +359,13 @@
+     const server=new URLSearchParams(location.search).get('server')||'';
+     const response=await api('start',Object.assign({server,clientId:stableClientId(),width:sz.w,height:sz.h},Streaming.toParams(streaming,Streaming.browserCapabilities(window))),'POST');
+     if(serial!==connectionGeneration){api('stop',{session:response.session},'POST').catch(()=>{});return;}
+-    session=response.session;setStatus('Connected · '+(response.clientId||stableClientId()));message('Waiting for SageTV / SageMC…');
++    session=response.session;
++    if(response.alive===false){nativeConnectionClosed(response.error||'SageTV closed the connection during initialization');return;}
++    setStatus('Connected · '+(response.clientId||stableClientId()));message('Waiting for SageTV / SageMC…');
+     eventLoop(serial,session).catch(setError);stateTimer=setInterval(browserState,500);
+     if(settings.fullscreenOnConnect)setRenderOnly(true);
+     requestResize();
+-  }catch(e){if(serial===connectionGeneration){setError(e);setStatus('Connection failed');message('MiniClient connection failed: '+lastError);}}
++  }catch(e){if(serial===connectionGeneration)nativeConnectionClosed('MiniClient connection failed: '+(e.message||e));}
+   finally{if(serial===connectionGeneration)$('reconnectBtn').disabled=false;}
+ }
+ function resizeLocal(w,h){
+@@ -357,11 +394,11 @@
+ }
+ function requestResize(){clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>syncWindowSize().catch(setError),120);}
+ function queueInput(action,params){
+-  if(!session)return Promise.resolve(false);
++  if(!session||stopped)return Promise.resolve(false);
+   if(inputPending>64){setError('Input queue is full; check the server connection');return Promise.resolve(false);}
+   const id=session,serial=connectionGeneration;inputPending++;
+   const task=inputChain.then(async()=>{
+-    if(id!==session||serial!==connectionGeneration)return false;
++    if(stopped||id!==session||serial!==connectionGeneration)return false;
+     const result=await api(action,Object.assign({session:id},params),'POST');return result.ok!==false;
+   });
+   inputChain=task.catch(setError).finally(()=>{inputPending--;});return task.catch(()=>false);
+@@ -509,6 +546,7 @@
+ $('fullscreenBtn').addEventListener('click',async()=>{try{if(!document.fullscreenElement)await $('app').requestFullscreen();else await document.exitFullscreen();}catch(_){setRenderOnly(true);}stage.focus();});
+ document.addEventListener('fullscreenchange',()=>{document.body.classList.toggle('mc-fullscreen',!!document.fullscreenElement);requestResize();});
+ $('reconnectBtn').addEventListener('click',connect);
++$('connectionDiagnosticsBtn').addEventListener('click',()=>$('diagnosticsBtn').click());
+ const sageKeys={ArrowLeft:2,ArrowRight:3,ArrowUp:4,ArrowDown:5,Enter:20,Escape:75,Backspace:75,PageUp:55,PageDown:56,Home:28,' ':59,MediaPlayPause:59,MediaPlay:7,MediaPause:6,MediaStop:89,MediaTrackNext:61,MediaTrackPrevious:62};
+ window.addEventListener('keydown',e=>{
+   if(e.key==='Escape'){
+@@ -552,7 +590,7 @@
+   const targetText=snap.hlsVersion||snap.workerEnabled?snap.bufferTargetSeconds+'s target':'browser-managed target';
+   const threads=st.threading||{},threadText=key=>threads[key]?'active':'idle';
+   const ranges=[];try{for(let i=0;i<Math.min(video.buffered.length,6);i++)ranges.push(video.buffered.start(i).toFixed(1)+'–'+video.buffered.end(i).toFixed(1));}catch(_){}
+-  statsEl.textContent=`MiniClient 3.2.0 · ${uiW}×${uiH} native → ${Math.round(displayRect.width)}×${Math.round(displayRect.height)} displayed · ${phase}\n`+
++  statsEl.textContent=`MiniClient 3.2.1 · ${uiW}×${uiH} native → ${Math.round(displayRect.width)}×${Math.round(displayRect.height)} displayed · ${phase}\n`+
+     `Time ${Core.timeText(snap.timeMs)} / ${Core.timeText(snap.durationMs)} · browser ahead ${snap.ahead.toFixed(1)}s / ${targetText} · ${snap.bufferPhase}\n`+
+     `Server ahead ${serverAhead.toFixed(1)}s · produced ${produced.toFixed(1)}s · segments ${st.segments||0} · fill ${Number(st.recentFillRate||0).toFixed(2)}× recent / ${Number(st.hlsFillRate||0).toFixed(2)}× average\n`+
+     `FFmpeg ${st.encoder||'—'} · ${st.encoder==='copy'?'video copied (no encoding/decoding)':(st.hardware?'hardware':'software')+' encode / '+(st.hardwareDecode?'hardware':'software')+' decode'} · ${st.inputMode||'—'}\n`+
+@@ -569,9 +607,9 @@
+ }
+ $('diagnosticsBtn').addEventListener('click',async()=>{
+   const button=$('diagnosticsBtn');button.disabled=true;
+-  const report={version:'3.2.0',generatedAt:new Date().toISOString(),userAgent:navigator.userAgent,
++  const report={version:'3.2.1',generatedAt:new Date().toISOString(),userAgent:navigator.userAgent,
+     clientId:stableClientId(),session,ui:{width:uiW,height:uiH,display:displayRect,viewport:{width:innerWidth,height:innerHeight},requested:lastRequestedSize,frame,gfxCount,images:images.size,lastEventAt,menuHint:currentMenuHint,rendererThread:'main (time-sliced)',renderQueued,renderQueuedBytes},
+-    settings,streaming,captions:captions.snapshot(),browserCapabilities:Streaming.browserCapabilities(window),playback:playback.snapshot(),logs:logs.slice()};
++    failureSnapshot,nativeRecoveryCount,settings,streaming,captions:captions.snapshot(),browserCapabilities:Streaming.browserCapabilities(window),playback:playback.snapshot(),logs:logs.slice()};
+   try{report.serverConnection=session?await requestJson('api/miniclient','status',{session},'GET',3000):null;}
+   catch(e){report.serverConnection={error:e.message||String(e)};}
+   button.disabled=false;
+--- a/src/main/webapp/miniclient.html
++++ b/src/main/webapp/miniclient.html
+@@ -6,13 +6,13 @@
+   <meta name="theme-color" content="#000000">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+-  <title>SageTV MiniClient · 3.2.0</title>
+-  <link rel="stylesheet" href="css/miniclient.css?v=3.2.0">
++  <title>SageTV MiniClient · 3.2.1</title>
++  <link rel="stylesheet" href="css/miniclient.css?v=3.2.1">
+ </head>
+ <body>
+ <div id="app" class="mc-app">
+   <header id="toolbar" class="mc-toolbar">
+-    <div class="mc-title">SageTV MiniClient <span class="mc-subtitle">3.2.0 · Vibe browser port</span></div>
++    <div class="mc-title">SageTV MiniClient <span class="mc-subtitle">3.2.1 · Vibe browser port</span></div>
+     <div class="mc-toolbar-actions">
+       <span id="connectionStatus" class="mc-status" role="status">Connecting…</span>
+       <span id="bufferStatus" class="mc-status"></span>
+@@ -21,6 +21,7 @@
+       <button id="statsToggle" type="button" aria-pressed="false">Buffer info</button>
+       <button id="fullscreenBtn" type="button">Fullscreen</button>
+       <button id="reconnectBtn" type="button">Reconnect</button>
++      <button id="connectionDiagnosticsBtn" type="button" hidden>Download diagnostics</button>
+       <a class="mc-link" href="index.html">Web Player</a>
+     </div>
+   </header>
+@@ -138,11 +139,11 @@
+     </section>
+   </div>
+ </div>
+-<script src="js/miniclient-core.js?v=3.2.0"></script>
+-<script src="js/miniclient-streaming.js?v=3.2.0"></script>
+-<script src="js/atsc-captions.js?v=3.2.0"></script>
+-<script src="js/miniclient-captions.js?v=3.2.0"></script>
+-<script src="js/miniclient-playback.js?v=3.2.0"></script>
+-<script src="js/miniclient.js?v=3.2.0"></script>
++<script src="js/miniclient-core.js?v=3.2.1"></script>
++<script src="js/miniclient-streaming.js?v=3.2.1"></script>
++<script src="js/atsc-captions.js?v=3.2.1"></script>
++<script src="js/miniclient-captions.js?v=3.2.1"></script>
++<script src="js/miniclient-playback.js?v=3.2.1"></script>
++<script src="js/miniclient.js?v=3.2.1"></script>
+ </body>
+ </html>
+--- a/src/main/webapp/sw.js
++++ b/src/main/webapp/sw.js
+@@ -1,4 +1,4 @@
+-const CACHE='sagetv-webplayer-shell-v3.2.0';
++const CACHE='sagetv-webplayer-shell-v3.2.1';
+ const SHELL=['./','index.html','client.html','miniclient.html','css/app.css','css/miniclient.css','js/session-state.js','js/library-utils.js','js/atsc-captions.js','js/performance-watchdog.js','js/wasm-decoder-adapter.js','js/fmp4-fallback.js','js/commercial-skip.js','js/remote-navigation.js','js/app.js','js/advanced-ui.js','js/client-shell.js','js/miniclient-core.js','js/miniclient-streaming.js','js/miniclient-captions.js','js/miniclient-playback.js','js/miniclient.js','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png'];
+ self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting())));
+ self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('sagetv-webplayer-shell-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+--- /dev/null
++++ b/tests/MiniClientRecoverySmoke.java
+@@ -0,0 +1,135 @@
++package org.opensagetv.webplayer;
++
++import java.io.*;
++import java.net.*;
++import java.nio.charset.StandardCharsets;
++import java.util.*;
++import java.util.concurrent.*;
++import java.util.function.BooleanSupplier;
++
++/** Actual loopback TCP resets/handshakes. The peer is a fake, NOT a live SageTV server. */
++public final class MiniClientRecoverySmoke {
++    static int passed;
++    interface Work { void run(Env e) throws Exception; }
++    static void check(boolean ok,String why){if(!ok)throw new AssertionError(why);}
++    static void await(BooleanSupplier ok,String why)throws Exception{
++        long end=System.nanoTime()+TimeUnit.SECONDS.toNanos(5);
++        while(!ok.getAsBoolean()&&System.nanoTime()<end)Thread.sleep(10);
++        check(ok.getAsBoolean(),why);
++    }
++    static final class Env implements AutoCloseable {
++        final ServerSocket server=new ServerSocket(0,10,InetAddress.getByName("127.0.0.1"));
++        final ExecutorService worker=Executors.newSingleThreadExecutor(r->{Thread t=new Thread(r,"fake-sagetv");t.setDaemon(true);return t;});
++        final List<Socket> peers=Collections.synchronizedList(new ArrayList<Socket>());
++        final CountDownLatch signal=new CountDownLatch(1), release=new CountDownLatch(1);
++        MiniClientSession session;
++        Env()throws Exception { server.setSoTimeout(4000);session=new MiniClientSession("recovery-test",address(),"02:00:00:00:00:55",640,360); }
++        String address(){return "127.0.0.1:"+server.getLocalPort();}
++        Socket accept(int type,int reply)throws Exception{
++            Socket s=server.accept();peers.add(s);s.setSoTimeout(4000);
++            byte[] h=bytes(s.getInputStream(),8);check((h[0]&255)==1,"bad handshake version");check((h[7]&255)==type,"expected handshake "+type+" got "+(h[7]&255));
++            if(reply>=0){s.getOutputStream().write(reply);s.getOutputStream().flush();}return s;
++        }
++        void noNewConnection()throws Exception{
++            server.setSoTimeout(350);
++            try {Socket s=server.accept();peers.add(s);throw new AssertionError("unexpected replacement connection");}
++            catch(SocketTimeoutException expected){} finally{server.setSoTimeout(4000);}
++        }
++        public void close(){session.close();release.countDown();MiniClientSessionManager.stopAll();try{server.close();}catch(Exception ignored){}
++            synchronized(peers){for(Socket s:peers)try{s.close();}catch(Exception ignored){}}worker.shutdownNow();}
++    }
++    static byte[] bytes(InputStream in,int n)throws Exception{byte[] b=new byte[n];new DataInputStream(in).readFully(b);return b;}
++    static byte[] reply(Socket s,int type)throws Exception{
++        byte[] h=bytes(s.getInputStream(),16);check((h[0]&255)==type,"reply type "+(h[0]&255)+" != "+type);
++        int n=((h[1]&255)<<16)|((h[2]&255)<<8)|(h[3]&255);return bytes(s.getInputStream(),n);
++    }
++    static int integer(byte[] b){return MiniClientSession.readInt(b,0);}
++    static void frame(Socket s,int type,byte[] b)throws Exception{
++        DataOutputStream out=new DataOutputStream(s.getOutputStream());out.writeByte(type);out.writeByte(b.length>>>16);out.writeShort(b.length);out.write(b);out.flush();
++    }
++    static byte[] gfxBody(int cmd,int... args)throws Exception{
++        ByteArrayOutputStream bytes=new ByteArrayOutputStream();DataOutputStream out=new DataOutputStream(bytes);
++        out.writeByte(cmd);out.writeByte(args.length*4>>>16);out.writeShort(args.length*4);for(int n:args)out.writeInt(n);return bytes.toByteArray();
++    }
++    static void draw(Socket s,int cmd,int... args)throws Exception{frame(s,16,gfxBody(cmd,args));}
++    static void property(Socket s,String name,String value)throws Exception{
++        ByteArrayOutputStream b=new ByteArrayOutputStream();DataOutputStream out=new DataOutputStream(b);
++        out.writeShort(name.length());out.writeShort(value.length());out.writeBytes(name);out.writeBytes(value);frame(s,1,b.toByteArray());
++        check(integer(reply(s,1))==0,"property not accepted: "+name);
++    }
++    static void init(Socket s,boolean negotiate,boolean first)throws Exception{
++        if(negotiate)property(s,"RECONNECT_SUPPORTED","TRUE");
++        draw(s,1);check(integer(reply(s,16))==1,"GFX INIT reply");reply(s,192);reply(s,193);
++        if(first){draw(s,31);draw(s,30);reply(s,16);}
++    }
++    static void reset(Socket s)throws Exception{s.setSoLinger(true,0);s.close();}
++    static void run(String name,Work server,Work client)throws Exception{
++        try(Env e=new Env()){
++            Future<?> f=e.worker.submit(()->{try{server.run(e);}catch(Exception x){throw new RuntimeException(x);}});
++            client.run(e);f.get(15,TimeUnit.SECONDS);passed++;System.out.println("PASS "+name);
++        }
++    }
++    static void recover(int rejected,boolean partialHeader)throws Exception{
++        run("type-5 recovery, "+rejected+" initial rejection(s), partial "+(partialHeader?"header":"body")+", retained media/cache",e->{
++            Socket media=e.accept(1,2),gfx=e.accept(0,2);init(gfx,true,true);
++            draw(gfx,26,20,20);check(integer(reply(gfx,16))==2,"initial image handle");
++            // Break a frame deliberately. No bytes from it may be dispatched or
++            // replayed on the replacement connection.
++            OutputStream out=gfx.getOutputStream();
++            out.write(partialHeader?new byte[]{16,0}:new byte[]{16,0,0,12,26,0,0,8,0});out.flush();reset(gfx);
++            for(int n=0;n<rejected;n++)e.accept(5,0).close();
++            Socket next=e.accept(5,2);frame(next,0,"GFX_RESOLUTION".getBytes(StandardCharsets.ISO_8859_1));
++            check(new String(reply(next,0),StandardCharsets.ISO_8859_1).equals("640x360"),"property after recovery");
++            draw(next,26,30,30);check(integer(reply(next,16))==3,"cache/handle state reset or partial frame dispatched");
++            frame(media,17,new byte[0]);check(integer(bytes(media.getInputStream(),4))==0,"original media channel did not survive");
++            e.signal.countDown();check(e.release.await(5,TimeUnit.SECONDS),"release timeout");
++        },e->{e.session.start();check(e.signal.await(8,TimeUnit.SECONDS),"recovery not completed");
++            check(e.session.isAlive(),"session died");String j=e.session.json();
++            check(j.contains("\"reconnectSuccesses\":1"),j);check(j.contains("\"reconnectAttempts\":"+(rejected+1)),j);
++            check(j.contains("Connection reset"),"original reset evidence lost");check(e.session.lastError().isEmpty(),"recovered reset marked fatal");
++            List<String> events=e.session.pollEvents(500,0);for(String x:events)check(!x.contains("\"type\":\"videoStop\""),"recovery stopped media");
++            e.release.countDown();});
++    }
++    public static void main(String[] args)throws Exception{
++        recover(0,true);recover(2,false);
++        for(boolean first:new boolean[]{false,true})run(first?"unnegotiated reset is terminal":"pre-first-frame reset is terminal",e->{
++            e.accept(1,2);Socket gfx=e.accept(0,2);init(gfx,!first,first);reset(gfx);e.noNewConnection();
++        },e->{e.session.start();await(()->!e.session.isAlive(),"failed session still alive");
++            check(e.session.lastError().contains("GFX connection ended"),e.session.json());
++            check(e.session.json().contains("\"reconnectAttempts\":0"),e.session.json());});
++        run("three rejected reconnects fail visibly without a fourth handshake",e->{
++            e.accept(1,2);Socket g=e.accept(0,2);init(g,true,true);reset(g);
++            for(int i=0;i<3;i++)e.accept(5,0).close();e.noNewConnection();
++        },e->{e.session.start();await(()->!e.session.isAlive(),"retries did not end");check(e.session.json().contains("\"reconnectAttempts\":3"),e.session.json());
++            List<String> events=e.session.pollEvents(500,0);boolean fatal=false;for(String x:events)fatal|=x.contains("\"fatal\":true");check(fatal,"no terminal browser event");});
++        run("close cancels an in-flight reconnect handshake and prevents resurrection",e->{
++            e.accept(1,2);Socket g=e.accept(0,2);init(g,true,true);reset(g);Socket pending=e.accept(5,-1);e.signal.countDown();
++            check(pending.getInputStream().read()==-1,"pending handshake not closed");e.noNewConnection();
++        },e->{e.session.start();check(e.signal.await(5,TimeUnit.SECONDS),"reconnect handshake did not start");e.session.close();
++            await(()->e.session.json().contains("\"gfxReader\":false"),"GFX worker survived close");check(!e.session.isAlive(),"session resurrected");});
++        run("explicit close terminates media/GFX without reconnect",e->{
++            Socket m=e.accept(1,2),g=e.accept(0,2);init(g,true,true);e.signal.countDown();
++            check(g.getInputStream().read()==-1,"GFX socket not closed");check(m.getInputStream().read()==-1,"media socket not closed");e.noNewConnection();
++        },e->{e.session.start();check(e.signal.await(5,TimeUnit.SECONDS),"init missing");e.session.close();check(e.session.lastError().isEmpty(),"normal close became an error");});
++        run("server DEINIT closes cleanly instead of reconnecting",e->{
++            e.accept(1,2);Socket g=e.accept(0,2);init(g,true,true);draw(g,2);check(g.getInputStream().read()==-1,"DEINIT not closed");e.noNewConnection();
++        },e->{e.session.start();await(()->!e.session.isAlive(),"DEINIT still alive");check(e.session.json().contains("\"reconnectAttempts\":0"),e.session.json());});
++        run("rejected startup cleans up both media and pending GFX socket",e->{
++            Socket m=e.accept(1,2),g=e.accept(0,0);check(g.getInputStream().read()==-1,"rejected GFX socket leaked");check(m.getInputStream().read()==-1,"startup media socket leaked");
++        },e->{boolean rejected=false;try{e.session.start();}catch(IOException expected){rejected=true;}check(rejected,"startup rejection hidden");check(!e.session.isAlive(),"rejected session alive");});
++        run("diagnostic property trace is bounded and omits property values",e->{
++            e.accept(1,2);Socket g=e.accept(0,2);init(g,false,false);
++            for(int n=0;n<100;n++)property(g,"MENU_HINT","private-path-should-not-appear");e.signal.countDown();e.release.await(5,TimeUnit.SECONDS);
++        },e->{e.session.start();check(e.signal.await(5,TimeUnit.SECONDS),"properties timed out");String j=e.session.json();check(!j.contains("private-path"),"diagnostics leaked a property value");
++            check(j.split("atMs",-1).length-1==64,"trace was not bounded");e.release.countDown();});
++        run("same-ID refresh retires old native sockets; stale stop cannot kill replacement",e->{
++            Socket m1=e.accept(1,2),g1=e.accept(0,2);init(g1,true,true);e.signal.countDown();
++            check(g1.getInputStream().read()==-1,"old GFX not closed before replacement");check(m1.getInputStream().read()==-1,"old media not closed");
++            e.accept(1,2);Socket g2=e.accept(0,2);init(g2,true,true);e.release.countDown();Thread.sleep(200);
++        },e->{MiniClientSession old=MiniClientSessionManager.start(e.address(),"02:00:00:00:00:66",640,360);check(e.signal.await(5,TimeUnit.SECONDS),"first managed session missing");
++            MiniClientSession next=MiniClientSessionManager.start(e.address(),"020000000066",640,360);check(e.release.await(5,TimeUnit.SECONDS),"replacement missing");
++            check(!old.isAlive()&&old.lastError().contains("another browser"),"old session not explicitly superseded");
++            MiniClientSessionManager.stop(old.id());check(next.isAlive(),"stale stop killed replacement");check(!next.id().equals(old.id()),"replacement identity not unique");});
++        System.out.println("Native recovery tests: "+passed+" PASS (real loopback sockets, synthetic SageTV peer)");
++    }
++}
+--- /dev/null
++++ b/tests/browser-recovery-smoke.py
+@@ -0,0 +1,116 @@
++#!/usr/bin/env python3
++"""Production browser UI + mocked HTTP for connection-loss and recovery; not live SageTV."""
++from pathlib import Path
++import json, os, re
++from playwright.sync_api import sync_playwright
++ROOT=Path(__file__).resolve().parents[1]
++WEB=ROOT/'src/main/webapp'
++count=0
++
++def passed(name):
++    global count
++    count+=1
++    print('PASS '+name, flush=True)
++
++def fixture(browser, fallback=False, initial_dead=False):
++    page=browser.new_page(viewport={'width':1000,'height':650},service_workers='block',accept_downloads=True)
++    errors=[]
++    page.on('pageerror',lambda e:errors.append(str(e)))
++    html=re.sub(r'<script[^>]*>.*?</script>','',(WEB/'miniclient.html').read_text(),flags=re.S)
++    html=re.sub(r'<link[^>]*>','',html)
++    page.set_content(html);page.add_style_tag(content=(WEB/'css/miniclient.css').read_text())
++    page.evaluate(r'''(()=>{
++      const T=window.TEST={requests:[],stream:null,alive:true,id:0,blob:null};
++      const nativeURL=URL.createObjectURL.bind(URL);URL.createObjectURL=blob=>{T.blob=blob;return nativeURL(blob);};
++      T.emit=item=>T.stream.enqueue(new TextEncoder().encode(JSON.stringify(item)+'\n'));
++      T.end=()=>{T.stream.close();T.stream=null;};
++      window.fetch=async(url,options={})=>{
++        const q=new URLSearchParams(new URL(url).search);
++        if(options.body)new URLSearchParams(options.body).forEach((v,k)=>q.set(k,v));
++        const d=Object.fromEntries(q),a=d.action;T.requests.push([a,d]);
++        if(a==='start')return new Response(JSON.stringify({session:'recovery-'+(++T.id),clientId:'020000000011',alive:!T.initialDead,error:T.initialDead?'SocketException: Connection reset':''}));
++        if(a==='status')return new Response(JSON.stringify({alive:T.alive,error:T.alive?'':'SocketException: Connection reset',connection:{lastGfxCommand:'get property GFX_RESOLUTION',reconnectAttempts:3}}));
++        if(a==='events')return new Response('[]');
++        if(a==='stream')return new Response(new ReadableStream({start(c){T.stream=c;}}));
++        return new Response('{"ok":true}');
++      };
++    })();''')
++    page.evaluate('(x)=>{TEST.initialDead=x.initialDead;if(x.fallback){TEST.alive=false;window.ReadableStream=undefined;}}',{'fallback':fallback,'initialDead':initial_dead})
++    for name in ['miniclient-core.js','miniclient-streaming.js','atsc-captions.js','miniclient-captions.js','miniclient-playback.js']:
++        page.evaluate((WEB/'js'/name).read_text())
++    main=(WEB/'js/miniclient.js').read_text()
++    page.evaluate("(function(location,localStorage){\n"+main+"\n})({href:'https://fixture.test/miniclient.html',origin:'https://fixture.test',search:'?ui=640x360'},{getItem:k=>k==='sagetvWebMiniClientSettings.v1'?'{\"renderOnly\":true}':null,setItem:()=>{}})")
++    return page,errors
++
++def emit(page,item):page.evaluate('x=>TEST.emit(x)',item)
++def requests(page,action):return page.evaluate('a=>TEST.requests.filter(x=>x[0]===a).length',action)
++
++with sync_playwright() as p:
++    browser=p.chromium.launch(executable_path=os.getenv('CHROMIUM_PATH','/usr/bin/chromium'),headless=True,args=['--no-sandbox'])
++    page,errors=fixture(browser)
++    page.wait_for_function('TEST.stream!==null')
++    assert not page.locator('#toolbar').is_visible()
++    emit(page,{'type':'error','fatal':True,'message':'GFX connection ended: SocketException: Connection reset'})
++    page.wait_for_function("document.body.classList.contains('mc-connection-lost')")
++    assert page.locator('#toolbar').is_visible() and page.locator('#reconnectBtn').is_enabled()
++    assert page.locator('#connectionDiagnosticsBtn').is_visible()
++    assert 'Connection reset' in page.locator('#osdMessage').inner_text()
++    passed('fatal native reset reveals recovery/diagnostic buttons in render-only view')
++    before=requests(page,'stream');page.wait_for_timeout(1000)
++    assert requests(page,'stream')==before
++    passed('terminal native failure stops the empty HTTP reconnect loop')
++    page.locator('#connectionDiagnosticsBtn').click()
++    page.wait_for_function('TEST.blob!==null')
++    report=json.loads(page.evaluate('TEST.blob.text()'))
++    assert 'Connection reset' in report['failureSnapshot']['reason']
++    assert report['serverConnection']['connection']['lastGfxCommand']=='get property GFX_RESOLUTION'
++    passed('one-click diagnostics contains failure snapshot and native connection trace')
++    page.screenshot(path=str(ROOT/'docs/connection-recovery-desktop.png'))
++    page.locator('#reconnectBtn').click()
++    page.wait_for_function('TEST.id===2 && !document.body.classList.contains("mc-connection-lost")')
++    assert requests(page,'stop')==1 and requests(page,'start')==2
++    assert not errors,errors
++    passed('explicit Reconnect stops old session and creates one replacement')
++    page.close()
++
++    page,errors=fixture(browser);page.wait_for_function('TEST.stream!==null')
++    emit(page,{'type':'status','state':'gfx-reconnecting'})
++    page.wait_for_function("document.querySelector('#connectionStatus').textContent.includes('Recovering')")
++    emit(page,{'type':'status','state':'gfx-reconnected'})
++    page.wait_for_function("document.querySelector('#connectionStatus').textContent.includes('GFX recovered')")
++    assert requests(page,'start')==1 and requests(page,'stop')==0
++    assert not page.evaluate("document.body.classList.contains('mc-connection-lost')")
++    passed('successful native GFX recovery keeps the browser session instead of restarting playback')
++    page.close()
++
++    page,errors=fixture(browser);page.wait_for_function('TEST.stream!==null')
++    page.evaluate('TEST.alive=false;TEST.end()')
++    page.wait_for_function("document.body.classList.contains('mc-connection-lost')")
++    assert requests(page,'status')==1 and requests(page,'stream')==1
++    passed('HTTP EOF detects dead native session even when terminal event was missed')
++    page.close()
++
++    page,errors=fixture(browser);page.wait_for_function('TEST.stream!==null');page.evaluate('TEST.end()')
++    page.wait_for_function("TEST.requests.filter(x=>x[0]==='stream').length===2")
++    assert requests(page,'start')==1
++    passed('transient HTTP EOF reconnects only HTTP while native session remains alive')
++    page.close()
++
++    page,errors=fixture(browser,fallback=True)
++    page.wait_for_function("document.body.classList.contains('mc-connection-lost')")
++    before=requests(page,'events');page.wait_for_timeout(300);assert requests(page,'events')==before
++    passed('long-poll fallback also stops when native session is dead')
++    page.close()
++
++    page,errors=fixture(browser,initial_dead=True)
++    page.wait_for_function("document.body.classList.contains('mc-connection-lost')")
++    assert requests(page,'stream')==0 and page.locator('#connectionDiagnosticsBtn').is_visible()
++    passed('startup failure returned by start is not shown as a connected session')
++    page.set_viewport_size({'width':390,'height':700})
++    page.wait_for_timeout(200)
++    assert page.locator('#reconnectBtn').is_visible() and page.locator('#connectionDiagnosticsBtn').is_visible()
++    assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
++    page.screenshot(path=str(ROOT/'docs/connection-recovery-mobile.png'))
++    passed('mobile error recovery controls remain visible without horizontal clipping')
++    page.close();browser.close()
++print(f'Browser recovery: {count} tests PASS (production DOM/JavaScript, mocked HTTP)')

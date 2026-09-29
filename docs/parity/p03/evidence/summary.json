@@ -1,0 +1,25 @@
+{
+  "phase": "P03",
+  "runtime_version": "3.2.6",
+  "tasks_done": 7,
+  "tasks_field_pending": 1,
+  "field_pending": [
+    "WP03-008"
+  ],
+  "generated_java_pass": 28,
+  "node_pass": 5,
+  "chromium_teletext_pass": 5,
+  "chromium_total_pass": 76,
+  "hls_runtime_pass": 10,
+  "streaming_servlet_pass": 16,
+  "streaming_runtime_pass": 14,
+  "mpegts_settings_pass": 17,
+  "native_recovery_pass": 11,
+  "native_startup_pass": 13,
+  "native_auth_pass": 14,
+  "real_uk_source_tested": false,
+  "live_sagetv_tested": false,
+  "real_vendor_mse_tested": false,
+  "war_sha256": "0c8b4ff17facab3fdfb1885ce488fa539ed37e4100f6a720c7aa9b6923600cdf",
+  "installer_sha256": "d4dd1737de4d458a4736e64f14e85637ce292650d85ea33ef13ab2bfba60578a"
+}

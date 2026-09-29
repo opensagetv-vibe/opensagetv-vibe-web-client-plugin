@@ -1,0 +1,54 @@
+name: Repository checks
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  source-contracts:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v7
+
+      - name: Set up Java 11
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '11'
+
+      - name: Set up Node.js 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+
+      - name: Install build dependencies
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg libservlet-api-java
+
+      - name: Build package
+        run: |
+          bash scripts/build-local.sh
+          python scripts/package-local-plugin.py
+
+      - name: Run generated and source validation
+        env:
+          TEST_FFMPEG: /usr/bin/ffmpeg
+        run: bash scripts/validate.sh
+
+      - name: Verify Vibe project contracts
+        run: |
+          test -x dev.sh
+          test -x update.sh
+          grep -Fq '<Plugin>SageTVFFmpegPluginLinux</Plugin>' dist/local-install/SageTVPluginsDev.d/sagetv-webplayer.xml
+          grep -Fq '<Plugin>SageTVFFmpegPluginWinx64</Plugin>' dist/local-install/SageTVPluginsDev.d/sagetv-webplayer-windows.xml
+          python scripts/project_manifest.py --check

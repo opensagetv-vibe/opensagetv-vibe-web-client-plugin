@@ -1,0 +1,7 @@
+WEBVTT
+
+00:00.500 --> 00:02.500 line:80% position:50% align:center
+First cue — Unicode ✓
+
+00:01.500 --> 00:03.000
+&lt;img src=x onerror=alert(1)&gt;

@@ -1,0 +1,587 @@
+diff --git a/build.gradle b/build.gradle
+index 179bf8f..5998706 100644
+--- a/build.gradle
++++ b/build.gradle
+@@ -4,7 +4,7 @@ plugins {
+ }
+ 
+ group = 'org.opensagetv'
+-version = '3.2.2'
++version = '3.2.3'
+ 
+ sourceCompatibility = JavaVersion.VERSION_1_8
+ targetCompatibility = JavaVersion.VERSION_1_8
+diff --git a/scripts/package-local-plugin.py b/scripts/package-local-plugin.py
+index fe576c5..49d0402 100644
+--- a/scripts/package-local-plugin.py
++++ b/scripts/package-local-plugin.py
+@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
+ DIST = ROOT / 'dist'
+ DEV = DIST / 'local-install' / 'SageTVPluginsDev.d'
+ WAR = DIST / 'SageTVWebPlayer.war'
+-VERSION = '3.2.2'
++VERSION = '3.2.3'
+ PKG = DEV / f'sagetv-webplayer-{VERSION}.zip'
+ MANIFEST = DEV / 'sagetv-webplayer.xml'
+ 
+@@ -31,6 +31,14 @@ manifest = f'''<?xml version="1.0" encoding="UTF-8"?>
+   <Desktop>false</Desktop>
+   <ResourcePath>sagetvwebplayer</ResourcePath>
+   <ReleaseNotes><![CDATA[
++3.2.3
++- Correct startup native UI-event ordering based on the supplied server receiver NPE.
++- Defer resize/repaint/media updates until first FLIPBUFFER ACK, without delaying protocol replies.
++- Coalesce startup sizes and discard early user input rather than replaying it at login.
++- Add event-gate diagnostics and 13 native TCP startup regression cases.
++- Retain encryption, recovery, full-window UI, streaming profiles and external FFmpeg/MIM.
++- Supersedes the earlier authentication-cause hypothesis. Live SageTV test still required.
++
+ 3.2.2
+ - Implement native RSA/Blowfish authentication handshake instead of returning empty CRYPTO_ALGORITHMS.
+ - Preserve binary public/session keys; encrypt nonempty reply/event bodies with original plaintext header lengths.
+diff --git a/scripts/validate.sh b/scripts/validate.sh
+index c49f9e4..bdcbf1c 100755
+--- a/scripts/validate.sh
++++ b/scripts/validate.sh
+@@ -55,9 +55,9 @@ assert "if(h<0){" in mc and "globalCompositeOperation='copy'" in mc
+ manifest_path=root/'dist/local-install/SageTVPluginsDev.d/sagetv-webplayer.xml'
+ ET.parse(manifest_path)
+ manifest=manifest_path.read_text()
+-m=re.search(r'<Version>([^<]+)</Version>',manifest); assert m and m.group(1)=='3.2.2'
++m=re.search(r'<Version>([^<]+)</Version>',manifest); assert m and m.group(1)=='3.2.3'
+ m2=re.search(r'<MD5>([0-9a-f]+)</MD5>',manifest)
+-pkg=root/'dist/local-install/SageTVPluginsDev.d/sagetv-webplayer-3.2.2.zip'
++pkg=root/'dist/local-install/SageTVPluginsDev.d/sagetv-webplayer-3.2.3.zip'
+ actual=hashlib.md5(pkg.read_bytes()).hexdigest()
+ assert m2 and m2.group(1)==actual,(m2.group(1) if m2 else None,actual)
+ with zipfile.ZipFile(pkg) as z:
+@@ -68,7 +68,7 @@ with zipfile.ZipFile(root/'dist/SageTVWebPlayer.war') as z:
+         assert required in names, required
+     for cls in ['MiniClientCrypto','ContinuousStreamServlet','StreamOptions','StreamPlan','StreamCommand','A53CaptionTap','CaptionsServlet','MediaProbe','ContinuousFilePump']:
+         assert 'WEB-INF/classes/org/opensagetv/webplayer/'+cls+'.class' in names,cls
+-    assert '3.2.2' in z.read('miniclient.html').decode()
++    assert '3.2.3' in z.read('miniclient.html').decode()
+ print('XML/package/WAR/MD5/new streaming classes OK')
+ PY
+ javap -verbose build/manual/classes/org/opensagetv/webplayer/HealthServlet.class | grep 'major version: 52'
+@@ -77,6 +77,8 @@ javac --release 8 -cp build/manual/classes -d build/manual/test-classes tests/Mi
+ java -cp build/manual/classes:build/manual/test-classes org.opensagetv.webplayer.MiniClientProtocolSmoke
+ javac --release 8 -cp build/manual/classes -d build/manual/test-classes tests/MiniClientRecoverySmoke.java
+ java -cp build/manual/classes:build/manual/test-classes org.opensagetv.webplayer.MiniClientRecoverySmoke
++javac --release 8 -cp build/manual/classes:build/manual/test-classes -d build/manual/test-classes tests/MiniClientStartupSmoke.java
++java -cp build/manual/classes:build/manual/test-classes org.opensagetv.webplayer.MiniClientStartupSmoke
+ javac --release 8 -cp build/manual/classes:build/manual/test-classes -d build/manual/test-classes tests/MiniClientAuthenticationSmoke.java
+ java -cp build/manual/classes:build/manual/test-classes org.opensagetv.webplayer.MiniClientAuthenticationSmoke
+ if [[ -x "${TEST_FFMPEG:-/usr/bin/ffmpeg}" ]]; then
+diff --git a/src/main/java/org/opensagetv/webplayer/MiniClientSession.java b/src/main/java/org/opensagetv/webplayer/MiniClientSession.java
+index 2a54687..4ffd65d 100644
+--- a/src/main/java/org/opensagetv/webplayer/MiniClientSession.java
++++ b/src/main/java/org/opensagetv/webplayer/MiniClientSession.java
+@@ -83,6 +83,14 @@ final class MiniClientSession {
+     private final List<Socket> openingSockets = new ArrayList<Socket>();
+     private final CountDownLatch mediaReady = new CountDownLatch(1);
+     private volatile boolean reconnectAllowed, firstFrameStarted, reconnecting;
++    // All fields below are protected by eventLock. INIT acknowledges a driver,
++    // not a fully constructed SageTV UI. Unsolicited events must wait until
++    // the first FLIPBUFFER reply, when the server has actually rendered a UI.
++    private boolean uiEventsReady, firstFrameCompleted;
++    private boolean pendingResize = true, pendingRepaint, pendingMediaUpdate;
++    private int pendingWidth, pendingHeight;
++    private int deferredUiEvents, droppedEarlyInput, sentUiEvents;
++    private int lastUiEventType = -1;
+     private volatile long closedAt;
+     private volatile String phase = "created", lastGfxCommand = "none", lastMediaCommand = "none";
+     private volatile String lastTransportError = "";
+@@ -114,6 +122,8 @@ final class MiniClientSession {
+         this.clientId = normalizeClientId(clientId);
+         this.width = Math.max(320, Math.min(1920, width));
+         this.height = Math.max(240, Math.min(1080, height));
++        this.pendingWidth = this.width;
++        this.pendingHeight = this.height;
+         this.mediaBridge = new MiniClientMediaBridge(this);
+     }
+ 
+@@ -300,6 +310,16 @@ final class MiniClientSession {
+         int assignedHandle = 0;
+         switch (cmd) {
+             case GFX_INIT:
++                synchronized (eventLock) {
++                    uiEventsReady = false;
++                    firstFrameCompleted = false;
++                    firstFrameStarted = false;
++                    phase = "negotiating";
++                    // Preserve a newer browser size already waiting on startup.
++                    if (!pendingResize) { pendingWidth = width; pendingHeight = height; }
++                    pendingResize = true;
++                    note("GFX INIT acknowledged; UI events deferred until first FLIPBUFFER");
++                }
+                 hasReturn = true; returnValue = 1; break;
+             case GFX_FLIPBUFFER:
+                 hasReturn = true; returnValue = 0; break;
+@@ -321,11 +341,34 @@ final class MiniClientSession {
+                 ",\"cmd\":" + cmd + ",\"assignedHandle\":" + assignedHandle +
+                 ",\"payload\":\"" + payload + "\"}");
+         if (hasReturn) writeReply(DRAWING_CMD_TYPE, intBytes(returnValue));
+-        if (cmd == GFX_INIT) {
+-            // GFX_RESOLUTION is capability/configuration, not the browser's
+-            // UI size notification. Native clients send event 192 on initial
+-            // canvas layout. Without it SageTV can draw at a cached/default size.
+-            sendResize(width, height);
++        if (cmd == GFX_FLIPBUFFER) enableUiEventsAfterFirstFrame();
++    }
++
++    /**
++     * A reply must precede asynchronous notifications on the shared wire. In
++     * particular, event 193 dereferences SageTV's root panel; after INIT that
++     * panel may still be null. No sleep, server authentication change, or
++     * dependency on a browser-specific ready callback is needed here.
++     */
++    private void enableUiEventsAfterFirstFrame() throws IOException {
++        synchronized (eventLock) {
++            if (uiEventsReady || !alive || closed.get()) return;
++            firstFrameCompleted = true;
++            uiEventsReady = true;
++            phase = "active";
++            note("first GFX FLIPBUFFER acknowledged; releasing deferred UI events");
++            if (pendingResize) {
++                sendResizeNow(pendingWidth, pendingHeight);
++                pendingResize = false;
++                pendingRepaint = false; // Resize already requests a full repaint.
++            } else if (pendingRepaint) {
++                sendRepaintNow(0, 0, width, height);
++                pendingRepaint = false;
++            }
++            if (pendingMediaUpdate) {
++                writeReply(201, new byte[0]);
++                pendingMediaUpdate = false;
++            }
+         }
+     }
+ 
+@@ -477,6 +520,14 @@ final class MiniClientSession {
+         DataOutputStream out = eventOut;
+         if (!alive || closed.get() || reconnecting || out == null)
+             throw new IOException("Native GFX channel is not ready (" + phase + ")");
++        // Property/GFX/FS replies (types < 128) are required during startup.
++        // Keyboard, mouse and remote commands are not: discard early input
++        // rather than replaying a click into a newly displayed login/menu.
++        // Resize, repaint and media-update entry points coalesce separately.
++        if (type >= 128 && !uiEventsReady) {
++            droppedEarlyInput++;
++            return;
++        }
+         try {
+             int n = payload == null ? 0 : payload.length;
+             // Compute before writing a header; crypto failure must not leave a
+@@ -486,6 +537,7 @@ final class MiniClientSession {
+             out.writeInt(0); out.writeInt(replyCount.getAndIncrement()); out.writeInt(0);
+             if (wire.length > 0) out.write(wire);
+             out.flush();
++            if (type >= 128) { sentUiEvents++; lastUiEventType = type; }
+         } catch (IOException e) {
+             closeSocket(gfxSocket); throw e;
+         }
+@@ -565,16 +617,45 @@ final class MiniClientSession {
+     void sendResize(int w, int h) throws IOException {
+         if (w < 320 || w > 1920 || h < 240 || h > 1080) throw new IllegalArgumentException("UI size must be 320..1920 by 240..1080");
+         synchronized (eventLock) {
+-            ByteArrayOutputStream bytes = new ByteArrayOutputStream(8);
+-            DataOutputStream data = new DataOutputStream(bytes); data.writeInt(w); data.writeInt(h);
+-            writeReply(UI_RESIZE_EVENT_REPLY_TYPE, bytes.toByteArray());
+-            width=w; height=h; enqueue(resizeJson()); sendRepaint(0,0,width,height);
++            requireEventChannel();
++            if (!uiEventsReady) {
++                pendingWidth = w; pendingHeight = h; pendingResize = true;
++                deferredUiEvents++;
++                return;
++            }
++            sendResizeNow(w, h);
+         }
+     }
+ 
++    /** Caller holds eventLock and has crossed the first-frame boundary. */
++    private void sendResizeNow(int w, int h) throws IOException {
++        ByteArrayOutputStream bytes = new ByteArrayOutputStream(8);
++        DataOutputStream data = new DataOutputStream(bytes); data.writeInt(w); data.writeInt(h);
++        writeReply(UI_RESIZE_EVENT_REPLY_TYPE, bytes.toByteArray());
++        width = w; height = h;
++        enqueue(resizeJson());
++        sendRepaintNow(0, 0, width, height);
++    }
++
++    private void requireEventChannel() throws IOException {
++        if (!alive || closed.get() || reconnecting || eventOut == null)
++            throw new IOException("Native GFX channel is not ready (" + phase + ")");
++    }
++
+     private String resizeJson() { return "{\"type\":\"resize\",\"width\":" + width + ",\"height\":" + height + "}"; }
+ 
+     void sendRepaint(int x, int y, int w, int h) throws IOException {
++        synchronized (eventLock) {
++            requireEventChannel();
++            if (!uiEventsReady) {
++                pendingRepaint = true; deferredUiEvents++;
++                return;
++            }
++            sendRepaintNow(x, y, w, h);
++        }
++    }
++
++    private void sendRepaintNow(int x, int y, int w, int h) throws IOException {
+         ByteArrayOutputStream bytes = new ByteArrayOutputStream(16);
+         DataOutputStream data = new DataOutputStream(bytes); data.writeInt(x); data.writeInt(y); data.writeInt(w); data.writeInt(h);
+         writeReply(UI_REPAINT_EVENT_REPLY_TYPE, bytes.toByteArray());
+@@ -600,7 +681,13 @@ final class MiniClientSession {
+     boolean recoverMedia(String expected, long timeMs) throws Exception { return mediaBridge.recoverFromBrowserPosition(expected,timeMs); }
+     boolean seekMedia(String expected, long timeMs) throws Exception { return mediaBridge.seekFromBrowser(expected,timeMs); }
+ 
+-    void sendMediaPlayerUpdate() throws IOException { writeReply(201, new byte[0]); }
++    void sendMediaPlayerUpdate() throws IOException {
++        synchronized (eventLock) {
++            requireEventChannel();
++            if (!uiEventsReady) { pendingMediaUpdate = true; deferredUiEvents++; return; }
++            writeReply(201, new byte[0]);
++        }
++    }
+ 
+     int browserVideoWidth() { return browserVideoWidth; }
+     int browserVideoHeight() { return browserVideoHeight; }
+@@ -639,7 +726,11 @@ final class MiniClientSession {
+             for (Socket s : openingSockets) closeSocket(s);
+             mediaSocket = null; gfxSocket = null; gfxIn = null; eventOut = null;
+         }
+-        synchronized (eventLock) { crypto.close(); }
++        synchronized (eventLock) {
++            crypto.close();
++            uiEventsReady = false;
++            pendingResize = pendingRepaint = pendingMediaUpdate = false;
++        }
+         mediaBridge.close();
+         note("closed"); enqueue(statusJson("closed"));
+     }
+@@ -663,13 +754,20 @@ final class MiniClientSession {
+         StringBuilder history = new StringBuilder("[");
+         synchronized (trace) { for (String entry : trace) { if (history.length() > 1) history.append(','); history.append(entry); } }
+         history.append(']');
+-        String cryptoStatus;
+-        synchronized (eventLock) { cryptoStatus = crypto.json(); }
++        String cryptoStatus, startupStatus;
++        synchronized (eventLock) {
++            cryptoStatus = crypto.json();
++            startupStatus = "{\"ready\":" + uiEventsReady + ",\"firstFrameCompleted\":" + firstFrameCompleted +
++                ",\"deferredUiEvents\":" + deferredUiEvents + ",\"droppedEarlyInput\":" + droppedEarlyInput +
++                ",\"pendingResize\":" + pendingResize + ",\"pendingRepaint\":" + pendingRepaint +
++                ",\"pendingMediaUpdate\":" + pendingMediaUpdate + ",\"sentUiEvents\":" + sentUiEvents +
++                ",\"lastUiEventType\":" + lastUiEventType + "}";
++        }
+         return "{\"session\":\"" + HttpUtil.json(id) + "\",\"alive\":" + alive + ",\"server\":\"" + HttpUtil.json(server + ":" + port) + "\",\"clientId\":\"" + HttpUtil.json(clientId) + "\",\"width\":" + width + ",\"height\":" + height + ",\"queuedEvents\":" + events.size() + ",\"peakQueuedEvents\":" + eventQueuePeak +
+             ",\"threading\":{\"gfxReader\":" + (gfxThread!=null&&gfxThread.isAlive()) + ",\"mediaReader\":" + (mediaThread!=null&&mediaThread.isAlive()) + "},\"error\":\"" + HttpUtil.json(lastError) + "\",\"connection\":{\"phase\":\"" + phase +
+             "\",\"firstFrameStarted\":" + firstFrameStarted + ",\"reconnectAllowed\":" + reconnectAllowed + ",\"reconnecting\":" + reconnecting + ",\"gfxPackets\":" + gfxFrames.get() +
+             ",\"reconnectAttempts\":" + reconnectAttempts.get() + ",\"reconnectSuccesses\":" + reconnectSuccesses.get() + ",\"lastGfxCommand\":\"" + HttpUtil.json(lastGfxCommand) + "\",\"lastMediaCommand\":\"" + HttpUtil.json(lastMediaCommand) +
+-            "\",\"lastTransportError\":\"" + HttpUtil.json(lastTransportError) + "\",\"crypto\":" + cryptoStatus + ",\"trace\":" + history + "}}";
++            "\",\"lastTransportError\":\"" + HttpUtil.json(lastTransportError) + "\",\"crypto\":" + cryptoStatus + ",\"startupEvents\":" + startupStatus + ",\"trace\":" + history + "}}";
+     }
+     private String shortId() { return id.substring(0, Math.min(8, id.length())); }
+ 
+diff --git a/src/main/java/org/opensagetv/webplayer/PluginVersion.java b/src/main/java/org/opensagetv/webplayer/PluginVersion.java
+index bb5ba00..9900078 100644
+--- a/src/main/java/org/opensagetv/webplayer/PluginVersion.java
++++ b/src/main/java/org/opensagetv/webplayer/PluginVersion.java
+@@ -1,7 +1,7 @@
+ package org.opensagetv.webplayer;
+ 
+ final class PluginVersion {
+-    static final String VERSION = "3.2.2";
++    static final String VERSION = "3.2.3";
+     static final String LIBMEDIA_VERSION = "1.3.1";
+     static final String HLSJS_VERSION = "1.7.3";
+     static final String MPEGTSJS_VERSION = "1.8.0";
+diff --git a/src/main/webapp/client.html b/src/main/webapp/client.html
+index 6c884fa..bb28a37 100644
+--- a/src/main/webapp/client.html
++++ b/src/main/webapp/client.html
+@@ -23,7 +23,7 @@
+     <button data-page="player">Player</button>
+     <button data-page="more">More</button>
+   </nav>
+-  <div class="client-top-actions"><a class="button-link" href="miniclient.html">MiniClient / SageMC</a><a class="button-link" href="index.html">Simple Player</a><span class="version">v3.2.2</span></div>
++  <div class="client-top-actions"><a class="button-link" href="miniclient.html">MiniClient / SageMC</a><a class="button-link" href="index.html">Simple Player</a><span class="version">v3.2.3</span></div>
+ </header>
+ <main class="client-main">
+   <section class="client-page" data-client-page="home">
+diff --git a/src/main/webapp/index.html b/src/main/webapp/index.html
+index 1df1da4..0ff3075 100644
+--- a/src/main/webapp/index.html
++++ b/src/main/webapp/index.html
+@@ -16,7 +16,7 @@
+ <main class="simple-main">
+   <header class="simple-header">
+     <div><h1>SageTV Web Player</h1><p>Choose a recording and press Watch.</p></div>
+-    <div class="hero-actions"><a class="button-link" href="miniclient.html">MiniClient / SageMC</a><a class="button-link" href="client.html">Web Admin</a><button id="installApp" hidden>Install App</button><span class="version">v3.2.2</span></div>
++    <div class="hero-actions"><a class="button-link" href="miniclient.html">MiniClient / SageMC</a><a class="button-link" href="client.html">Web Admin</a><button id="installApp" hidden>Install App</button><span class="version">v3.2.3</span></div>
+   </header>
+ 
+   <section class="card simple-status-card">
+diff --git a/src/main/webapp/js/miniclient.js b/src/main/webapp/js/miniclient.js
+index a32023a..ad21029 100644
+--- a/src/main/webapp/js/miniclient.js
++++ b/src/main/webapp/js/miniclient.js
+@@ -590,7 +590,7 @@ function updateStats(){
+   const targetText=snap.hlsVersion||snap.workerEnabled?snap.bufferTargetSeconds+'s target':'browser-managed target';
+   const threads=st.threading||{},threadText=key=>threads[key]?'active':'idle';
+   const ranges=[];try{for(let i=0;i<Math.min(video.buffered.length,6);i++)ranges.push(video.buffered.start(i).toFixed(1)+'–'+video.buffered.end(i).toFixed(1));}catch(_){}
+-  statsEl.textContent=`MiniClient 3.2.2 · ${uiW}×${uiH} native → ${Math.round(displayRect.width)}×${Math.round(displayRect.height)} displayed · ${phase}\n`+
++  statsEl.textContent=`MiniClient 3.2.3 · ${uiW}×${uiH} native → ${Math.round(displayRect.width)}×${Math.round(displayRect.height)} displayed · ${phase}\n`+
+     `Time ${Core.timeText(snap.timeMs)} / ${Core.timeText(snap.durationMs)} · browser ahead ${snap.ahead.toFixed(1)}s / ${targetText} · ${snap.bufferPhase}\n`+
+     `Server ahead ${serverAhead.toFixed(1)}s · produced ${produced.toFixed(1)}s · segments ${st.segments||0} · fill ${Number(st.recentFillRate||0).toFixed(2)}× recent / ${Number(st.hlsFillRate||0).toFixed(2)}× average\n`+
+     `FFmpeg ${st.encoder||'—'} · ${st.encoder==='copy'?'video copied (no encoding/decoding)':(st.hardware?'hardware':'software')+' encode / '+(st.hardwareDecode?'hardware':'software')+' decode'} · ${st.inputMode||'—'}\n`+
+@@ -607,7 +607,7 @@ function updateStats(){
+ }
+ $('diagnosticsBtn').addEventListener('click',async()=>{
+   const button=$('diagnosticsBtn');button.disabled=true;
+-  const report={version:'3.2.2',generatedAt:new Date().toISOString(),userAgent:navigator.userAgent,
++  const report={version:'3.2.3',generatedAt:new Date().toISOString(),userAgent:navigator.userAgent,
+     clientId:stableClientId(),session,ui:{width:uiW,height:uiH,display:displayRect,viewport:{width:innerWidth,height:innerHeight},requested:lastRequestedSize,frame,gfxCount,images:images.size,lastEventAt,menuHint:currentMenuHint,rendererThread:'main (time-sliced)',renderQueued,renderQueuedBytes},
+     failureSnapshot,nativeRecoveryCount,settings,streaming,captions:captions.snapshot(),browserCapabilities:Streaming.browserCapabilities(window),playback:playback.snapshot(),logs:logs.slice()};
+   try{report.serverConnection=session?await requestJson('api/miniclient','status',{session},'GET',3000):null;}
+diff --git a/src/main/webapp/miniclient.html b/src/main/webapp/miniclient.html
+index 2cf538a..99ea6a7 100644
+--- a/src/main/webapp/miniclient.html
++++ b/src/main/webapp/miniclient.html
+@@ -6,13 +6,13 @@
+   <meta name="theme-color" content="#000000">
+   <meta name="apple-mobile-web-app-capable" content="yes">
+   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+-  <title>SageTV MiniClient · 3.2.2</title>
+-  <link rel="stylesheet" href="css/miniclient.css?v=3.2.2">
++  <title>SageTV MiniClient · 3.2.3</title>
++  <link rel="stylesheet" href="css/miniclient.css?v=3.2.3">
+ </head>
+ <body>
+ <div id="app" class="mc-app">
+   <header id="toolbar" class="mc-toolbar">
+-    <div class="mc-title">SageTV MiniClient <span class="mc-subtitle">3.2.2 · Vibe browser port</span></div>
++    <div class="mc-title">SageTV MiniClient <span class="mc-subtitle">3.2.3 · Vibe browser port</span></div>
+     <div class="mc-toolbar-actions">
+       <span id="connectionStatus" class="mc-status" role="status">Connecting…</span>
+       <span id="bufferStatus" class="mc-status"></span>
+@@ -139,11 +139,11 @@
+     </section>
+   </div>
+ </div>
+-<script src="js/miniclient-core.js?v=3.2.2"></script>
+-<script src="js/miniclient-streaming.js?v=3.2.2"></script>
+-<script src="js/atsc-captions.js?v=3.2.2"></script>
+-<script src="js/miniclient-captions.js?v=3.2.2"></script>
+-<script src="js/miniclient-playback.js?v=3.2.2"></script>
+-<script src="js/miniclient.js?v=3.2.2"></script>
++<script src="js/miniclient-core.js?v=3.2.3"></script>
++<script src="js/miniclient-streaming.js?v=3.2.3"></script>
++<script src="js/atsc-captions.js?v=3.2.3"></script>
++<script src="js/miniclient-captions.js?v=3.2.3"></script>
++<script src="js/miniclient-playback.js?v=3.2.3"></script>
++<script src="js/miniclient.js?v=3.2.3"></script>
+ </body>
+ </html>
+diff --git a/src/main/webapp/sw.js b/src/main/webapp/sw.js
+index 534be60..edb3234 100644
+--- a/src/main/webapp/sw.js
++++ b/src/main/webapp/sw.js
+@@ -1,4 +1,4 @@
+-const CACHE='sagetv-webplayer-shell-v3.2.2';
++const CACHE='sagetv-webplayer-shell-v3.2.3';
+ const SHELL=['./','index.html','client.html','miniclient.html','css/app.css','css/miniclient.css','js/session-state.js','js/library-utils.js','js/atsc-captions.js','js/performance-watchdog.js','js/wasm-decoder-adapter.js','js/fmp4-fallback.js','js/commercial-skip.js','js/remote-navigation.js','js/app.js','js/advanced-ui.js','js/client-shell.js','js/miniclient-core.js','js/miniclient-streaming.js','js/miniclient-captions.js','js/miniclient-playback.js','js/miniclient.js','manifest.webmanifest','icons/icon-192.png','icons/icon-512.png'];
+ self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting())));
+ self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('sagetv-webplayer-shell-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+diff --git a/tests/MiniClientAuthenticationSmoke.java b/tests/MiniClientAuthenticationSmoke.java
+index 7b67e41..1fce779 100644
+--- a/tests/MiniClientAuthenticationSmoke.java
++++ b/tests/MiniClientAuthenticationSmoke.java
+@@ -62,7 +62,7 @@ public final class MiniClientAuthenticationSmoke {
+             decrypt=Cipher.getInstance("Blowfish/ECB/PKCS5Padding");decrypt.init(Cipher.DECRYPT_MODE,new SecretKeySpec(rawKey,"Blowfish"));
+             toggle(true);
+         }
+-        void firstFrame()throws Exception {draw(socket,31);draw(socket,30);check(integer(read(16))==0,"encrypted flip reply");}
++        void firstFrame()throws Exception {draw(socket,31);draw(socket,30);check(integer(read(16))==0,"encrypted flip reply");read(192);read(193);}
+     }
+     private static Wire connected(Env e)throws Exception {e.accept(1,2);Socket g=e.accept(0,2);init(g,true,false);return new Wire(g);}
+     private static void hold(Env e)throws Exception {e.signal.countDown();check(e.release.await(5,TimeUnit.SECONDS),"test client release timeout");}
+@@ -70,6 +70,7 @@ public final class MiniClientAuthenticationSmoke {
+     private static void test(String name,Work server,Work client)throws Exception {run(name,server,client);count++;}
+     public static void main(String[] args)throws Exception {
+         if(args.length>0&&args[0].equals("--expect-unsupported")) {
++            legacyInitEvents = true;
+             test("baseline 3.2.1 reproduces CRYPTO_ALGORITHMS rejection before first frame",e->{Wire w=connected(e);
+                 check(w.get("CRYPTO_ALGORITHMS").length==0,"baseline unexpectedly supports crypto");reset(w.socket);e.noNewConnection();
+             },e->{e.session.start();await(()->!e.session.isAlive(),"baseline did not fail");String j=e.session.json();
+@@ -109,7 +110,7 @@ public final class MiniClientAuthenticationSmoke {
+             frame(w.socket,2,EMPTY);check(integer(w.read(2))==2,"filesystem reply not encrypted");
+             check(w.encryptedPackets>=6,"not enough encrypted families");hold(e);
+         },MiniClientAuthenticationSmoke::inspect);
+-        test("enable/disable ACK uses old mode atomically with concurrent keyboard input",e->{Wire w=connected(e);w.negotiate(1024);
++        test("enable/disable ACK uses old mode atomically with concurrent keyboard input",e->{Wire w=connected(e);w.negotiate(1024);w.firstFrame();
+             AtomicBoolean active=new AtomicBoolean(true);AtomicReference<Throwable> failure=new AtomicReference<>();
+             Thread sender=new Thread(()->{try{for(int i=0;i<400&&active.get();i++){e.session.sendKey(0,0,65+i%26);Thread.sleep(1);}}catch(Throwable x){failure.set(x);}},"concurrent-auth-input");
+             sender.start();try{for(int i=0;i<20;i++){w.toggle(false);Thread.sleep(3);w.toggle(true);Thread.sleep(3);}w.get("GFX_RESOLUTION");}
+diff --git a/tests/MiniClientProtocolSmoke.java b/tests/MiniClientProtocolSmoke.java
+index 9223fed..3f61800 100644
+--- a/tests/MiniClientProtocolSmoke.java
++++ b/tests/MiniClientProtocolSmoke.java
+@@ -25,8 +25,11 @@ public final class MiniClientProtocolSmoke {
+       byte[] p="GFX_RESOLUTION".getBytes(StandardCharsets.ISO_8859_1);go.write(new byte[]{0,(byte)(p.length>>16),(byte)(p.length>>8),(byte)p.length});go.write(p);go.flush();
+       byte[] prop=replyPayload(gi,0);require(new String(prop,StandardCharsets.ISO_8859_1).equals("640x360"),"resolution property mismatch");
+       go.write(new byte[]{16,0,0,4, 1,0,0,4});go.flush();byte[] init=replyPayload(gi,16);require(i32(init,0)==1,"INIT return mismatch");
+-      byte[] resize=replyPayload(gi,192);require(i32(resize,0)==640&&i32(resize,4)==360,"INIT resize event mismatch");
+-      byte[] repaint=replyPayload(gi,193);require(i32(repaint,8)==640&&i32(repaint,12)==360,"INIT repaint mismatch");initDone.countDown();
++      // INIT is not server UI readiness. No asynchronous event may follow it.
++      gfx.setSoTimeout(150);try{int unexpected=gi.read();throw new AssertionError("early UI event "+unexpected);}catch(SocketTimeoutException expected){}finally{gfx.setSoTimeout(8000);}
++      go.write(new byte[]{16,0,0,4,31,0,0,0,16,0,0,4,30,0,0,0});go.flush();replyPayload(gi,16);
++      byte[] resize=replyPayload(gi,192);require(i32(resize,0)==640&&i32(resize,4)==360,"first-frame resize event mismatch");
++      byte[] repaint=replyPayload(gi,193);require(i32(repaint,8)==640&&i32(repaint,12)==360,"first-frame repaint mismatch");initDone.countDown();
+       resize=replyPayload(gi,192);require(i32(resize,0)==1600&&i32(resize,4)==800,"explicit resize event mismatch");
+       repaint=replyPayload(gi,193);require(i32(repaint,8)==1600&&i32(repaint,12)==800,"explicit repaint mismatch");
+       byte[] cmd=replyPayload(gi,136);require(i32(cmd,0)==28,"Sage command mismatch");
+@@ -42,6 +45,6 @@ public final class MiniClientProtocolSmoke {
+     MiniClientSession s=new MiniClientSession("smoke","127.0.0.1:"+ss.getLocalPort(),"02:00:00:00:00:22",640,360);s.start();require(initDone.await(5,TimeUnit.SECONDS),"INIT not complete");s.sendResize(1600,800);s.sendSageCommand(28);s.sendMouseClick(123,45,1,true);s.sendMouseClick(7,8,3,false);s.sendText("Aé\n");
+     boolean invalid=false;try{s.sendSageCommand(0);}catch(IllegalArgumentException e){invalid=true;}require(invalid,"invalid command accepted");
+     invalid=false;try{s.sendResize(9000,300);}catch(IllegalArgumentException e){invalid=true;}require(invalid,"invalid resize accepted");
+-    server.get(10,TimeUnit.SECONDS);s.close();ss.close();ex.shutdownNow();System.out.println("MiniClient protocol smoke PASS (initial/explicit resize + repaint, commands, mouse, text and bounds)");
++    server.get(10,TimeUnit.SECONDS);s.close();ss.close();ex.shutdownNow();System.out.println("MiniClient protocol smoke PASS (first-frame/explicit resize + repaint, commands, mouse, text and bounds)");
+   }
+ }
+diff --git a/tests/MiniClientRecoverySmoke.java b/tests/MiniClientRecoverySmoke.java
+index f33c88f..e9e7acc 100644
+--- a/tests/MiniClientRecoverySmoke.java
++++ b/tests/MiniClientRecoverySmoke.java
+@@ -57,10 +57,13 @@ public final class MiniClientRecoverySmoke {
+         out.writeShort(name.length());out.writeShort(value.length());out.writeBytes(name);out.writeBytes(value);frame(s,1,b.toByteArray());
+         check(integer(reply(s,1))==0,"property not accepted: "+name);
+     }
++    // Only the explicit historical authentication baseline mode enables this.
++    static boolean legacyInitEvents;
+     static void init(Socket s,boolean negotiate,boolean first)throws Exception{
+         if(negotiate)property(s,"RECONNECT_SUPPORTED","TRUE");
+-        draw(s,1);check(integer(reply(s,16))==1,"GFX INIT reply");reply(s,192);reply(s,193);
+-        if(first){draw(s,31);draw(s,30);reply(s,16);}
++        draw(s,1);check(integer(reply(s,16))==1,"GFX INIT reply");
++        if(legacyInitEvents){reply(s,192);reply(s,193);}
++        if(first){draw(s,31);draw(s,30);reply(s,16);if(!legacyInitEvents){reply(s,192);reply(s,193);}}
+     }
+     static void reset(Socket s)throws Exception{s.setSoLinger(true,0);s.close();}
+     static void run(String name,Work server,Work client)throws Exception{
+diff --git a/tests/MiniClientStartupSmoke.java b/tests/MiniClientStartupSmoke.java
+new file mode 100644
+index 0000000..1bc21e9
+--- /dev/null
++++ b/tests/MiniClientStartupSmoke.java
+@@ -0,0 +1,110 @@
++package org.opensagetv.webplayer;
++
++import java.net.Socket;
++import java.net.SocketTimeoutException;
++import java.nio.charset.StandardCharsets;
++import java.util.List;
++import java.util.concurrent.TimeUnit;
++import static org.opensagetv.webplayer.MiniClientRecoverySmoke.*;
++
++/**
++ * Real TCP wire regression for the uploaded server log's startup failure.
++ * This is a synthetic peer, NOT a running SageTV/SageMC instance. It models
++ * the critical boundary explicitly: no UI receiver/root exists until the
++ * server has sent its first completed frame. Source-derived reply and event
++ * families are used, including the formerly premature resize/repaint pair.
++ */
++public final class MiniClientStartupSmoke {
++    private static int count;
++    private static void quiet(Socket s)throws Exception {
++        int old=s.getSoTimeout();s.setSoTimeout(130);
++        try {int b=s.getInputStream().read();throw new AssertionError("unsolicited byte before permitted boundary: "+b);}
++        catch(SocketTimeoutException expected){} finally{s.setSoTimeout(old);}
++    }
++    private static Socket startPeer(Env e)throws Exception {
++        e.accept(1,2);Socket g=e.accept(0,2);
++        draw(g,1);check(integer(reply(g,16))==1,"INIT reply missing");return g;
++    }
++    private static void ready(Socket g,int w,int h)throws Exception {
++        draw(g,31);draw(g,30);
++        check(integer(reply(g,16))==0,"FLIP ACK must precede events");
++        byte[] size=reply(g,192),paint=reply(g,193);
++        check(integer(size)==w&&MiniClientSession.readInt(size,4)==h,"latest size not released");
++        check(integer(paint)==0&&MiniClientSession.readInt(paint,4)==0&&MiniClientSession.readInt(paint,8)==w&&MiniClientSession.readInt(paint,12)==h,"not full latest-size repaint");
++    }
++    private static void hold(Env e)throws Exception {
++        e.signal.countDown();check(e.release.await(5,TimeUnit.SECONDS),"client inspection timeout");
++    }
++    private static void client(Env e)throws Exception {
++        e.session.start();check(e.signal.await(8,TimeUnit.SECONDS),"peer did not reach assertion boundary");
++        check(e.session.isAlive(),e.session.json());e.release.countDown();
++    }
++    private static void test(String name,Work server,Work client)throws Exception {run(name,server,client);count++;}
++    public static void main(String[] args)throws Exception {
++        if(args.length>0&&args[0].equals("--expect-early-ui")) {
++            test("untouched 3.2.2 sends resize 192 then unsafe repaint 193 before any frame",e->{
++                Socket g=startPeer(e);reply(g,192);byte[] paint=reply(g,193);
++                check(paint.length==16,"missing premature repaint");
++                check(e.session.json().contains("\"firstFrameStarted\":false"),"not a pre-first-frame reproduction");hold(e);
++            },MiniClientStartupSmoke::client);
++            System.out.println("BASELINE: premature UI-event ordering reproduced with real TCP; no live SageTV used.");return;
++        }
++        test("INIT replies without resize/repaint while server UI is unconstructed",e->{Socket g=startPeer(e);quiet(g);
++            check(e.session.json().contains("\"firstFrameCompleted\":false"),e.session.json());hold(e);
++        },MiniClientStartupSmoke::client);
++        test("all property and filesystem replies still arrive during startup",e->{Socket g=startPeer(e);
++            for(String prop:new String[]{"GFX_RESOLUTION","GFX_SURFACES","CRYPTO_ALGORITHMS","UNKNOWN_EMPTY"}){
++                frame(g,0,prop.getBytes(StandardCharsets.ISO_8859_1));byte[] b=reply(g,0);
++                if(prop.equals("CRYPTO_ALGORITHMS"))check(new String(b,StandardCharsets.ISO_8859_1).equals("RSA,Blowfish"),"crypto response gated");
++            }
++            frame(g,2,new byte[0]);check(integer(reply(g,2))==2,"FS reply gated");quiet(g);hold(e);
++        },MiniClientStartupSmoke::client);
++        test("first frame allocation replies remain live; STARTFRAME alone does not open gate",e->{Socket g=startPeer(e);
++            draw(g,26,32,32);check(integer(reply(g,16))>=2,"image reply blocked");draw(g,31);
++            await(()->e.session.json().contains("\"firstFrameStarted\":true"),"START not processed");
++            e.session.sendRepaint(0,0,640,360);quiet(g);hold(e);
++        },MiniClientStartupSmoke::client);
++        test("first completed frame ACK precedes one initial resize and repaint",e->{Socket g=startPeer(e);ready(g,640,360);quiet(g);
++            check(e.session.json().contains("\"firstFrameCompleted\":true"),e.session.json());hold(e);
++        },MiniClientStartupSmoke::client);
++        test("startup resize flood coalesces to latest size and one full repaint",e->{Socket g=startPeer(e);
++            for(int i=0;i<80;i++){e.session.sendResize(800+i*2,600);e.session.sendRepaint(3,4,100,200);}
++            quiet(g);ready(g,958,600);quiet(g);String j=e.session.json();
++            check(j.contains("\"deferredUiEvents\":160")&&j.contains("\"sentUiEvents\":2"),j);hold(e);
++        },MiniClientStartupSmoke::client);
++        test("mouse keyboard text and Sage commands are dropped rather than replayed at login",e->{Socket g=startPeer(e);
++            e.session.sendKey(0,0,'P');e.session.sendSageCommand(20);e.session.sendMouseClick(30,40,1,true);e.session.sendText("secret");
++            quiet(g);ready(g,640,360);quiet(g);String j=e.session.json();
++            check(j.contains("\"droppedEarlyInput\":12")&&!j.contains("secret"),j);hold(e);
++        },MiniClientStartupSmoke::client);
++        test("media-update events are coalesced until video frame owner exists",e->{Socket g=startPeer(e);
++            for(int i=0;i<20;i++)e.session.sendMediaPlayerUpdate();quiet(g);ready(g,640,360);check(reply(g,201).length==0,"bad media update");quiet(g);hold(e);
++        },MiniClientStartupSmoke::client);
++        test("media protocol replies are independent of GFX readiness",e->{Socket m=e.accept(1,2),g=e.accept(0,2);
++            draw(g,1);reply(g,16);frame(m,0,new byte[0]);check(integer(bytes(m.getInputStream(),4))==1,"media INIT blocked");
++            frame(m,17,new byte[0]);check(integer(bytes(m.getInputStream(),4))==0,"media time blocked");quiet(g);hold(e);
++        },MiniClientStartupSmoke::client);
++        test("runtime resize repaint and input still work after readiness",e->{Socket g=startPeer(e);ready(g,640,360);
++            e.session.sendResize(1600,900);check(integer(reply(g,192))==1600,"runtime resize");check(MiniClientSession.readInt(reply(g,193),12)==900,"runtime repaint");
++            e.session.sendKey(0,0,'K');check(reply(g,129)[5]=='K',"runtime key lost");
++            e.session.sendRepaint(3,4,5,6);check(integer(reply(g,193))==3,"explicit repaint lost");hold(e);
++        },MiniClientStartupSmoke::client);
++        test("later FLIPBUFFER does not repeat initial resize/repaint",e->{Socket g=startPeer(e);ready(g,640,360);
++            for(int i=0;i<8;i++){draw(g,31);draw(g,30);reply(g,16);}quiet(g);hold(e);
++        },MiniClientStartupSmoke::client);
++        test("driver re-INIT closes event gate until another completed frame",e->{Socket g=startPeer(e);ready(g,640,360);
++            draw(g,1);reply(g,16);e.session.sendResize(1000,700);e.session.sendSageCommand(20);quiet(g);ready(g,1000,700);quiet(g);hold(e);
++        },MiniClientStartupSmoke::client);
++        test("close before first frame discards deferred events and cannot reopen",e->{Socket g=startPeer(e);
++            e.session.sendResize(1200,800);e.session.sendRepaint(0,0,1200,800);e.session.sendMediaPlayerUpdate();quiet(g);
++            e.signal.countDown();check(g.getInputStream().read()==-1,"socket not closed");e.noNewConnection();
++        },e->{e.session.start();check(e.signal.await(5,TimeUnit.SECONDS),"no startup");e.session.close();String j=e.session.json();
++            check(j.contains("\"ready\":false")&&j.contains("\"pendingResize\":false")&&j.contains("\"sentUiEvents\":0"),j);});
++        test("invalid startup sizes are rejected before queuing",e->{Socket g=startPeer(e);
++            for(int[] dims:new int[][]{{0,360},{640,0},{1921,360},{640,1081}}){boolean rejected=false;
++                try{e.session.sendResize(dims[0],dims[1]);}catch(IllegalArgumentException expected){rejected=true;}check(rejected,"bad size queued");}
++            quiet(g);ready(g,640,360);hold(e);
++        },MiniClientStartupSmoke::client);
++        System.out.println("Native startup ordering: "+count+" PASS (real TCP; synthetic server readiness boundary).");
++    }
++}

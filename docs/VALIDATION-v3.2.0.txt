@@ -1,0 +1,211 @@
+{
+  packets: 3,
+  continuityErrors: 0,
+  pmtPid: 256,
+  videoPid: 257,
+  videoStreamType: 2,
+  cea608Pairs: 2,
+  cea708Triples: 0,
+  captionServices: [],
+  queuedCues: 1,
+  selectedService: 'CC1'
+}
+OUT= "HI"
+{
+  packets: 3,
+  continuityErrors: 0,
+  pmtPid: 256,
+  videoPid: 257,
+  videoStreamType: 2,
+  cea608Pairs: 0,
+  cea708Triples: 2,
+  captionServices: [],
+  queuedCues: 1,
+  selectedService: '708-1'
+}
+OUT= "OK"
+performance watchdog PASS
+session state PASS
+session state v2 PASS
+library utils PASS
+commercial skip PASS
+PASS fast startup stays one segment regardless of reserve or producer rate
+PASS buffer settings clamp and validate
+PASS short finished clip can start with one segment
+PASS separate startup and ongoing reserve targets
+PASS recording buffering cannot force live-edge jumps or rate catch-up
+PASS bounded back buffer and worker-enabled transmuxer
+PASS auto resolution follows usable window and caps rendering load
+PASS fixed rendering resolution does not crop desktop or portrait windows
+PASS short click sends one click and suppresses browser duplicate
+PASS hold opens at 575ms, never clicks underlying item
+PASS touch primary pointer supports hold
+PASS secondary touch cannot steal hold
+PASS drag cancels hold and releases without activating
+PASS 12px tolerance uses CSS rather than canvas pixels
+PASS cancelled hold and synthetic click cannot select
+PASS cancelled drag still releases
+PASS right hold opens remote; short right click remains native
+PASS left double-click opens without prior activation
+PASS single click with double-click trigger delivered after window
+PASS right double-click opens and middle-click trigger works
+PASS mouse X-button back is a command, not a click
+PASS Guide hint parser avoids unrelated menu names
+PASS ENDLIST does not recover before normal buffered end
+PASS bounded recovery budget does not silently reset
+PASS video-mask assist accepts color key and clips trusted preview
+PASS dark clear can reveal fullscreen video, not tiny black UI buttons
+PASS menu navigation suppresses stale black-fill video hole
+MiniClient core: 27 tests PASS
+PASS starts on one published segment, no fixed 10-second gate
+PASS manual startup threshold respected without blocking
+PASS short completed media does not wait for nonexistent segments
+PASS starvation pauses, replenished buffer resumes without undefined variable
+PASS user pause is not overridden by buffer refill
+PASS rebuffering reports play intent, not temporary video.pause
+PASS finished producer with unplayed content is not restarted
+PASS premature end recovery includes atomic absolute position and expected session
+PASS recovery counter persists across recovery sessions and caps at six
+PASS old asynchronous vendor load cannot attach to new recording
+PASS old status response cannot replace new session status
+PASS concurrent status polls share one request
+PASS seek startup reports offset without retaining prior currentTime
+PASS seek preserves pause intent
+PASS autoplay denied displays user action; gesture retries
+PASS normal end does not loop recovery
+PASS native HLS uses same startup and pause policy
+PASS old interrupted play promise cannot mutate replacement
+PASS completed recording duration replaces scheduled duration
+PASS first appended fragment expands 6s startup target to 180s without reloading
+PASS low-delay startup still fills a large ongoing reserve
+PASS forward reserve change applies while playing without resetting playback
+PASS settings unrelated to buffering preserve a library memory reduction
+PASS loader is woken with 20s still buffered instead of waiting to stall
+PASS refill continues while paused without autoplaying
+PASS normal appends fill reserve and continue topping up during long playback
+PASS no refill restart at target or when producer has no additional data
+PASS active slow fragment gets its timeout before a loader wakeup
+PASS buffer quota pressure reduces reserve and remains reduced
+PASS new recording resets phase and ignores old buffered callbacks
+PASS available server reserve is not discarded when producer stops advancing
+MiniClient playback: 31 tests PASS
+XML/package/WAR/MD5/new streaming classes OK
+  major version: 52
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+MiniClient protocol smoke PASS (initial/explicit resize + repaint, commands, mouse, text and bounds)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS growing file EOF waits and follows appended bytes
+PASS segment rollover follows new file and drains final bytes before EOF
+PASS byte-offset feeder spans completed segments
+PASS cancellation terminates EOF wait promptly
+PASS playlist duration ignores invalid/nonfinite/negative entries
+PASS FFmpeg probe cache reuse and explicit invalidation
+PASS real MPEG-2/AC-3 to H.264/AAC EVENT HLS transcode, duration and ENDLIST
+PASS pipe input does not force MPEG-TS on MPEG-PS recordings
+PASS separate monitor/stderr threads track producer growth beyond startup without browser polling
+PASS 240-second synthetic recording continues producing beyond the 180-second browser target and ends cleanly
+HLS runtime: 10 tests PASS (synthetic media; no hardware/SageTV live test)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS async servlet streams complete original bytes, 200/no invented Content-Length
+PASS continuous transport has no-cache/no-proxy-buffer headers
+PASS lazy-load reconnect resumes exact byte suffix without restarting producer
+PASS negative, nonnumeric and overflowing resume offsets rejected before async work
+PASS unproduced resume offset rejected with 416
+PASS HTTP Range rejected rather than fabricating total growing length
+PASS path traversal and non-session stream URL rejected
+PASS unsupported Jetty async deployment gives actionable HLS fallback error
+PASS closing a full client buffer retains producer session for later reconnect
+PASS caption endpoint refuses disabled caption stream
+PASS caption endpoint rejects unknown session instead of accepting arbitrary media path
+PASS asset preparation rejects arbitrary families/URLs without network access
+PASS streaming prefetch allowlist is limited to two pinned player assets
+Streaming servlet tests: 13 PASS (mock Servlet API; real async workers/file IO)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS validated per-browser options reject unsafe/invalid values and reset audio indices between recordings
+PASS codec-aware remux, preferred-language selection, actual stream index and strict compatibility validation
+PASS MPEG-2 A/53 extraction crosses fragmented TS chunks and preserves relative PTS
+PASS AVC and HEVC registered A/53 SEI extraction
+PASS caption PTS wrap handling does not jump by 26 hours
+PASS bounded binary caption sidecar, JSON packets and invalid cursor rejection
+PASS continuous stream follows growth and resumes exact bytes without re-running encoder
+PASS FFmpeg progress microseconds are converted to produced seconds
+PASS real ffprobe discovers MPEG-2 video and two language-tagged audio tracks
+PASS real MPEG-2 to H.264 MPEG-TS uses selected video bitrate/FPS and Spanish mono AAC settings
+PASS original-video CC side channel survives actual video transcode without asking encoder to preserve it
+PASS continuous stream status measures output duration/bytes and clean EOF without an HLS playlist
+PASS real compatible H.264/AAC remux uses video/audio copy without GPU encoder probe
+PASS real HLS compatibility path keeps user quality/audio-delay settings and server seek offset
+Streaming runtime: 14 tests PASS; real FFmpeg software path, no GPU or live SageTV test
+PASS web settings match validated server ranges and request names
+PASS MPEG-TS startup is independent of large reserve and never uses HLS segment gate
+PASS DVR lazy loading is enabled instead of live-edge chasing with unbounded download
+PASS MPEG-TS workers and backward-buffer cleanup are requested explicitly
+PASS progress/repeated status does not restart a healthy TS loader
+PASS pause keeps TS loader alive and never turns buffer refill into Play
+PASS TS error requests one guarded fallback at absolute recording position
+PASS strict no-fallback policy stops with useful error instead of changing codec
+PASS old asynchronous mpegts vendor load cannot attach over a replacement stream
+PASS TS seek tears down old MSE owner and preserves paused state
+PASS completed TS production with an unplayed reserve does not trigger recovery
+PASS unsupported MSE invokes compatibility fallback without claiming playback
+PASS CEA-608 side-channel triples reach the real decoder and render by media time
+PASS CEA-708 side-channel service selection remains separate from CC1
+PASS bounded caption history retains cursor position during long playback
+PASS real FFmpeg original-video sidecar renders HI using browser caption decoder
+PASS caption fetch responses from a stopped recording cannot paint the next video
+MPEG-TS/settings/captions: 17 tests PASS (mpegts.js adapter mocked; codec/CC parser tests real)
+PASS production scripts connect and render actual GFX packets without errors
+PASS real pointer hold opens remote with no underlying click
+PASS real short click sends exactly one atomic click
+PASS held remote key repeats and stops on pointer release
+PASS SageTV Options remains distinct from local hold menu
+PASS keyboard text delivered literally as UTF-8 POST
+PASS Guide click adds SELECT assist after native click
+PASS right-hold setting opens remote without native context menu
+PASS drag sends release but never activation click
+PASS render-only view fits logical 16:9 canvas and Escape restores toolbar
+PASS mobile remote fits viewport without horizontal clipping
+PASS dark SageTV CLEAR_RECT reveals active video instead of covering it black
+PASS menu remains opaque while color-key preview moves/resizes underlying video
+PASS negative texture dimensions do not mirror text or erase surrounding menu
+PASS no browser JavaScript exceptions throughout gestures/settings
+Chromium browser smoke: 15 tests PASS (offline mocked transport; not live playback)
+PASS 1912x800 window uses full area below toolbar with all four GFX corners visible
+PASS initial server connection receives the actual usable UI dimensions
+PASS desktop, portrait, landscape and large windows resize without clipping or page overflow
+PASS window changes send real resize API requests and redraw at the new native size
+PASS image handle allocated only at connection remains valid after four native resizes
+PASS fixed 720p option contains the entire 16:9 UI rather than zooming/cropping
+PASS bottom-right pointer clicks map to the new native coordinates
+PASS render-only view and toolbar restoration renegotiate usable height
+PASS fullscreen entry and exit preserve the complete native drawing surface
+PASS video startup/control and reserve promotion do not wait behind a blocked GFX image decode
+PASS large GFX batch yields to browser tasks before completion while preserving draw order
+PASS no JavaScript exceptions in auto-resize, cache reuse or independent media scheduling
+Chromium layout/scheduling: 12 tests PASS (mock native transport, no live SageMC/video)
+PASS native connect sends explicit browser streaming profile and capabilities
+PASS source-derived language/codec/channel tracks and effective transcode values displayed
+PASS Save wires all video/audio/CC options; explicit track is not persisted for other recordings
+PASS Load defaults edits draft only, without overwriting saved profile
+PASS Prepare assets requests only version-pinned streaming library family
+PASS production playback adapter starts continuous TS with 180-second lazy reserve and byte resume
+PASS real production CEA decoder and video-clock controller display side-channel CC
+PASS Apply now carries selected quality/track, current timestamp and stale-session guard
+PASS invalid CEA-608 service rejected visibly instead of submitting a nonfunctional selector
+PASS streaming form and long track descriptions fit mobile viewport; all controls scroll into view
+PASS stop destroys TS owner and clears caption output
+PASS no uncaught JavaScript errors in production settings, playback adapter and caption UI
+Chromium streaming settings: 12 tests PASS (mock vendor/SageTV, real DOM/CC decoder)
+Validation OK

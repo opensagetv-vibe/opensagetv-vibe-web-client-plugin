@@ -1,0 +1,7 @@
+PASS all WAR web assets byte-match source; only active 3.2.2 asset versions
+PASS new crypto class present; all classes target Java 8 and match tested build
+PASS compiled WAR exposes 3.2.2 browser/diagnostic/cache versions
+PASS local installer embeds exactly the tested WAR
+PASS local plugin XML version and MD5 match installer
+PASS build provenance hashes and 186 named-scenario accounting match
+Package integrity exit: 0

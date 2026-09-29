@@ -1,0 +1,8 @@
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+Built /mnt/data/work324/sagetv-webplayer-v30-vibe/dist/SageTVWebPlayer.war
+/mnt/data/work324/sagetv-webplayer-v30-vibe/dist/local-install/SageTVPluginsDev.d/sagetv-webplayer-3.2.4.zip
+/mnt/data/work324/sagetv-webplayer-v30-vibe/dist/local-install/SageTVPluginsDev.d/sagetv-webplayer.xml
+MD5 6ae30ca7c17397f9f29efdb65017133c

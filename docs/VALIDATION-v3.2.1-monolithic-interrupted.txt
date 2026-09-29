@@ -1,0 +1,209 @@
+{
+  packets: 3,
+  continuityErrors: 0,
+  pmtPid: 256,
+  videoPid: 257,
+  videoStreamType: 2,
+  cea608Pairs: 2,
+  cea708Triples: 0,
+  captionServices: [],
+  queuedCues: 1,
+  selectedService: 'CC1'
+}
+OUT= "HI"
+{
+  packets: 3,
+  continuityErrors: 0,
+  pmtPid: 256,
+  videoPid: 257,
+  videoStreamType: 2,
+  cea608Pairs: 0,
+  cea708Triples: 2,
+  captionServices: [],
+  queuedCues: 1,
+  selectedService: '708-1'
+}
+OUT= "OK"
+performance watchdog PASS
+session state PASS
+session state v2 PASS
+library utils PASS
+commercial skip PASS
+PASS fast startup stays one segment regardless of reserve or producer rate
+PASS buffer settings clamp and validate
+PASS short finished clip can start with one segment
+PASS separate startup and ongoing reserve targets
+PASS recording buffering cannot force live-edge jumps or rate catch-up
+PASS bounded back buffer and worker-enabled transmuxer
+PASS auto resolution follows usable window and caps rendering load
+PASS fixed rendering resolution does not crop desktop or portrait windows
+PASS short click sends one click and suppresses browser duplicate
+PASS hold opens at 575ms, never clicks underlying item
+PASS touch primary pointer supports hold
+PASS secondary touch cannot steal hold
+PASS drag cancels hold and releases without activating
+PASS 12px tolerance uses CSS rather than canvas pixels
+PASS cancelled hold and synthetic click cannot select
+PASS cancelled drag still releases
+PASS right hold opens remote; short right click remains native
+PASS left double-click opens without prior activation
+PASS single click with double-click trigger delivered after window
+PASS right double-click opens and middle-click trigger works
+PASS mouse X-button back is a command, not a click
+PASS Guide hint parser avoids unrelated menu names
+PASS ENDLIST does not recover before normal buffered end
+PASS bounded recovery budget does not silently reset
+PASS video-mask assist accepts color key and clips trusted preview
+PASS dark clear can reveal fullscreen video, not tiny black UI buttons
+PASS menu navigation suppresses stale black-fill video hole
+MiniClient core: 27 tests PASS
+PASS starts on one published segment, no fixed 10-second gate
+PASS manual startup threshold respected without blocking
+PASS short completed media does not wait for nonexistent segments
+PASS starvation pauses, replenished buffer resumes without undefined variable
+PASS user pause is not overridden by buffer refill
+PASS rebuffering reports play intent, not temporary video.pause
+PASS finished producer with unplayed content is not restarted
+PASS premature end recovery includes atomic absolute position and expected session
+PASS recovery counter persists across recovery sessions and caps at six
+PASS old asynchronous vendor load cannot attach to new recording
+PASS old status response cannot replace new session status
+PASS concurrent status polls share one request
+PASS seek startup reports offset without retaining prior currentTime
+PASS seek preserves pause intent
+PASS autoplay denied displays user action; gesture retries
+PASS normal end does not loop recovery
+PASS native HLS uses same startup and pause policy
+PASS old interrupted play promise cannot mutate replacement
+PASS completed recording duration replaces scheduled duration
+PASS first appended fragment expands 6s startup target to 180s without reloading
+PASS low-delay startup still fills a large ongoing reserve
+PASS forward reserve change applies while playing without resetting playback
+PASS settings unrelated to buffering preserve a library memory reduction
+PASS loader is woken with 20s still buffered instead of waiting to stall
+PASS refill continues while paused without autoplaying
+PASS normal appends fill reserve and continue topping up during long playback
+PASS no refill restart at target or when producer has no additional data
+PASS active slow fragment gets its timeout before a loader wakeup
+PASS buffer quota pressure reduces reserve and remains reduced
+PASS new recording resets phase and ignores old buffered callbacks
+PASS available server reserve is not discarded when producer stops advancing
+MiniClient playback: 31 tests PASS
+XML/package/WAR/MD5/new streaming classes OK
+  major version: 52
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+MiniClient protocol smoke PASS (initial/explicit resize + repaint, commands, mouse, text and bounds)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS type-5 recovery, 0 initial rejection(s), partial header, retained media/cache
+PASS type-5 recovery, 2 initial rejection(s), partial body, retained media/cache
+PASS pre-first-frame reset is terminal
+PASS unnegotiated reset is terminal
+PASS three rejected reconnects fail visibly without a fourth handshake
+PASS close cancels an in-flight reconnect handshake and prevents resurrection
+PASS explicit close terminates media/GFX without reconnect
+PASS server DEINIT closes cleanly instead of reconnecting
+PASS rejected startup cleans up both media and pending GFX socket
+PASS diagnostic property trace is bounded and omits property values
+PASS same-ID refresh retires old native sockets; stale stop cannot kill replacement
+Native recovery tests: 11 PASS (real loopback sockets, synthetic SageTV peer)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS growing file EOF waits and follows appended bytes
+PASS segment rollover follows new file and drains final bytes before EOF
+PASS byte-offset feeder spans completed segments
+PASS cancellation terminates EOF wait promptly
+PASS playlist duration ignores invalid/nonfinite/negative entries
+PASS FFmpeg probe cache reuse and explicit invalidation
+PASS real MPEG-2/AC-3 to H.264/AAC EVENT HLS transcode, duration and ENDLIST
+PASS pipe input does not force MPEG-TS on MPEG-PS recordings
+PASS separate monitor/stderr threads track producer growth beyond startup without browser polling
+PASS 240-second synthetic recording continues producing beyond the 180-second browser target and ends cleanly
+HLS runtime: 10 tests PASS (synthetic media; no hardware/SageTV live test)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS async servlet streams complete original bytes, 200/no invented Content-Length
+PASS continuous transport has no-cache/no-proxy-buffer headers
+PASS lazy-load reconnect resumes exact byte suffix without restarting producer
+PASS negative, nonnumeric and overflowing resume offsets rejected before async work
+PASS unproduced resume offset rejected with 416
+PASS HTTP Range rejected rather than fabricating total growing length
+PASS path traversal and non-session stream URL rejected
+PASS unsupported Jetty async deployment gives actionable HLS fallback error
+PASS closing a full client buffer retains producer session for later reconnect
+PASS caption endpoint refuses disabled caption stream
+PASS caption endpoint rejects unknown session instead of accepting arbitrary media path
+PASS asset preparation rejects arbitrary families/URLs without network access
+PASS streaming prefetch allowlist is limited to two pinned player assets
+Streaming servlet tests: 13 PASS (mock Servlet API; real async workers/file IO)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS validated per-browser options reject unsafe/invalid values and reset audio indices between recordings
+PASS codec-aware remux, preferred-language selection, actual stream index and strict compatibility validation
+PASS MPEG-2 A/53 extraction crosses fragmented TS chunks and preserves relative PTS
+PASS AVC and HEVC registered A/53 SEI extraction
+PASS caption PTS wrap handling does not jump by 26 hours
+PASS bounded binary caption sidecar, JSON packets and invalid cursor rejection
+PASS continuous stream follows growth and resumes exact bytes without re-running encoder
+PASS FFmpeg progress microseconds are converted to produced seconds
+PASS real ffprobe discovers MPEG-2 video and two language-tagged audio tracks
+PASS real MPEG-2 to H.264 MPEG-TS uses selected video bitrate/FPS and Spanish mono AAC settings
+PASS original-video CC side channel survives actual video transcode without asking encoder to preserve it
+PASS continuous stream status measures output duration/bytes and clean EOF without an HLS playlist
+PASS real compatible H.264/AAC remux uses video/audio copy without GPU encoder probe
+PASS real HLS compatibility path keeps user quality/audio-delay settings and server seek offset
+Streaming runtime: 14 tests PASS; real FFmpeg software path, no GPU or live SageTV test
+PASS web settings match validated server ranges and request names
+PASS MPEG-TS startup is independent of large reserve and never uses HLS segment gate
+PASS DVR lazy loading is enabled instead of live-edge chasing with unbounded download
+PASS MPEG-TS workers and backward-buffer cleanup are requested explicitly
+PASS progress/repeated status does not restart a healthy TS loader
+PASS pause keeps TS loader alive and never turns buffer refill into Play
+PASS TS error requests one guarded fallback at absolute recording position
+PASS strict no-fallback policy stops with useful error instead of changing codec
+PASS old asynchronous mpegts vendor load cannot attach over a replacement stream
+PASS TS seek tears down old MSE owner and preserves paused state
+PASS completed TS production with an unplayed reserve does not trigger recovery
+PASS unsupported MSE invokes compatibility fallback without claiming playback
+PASS CEA-608 side-channel triples reach the real decoder and render by media time
+PASS CEA-708 side-channel service selection remains separate from CC1
+PASS bounded caption history retains cursor position during long playback
+PASS real FFmpeg original-video sidecar renders HI using browser caption decoder
+PASS caption fetch responses from a stopped recording cannot paint the next video
+MPEG-TS/settings/captions: 17 tests PASS (mpegts.js adapter mocked; codec/CC parser tests real)
+node:events:486
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: write EPIPE
+    at afterWriteDispatched (node:internal/stream_base_commons:159:15)
+    at writeGeneric (node:internal/stream_base_commons:150:3)
+    at Socket._writeGeneric (node:net:966:11)
+    at Socket._write (node:net:978:8)
+    at writeOrBuffer (node:internal/streams/writable:570:12)
+    at _write (node:internal/streams/writable:499:10)
+    at Writable.write (node:internal/streams/writable:508:10)
+    at PipeTransport.send (/opt/pyvenv/lib/python3.13/site-packages/playwright/driver/package/lib/server/utils/pipeTransport.js:52:21)
+    at dispatcherConnection.onmessage (/opt/pyvenv/lib/python3.13/site-packages/playwright/driver/package/lib/cli/driver.js:60:59)
+    at DispatcherConnection.sendEvent (/opt/pyvenv/lib/python3.13/site-packages/playwright/driver/package/lib/server/dispatchers/dispatcher.js:180:10)
+Emitted 'error' event on Socket instance at:
+    at emitErrorNT (node:internal/streams/destroy:170:8)
+    at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+    at process.processTicksAndRejections (node:internal/process/task_queues:89:21) {
+  errno: -32,
+  code: 'EPIPE',
+  syscall: 'write'
+}
+
+Node.js v24.11.1

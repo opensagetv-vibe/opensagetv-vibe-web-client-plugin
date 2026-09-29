@@ -1,0 +1,10 @@
+/.gradle/
+/build/
+/output/
+/artifacts/*
+!/artifacts/downloads/
+/dist/SageTVWebPlayer.war
+/dist/local-install/SageTVPluginsDev.d/*.zip
+__pycache__/
+*.pyc
+.deps/

@@ -1,0 +1,122 @@
+PASS async servlet streams complete original bytes, 200/no invented Content-Length
+PASS continuous transport has no-cache/no-proxy-buffer headers
+PASS lazy-load reconnect resumes exact byte suffix without restarting producer
+PASS negative, nonnumeric and overflowing resume offsets rejected before async work
+PASS unproduced resume offset rejected with 416
+PASS HTTP Range rejected rather than fabricating total growing length
+PASS path traversal and non-session stream URL rejected
+PASS unsupported Jetty async deployment gives actionable HLS fallback error
+PASS closing a full client buffer retains producer session for later reconnect
+PASS caption endpoint refuses disabled caption stream
+PASS caption endpoint rejects unknown session instead of accepting arbitrary media path
+PASS versioned subtitle cue endpoint does not drain future cues
+PASS versioned subtitle cue endpoint drains only current-session due cues
+PASS seek generation clears queued subtitle cues
+PASS asset preparation rejects arbitrary families/URLs without network access
+PASS streaming prefetch allowlist is limited to two pinned player assets
+Streaming servlet tests: 16 PASS (mock Servlet API; real async workers/file IO)
+PASS validated per-browser options reject unsafe/invalid values and reset audio indices between recordings
+PASS codec-aware remux, preferred-language selection, actual stream index and strict compatibility validation
+PASS MPEG-2 A/53 extraction crosses fragmented TS chunks and preserves relative PTS
+PASS AVC and HEVC registered A/53 SEI extraction
+PASS caption PTS wrap handling does not jump by 26 hours
+PASS bounded binary caption sidecar, JSON packets and invalid cursor rejection
+PASS continuous stream follows growth and resumes exact bytes without re-running encoder
+PASS FFmpeg progress microseconds are converted to produced seconds
+PASS real ffprobe discovers MPEG-2 video and two language-tagged audio tracks
+PASS real MPEG-2 to H.264 MPEG-TS uses selected video bitrate/FPS and Spanish mono AAC settings
+PASS original-video CC side channel survives actual video transcode without asking encoder to preserve it
+PASS continuous stream status measures output duration/bytes and clean EOF without an HLS playlist
+PASS real compatible H.264/AAC remux uses video/audio copy without GPU encoder probe
+PASS real HLS compatibility path keeps user quality/audio-delay settings and server seek offset
+Streaming runtime: 14 tests PASS; real FFmpeg software path, no GPU or live SageTV test
+PASS web settings match validated server ranges, migrate schema 1, and preserve literal CEA choices
+PASS MPEG-TS startup is independent of large reserve and never uses HLS segment gate
+PASS DVR lazy loading is enabled instead of live-edge chasing with unbounded download
+PASS MPEG-TS workers and backward-buffer cleanup are requested explicitly
+PASS progress/repeated status does not restart a healthy TS loader
+PASS pause keeps TS loader alive and never turns buffer refill into Play
+PASS TS error requests one guarded fallback at absolute recording position
+PASS strict no-fallback policy stops with useful error instead of changing codec
+PASS old asynchronous mpegts vendor load cannot attach over a replacement stream
+PASS TS seek tears down old MSE owner and preserves paused state
+PASS completed TS production with an unplayed reserve does not trigger recovery
+PASS unsupported MSE invokes compatibility fallback without claiming playback
+PASS CEA-608 side-channel triples reach the real decoder and render by media time
+PASS CEA-708 side-channel service selection remains separate from CC1
+PASS bounded caption history retains cursor position during long playback
+PASS real FFmpeg original-video sidecar renders HI using browser caption decoder
+PASS caption fetch responses from a stopped recording cannot paint the next video
+MPEG-TS/settings/captions: 17 tests PASS (mpegts.js adapter mocked; codec/CC parser tests real)
+PASS teletext-188.ts discovers page 888 service across arbitrary source chunks
+PASS teletext-188.ts decodes first Level-1 row at source PTS origin
+PASS teletext-188.ts decodes ordered page update
+PASS teletext-188.ts emits erase/clear cue
+PASS teletext-192.ts discovers page 888 service across arbitrary source chunks
+PASS teletext-192.ts decodes first Level-1 row at source PTS origin
+PASS teletext-192.ts decodes ordered page update
+PASS teletext-192.ts emits erase/clear cue
+PASS teletext-204.ts discovers page 888 service across arbitrary source chunks
+PASS teletext-204.ts decodes first Level-1 row at source PTS origin
+PASS teletext-204.ts decodes ordered page update
+PASS teletext-204.ts emits erase/clear cue
+PASS client A Teletext parser cannot publish into client B cue queue
+PASS client B has independent parser/page state
+PASS stopping client A leaves client B unchanged
+PASS DVB-bitmap-only transport is not misclassified as Teletext
+PASS negative transport diagnostic distinguishes no Teletext descriptor
+PASS pre-seek cues exist
+PASS seek clears old cue queue before new generation
+PASS seek generation reanchors Teletext to new recording position
+PASS positive caption delay presents Teletext later without changing source PTS
+PASS presentation drain is driven by browser media time, not native OSD lifetime
+PASS FLUSH retires prior Teletext callbacks
+PASS explicit page/language resolves seeded service before PES arrives
+PASS virtual CC2 Teletext slot resolves a distinct service when available
+PASS Off remains authoritative for local Teletext
+PASS bounded diagnostics distinguish descriptor/PES/data-unit/decoded stages without media payload
+PASS Teletext diagnostics do not export decoded subtitle text
+P03 Teletext subtitle: 28 PASS
+PASS Teletext controller renders service while no SageTV OSD event is present
+PASS Teletext controller advances from independent browser video clock
+PASS Teletext polling continues while UI/OSD is idle
+PASS Teletext clear cue removes local text
+PASS stopping playback cancels Teletext poll lifecycle
+P03 browser Teletext controller: 5 PASS
+PASS DVB 2bpp discovers descriptor 0x59 identity
+PASS DVB 2bpp emits RGBA bitmap cue at first PTS
+PASS DVB 2bpp preserves canvas and region placement
+PASS DVB 2bpp RGBA/alpha pixels match independent golden hash
+PASS DVB 2bpp page clear emits a timed bitmap clear
+PASS DVB 4bpp discovers descriptor 0x59 identity
+PASS DVB 4bpp emits RGBA bitmap cue at first PTS
+PASS DVB 4bpp preserves canvas and region placement
+PASS DVB 4bpp RGBA/alpha pixels match independent golden hash
+PASS DVB 4bpp page clear emits a timed bitmap clear
+PASS DVB 8bpp discovers descriptor 0x59 identity
+PASS DVB 8bpp emits RGBA bitmap cue at first PTS
+PASS DVB 8bpp preserves canvas and region placement
+PASS DVB 8bpp RGBA/alpha pixels match independent golden hash
+PASS DVB 8bpp page clear emits a timed bitmap clear
+PASS DVB parser accepts 192-byte transport framing
+PASS DVB parser accepts 204-byte transport framing
+PASS saved DVB PID may be configured before asynchronous discovery
+PASS late PMT discovery reapplies saved DVB PID/composition selection
+PASS unknown ordinary-video DVB PID fails closed instead of choosing another track
+PASS media command PID may be accepted pending asynchronous PMT discovery
+PASS late discovery of other DVB services does not fall back from an explicitly requested unknown PID
+PASS media command 36/type 1 adapter selects DVB by physical source PID
+PASS media command 36 DVB disable sentinel 8192 clears local bitmap selection
+PASS DVB adapter rejects audio/DVD-unrelated stream type instead of reusing subtitle semantics
+PASS DVB cues exist before seek
+PASS seek generation reanchors DVB display set and retires stale cues
+PASS FLUSH retires prior DVB callbacks
+PASS EOS/stop emits final DVB clear
+PASS Teletext-only transport is not misclassified as DVB bitmap
+PASS DVB diagnostics expose bounded decode stages
+PASS DVB diagnostics do not export media or decoded pixel payloads
+P04 DVB bitmap subtitle: 32 PASS
+PASS DVB controller renders straight-alpha RGBA cue on the bitmap path
+PASS DVB cue timeout clears stale bitmap without waiting for a new video segment
+PASS stopping playback cancels DVB bitmap poll lifecycle
+P04 browser DVB controller: 3 PASS

@@ -1,0 +1,14 @@
+PASS profile has explicit kind/schema
+PASS profile declares scope boundaries
+PASS identity and per-session track choices are excluded
+PASS per-session PID/page choices are excluded
+PASS import preview reports unknown keys
+PASS import preview retains approved saved defaults
+PASS unknown import keys are bounded
+PASS future profile schema fails closed
+PASS recognized credentials are redacted
+PASS caption/media content is omitted while counters survive
+PASS caption diagnostics resolve slot/codec/PID/page/render owner
+PASS ordinary subtitle diagnostics expose timing counters without subtitle text
+PASS effective transcode diagnostics distinguish encode/decode mode
+P14 support/profile helpers: 13 tests PASS

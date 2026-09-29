@@ -1,0 +1,24 @@
+REPRODUCED untouched v3.2.3: black-clear paint resized video from {"x": 0.28125, "y": 56.34375, "width": 1599.40625, "height": 943.65625} to {"x": 104.25, "y": 74.328125, "width": 1391.484375, "height": 905.65625}
+PASS automatic UI fills browser content below toolbar without added borders
+PASS all 30 bundled Android icon bytes decode with accessible labels
+PASS transparent edge overlay has original Home/help, D-pad, transport and tool groups
+PASS native inset black CLEAR_RECT no longer changes fullscreen video bounds
+PASS full-playback edge mattes reveal video instead of adding server black bars
+PASS OSD show/hide preserves translucent native panels without moving video
+PASS opening and dismissing browser overlay never pauses/restarts/seeks native playback
+PASS native Source aspect notification does not override selected Fill browser mode
+PASS aspect icon cycles Fill, Fit and Stretch without transcoder restart
+PASS video, audio and caption icons open the working browser settings sections
+PASS info, scoped playback check, stats and nested Escape are functional
+PASS diagnostic export includes requested/effective video placement and version
+PASS keypad/timeline extras remain under Help and keyboard sends literal text
+PASS small native/color-key previews still match native coordinates through menu changes
+PASS native placement override is available and browser placement restores edge-to-edge
+PASS mouse coordinates use the same full-window UI transform
+PASS desktop, phone, short-landscape and capped-native layouts stay in bounds without icon overlap
+PASS render-only enter/exit reflows video and UI to the actual browser height
+PASS no JavaScript exceptions throughout production UI/layout test
+PASS one-time default migration does not overwrite a subsequent explicit Fit choice
+PASS fixed 16:9 UI mode does not limit independent fullscreen video area
+PASS real H.264 fixture decodes with Fill/Fit/Stretch and stable OSD geometry
+Vibe overlay/display Chromium: 22 tests PASS (synthetic native/vendor transport; actual bundled assets and local video)

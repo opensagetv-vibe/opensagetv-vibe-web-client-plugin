@@ -1,0 +1,16 @@
+PASS production scripts connect and render actual GFX packets without errors
+PASS real pointer hold opens remote with no underlying click
+PASS real short click sends exactly one atomic click
+PASS held remote key repeats and stops on pointer release
+PASS SageTV Options remains distinct from local hold menu
+PASS keyboard text delivered literally as UTF-8 POST
+PASS Guide click adds SELECT assist after native click
+PASS right-hold setting opens remote without native context menu
+PASS drag sends release but never activation click
+PASS render-only view fits logical 16:9 canvas and Escape restores toolbar
+PASS mobile remote fits viewport without horizontal clipping
+PASS dark SageTV CLEAR_RECT reveals active video instead of covering it black
+PASS menu remains opaque while color-key preview moves/resizes underlying video
+PASS negative texture dimensions do not mirror text or erase surrounding menu
+PASS no browser JavaScript exceptions throughout gestures/settings
+Chromium browser smoke: 15 tests PASS (offline mocked transport; not live playback)

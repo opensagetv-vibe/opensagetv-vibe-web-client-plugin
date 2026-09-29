@@ -1,0 +1,1443 @@
+{
+  "schema_version": 1,
+  "revision": 2,
+  "available_synthetic_files": 23,
+  "unavailable_fixture_groups": 12,
+  "no_user_media_bundled": true,
+  "files": [
+    {
+      "id": "F-TEXT-SRT",
+      "path": "tests/parity/fixtures/unicode-overlap.srt",
+      "kind": "text",
+      "origin": "generated synthetic fixture",
+      "sha256": "88e526a70e7017ce058579661e5c8e47ce53c8cbca4bf3fe5c0306bb34c8130b",
+      "bytes": 201,
+      "expected": {
+        "cues": 3,
+        "overlap": [
+          1.5,
+          2.5
+        ],
+        "script_execution": false
+      },
+      "validation_boundary": "Text and hostile markup input only; no current browser subtitle support implied.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-TEXT-VTT",
+      "path": "tests/parity/fixtures/unicode-position.vtt",
+      "kind": "text",
+      "origin": "generated synthetic fixture",
+      "sha256": "102f12968536e647812b7230305724ce10ba469b31eb5226851ead3828754d13",
+      "bytes": 153,
+      "expected": {
+        "cues": 2,
+        "overlap": [
+          1.5,
+          2.5
+        ],
+        "script_execution": false
+      },
+      "validation_boundary": "Input validity and hashes only; P06 will test rendering.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-TTX-188",
+      "path": "tests/parity/fixtures/teletext-188.ts",
+      "kind": "transport-parser-vector",
+      "origin": "generated synthetic fixture",
+      "sha256": "d325f78b5ed304bfe0fdceb4a3b38671845771ca44e13231682a9ceb59d7fc06",
+      "bytes": 3008,
+      "expected": {
+        "packet_size": 188,
+        "pid": 300,
+        "page": 888,
+        "language": "eng",
+        "cue_source_pts": [
+          90000,
+          180000,
+          270000
+        ],
+        "texts": [
+          "P01 TELETEXT VECTOR",
+          "SECOND PAGE UPDATE",
+          ""
+        ],
+        "presentation_origin": "P02 must map source PTS to media time explicitly"
+      },
+      "validation_boundary": "Synthetic subtitle-only TS: no video and no field or MSE playback claim.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-TTX-192",
+      "path": "tests/parity/fixtures/teletext-192.ts",
+      "kind": "transport-parser-vector",
+      "origin": "generated synthetic fixture",
+      "sha256": "34fab59fcc3a169452820341b54b360bb6f791dd3112b3292ab6ec3499fbe7e5",
+      "bytes": 3072,
+      "expected": {
+        "packet_size": 192,
+        "pid": 300,
+        "page": 888,
+        "language": "eng",
+        "cue_source_pts": [
+          90000,
+          180000,
+          270000
+        ],
+        "texts": [
+          "P01 TELETEXT VECTOR",
+          "SECOND PAGE UPDATE",
+          ""
+        ],
+        "presentation_origin": "P02 must map source PTS to media time explicitly"
+      },
+      "validation_boundary": "Synthetic subtitle-only TS: no video and no field or MSE playback claim.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-TTX-204",
+      "path": "tests/parity/fixtures/teletext-204.ts",
+      "kind": "transport-parser-vector",
+      "origin": "generated synthetic fixture",
+      "sha256": "cfc5b0064c0f55d32dfdd89355860e7b0d9b1a1cf00ccecf98ee1c0aa5f914ef",
+      "bytes": 3264,
+      "expected": {
+        "packet_size": 204,
+        "pid": 300,
+        "page": 888,
+        "language": "eng",
+        "cue_source_pts": [
+          90000,
+          180000,
+          270000
+        ],
+        "texts": [
+          "P01 TELETEXT VECTOR",
+          "SECOND PAGE UPDATE",
+          ""
+        ],
+        "presentation_origin": "P02 must map source PTS to media time explicitly"
+      },
+      "validation_boundary": "Synthetic subtitle-only TS: no video and no field or MSE playback claim.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-DVB-2",
+      "path": "tests/parity/fixtures/dvb-2bpp.ts",
+      "kind": "transport-parser-vector",
+      "origin": "generated synthetic fixture",
+      "sha256": "17bcc96aede60c6a981bcbcbbd137f68a650f50fd78772acff76635545787312",
+      "bytes": 2256,
+      "expected": {
+        "pid": 336,
+        "language": "eng",
+        "composition_page": 1,
+        "ancillary_page": 1,
+        "bit_depth": 2,
+        "canvas": [
+          720,
+          576
+        ],
+        "rect": [
+          100,
+          400,
+          6,
+          2
+        ],
+        "opaque_rect": [
+          100,
+          400,
+          4,
+          2
+        ],
+        "rgba_sha256": "771a34bc5aa98062a208baf451c76a865cfb3665116ab217941ec8c7901b696e",
+        "clear_source_pts": 270000
+      },
+      "validation_boundary": "Golden-input construction only: exact pixel/alpha decoder output must be independently verified in P04. Contains no Teletext descriptor.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-DVB-4",
+      "path": "tests/parity/fixtures/dvb-4bpp.ts",
+      "kind": "transport-parser-vector",
+      "origin": "generated synthetic fixture",
+      "sha256": "9dd78ce08aa9582e3f51d5f7f372571cf9d1ae686f88b16bc65abce157bca9bd",
+      "bytes": 2256,
+      "expected": {
+        "pid": 336,
+        "language": "eng",
+        "composition_page": 1,
+        "ancillary_page": 1,
+        "bit_depth": 4,
+        "canvas": [
+          720,
+          576
+        ],
+        "rect": [
+          100,
+          400,
+          6,
+          2
+        ],
+        "opaque_rect": [
+          100,
+          400,
+          4,
+          2
+        ],
+        "rgba_sha256": "771a34bc5aa98062a208baf451c76a865cfb3665116ab217941ec8c7901b696e",
+        "clear_source_pts": 270000
+      },
+      "validation_boundary": "Golden-input construction only: exact pixel/alpha decoder output must be independently verified in P04. Contains no Teletext descriptor.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-DVB-8",
+      "path": "tests/parity/fixtures/dvb-8bpp.ts",
+      "kind": "transport-parser-vector",
+      "origin": "generated synthetic fixture",
+      "sha256": "6181f3b9e51615278a695c571b6602fbb852355a96f8966c66dc6c02f4971b09",
+      "bytes": 2256,
+      "expected": {
+        "pid": 336,
+        "language": "eng",
+        "composition_page": 1,
+        "ancillary_page": 1,
+        "bit_depth": 8,
+        "canvas": [
+          720,
+          576
+        ],
+        "rect": [
+          100,
+          400,
+          6,
+          2
+        ],
+        "opaque_rect": [
+          100,
+          400,
+          4,
+          2
+        ],
+        "rgba_sha256": "771a34bc5aa98062a208baf451c76a865cfb3665116ab217941ec8c7901b696e",
+        "clear_source_pts": 270000
+      },
+      "validation_boundary": "Golden-input construction only: exact pixel/alpha decoder output must be independently verified in P04. Contains no Teletext descriptor.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-PGS",
+      "path": "tests/parity/fixtures/white-rectangle.sup",
+      "kind": "subtitle-parser-vector",
+      "origin": "generated synthetic fixture",
+      "sha256": "ab5f95b07c94bc5699bdcd1d55a87b76e3cdac2a80c52568a92ae1f9c7ade11d",
+      "bytes": 138,
+      "expected": {
+        "canvas": [
+          720,
+          576
+        ],
+        "rect": [
+          100,
+          400,
+          4,
+          2
+        ],
+        "show_source_pts": 90000,
+        "clear_source_pts": 270000,
+        "opaque_pixels": 8
+      },
+      "validation_boundary": "PGS input construction only; P06 must verify decoder/render output and file embedding.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-EMPTY",
+      "path": "tests/parity/fixtures/empty.ts",
+      "kind": "negative",
+      "origin": "generated synthetic fixture",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "expected": {
+        "startup_should_fail": true
+      },
+      "validation_boundary": "Expected-safe-failure input, never an A/V pass.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-TRUNCATED",
+      "path": "tests/parity/fixtures/truncated.ts",
+      "kind": "negative",
+      "origin": "generated synthetic fixture",
+      "sha256": "08351343e07a6608bdcb7409f9b94896943462bcc2a345a044501bc533f00a37",
+      "bytes": 73,
+      "expected": {
+        "incomplete_ts_header_or_packet": true,
+        "should_not_emit_cues": true
+      },
+      "validation_boundary": "Malformed containment input; never an A/V pass.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-MSE-TS",
+      "path": "tests/parity/fixtures/av-h264-aac.ts",
+      "kind": "av",
+      "origin": "generated synthetic fixture",
+      "sha256": "b7356ae8ed47159f710428d44b461c7243c02f26b54d3ee9dd111dc9f33561ca",
+      "bytes": 974216,
+      "expected": {
+        "video": "h264",
+        "audio": "aac",
+        "duration_seconds": 8
+      },
+      "validation_boundary": "Real FFmpeg output; browser MSE acceptance is a separate blocked gate.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "codec_tag_string": "[27][0][0][0]",
+            "codec_tag": "0x001b",
+            "width": 320,
+            "height": 180,
+            "coded_width": 320,
+            "coded_height": 180,
+            "closed_captions": 0,
+            "film_grain": 0,
+            "has_b_frames": 0,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 13,
+            "chroma_location": "left",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "false",
+            "nal_length_size": "0",
+            "ts_id": "1",
+            "ts_packetsize": "188",
+            "id": "0x100",
+            "r_frame_rate": "30/1",
+            "avg_frame_rate": "30/1",
+            "time_base": "1/90000",
+            "start_pts": 127920,
+            "start_time": "1.421333",
+            "duration_ts": 720000,
+            "duration": "8.000000",
+            "bits_per_raw_sample": "8",
+            "extradata_size": 34,
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            }
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "codec_tag_string": "[15][0][0][0]",
+            "codec_tag": "0x000f",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "ts_id": "1",
+            "ts_packetsize": "188",
+            "id": "0x101",
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/90000",
+            "start_pts": 126000,
+            "start_time": "1.400000",
+            "duration_ts": 716160,
+            "duration": "7.957333",
+            "bit_rate": "99018",
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            }
+          }
+        ],
+        "format": {
+          "nb_streams": 2,
+          "nb_programs": 1,
+          "nb_stream_groups": 0,
+          "format_name": "mpegts",
+          "format_long_name": "MPEG-TS (MPEG-2 Transport Stream)",
+          "start_time": "1.400000",
+          "duration": "8.021333",
+          "size": "974216",
+          "bit_rate": "971625",
+          "probe_score": 50
+        }
+      },
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-MSE-HLS",
+      "path": "tests/parity/fixtures/hls/index.m3u8",
+      "kind": "playlist",
+      "origin": "generated synthetic fixture",
+      "sha256": "c46a605fb54d527076b3161145434896cad9c439c7fe639f53f786a33abf8734",
+      "bytes": 369,
+      "expected": {
+        "video": "h264",
+        "audio": "aac",
+        "endlist": true
+      },
+      "validation_boundary": "Actual remuxed HLS; no real hls.js MSE pass is claimed.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "codec_tag_string": "[27][0][0][0]",
+            "codec_tag": "0x001b",
+            "width": 320,
+            "height": 180,
+            "coded_width": 320,
+            "coded_height": 180,
+            "closed_captions": 0,
+            "film_grain": 0,
+            "has_b_frames": 0,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 13,
+            "chroma_location": "left",
+            "refs": 1,
+            "is_avc": "false",
+            "nal_length_size": "0",
+            "r_frame_rate": "30/1",
+            "avg_frame_rate": "30/1",
+            "time_base": "1/90000",
+            "start_pts": 127920,
+            "start_time": "1.421333",
+            "bits_per_raw_sample": "8",
+            "extradata_size": 34,
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "variant_bitrate": "0"
+            }
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "codec_tag_string": "[15][0][0][0]",
+            "codec_tag": "0x000f",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/90000",
+            "start_pts": 126000,
+            "start_time": "1.400000",
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "variant_bitrate": "0"
+            }
+          }
+        ],
+        "format": {
+          "nb_streams": 2,
+          "nb_programs": 1,
+          "nb_stream_groups": 0,
+          "format_name": "hls",
+          "format_long_name": "Apple HTTP Live Streaming",
+          "start_time": "1.400000",
+          "duration": "8.000000",
+          "size": "369",
+          "bit_rate": "369",
+          "probe_score": 100
+        }
+      },
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-MSE-HLS-segment000",
+      "path": "tests/parity/fixtures/hls/segment000.ts",
+      "kind": "av-segment",
+      "origin": "generated synthetic fixture",
+      "sha256": "7ff2e4141872aafe5f92dd26f5891ba2ab1397298cf2d3b25c0b55bbfc610080",
+      "bytes": 109980,
+      "expected": {},
+      "validation_boundary": "Constituent of F-MSE-HLS.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-MSE-HLS-segment001",
+      "path": "tests/parity/fixtures/hls/segment001.ts",
+      "kind": "av-segment",
+      "origin": "generated synthetic fixture",
+      "sha256": "90784263f7ef9fa73722eb1a37cda9ef40fb81878aa51703f8287d0ee6ee6e04",
+      "bytes": 111860,
+      "expected": {},
+      "validation_boundary": "Constituent of F-MSE-HLS.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-MSE-HLS-segment002",
+      "path": "tests/parity/fixtures/hls/segment002.ts",
+      "kind": "av-segment",
+      "origin": "generated synthetic fixture",
+      "sha256": "9ba6c28b93d1894ec88c7b34301c0365f82bc7ae7be4a6b9a14761ccba5d8fe1",
+      "bytes": 117876,
+      "expected": {},
+      "validation_boundary": "Constituent of F-MSE-HLS.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-MSE-HLS-segment003",
+      "path": "tests/parity/fixtures/hls/segment003.ts",
+      "kind": "av-segment",
+      "origin": "generated synthetic fixture",
+      "sha256": "b9cfb743f6da888fcbb81a8e027e192f2dc58e0ae8d5385d5c2c63bc2734d274",
+      "bytes": 122952,
+      "expected": {},
+      "validation_boundary": "Constituent of F-MSE-HLS.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-MSE-HLS-segment004",
+      "path": "tests/parity/fixtures/hls/segment004.ts",
+      "kind": "av-segment",
+      "origin": "generated synthetic fixture",
+      "sha256": "025b35fade6667c0e2abfb18bbdaf2c96318993223bf7257c63e42001accf4e1",
+      "bytes": 117688,
+      "expected": {},
+      "validation_boundary": "Constituent of F-MSE-HLS.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-MSE-HLS-segment005",
+      "path": "tests/parity/fixtures/hls/segment005.ts",
+      "kind": "av-segment",
+      "origin": "generated synthetic fixture",
+      "sha256": "5bff2c4a8eeebc31564c38e9d0cc25297760c16fcba61b3b071cc3af568ab82c",
+      "bytes": 116560,
+      "expected": {},
+      "validation_boundary": "Constituent of F-MSE-HLS.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-MSE-HLS-segment006",
+      "path": "tests/parity/fixtures/hls/segment006.ts",
+      "kind": "av-segment",
+      "origin": "generated synthetic fixture",
+      "sha256": "3c4291d5cc7843f2d16b701051a9ea94b2ad6075d1fe4fbceaec58a7259daf99",
+      "bytes": 124080,
+      "expected": {},
+      "validation_boundary": "Constituent of F-MSE-HLS.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-MSE-HLS-segment007",
+      "path": "tests/parity/fixtures/hls/segment007.ts",
+      "kind": "av-segment",
+      "origin": "generated synthetic fixture",
+      "sha256": "8b94491b9a0c44f76c2eacaacd49e593271dd7c15336c9cf84ed68e493a00eca",
+      "bytes": 126712,
+      "expected": {},
+      "validation_boundary": "Constituent of F-MSE-HLS.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-RESERVE",
+      "path": "tests/parity/fixtures/long-reserve-240s.ts",
+      "kind": "av",
+      "origin": "generated synthetic fixture",
+      "sha256": "f327f349ddc52500af45d09c7f737745d5905fd8e1ce7ce892d6e301a7590200",
+      "bytes": 6448212,
+      "expected": {
+        "duration_seconds": 240,
+        "exceeds_default_reserve_seconds": 180
+      },
+      "validation_boundary": "240-second generated input, not a three-hour soak or sustained browser proof.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_long_name": "H.264 / AVC / MPEG-4 AVC / MPEG-4 part 10",
+            "profile": "Constrained Baseline",
+            "codec_type": "video",
+            "codec_tag_string": "[27][0][0][0]",
+            "codec_tag": "0x001b",
+            "width": 160,
+            "height": 96,
+            "coded_width": 160,
+            "coded_height": 96,
+            "closed_captions": 0,
+            "film_grain": 0,
+            "has_b_frames": 0,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "5:3",
+            "pix_fmt": "yuv420p",
+            "level": 10,
+            "chroma_location": "left",
+            "field_order": "progressive",
+            "refs": 1,
+            "is_avc": "false",
+            "nal_length_size": "0",
+            "ts_id": "1",
+            "ts_packetsize": "188",
+            "id": "0x100",
+            "r_frame_rate": "15/1",
+            "avg_frame_rate": "15/1",
+            "time_base": "1/90000",
+            "start_pts": 127920,
+            "start_time": "1.421333",
+            "duration_ts": 21600000,
+            "duration": "240.000000",
+            "bits_per_raw_sample": "8",
+            "extradata_size": 35,
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            }
+          },
+          {
+            "index": 1,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "codec_tag_string": "[15][0][0][0]",
+            "codec_tag": "0x000f",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "ts_id": "1",
+            "ts_packetsize": "188",
+            "id": "0x101",
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/90000",
+            "start_pts": 126000,
+            "start_time": "1.400000",
+            "duration_ts": 21576960,
+            "duration": "239.744000",
+            "bit_rate": "50873",
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            }
+          }
+        ],
+        "format": {
+          "nb_streams": 2,
+          "nb_programs": 1,
+          "nb_stream_groups": 0,
+          "format_name": "mpegts",
+          "format_long_name": "MPEG-TS (MPEG-2 Transport Stream)",
+          "start_time": "1.400000",
+          "duration": "240.021333",
+          "size": "6448212",
+          "bit_rate": "214921",
+          "probe_score": 50
+        }
+      },
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-CEA-AUDIO",
+      "path": "tests/parity/fixtures/mpeg2-cc-multiaudio.ts",
+      "kind": "av",
+      "origin": "generated synthetic fixture",
+      "sha256": "5138dbe557ebfaaf2527dc1f3700052edb9f7fcf7b70b0aba1de953f43dad39c",
+      "bytes": 515684,
+      "expected": {
+        "video": "mpeg2video",
+        "audio": "ac3",
+        "languages": [
+          "nar",
+          "eng",
+          "spa"
+        ],
+        "source_a53_insertions": 180,
+        "cea608_text": "HI"
+      },
+      "validation_boundary": "Synthetic A/53 pattern adapted from existing StreamingRuntimeSmoke; no real broadcast language/CEA metadata claim.",
+      "allowed_operations": [
+        "read",
+        "copy to disposable test directory",
+        "seek/pause/replay in isolated tests"
+      ],
+      "redistributable": true,
+      "probe": {
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "mpeg2video",
+            "codec_long_name": "MPEG-2 video",
+            "profile": "Main",
+            "codec_type": "video",
+            "codec_tag_string": "[2][0][0][0]",
+            "codec_tag": "0x0002",
+            "width": 320,
+            "height": 180,
+            "coded_width": 0,
+            "coded_height": 0,
+            "closed_captions": 0,
+            "film_grain": 0,
+            "has_b_frames": 1,
+            "sample_aspect_ratio": "1:1",
+            "display_aspect_ratio": "16:9",
+            "pix_fmt": "yuv420p",
+            "level": 8,
+            "color_range": "tv",
+            "chroma_location": "left",
+            "field_order": "progressive",
+            "refs": 1,
+            "ts_id": "1",
+            "ts_packetsize": "188",
+            "id": "0x100",
+            "r_frame_rate": "30/1",
+            "avg_frame_rate": "30/1",
+            "time_base": "1/90000",
+            "start_pts": 129480,
+            "start_time": "1.438667",
+            "duration_ts": 540000,
+            "duration": "6.000000",
+            "extradata_size": 22,
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "side_data_list": [
+              {
+                "side_data_type": "CPB properties",
+                "max_bitrate": 0,
+                "min_bitrate": 0,
+                "avg_bitrate": 0,
+                "buffer_size": 49152,
+                "vbv_delay": -1
+              }
+            ]
+          },
+          {
+            "index": 1,
+            "codec_name": "ac3",
+            "codec_long_name": "ATSC A/52A (AC-3)",
+            "codec_type": "audio",
+            "codec_tag_string": "AC-3",
+            "codec_tag": "0x332d4341",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "ts_id": "1",
+            "ts_packetsize": "188",
+            "id": "0x101",
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/90000",
+            "start_pts": 126000,
+            "start_time": "1.400000",
+            "duration_ts": 527040,
+            "duration": "5.856000",
+            "bit_rate": "96000",
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "nar"
+            }
+          },
+          {
+            "index": 2,
+            "codec_name": "ac3",
+            "codec_long_name": "ATSC A/52A (AC-3)",
+            "codec_type": "audio",
+            "codec_tag_string": "AC-3",
+            "codec_tag": "0x332d4341",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "ts_id": "1",
+            "ts_packetsize": "188",
+            "id": "0x102",
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/90000",
+            "start_pts": 126000,
+            "start_time": "1.400000",
+            "duration_ts": 527040,
+            "duration": "5.856000",
+            "bit_rate": "96000",
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "eng"
+            }
+          },
+          {
+            "index": 3,
+            "codec_name": "ac3",
+            "codec_long_name": "ATSC A/52A (AC-3)",
+            "codec_type": "audio",
+            "codec_tag_string": "AC-3",
+            "codec_tag": "0x332d4341",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "bits_per_sample": 0,
+            "initial_padding": 0,
+            "ts_id": "1",
+            "ts_packetsize": "188",
+            "id": "0x103",
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/90000",
+            "start_pts": 126000,
+            "start_time": "1.400000",
+            "duration_ts": 527040,
+            "duration": "5.856000",
+            "bit_rate": "96000",
+            "disposition": {
+              "default": 0,
+              "dub": 0,
+              "original": 0,
+              "comment": 0,
+              "lyrics": 0,
+              "karaoke": 0,
+              "forced": 0,
+              "hearing_impaired": 0,
+              "visual_impaired": 0,
+              "clean_effects": 0,
+              "attached_pic": 0,
+              "timed_thumbnails": 0,
+              "non_diegetic": 0,
+              "captions": 0,
+              "descriptions": 0,
+              "metadata": 0,
+              "dependent": 0,
+              "still_image": 0,
+              "multilayer": 0
+            },
+            "tags": {
+              "language": "spa"
+            }
+          }
+        ],
+        "format": {
+          "nb_streams": 4,
+          "nb_programs": 1,
+          "nb_stream_groups": 0,
+          "format_name": "mpegts",
+          "format_long_name": "MPEG-TS (MPEG-2 Transport Stream)",
+          "start_time": "1.400000",
+          "duration": "6.038667",
+          "size": "515684",
+          "bit_rate": "683175",
+          "probe_score": 50
+        }
+      },
+      "availability": "AVAILABLE_SYNTHETIC",
+      "webplayer_feature_acceptance": "NOT_RUN"
+    },
+    {
+      "id": "F-UK-TTX-REAL",
+      "title": "Unchanged authorized UK Teletext positive sample",
+      "availability": "UNAVAILABLE",
+      "path": null,
+      "sha256": null,
+      "origin": "Not provided or not authored in this checkpoint",
+      "expected": {
+        "description": "Real page-888 service, source hash/PID/language, original media timing and retained primary audio"
+      },
+      "test_ids": [
+        "TTX-02",
+        "TTX-03"
+      ],
+      "allowed_operations": [
+        "read-only verification after explicit source provisioning",
+        "isolated test copy"
+      ],
+      "redistributable": false,
+      "webplayer_feature_acceptance": "NOT_RUN",
+      "reason": "Absence is recorded; no synthetic or source-only result is substituted for this gate."
+    },
+    {
+      "id": "F-UK-DVB-REAL",
+      "title": "Unchanged authorized UK DVB bitmap sample",
+      "availability": "UNAVAILABLE",
+      "path": null,
+      "sha256": null,
+      "origin": "Not provided or not authored in this checkpoint",
+      "expected": {
+        "description": "Real DVB PID/page/ancillary ID, visible bitmap, primary audio, same-session enable/disable"
+      },
+      "test_ids": [
+        "DVB-02"
+      ],
+      "allowed_operations": [
+        "read-only verification after explicit source provisioning",
+        "isolated test copy"
+      ],
+      "redistributable": false,
+      "webplayer_feature_acceptance": "NOT_RUN",
+      "reason": "Absence is recorded; no synthetic or source-only result is substituted for this gate."
+    },
+    {
+      "id": "F-DVB-NEG-REAL",
+      "title": "Authorized DVB-only/no-Teletext negative sample",
+      "availability": "UNAVAILABLE",
+      "path": null,
+      "sha256": null,
+      "origin": "Not provided or not authored in this checkpoint",
+      "expected": {
+        "description": "No invented Teletext/CEA services; separate DVB bitmap remains selectable"
+      },
+      "test_ids": [
+        "TTX-NEG"
+      ],
+      "allowed_operations": [
+        "read-only verification after explicit source provisioning",
+        "isolated test copy"
+      ],
+      "redistributable": false,
+      "webplayer_feature_acceptance": "NOT_RUN",
+      "reason": "Absence is recorded; no synthetic or source-only result is substituted for this gate."
+    },
+    {
+      "id": "F-DVD-AUTHORED",
+      "title": "Authored DVD with root/language menus and short/equal-sized still cells",
+      "availability": "UNAVAILABLE",
+      "path": null,
+      "sha256": null,
+      "origin": "Not provided or not authored in this checkpoint",
+      "expected": {
+        "description": "NTSC/PAL, chapter/time marks, multiple audio/SPU streams, menu button palettes and repeated CLUT; requires authoring tools not present here"
+      },
+      "test_ids": [
+        "DVD-WIRE",
+        "DVD-DRAIN",
+        "DVD-AV",
+        "DVD-STILL",
+        "DVD-SPU",
+        "DVD-MENU"
+      ],
+      "allowed_operations": [
+        "read-only verification after explicit source provisioning",
+        "isolated test copy"
+      ],
+      "redistributable": false,
+      "webplayer_feature_acceptance": "NOT_RUN",
+      "reason": "Absence is recorded; no synthetic or source-only result is substituted for this gate."
+    },
+    {
+      "id": "F-DVD-REAL",
+      "title": "Authorized representative menu and menu-less VIDEO_TS sources",
+      "availability": "UNAVAILABLE",
+      "path": null,
+      "sha256": null,
+      "origin": "Not provided or not authored in this checkpoint",
+      "expected": {
+        "description": "Exact disc structure/hash manifest, language order, chapters, native menu and title playback"
+      },
+      "test_ids": [
+        "DVD-REAL"
+      ],
+      "allowed_operations": [
+        "read-only verification after explicit source provisioning",
+        "isolated test copy"
+      ],
+      "redistributable": false,
+      "webplayer_feature_acceptance": "NOT_RUN",
+      "reason": "Absence is recorded; no synthetic or source-only result is substituted for this gate."
+    },
+    {
+      "id": "F-DISC-ISO",
+      "title": "Read-only authorized ISO and mounted VIDEO_TS pair",
+      "availability": "UNAVAILABLE",
+      "path": null,
+      "sha256": null,
+      "origin": "Not provided or not authored in this checkpoint",
+      "expected": {
+        "description": "Validated identity, Unicode/spaces, multi-title selection; no privileged mounts performed"
+      },
+      "test_ids": [
+        "DISC-01",
+        "DISC-02"
+      ],
+      "allowed_operations": [
+        "read-only verification after explicit source provisioning",
+        "isolated test copy"
+      ],
+      "redistributable": false,
+      "webplayer_feature_acceptance": "NOT_RUN",
+      "reason": "Absence is recorded; no synthetic or source-only result is substituted for this gate."
+    },
+    {
+      "id": "F-VOBSUB",
+      "title": "Authorized/generated matched IDX+SUB and embedded VobSub sample",
+      "availability": "UNAVAILABLE",
+      "path": null,
+      "sha256": null,
+      "origin": "Not provided or not authored in this checkpoint",
+      "expected": {
+        "description": "Palette, source canvas, bitmap PTS, language and clear/forced policies"
+      },
+      "test_ids": [
+        "SUB-02"
+      ],
+      "allowed_operations": [
+        "read-only verification after explicit source provisioning",
+        "isolated test copy"
+      ],
+      "redistributable": false,
+      "webplayer_feature_acceptance": "NOT_RUN",
+      "reason": "Absence is recorded; no synthetic or source-only result is substituted for this gate."
+    },
+    {
+      "id": "F-PGS-EMBEDDED",
+      "title": "Independently authored PGS-in-MKV with full palette/forced changes",
+      "availability": "UNAVAILABLE",
+      "path": null,
+      "sha256": null,
+      "origin": "Not provided or not authored in this checkpoint",
+      "expected": {
+        "description": "Container extraction and selection in addition to raw SUP pixels"
+      },
+      "test_ids": [
+        "SUB-02"
+      ],
+      "allowed_operations": [
+        "read-only verification after explicit source provisioning",
+        "isolated test copy"
+      ],
+      "redistributable": false,
+      "webplayer_feature_acceptance": "NOT_RUN",
+      "reason": "Absence is recorded; no synthetic or source-only result is substituted for this gate."
+    },
+    {
+      "id": "F-TTX-MULTI",
+      "title": "Generated two-service/language, corrupted/duplicate/continuity-loss Teletext stream",
+      "availability": "UNAVAILABLE",
+      "path": null,
+      "sha256": null,
+      "origin": "Not provided or not authored in this checkpoint",
+      "expected": {
+        "description": "Full multi-service and malformed-input matrix; current vectors exercise one service only"
+      },
+      "test_ids": [
+        "TTX-01"
+      ],
+      "allowed_operations": [
+        "read-only verification after explicit source provisioning",
+        "isolated test copy"
+      ],
+      "redistributable": false,
+      "webplayer_feature_acceptance": "NOT_RUN",
+      "reason": "Absence is recorded; no synthetic or source-only result is substituted for this gate."
+    },
+    {
+      "id": "F-DVB-ADVANCED",
+      "title": "Generated fragmented multi-page DVB with partial-alpha and CLUT/version changes",
+      "availability": "UNAVAILABLE",
+      "path": null,
+      "sha256": null,
+      "origin": "Not provided or not authored in this checkpoint",
+      "expected": {
+        "description": "Ancillary-page resolution, partial transparency, timeout and malformed bounds; current vectors exercise basic opaque 2/4/8bpp only"
+      },
+      "test_ids": [
+        "DVB-01"
+      ],
+      "allowed_operations": [
+        "read-only verification after explicit source provisioning",
+        "isolated test copy"
+      ],
+      "redistributable": false,
+      "webplayer_feature_acceptance": "NOT_RUN",
+      "reason": "Absence is recorded; no synthetic or source-only result is substituted for this gate."
+    },
+    {
+      "id": "F-VBR-LONG",
+      "title": "Authorized three-hour-plus/5.5-hour VBR source with known PTS/EDL",
+      "availability": "UNAVAILABLE",
+      "path": null,
+      "sha256": null,
+      "origin": "Not provided or not authored in this checkpoint",
+      "expected": {
+        "description": "Duration, late seek, RAP/keyframe map, marker targets and real OSD clearing; 240 seconds is not a substitute"
+      },
+      "test_ids": [
+        "SEEK-01",
+        "LONG-01"
+      ],
+      "allowed_operations": [
+        "read-only verification after explicit source provisioning",
+        "isolated test copy"
+      ],
+      "redistributable": false,
+      "webplayer_feature_acceptance": "NOT_RUN",
+      "reason": "Absence is recorded; no synthetic or source-only result is substituted for this gate."
+    },
+    {
+      "id": "F-PROGRAM-CHANGE",
+      "title": "Generated growth/PMT/audio-codec/video-resolution transition corpus",
+      "availability": "UNAVAILABLE",
+      "path": null,
+      "sha256": null,
+      "origin": "Not provided or not authored in this checkpoint",
+      "expected": {
+        "description": "Known program boundaries, discontinuity epoch, growing-to-completed state and safe refill; baseline has narrower growth tests"
+      },
+      "test_ids": [
+        "LIVE-01"
+      ],
+      "allowed_operations": [
+        "read-only verification after explicit source provisioning",
+        "isolated test copy"
+      ],
+      "redistributable": false,
+      "webplayer_feature_acceptance": "NOT_RUN",
+      "reason": "Absence is recorded; no synthetic or source-only result is substituted for this gate."
+    }
+  ]
+}

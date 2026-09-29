@@ -1,0 +1,85 @@
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS teletext-188.ts discovers page 888 service across arbitrary source chunks
+PASS teletext-188.ts decodes first Level-1 row at source PTS origin
+PASS teletext-188.ts decodes ordered page update
+PASS teletext-188.ts emits erase/clear cue
+PASS teletext-192.ts discovers page 888 service across arbitrary source chunks
+PASS teletext-192.ts decodes first Level-1 row at source PTS origin
+PASS teletext-192.ts decodes ordered page update
+PASS teletext-192.ts emits erase/clear cue
+PASS teletext-204.ts discovers page 888 service across arbitrary source chunks
+PASS teletext-204.ts decodes first Level-1 row at source PTS origin
+PASS teletext-204.ts decodes ordered page update
+PASS teletext-204.ts emits erase/clear cue
+PASS client A Teletext parser cannot publish into client B cue queue
+PASS client B has independent parser/page state
+PASS stopping client A leaves client B unchanged
+PASS DVB-bitmap-only transport is not misclassified as Teletext
+PASS negative transport diagnostic distinguishes no Teletext descriptor
+PASS pre-seek cues exist
+PASS seek clears old cue queue before new generation
+PASS seek generation reanchors Teletext to new recording position
+PASS positive caption delay presents Teletext later without changing source PTS
+PASS presentation drain is driven by browser media time, not native OSD lifetime
+PASS FLUSH retires prior Teletext callbacks
+PASS explicit page/language resolves seeded service before PES arrives
+PASS virtual CC2 Teletext slot resolves a distinct service when available
+PASS Off remains authoritative for local Teletext
+PASS bounded diagnostics distinguish descriptor/PES/data-unit/decoded stages without media payload
+PASS Teletext diagnostics do not export decoded subtitle text
+P03 Teletext subtitle: 28 PASS
+PASS Teletext controller renders service while no SageTV OSD event is present
+PASS Teletext controller advances from independent browser video clock
+PASS Teletext polling continues while UI/OSD is idle
+PASS Teletext clear cue removes local text
+PASS stopping playback cancels Teletext poll lifecycle
+P03 browser Teletext controller: 5 PASS
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS DVB 2bpp discovers descriptor 0x59 identity
+PASS DVB 2bpp emits RGBA bitmap cue at first PTS
+PASS DVB 2bpp preserves canvas and region placement
+PASS DVB 2bpp RGBA/alpha pixels match independent golden hash
+PASS DVB 2bpp page clear emits a timed bitmap clear
+PASS DVB 4bpp discovers descriptor 0x59 identity
+PASS DVB 4bpp emits RGBA bitmap cue at first PTS
+PASS DVB 4bpp preserves canvas and region placement
+PASS DVB 4bpp RGBA/alpha pixels match independent golden hash
+PASS DVB 4bpp page clear emits a timed bitmap clear
+PASS DVB 8bpp discovers descriptor 0x59 identity
+PASS DVB 8bpp emits RGBA bitmap cue at first PTS
+PASS DVB 8bpp preserves canvas and region placement
+PASS DVB 8bpp RGBA/alpha pixels match independent golden hash
+PASS DVB 8bpp page clear emits a timed bitmap clear
+PASS DVB parser accepts 192-byte transport framing
+PASS DVB parser accepts 204-byte transport framing
+PASS saved DVB PID may be configured before asynchronous discovery
+PASS late PMT discovery reapplies saved DVB PID/composition selection
+PASS unknown ordinary-video DVB PID fails closed instead of choosing another track
+PASS media command PID may be accepted pending asynchronous PMT discovery
+PASS late discovery of other DVB services does not fall back from an explicitly requested unknown PID
+PASS media command 36/type 1 adapter selects DVB by physical source PID
+PASS media command 36 DVB disable sentinel 8192 clears local bitmap selection
+PASS DVB adapter rejects audio/DVD-unrelated stream type instead of reusing subtitle semantics
+PASS DVB cues exist before seek
+PASS seek generation reanchors DVB display set and retires stale cues
+PASS FLUSH retires prior DVB callbacks
+PASS EOS/stop emits final DVB clear
+PASS Teletext-only transport is not misclassified as DVB bitmap
+PASS DVB diagnostics expose bounded decode stages
+PASS DVB diagnostics do not export media or decoded pixel payloads
+P04 DVB bitmap subtitle: 32 PASS
+PASS DVB controller renders straight-alpha RGBA cue on the bitmap path
+PASS DVB cue timeout clears stale bitmap without waiting for a new video segment
+PASS stopping playback cancels DVB bitmap poll lifecycle
+P04 browser DVB controller: 3 PASS
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+OrdinarySubtitleSmoke PASS tracks=2 pgsCues=4 dvdCues=3

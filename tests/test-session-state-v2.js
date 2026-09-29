@@ -1,0 +1,12 @@
+const fs=require('fs'),vm=require('vm');
+const code=fs.readFileSync(__dirname+'/../src/main/webapp/js/session-state.js','utf8');
+const data={};const localStorage={getItem:k=>Object.prototype.hasOwnProperty.call(data,k)?data[k]:null,setItem:(k,v)=>{data[k]=String(v)},removeItem:k=>{delete data[k]}};
+const ctx={console,Date,localStorage};ctx.globalThis=ctx;ctx.window=ctx;vm.runInNewContext(code,ctx);const S=ctx.SageSessionState;
+if(S.version!=='2.0.0')throw new Error('wrong state version');
+const p=S.createProfile('Kids Room');if(p.id!=='kids-room')throw new Error('profile slug');S.setActiveProfile(p.id);if(S.getActiveProfile()!=='kids-room')throw new Error('active profile');
+S.updateSettings({volume:.25,autoPlayQueue:false,favoriteChannelsOnly:true});if(S.getSettings().volume!==.25||S.getSettings().autoPlayQueue!==false||S.getSettings().favoriteChannelsOnly!==true)throw new Error('profile settings');
+S.setFavorite(10,true);S.setQueued(20,true);S.setQueued(30,true);S.moveQueue(30,-1);if(S.getQueue().join(',')!=='30,20')throw new Error('queue order');S.setChannelFavorite('7.1|WXYZ',true);if(!S.isChannelFavorite('7.1|WXYZ'))throw new Error('channel favorite');
+S.saveResume(20,0,100,1000,'Test');const exp=S.exportProfile();if(exp.profile!=='kids-room'||exp.queue.length!==2||exp.channelFavorites.length!==1||!exp.resume['20:0'])throw new Error('export');
+S.clearQueue();S.setFavorite(10,false);S.importProfile(exp);if(S.getQueue().join(',')!=='30,20'||!S.isFavorite(10))throw new Error('import');
+S.setActiveProfile('default');if(S.getFavorites().length!==0||S.getQueue().length!==0)throw new Error('profile isolation');
+console.log('session state v2 PASS');

@@ -1,0 +1,42 @@
+PASS INIT replies without resize/repaint while server UI is unconstructed
+PASS all property and filesystem replies still arrive during startup
+PASS first frame allocation replies remain live; STARTFRAME alone does not open gate
+PASS first completed frame ACK precedes one initial resize and repaint
+PASS startup resize flood coalesces to latest size and one full repaint
+PASS mouse keyboard text and Sage commands are dropped rather than replayed at login
+PASS media-update events are coalesced until video frame owner exists
+PASS media protocol replies are independent of GFX readiness
+PASS runtime resize repaint and input still work after readiness
+PASS later FLIPBUFFER does not repeat initial resize/repaint
+PASS driver re-INIT closes event gate until another completed frame
+PASS close before first frame discards deferred events and cannot reopen
+PASS invalid startup sizes are rejected before queuing
+Native startup ordering: 13 PASS (real TCP; synthetic server readiness boundary).
+MiniClient protocol smoke PASS (first-frame/explicit resize + repaint, commands, mouse, text and bounds)
+PASS type-5 recovery, 0 initial rejection(s), partial header, retained media/cache
+PASS type-5 recovery, 2 initial rejection(s), partial body, retained media/cache
+PASS pre-first-frame reset is terminal
+PASS unnegotiated reset is terminal
+PASS three rejected reconnects fail visibly without a fourth handshake
+PASS close cancels an in-flight reconnect handshake and prevents resurrection
+PASS explicit close terminates media/GFX without reconnect
+PASS server DEINIT closes cleanly instead of reconnecting
+PASS rejected startup cleans up both media and pending GFX socket
+PASS diagnostic property trace is bounded and omits property values
+PASS same-ID refresh retires old native sockets; stale stop cannot kill replacement
+Native recovery tests: 11 PASS (real loopback sockets, synthetic SageTV peer)
+PASS ordinary no-auth startup remains plaintext after capability query
+PASS RSA-1024 binary key exchange, encrypted properties, first GFX frame
+PASS RSA-2048 binary key exchange, encrypted properties, first GFX frame
+PASS premature enable and missing public key rejected without false success
+PASS unsupported algorithms, invalid RSA key, malformed boolean, unknown crypto rejected
+PASS truncated and mismatched property lengths rejected without changing mode
+PASS all outbound families use correct padding; empty payload stays empty
+PASS enable/disable ACK uses old mode atomically with concurrent keyboard input
+PASS active encrypted link rejects rekey/downgrade and keeps current cipher
+PASS keys and auth payloads excluded from browser events and diagnostic values
+PASS reset while encrypted closes without unsafe type-5 resumption
+PASS type-5 recovery allowed again after server disables encryption
+PASS fresh secret for independent session 1
+PASS fresh secret for independent session 2
+Native authentication tests: 14 PASS (real RSA/Blowfish + loopback TCP; synthetic server)

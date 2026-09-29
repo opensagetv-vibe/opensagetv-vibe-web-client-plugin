@@ -1,0 +1,11 @@
+1
+00:00:00,500 --> 00:00:02,500
+Unicode: café, español, 日本語
+
+2
+00:00:01,500 --> 00:00:03,000
+<script>window.PARITY_INJECTED=true</script>
+
+3
+00:00:03,200 --> 00:00:04,200
+Clear at 4.2 seconds.

@@ -1,0 +1,13 @@
+MiniClient protocol smoke PASS (initial/explicit resize + repaint, commands, mouse, text and bounds)
+PASS type-5 recovery, 0 initial rejection(s), partial header, retained media/cache
+PASS type-5 recovery, 2 initial rejection(s), partial body, retained media/cache
+PASS pre-first-frame reset is terminal
+PASS unnegotiated reset is terminal
+PASS three rejected reconnects fail visibly without a fourth handshake
+PASS close cancels an in-flight reconnect handshake and prevents resurrection
+PASS explicit close terminates media/GFX without reconnect
+PASS server DEINIT closes cleanly instead of reconnecting
+PASS rejected startup cleans up both media and pending GFX socket
+PASS diagnostic property trace is bounded and omits property values
+PASS same-ID refresh retires old native sockets; stale stop cannot kill replacement
+Native recovery tests: 11 PASS (real loopback sockets, synthetic SageTV peer)

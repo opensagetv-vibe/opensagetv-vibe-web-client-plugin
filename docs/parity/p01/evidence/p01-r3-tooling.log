@@ -1,0 +1,31 @@
+test_literal_and_test_census (tests.parity.test_p01_completion.P01CompletionTest.test_literal_and_test_census) ... ok
+test_runtime_war_unchanged (tests.parity.test_p01_completion.P01CompletionTest.test_runtime_war_unchanged) ... ok
+test_server_identity_redacted (tests.parity.test_p01_completion.P01CompletionTest.test_server_identity_redacted) ... ok
+test_task_index_and_external_boundary (tests.parity.test_p01_completion.P01CompletionTest.test_task_index_and_external_boundary) ... ok
+test_ambiguous_vendor_remains_blocked (tests.parity.test_p01_tools.P01ToolsTests.test_ambiguous_vendor_remains_blocked) ... ok
+test_baseline_rejects_output_inside_source (tests.parity.test_p01_tools.P01ToolsTests.test_baseline_rejects_output_inside_source) ... ok
+test_changelog_intake_keeps_top_level_and_continuations (tests.parity.test_p01_tools.P01ToolsTests.test_changelog_intake_keeps_top_level_and_continuations) ... ok
+test_completed_intake_has_saved_literal_and_test_reconciliation (tests.parity.test_p01_tools.P01ToolsTests.test_completed_intake_has_saved_literal_and_test_reconciliation) ... ok
+test_crc_roundtrip (tests.parity.test_p01_tools.P01ToolsTests.test_crc_roundtrip) ... ok
+test_dvb_depth_vectors_and_clear_not_teletext (tests.parity.test_p01_tools.P01ToolsTests.test_dvb_depth_vectors_and_clear_not_teletext) ... ok
+test_fixture_generation_never_overwrites_media (tests.parity.test_p01_tools.P01ToolsTests.test_fixture_generation_never_overwrites_media) ... ok
+test_generated_registry_does_not_claim_field_acceptance (tests.parity.test_p01_tools.P01ToolsTests.test_generated_registry_does_not_claim_field_acceptance) ... ok
+test_manifest_accepts_project_relative_path (tests.parity.test_p01_tools.P01ToolsTests.test_manifest_accepts_project_relative_path) ... ok
+test_manifest_rejects_path_traversal (tests.parity.test_p01_tools.P01ToolsTests.test_manifest_rejects_path_traversal) ... ok
+test_matching_upstream_is_unchanged (tests.parity.test_p01_tools.P01ToolsTests.test_matching_upstream_is_unchanged) ... ok
+test_missing_server_never_implies_stock (tests.parity.test_p01_tools.P01ToolsTests.test_missing_server_never_implies_stock) ... ok
+test_missing_vendor_is_blocked (tests.parity.test_p01_tools.P01ToolsTests.test_missing_vendor_is_blocked) ... ok
+test_new_head_does_not_advance_pin (tests.parity.test_p01_tools.P01ToolsTests.test_new_head_does_not_advance_pin) ... ok
+test_packetization_has_188_byte_alignment (tests.parity.test_p01_tools.P01ToolsTests.test_packetization_has_188_byte_alignment) ... ok
+test_pgs_has_timestamped_display_and_clear (tests.parity.test_p01_tools.P01ToolsTests.test_pgs_has_timestamped_display_and_clear) ... ok
+test_present_vendor_is_not_a_playback_pass (tests.parity.test_p01_tools.P01ToolsTests.test_present_vendor_is_not_a_playback_pass) ... ok
+test_pts_wrap_and_markers (tests.parity.test_p01_tools.P01ToolsTests.test_pts_wrap_and_markers) ... ok
+test_review_ledger_has_no_dangling_task_ids (tests.parity.test_p01_tools.P01ToolsTests.test_review_ledger_has_no_dangling_task_ids) ... ok
+test_short_or_unsafe_head_rejected (tests.parity.test_p01_tools.P01ToolsTests.test_short_or_unsafe_head_rejected) ... ok
+test_teletext_has_fixed_header_and_valid_pes_multiple (tests.parity.test_p01_tools.P01ToolsTests.test_teletext_has_fixed_header_and_valid_pes_multiple) ... ok
+test_teletext_text_odd_parity (tests.parity.test_p01_tools.P01ToolsTests.test_teletext_text_odd_parity) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.011s
+
+OK

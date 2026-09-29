@@ -1,0 +1,19 @@
+*.sh text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+*.xml text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.txt text eol=lf
+*.zip binary
+*.war binary
+*.jar binary
+*.class binary
+*.png binary
+*.jpg binary
+*.gif binary
+*.ttf binary

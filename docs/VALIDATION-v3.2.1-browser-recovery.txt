@@ -1,0 +1,12 @@
+PASS fatal native reset reveals recovery/diagnostic buttons in render-only view
+PASS terminal native failure stops the empty HTTP reconnect loop
+PASS one-click diagnostics contains failure snapshot and native connection trace
+PASS explicit Reconnect stops old session and creates one replacement
+PASS successful native GFX recovery keeps the browser session instead of restarting playback
+PASS HTTP EOF detects dead native session even when terminal event was missed
+PASS transient HTTP EOF reconnects only HTTP while native session remains alive
+PASS long-poll fallback also stops when native session is dead
+PASS startup failure returned by start is not shown as a connected session
+PASS mobile error recovery controls remain visible without horizontal clipping
+Browser recovery: 10 tests PASS (production DOM/JavaScript, mocked HTTP)
+BROWSER_RECOVERY_EXIT=0

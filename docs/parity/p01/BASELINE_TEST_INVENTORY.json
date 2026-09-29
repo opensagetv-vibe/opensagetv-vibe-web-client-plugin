@@ -1,0 +1,122 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "path": "tests/HlsRuntimeSmoke.java",
+      "sha256": "2b604ee58bdbe4d727c3b4a7a8fe041f4d0ffeed385353cd44c0827a84c4c5f9",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/MiniClientAuthenticationSmoke.java",
+      "sha256": "ba0d9a63f0d88050ab05570103ff7153b1c927315e1abf6a6fa6caa7f4256f39",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/MiniClientProtocolSmoke.java",
+      "sha256": "726469ade0be8950b450fbcd682af95c01ed8c3aa965e706e40e46f93c4146fc",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/MiniClientRecoverySmoke.java",
+      "sha256": "b682f4e67f58a29af24b6d4eac3335d7dfd0e08e85d93f6aea05eeb9d1ff53ac",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/MiniClientStartupSmoke.java",
+      "sha256": "195f3b0c882a702293dced20f4a17c3aeb166591935507f2971e5d05e0349901",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/StreamingRuntimeSmoke.java",
+      "sha256": "d3b97654afb5c722540fbb4b23490e816ade5d81e3ee3d0c1707e94939a4ac7d",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/StreamingServletSmoke.java",
+      "sha256": "b80562a622070c74f488b30de5f1b200a2095f41e0556aca169199c630ece080",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/browser-layout-smoke.py",
+      "sha256": "8e6632eb4b9bb39bc23cf2345020531d608dc7ce24c03c6c1178ddc26f5f88fb",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/browser-recovery-smoke.py",
+      "sha256": "c38842f663ceba99dd4c46bf50949a7c14821d94e6dbbc55df0e4ff662dee379",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/browser-smoke.py",
+      "sha256": "9cbb68cccc199e007a10d4fe31fd89d826400b8d6c55161f7ff117ddd3ff2906",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/browser-streaming-smoke.py",
+      "sha256": "43b0278d838be5e192cf5cfbd7c47affccd06924500695bb46ce4a5dd45e7084",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/browser-vibe-display-smoke.py",
+      "sha256": "b4b788346e91eafdb6bbdb96065f14ab5e18793f52de17bf16293d8924ddb8ee",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/test-captions608.js",
+      "sha256": "f595061749c423e4a29f2685c1a5a3dfd99a55619d5a7c4e198b1faf3dd93b4c",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/test-captions708.js",
+      "sha256": "854ce93b1687067cfd0cdbea31967bc3a1d574e44314baedfd3806ded14459d0",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/test-commercial-skip.js",
+      "sha256": "cd966d8558d3b30b2c9c39c3bf2c29f8ac3999e58853ee036c558d576492d167",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/test-library-utils.js",
+      "sha256": "728909eedcb8e8e88932d188abc9f4f66892b6f4df6e458e27b56d730b83ab05",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/test-miniclient-core.js",
+      "sha256": "03589f152f63b0a5df2a9ac8fa836a7b7d8a7e9283c39e793f2e8b73f09b0807",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/test-miniclient-display.js",
+      "sha256": "b7d321caddb57139553b2cb0d288f92e24540734f4ca21368cf228f039870be4",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/test-miniclient-playback.js",
+      "sha256": "8ec33959e185bfd7c7cb0ad0e1dfd88a9bad90d5d7025f9516608f69dd46ef05",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/test-mpegts-streaming.js",
+      "sha256": "e390776077bb0c544a610c25f99c44014d7f73725c9bbc8cf3fd98164ab1ddf3",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/test-performance.js",
+      "sha256": "f442a200d8e94f2cdceaff6a2c781072532f35c3e1f7002592bf243f0fdee97f",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/test-session-state-v2.js",
+      "sha256": "dadd8f4602d6aa4bb8b79eeb5ff4c8ad51571c060979ebbe54bd764893163792",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    },
+    {
+      "path": "tests/test-session-state.js",
+      "sha256": "cfce3e49d69169268e00f2f5dfbd598ca6a4c6a46dbcea751e860513f53193f8",
+      "scope": "original WebPlayer baseline test; actually executed where called by validate.sh"
+    }
+  ],
+  "entry_point": "scripts/validate.sh",
+  "full_execution": "evidence/baseline-validation.log"
+}

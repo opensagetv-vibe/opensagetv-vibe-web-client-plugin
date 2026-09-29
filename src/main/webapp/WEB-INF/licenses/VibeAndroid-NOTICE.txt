@@ -1,0 +1,24 @@
+Vibe Android navigation overlay/icon port for SageTV Web Player 3.2.4.
+Derived from OpenSageTV Vibe Android Client and The SageTV Authors,
+https://github.com/opensagetv-vibe/opensagetv-vibe-android-client
+Reference tree f1ba340e05fe18eaaba939253a933c3dfe6d6caf; source/dev.
+NavigationDialog source credits seans (2015). Individual UI resources are
+licensed under the repository Apache License, Version2.0. See included license
+and per-file source IDs in vibe-icons.json.
+
+Modifications: vector drawable pathData converted to SVG d with source color;
+HTML/CSS responsive edge layout and browser action wiring. PNG Home/Close bytes
+are unchanged. No Android runtime or font is bundled.
+
+SageTV Web Player 3.2.6 also adapts the player-independent DVB Teletext
+Level-1 subtitle algorithm from source/dev/core/.../media/TeletextSubtitleEngine.java
+at the same pinned repository commit. The WebPlayer modification replaces the
+Android process-global session with per-playback server ownership and emits the
+WebPlayer text-cue contract. No Android runtime or APK is bundled.
+
+
+SageTV Web Player 3.2.7 adds a pure-Java DVB bitmap decoder modeled on the
+Apache-2.0 AndroidX Media3 DvbParser/ETSI EN 300 743 state machine. Android
+Bitmap/Canvas/Media3 classes are not bundled; output is converted to the
+WebPlayer straight-alpha RGBA cue contract. See the bundled AndroidX Media3
+license notice.

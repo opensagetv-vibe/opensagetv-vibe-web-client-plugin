@@ -1,0 +1,14 @@
+PASS async servlet streams complete original bytes, 200/no invented Content-Length
+PASS continuous transport has no-cache/no-proxy-buffer headers
+PASS lazy-load reconnect resumes exact byte suffix without restarting producer
+PASS negative, nonnumeric and overflowing resume offsets rejected before async work
+PASS unproduced resume offset rejected with 416
+PASS HTTP Range rejected rather than fabricating total growing length
+PASS path traversal and non-session stream URL rejected
+PASS unsupported Jetty async deployment gives actionable HLS fallback error
+PASS closing a full client buffer retains producer session for later reconnect
+PASS caption endpoint refuses disabled caption stream
+PASS caption endpoint rejects unknown session instead of accepting arbitrary media path
+PASS asset preparation rejects arbitrary families/URLs without network access
+PASS streaming prefetch allowlist is limited to two pinned player assets
+Streaming servlet tests: 13 PASS (mock Servlet API; real async workers/file IO)

@@ -1,0 +1,4 @@
+Baseline: original supplied SageTVWebPlayer-v3.2.1.war
+2d9c683f5c58d06acc5232aac3c7979778d0a2d0a31a535eb8f4fa2d5417e757  /mnt/data/SageTVWebPlayer-v3.2.1.war
+PASS baseline 3.2.1 reproduces CRYPTO_ALGORITHMS rejection before first frame
+Baseline reproduction exit: 0

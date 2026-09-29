@@ -1,0 +1,16 @@
+const fs = require('fs');
+const vm = require('vm');
+const code = fs.readFileSync(__dirname + '/../src/main/webapp/js/performance-watchdog.js', 'utf8');
+const ctx = {console, Date}; ctx.globalThis = ctx; vm.runInNewContext(code, ctx);
+const W = ctx.SagePerformanceWatchdog;
+if (!W) throw new Error('watchdog missing');
+const w = new W({expectedFps:30,warmupSamples:2,badSamplesRequired:3,badRatio:.72});
+w.update({videoRenderFramerate:30,videoStutter:0},1000);
+w.update({videoRenderFramerate:29,videoStutter:0},2000);
+let s = w.update({videoRenderFramerate:28,videoStutter:0},3000);
+if (s.state !== 'good') throw new Error('expected good after warmup');
+w.update({videoRenderFramerate:12,videoStutter:2},4000);
+w.update({videoRenderFramerate:12,videoStutter:5},5000);
+s = w.update({videoRenderFramerate:12,videoStutter:8},6000);
+if (s.state !== 'bad' || s.recommendation !== 'compatibility') throw new Error('expected bad');
+console.log('performance watchdog PASS');

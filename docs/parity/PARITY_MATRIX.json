@@ -1,0 +1,865 @@
+[
+  {
+    "id": "PAR-001",
+    "topic": "Stock-server-first compatibility",
+    "upstream": "FOUND-001 completed; U03",
+    "baseline": "Existing plugin-only 3.2.4 design",
+    "disposition": "RETAIN_AND_VERIFY",
+    "phases": [
+      "P01",
+      "P07",
+      "P16"
+    ],
+    "sources": "B01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-002",
+    "topic": "Quick startup and continuous reserve",
+    "upstream": "Player/source buffering foundation; U01/U02",
+    "baseline": "Implemented TS/HLS policy; real MSE acceptance still pending in supplied build",
+    "disposition": "RETAIN_AND_VERIFY",
+    "phases": [
+      "P01",
+      "P11",
+      "P16"
+    ],
+    "sources": "B01/B07",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-003",
+    "topic": "Full-browser layout and real Vibe icons",
+    "upstream": "UI-001 completed; navigation resource",
+    "baseline": "Implemented and user reports update works",
+    "disposition": "RETAIN_AND_VERIFY",
+    "phases": [
+      "P13",
+      "P16"
+    ],
+    "sources": "B01/U14",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-004",
+    "topic": "Native first-frame safety, crypto and reconnect",
+    "upstream": "Foundation and DVD-001 completed recovery subfixes",
+    "baseline": "3.2.3 first-FLIPBUFFER gate, crypto and recovery retained",
+    "disposition": "RETAIN_AND_VERIFY",
+    "phases": [
+      "P01",
+      "P13"
+    ],
+    "sources": "B01/B05",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-005",
+    "topic": "Teletext descriptor/PES preservation",
+    "upstream": "TTX-001 completed",
+    "baseline": "No Teletext source branch",
+    "disposition": "IMPLEMENTED_AWAITING_REAL_SOURCE_FIELD",
+    "phases": [
+      "P02",
+      "P03"
+    ],
+    "sources": "B03/B04/U05",
+    "implementation_status": "P03_IMPLEMENTED_LOCAL_GENERATED_VALIDATED",
+    "last_review_revision": 5,
+    "audit_evidence": "p03/REPORT.md"
+  },
+  {
+    "id": "PAR-006",
+    "topic": "Teletext Level-1 page decode",
+    "upstream": "TTX-002 completed",
+    "baseline": "No Teletext decoder",
+    "disposition": "IMPLEMENTED_AWAITING_REAL_SOURCE_FIELD",
+    "phases": [
+      "P03"
+    ],
+    "sources": "U05/B04",
+    "implementation_status": "P03_IMPLEMENTED_LOCAL_GENERATED_VALIDATED",
+    "last_review_revision": 5,
+    "audit_evidence": "p03/REPORT.md"
+  },
+  {
+    "id": "PAR-007",
+    "topic": "Teletext independent clock / no OSD freeze",
+    "upstream": "TTX-002 completed",
+    "baseline": "CEA has a clock; no Teletext cues",
+    "disposition": "IMPLEMENTED_AWAITING_REAL_SOURCE_FIELD",
+    "phases": [
+      "P03"
+    ],
+    "sources": "U05/U06/B04",
+    "implementation_status": "P03_IMPLEMENTED_LOCAL_GENERATED_VALIDATED",
+    "last_review_revision": 5,
+    "audit_evidence": "p03/REPORT.md"
+  },
+  {
+    "id": "PAR-008",
+    "topic": "Teletext stock CC bridge",
+    "upstream": "TTX-002 completed",
+    "baseline": "GFX_SUBTITLES FALSE and callbacks rejected",
+    "disposition": "MISSING",
+    "phases": [
+      "P05"
+    ],
+    "sources": "U06/B05",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-009",
+    "topic": "Multi-client Teletext ownership",
+    "upstream": "Android singleton is source behavior, not server architecture",
+    "baseline": "Server supports multiple MiniClient sessions",
+    "disposition": "IMPLEMENTED_PLATFORM_ADAPTATION",
+    "phases": [
+      "P02",
+      "P03"
+    ],
+    "sources": "U05/B02",
+    "implementation_status": "P03_IMPLEMENTED_LOCAL_GENERATED_VALIDATED",
+    "last_review_revision": 5,
+    "audit_evidence": "p03/REPORT.md"
+  },
+  {
+    "id": "PAR-010",
+    "topic": "Virtual CC1/CC2 profiles",
+    "upstream": "TTX-003 completed with later CC-007 policy",
+    "baseline": "Literal 608/708 service settings only",
+    "disposition": "MISSING",
+    "phases": [
+      "P02",
+      "P05"
+    ],
+    "sources": "U07/B03",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-011",
+    "topic": "Observed service/language inventory",
+    "upstream": "TTX-003/CC-006 completed",
+    "baseline": "Simple ffprobe metadata; no caption evidence hierarchy",
+    "disposition": "MISSING",
+    "phases": [
+      "P02",
+      "P05"
+    ],
+    "sources": "B03/U03",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-012",
+    "topic": "DVB explicit mode/persistence",
+    "upstream": "CC-004 and CC-007 completed",
+    "baseline": "No DVB mode/decoder",
+    "disposition": "MISSING",
+    "phases": [
+      "P04",
+      "P05"
+    ],
+    "sources": "U01/U03/B03",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-013",
+    "topic": "DVB bitmap decoding/alpha/placement",
+    "upstream": "Normal feature in U03",
+    "baseline": "No bitmap cue pipeline",
+    "disposition": "MISSING",
+    "phases": [
+      "P04"
+    ],
+    "sources": "U03/B04",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-014",
+    "topic": "Ordinary DVB PID/disable selection",
+    "upstream": "TTX-003/CC-006 completed",
+    "baseline": "All media36 commands rejected",
+    "disposition": "MISSING",
+    "phases": [
+      "P04",
+      "P05"
+    ],
+    "sources": "U04/B02",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-015",
+    "topic": "CC separate from file/DVD subtitles",
+    "upstream": "CC-005 completed",
+    "baseline": "Only local CEA; separation must survive additions",
+    "disposition": "MISSING",
+    "phases": [
+      "P05",
+      "P06"
+    ],
+    "sources": "U03/B03",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-016",
+    "topic": "One caption-render owner",
+    "upstream": "CC-006 completed",
+    "baseline": "No stock callback or bitmap owner yet",
+    "disposition": "MISSING",
+    "phases": [
+      "P02",
+      "P05"
+    ],
+    "sources": "U03/U06/B05",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-017",
+    "topic": "Persisted choice after async discovery",
+    "upstream": "v0.5.93 completed fixes",
+    "baseline": "Audio refresh present; subtitle re-resolution absent",
+    "disposition": "MISSING",
+    "phases": [
+      "P02",
+      "P04",
+      "P05"
+    ],
+    "sources": "U02/B03",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-018",
+    "topic": "CEA608/708 details and transcode retention",
+    "upstream": "Completed foundation; full protocol vectors required",
+    "baseline": "A/53 branch and local decoder implemented, not universal styling certification",
+    "disposition": "PARTIAL_AUDIT",
+    "phases": [
+      "P02",
+      "P05",
+      "P16"
+    ],
+    "sources": "B04/U03",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-019",
+    "topic": "SRT/embedded text subtitles",
+    "upstream": "Ordinary subtitle feature in U03",
+    "baseline": "Explicitly not implemented",
+    "disposition": "MISSING",
+    "phases": [
+      "P06"
+    ],
+    "sources": "B01/U03",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-020",
+    "topic": "PGS/file bitmap subtitles",
+    "upstream": "Ordinary subtitle feature in U03",
+    "baseline": "Explicitly not implemented",
+    "disposition": "MISSING",
+    "phases": [
+      "P06"
+    ],
+    "sources": "B01/U03",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-021",
+    "topic": "VobSub/DVD file palette context",
+    "upstream": "DVD/SPU and ordinary-subtitle behavior",
+    "baseline": "No file-subtitle adapter",
+    "disposition": "MISSING",
+    "phases": [
+      "P06"
+    ],
+    "sources": "U08/E01/B04",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-022",
+    "topic": "Native DVD role/selection negotiation",
+    "upstream": "FOUND-006; U03 stock extender role",
+    "baseline": "Browser advertises MOUSE plus PULL-only; DVD path not implemented",
+    "disposition": "MISSING",
+    "phases": [
+      "P07"
+    ],
+    "sources": "B05/U03",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-023",
+    "topic": "DVD INIT without OPENURL",
+    "upstream": "MediaCmd completed fix",
+    "baseline": "INIT returns1; media creation requires OPENURL",
+    "disposition": "MISSING",
+    "phases": [
+      "P07"
+    ],
+    "sources": "U04/B02",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-024",
+    "topic": "DVD raw pushed media",
+    "upstream": "FOUND-006 completed",
+    "baseline": "PUSHBUFFER only returns16MiB; payload is not consumed",
+    "disposition": "MISSING",
+    "phases": [
+      "P07",
+      "P08"
+    ],
+    "sources": "B02/U04",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-025",
+    "topic": "DVD exact reply lengths",
+    "upstream": "MediaCmd completed deadlock/alignment fixes",
+    "baseline": "DVD32\u201337 return-1; no operational DVD session",
+    "disposition": "MISSING",
+    "phases": [
+      "P07"
+    ],
+    "sources": "U04/B02",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-026",
+    "topic": "DVD transient EOS/drain/FLUSH",
+    "upstream": "MediaCmd completed fixes",
+    "baseline": "No DVD generation/drain protocol",
+    "disposition": "MISSING",
+    "phases": [
+      "P07",
+      "P08"
+    ],
+    "sources": "U04/B02",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-027",
+    "topic": "DVD PS private audio substream routing",
+    "upstream": "Completed DvdPsExtractor behavior",
+    "baseline": "No DVD A/V conversion input path",
+    "disposition": "MISSING",
+    "phases": [
+      "P08"
+    ],
+    "sources": "U11/B02",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-028",
+    "topic": "DVD PTS/cell/STC clock and cadence",
+    "upstream": "Completed core/player fixes",
+    "baseline": "No DVD clock translation",
+    "disposition": "MISSING",
+    "phases": [
+      "P08"
+    ],
+    "sources": "U04/U11",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-029",
+    "topic": "DVD still/short/menu-cell buffering",
+    "upstream": "Completed fixes; DVD-001 retains separate open acceptance",
+    "baseline": "No native DVD playback",
+    "disposition": "MISSING",
+    "phases": [
+      "P08"
+    ],
+    "sources": "U04/U11/U01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-030",
+    "topic": "DVD SPU/RLE/CLUT/CHG_COLCON",
+    "upstream": "FOUND-006 completed",
+    "baseline": "No SPU renderer",
+    "disposition": "MISSING",
+    "phases": [
+      "P09"
+    ],
+    "sources": "U08/U09/U12",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-031",
+    "topic": "DVD highlight/subtitle generation fixes",
+    "upstream": "Completed DvdSubpictureDecoder behavior",
+    "baseline": "No authored bitmap state",
+    "disposition": "MISSING",
+    "phases": [
+      "P09"
+    ],
+    "sources": "U09",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-032",
+    "topic": "DVD titles/menus/chapter/seek controls",
+    "upstream": "FOUND-006 and MATRIX-002 completed",
+    "baseline": "No functioning DVD backend",
+    "disposition": "MISSING",
+    "phases": [
+      "P09",
+      "P10"
+    ],
+    "sources": "U03/U04",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-033",
+    "topic": "Stock-compatible DVD local display refresh",
+    "upstream": "FOUND-015 completed",
+    "baseline": "Browser already separates layout; no DVD refresh context",
+    "disposition": "PLATFORM_ADAPTATION",
+    "phases": [
+      "P08",
+      "P13"
+    ],
+    "sources": "U01/B01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-034",
+    "topic": "Disc path/ISO and metadata safety",
+    "upstream": "Stock source and U03 boundary",
+    "baseline": "Direct/MediaServer files and basename fallback; no proven ISO route",
+    "disposition": "PARTIAL_AUDIT",
+    "phases": [
+      "P10"
+    ],
+    "sources": "B02/B06/U13",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-035",
+    "topic": "Optional Core DVD transformed transport",
+    "upstream": "FOUND-012/016/017 completed in extended path",
+    "baseline": "No negotiated provider path",
+    "disposition": "OPTIONAL_CORE_DEPENDENT",
+    "phases": [
+      "P15"
+    ],
+    "sources": "U01/U03/U10",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-036",
+    "topic": "Client Skip Menus/Skip Previews",
+    "upstream": "U03 Core-dependent behavior",
+    "baseline": "No supported configuration",
+    "disposition": "OPTIONAL_CORE_DEPENDENT",
+    "phases": [
+      "P15"
+    ],
+    "sources": "U03",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-037",
+    "topic": "Functional property names/unknown handling",
+    "upstream": "FOUND-016/017 completed",
+    "baseline": "Partial generic fallbacks; explicit runtime contracts require audit",
+    "disposition": "PARTIAL_AUDIT",
+    "phases": [
+      "P07",
+      "P13",
+      "P15"
+    ],
+    "sources": "B05/U10",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-038",
+    "topic": "Remote/pipe seek accuracy",
+    "upstream": "FOUND-009 and seek fixes",
+    "baseline": "Byte-proportional fallback is documented",
+    "disposition": "PARTIAL_AUDIT",
+    "phases": [
+      "P11"
+    ],
+    "sources": "B07/U01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-039",
+    "topic": "Transitional-zero and mux-end Push fixes",
+    "upstream": "SEEK-001 subfixes complete; visual Pro gate OPEN",
+    "baseline": "No ordinary Push decode path yet",
+    "disposition": "ADAPT_ONLY_WHEN_APPLICABLE",
+    "phases": [
+      "P07",
+      "P11"
+    ],
+    "sources": "U02/U04/B02",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-040",
+    "topic": "Growing-file backward-position guard",
+    "upstream": "PULL-001 completed, affected long-run follow-up remains",
+    "baseline": "Follower exists; compare clock/reset safeguards",
+    "disposition": "PARTIAL_AUDIT",
+    "phases": [
+      "P11"
+    ],
+    "sources": "B07/U01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-041",
+    "topic": "Completed EOF/tail clamping",
+    "upstream": "Completed earlier changelog fixes",
+    "baseline": "Partial implementation; actual transport/edge cases need parity audit",
+    "disposition": "RETAIN_AND_VERIFY",
+    "phases": [
+      "P11"
+    ],
+    "sources": "B02/B07",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-042",
+    "topic": "Progress-aware retry and bounded probe cache",
+    "upstream": "FOUND-009/D1\u2013D5 completed",
+    "baseline": "Existing probes/recovery; compare exact source identity and progress",
+    "disposition": "PARTIAL_AUDIT",
+    "phases": [
+      "P11",
+      "P12"
+    ],
+    "sources": "B07/U01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-043",
+    "topic": "Primary audio versus NAR/commentary",
+    "upstream": "U03 completed UK fixture behavior",
+    "baseline": "Language/index selection; role metadata absent",
+    "disposition": "PARTIAL_AUDIT",
+    "phases": [
+      "P02",
+      "P12"
+    ],
+    "sources": "B03/U03",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-044",
+    "topic": "Signed delay/session defaults/live debounce",
+    "upstream": "AUDIO-002/003 completed; physical residual gates OPEN",
+    "baseline": "-3000..3000ms via stream restart, not Android live AudioTrack",
+    "disposition": "PLATFORM_ADAPTATION",
+    "phases": [
+      "P12"
+    ],
+    "sources": "B03/U01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-045",
+    "topic": "HDMI passthrough/decoder selectors",
+    "upstream": "Android native APIs and AUDIO-004/006",
+    "baseline": "Browser codec support is not HDMI output authority",
+    "disposition": "PLATFORM_ADAPTATION",
+    "phases": [
+      "P12"
+    ],
+    "sources": "U01/U03/B01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-046",
+    "topic": "Fixed quality settings/type migration",
+    "upstream": "FOUND-013 completed Android fix",
+    "baseline": "Validated browser settings exist; remaining knobs/migration need comparison",
+    "disposition": "PARTIAL_AUDIT",
+    "phases": [
+      "P02",
+      "P12"
+    ],
+    "sources": "B03/U01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-047",
+    "topic": "Frame step and rate/scan controls",
+    "upstream": "Foundation and functional-rate extension",
+    "baseline": "FRAMESTEP returns0; browser forward rate exists; no rate extension advertised",
+    "disposition": "PARTIAL_AUDIT",
+    "phases": [
+      "P12",
+      "P15"
+    ],
+    "sources": "B02/B05/U10",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-048",
+    "topic": "Unified Y/UV graphics",
+    "upstream": "UNIFIED-001 completed opt-in feature",
+    "baseline": "Not advertised/not implemented",
+    "disposition": "MISSING_OPTIONAL_CLIENT_FEATURE",
+    "phases": [
+      "P13"
+    ],
+    "sources": "B05/U01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-049",
+    "topic": "GFX opcodes/cache/alpha/transform parity",
+    "upstream": "Renderer refactor and foundation",
+    "baseline": "Subset with unadvertised transforms/batch/YUV",
+    "disposition": "PARTIAL_AUDIT",
+    "phases": [
+      "P13"
+    ],
+    "sources": "B05/U10",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-050",
+    "topic": "Input Stop/Back/focus/repeat",
+    "upstream": "ONN-002/UI-001/SMB-002 completed",
+    "baseline": "Browser equivalents and Vibe icons partly implemented",
+    "disposition": "PLATFORM_ADAPTATION",
+    "phases": [
+      "P13",
+      "P14"
+    ],
+    "sources": "B01/U01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-051",
+    "topic": "Background/foreground/session teardown",
+    "upstream": "Completed foundation/lifecycle work",
+    "baseline": "Existing recovery; browser lifecycle differs",
+    "disposition": "PLATFORM_ADAPTATION",
+    "phases": [
+      "P13"
+    ],
+    "sources": "B01/U01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-052",
+    "topic": "Diagnostic stats and bounded export",
+    "upstream": "FOUND-002/004 completed",
+    "baseline": "P14 bounded redacted ZIP + hash + failure/test/caption/DVD/transcode counters",
+    "disposition": "IMPLEMENTED_LOCAL",
+    "phases": [
+      "P14"
+    ],
+    "sources": "B01/U01",
+    "implementation_status": "P14_IMPLEMENTED_LOCAL",
+    "last_review_revision": 14,
+    "audit_evidence": "p14/REPORT.md"
+  },
+  {
+    "id": "PAR-053",
+    "topic": "Test Current Video real reversible checks",
+    "upstream": "FOUND-003 completed",
+    "baseline": "P14 explicit cadence/pause/resume/reversible-seek test with unsafe-case skip and state restoration",
+    "disposition": "IMPLEMENTED_LOCAL",
+    "phases": [
+      "P14"
+    ],
+    "sources": "B01/U01",
+    "implementation_status": "P14_IMPLEMENTED_LOCAL",
+    "last_review_revision": 14,
+    "audit_evidence": "p14/REPORT.md"
+  },
+  {
+    "id": "PAR-054",
+    "topic": "SMB/profile/diagnostic transactions",
+    "upstream": "SMB-001/002 and v0.5.95 test preservation",
+    "baseline": "Schema-v1 saved-default profiles plus admin-mounted diagnostic destination; no browser SMB credentials",
+    "disposition": "PLATFORM_ADAPTATION_IMPLEMENTED_LOCAL",
+    "phases": [
+      "P14"
+    ],
+    "sources": "U01/U02",
+    "implementation_status": "P14_IMPLEMENTED_LOCAL_AWAITING_FIELD",
+    "last_review_revision": 14,
+    "audit_evidence": "p14/REPORT.md"
+  },
+  {
+    "id": "PAR-055",
+    "topic": "Cold-storage startup and long media",
+    "upstream": "MATRIX-001 evidence and adaptive test allowance",
+    "baseline": "General timeout/probe behavior; no field parity evidence",
+    "disposition": "PARTIAL_AUDIT",
+    "phases": [
+      "P01",
+      "P11",
+      "P16"
+    ],
+    "sources": "U01/B07",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-056",
+    "topic": "Open long-recording OSD/DVD/audio/tablet work",
+    "upstream": "ONN-003/DVD-001/AUDIO-001/005/006/DEVICE-001 remain OPEN in U01",
+    "baseline": "Not proven browser failures or completed upstream fixes",
+    "disposition": "UPSTREAM_OPEN",
+    "phases": [
+      "P01",
+      "P13",
+      "P16"
+    ],
+    "sources": "U01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-057",
+    "topic": "Unfinished cross-device and Blu-ray/DRM work",
+    "upstream": "MATRIX-003/004 and EXT-002/003 pending",
+    "baseline": "Not automatically included as completed parity",
+    "disposition": "UPSTREAM_OPEN_OR_SEPARATE_SCOPE",
+    "phases": [
+      "P01",
+      "P10",
+      "P16"
+    ],
+    "sources": "U01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-058",
+    "topic": "Android API migration, APK signing/store/ADB",
+    "upstream": "EXT-001 and STORE tasks Android-specific",
+    "baseline": "Not Java/Jetty browser-runtime work",
+    "disposition": "NOT_DIRECTLY_PORTABLE",
+    "phases": [
+      "P01",
+      "P17"
+    ],
+    "sources": "U01/U03",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  },
+  {
+    "id": "PAR-059",
+    "topic": "Future HD200/HD300 firmware audit",
+    "upstream": "EXT-004 explicitly future",
+    "baseline": "No proprietary firmware port authorized",
+    "disposition": "UPSTREAM_OPEN_OR_SEPARATE_SCOPE",
+    "phases": [
+      "P01"
+    ],
+    "sources": "U01",
+    "implementation_status": "UNCHANGED_RUNTIME_P01_AUDIT",
+    "last_review_revision": 2,
+    "audit_evidence": "p01/REPORT.md"
+  }
+]

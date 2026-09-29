@@ -1,0 +1,308 @@
+{
+  packets: 3,
+  continuityErrors: 0,
+  pmtPid: 256,
+  videoPid: 257,
+  videoStreamType: 2,
+  cea608Pairs: 2,
+  cea708Triples: 0,
+  captionServices: [],
+  queuedCues: 1,
+  selectedService: 'CC1'
+}
+OUT= "HI"
+{
+  packets: 3,
+  continuityErrors: 0,
+  pmtPid: 256,
+  videoPid: 257,
+  videoStreamType: 2,
+  cea608Pairs: 0,
+  cea708Triples: 2,
+  captionServices: [],
+  queuedCues: 1,
+  selectedService: '708-1'
+}
+OUT= "OK"
+performance watchdog PASS
+session state PASS
+session state v2 PASS
+library utils PASS
+commercial skip PASS
+PASS unified graphics stays opt-in in browser settings
+PASS unified YUV rows convert only after both planes arrive
+PASS keyboard command repeat is owned and cancels on release
+PASS canvas point mapping clamps one shared UI transform
+PASS fast startup stays one segment regardless of reserve or producer rate
+PASS buffer settings clamp and validate
+PASS short finished clip can start with one segment
+PASS separate startup and ongoing reserve targets
+PASS recording buffering cannot force live-edge jumps or rate catch-up
+PASS bounded back buffer and worker-enabled transmuxer
+PASS auto resolution follows usable window and caps rendering load
+PASS fixed rendering resolution does not crop desktop or portrait windows
+PASS short click sends one click and suppresses browser duplicate
+PASS hold opens at 575ms, never clicks underlying item
+PASS touch primary pointer supports hold
+PASS secondary touch cannot steal hold
+PASS drag cancels hold and releases without activating
+PASS 12px tolerance uses CSS rather than canvas pixels
+PASS cancelled hold and synthetic click cannot select
+PASS cancelled drag still releases
+PASS right hold opens remote; short right click remains native
+PASS left double-click opens without prior activation
+PASS single click with double-click trigger delivered after window
+PASS right double-click opens and middle-click trigger works
+PASS mouse X-button back is a command, not a click
+PASS Guide hint parser avoids unrelated menu names
+PASS ENDLIST does not recover before normal buffered end
+PASS bounded recovery budget does not silently reset
+PASS video-mask assist accepts color key and clips trusted preview
+PASS dark clear can reveal fullscreen video, not tiny black UI buttons
+PASS menu navigation suppresses stale black-fill video hole
+MiniClient core: 31 tests PASS
+PASS subtitle/DVD content geometry shares Fit Fill and Cover transforms
+PASS forced 4:3 and 16:9 overlays remain centered
+PASS new default uses browser-owned cover viewport
+PASS explicit fit/stretch/native remain selectable
+PASS window canvas fills all CSS pixels despite native size cap
+PASS fixed UI preserves complete logical picture
+PASS inset near-full native video is expanded once, not fitted twice
+PASS explicit small native preview remains native
+PASS preview positioning uses same axes as UI pointer mapping
+PASS fullscreen video ignores fixed-UI letterbox offsets
+PASS native override preserves exact destination even near full
+PASS invalid geometry falls back to sane screen rectangle
+PASS fullscreen border mattes recognized without geometry mutation
+PASS translucent native OSD and colored panels are retained
+PASS menu suspension and native preview do not erase mattes
+PASS small black UI button is never a fullscreen border matte
+MiniClient display policy: 16 tests PASS
+PASS 30 Vibe Android assets: recorded shapes/colors, SHA-256, PNG Git blobs, HTML and offline shell references
+PASS starts on one published segment, no fixed 10-second gate
+PASS manual startup threshold respected without blocking
+PASS short completed media does not wait for nonexistent segments
+PASS starvation pauses, replenished buffer resumes without undefined variable
+PASS user pause is not overridden by buffer refill
+PASS rebuffering reports play intent, not temporary video.pause
+PASS finished producer with unplayed content is not restarted
+PASS premature end recovery includes atomic absolute position and expected session
+PASS recovery counter persists across recovery sessions and caps at six
+PASS old asynchronous vendor load cannot attach to new recording
+PASS old status response cannot replace new session status
+PASS concurrent status polls share one request
+PASS seek startup reports offset without retaining prior currentTime
+PASS seek preserves pause intent
+PASS autoplay denied displays user action; gesture retries
+PASS normal end does not loop recovery
+PASS native HLS uses same startup and pause policy
+PASS old interrupted play promise cannot mutate replacement
+PASS completed recording duration replaces scheduled duration
+PASS first appended fragment expands 6s startup target to 180s without reloading
+PASS low-delay startup still fills a large ongoing reserve
+PASS forward reserve change applies while playing without resetting playback
+PASS settings unrelated to buffering preserve a library memory reduction
+PASS loader is woken with 20s still buffered instead of waiting to stall
+PASS refill continues while paused without autoplaying
+PASS normal appends fill reserve and continue topping up during long playback
+PASS no refill restart at target or when producer has no additional data
+PASS active slow fragment gets its timeout before a loader wakeup
+PASS buffer quota pressure reduces reserve and remains reduced
+PASS new recording resets phase and ignores old buffered callbacks
+PASS available server reserve is not discarded when producer stops advancing
+PASS unexplained browser clock regression is clamped within one media generation
+PASS ongoing source reads prevent producer restart while decode output is temporarily cold
+PASS DVD epochs use one-segment startup and bounded 12-second reserve
+PASS short completed DVD cell starts even when normal profile asks for many segments
+MiniClient playback: 35 tests PASS
+caption authority policy: 6 PASS
+PASS off never polls ordinary subtitle endpoint
+PASS overlapping local-file text cues remain independently active
+PASS bitmap cues render straight RGBA and expire
+PASS stale async response cannot paint replacement recording
+ordinary subtitle controller: 4 PASS
+PASS profile has explicit kind/schema
+PASS profile declares scope boundaries
+PASS identity and per-session track choices are excluded
+PASS per-session PID/page choices are excluded
+PASS import preview reports unknown keys
+PASS import preview retains approved saved defaults
+PASS unknown import keys are bounded
+PASS future profile schema fails closed
+PASS recognized credentials are redacted
+PASS caption/media content is omitted while counters survive
+PASS caption diagnostics resolve slot/codec/PID/page/render owner
+PASS ordinary subtitle diagnostics expose timing counters without subtitle text
+PASS effective transcode diagnostics distinguish encode/decode mode
+P14 support/profile helpers: 13 tests PASS
+XML/package/WAR/MD5/new streaming classes OK
+  major version: 52
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS two browser playback sessions are isolated
+PASS seek retires only its own prior epoch
+PASS FLUSH has an independent generation
+PASS source replacement/stop invalidates stale callbacks without touching another client
+PASS text cue accepted inside current epoch
+PASS read-ahead cue does not render before presentation clock
+PASS due cue drains on presentation time
+PASS stale cue is rejected after seek
+PASS straight-alpha bitmap cue shares the versioned queue
+PASS bitmap dimension limit fails closed
+PASS text payload limit fails closed
+PASS 33-bit source PTS wrap maps to monotonic recording time
+PASS caption delay maps independently from source timestamps
+PASS cue-count backpressure is bounded
+PASS ffprobe inventory preserves source PID and disposition
+PASS CEA-608 language remains Unknown instead of inheriting guessed metadata
+PASS bounded PAT/PMT inventory discovers Teletext and DVB subtitle services
+PASS service inventory retains distinct descriptor identities instead of collapsing by UI ordinal
+PASS Teletext inventory preserves PID/language/type/magazine/page and observed evidence
+PASS DVB inventory preserves PID/composition/ancillary page identity
+PASS inventory reports completed P06 subtitle capabilities
+PASS legacy profile with no schema migrates through schema 7 without enabling ordinary subtitles
+PASS schema 4 profile remains compatible and gains a safe OFF authority default
+PASS literal CEA-608 CC4 and unrelated stream settings survive migration
+PASS per-recording audio/subtitle indices do not leak into the next recording
+PASS literal CEA-708 service selections remain addressable
+PASS TS source branch copies only selected original PID packets
+PASS subtitle branch does not duplicate source video packets
+PASS subtitle preservation is transport-independent from TS/HLS A/V outputs and video encoder stripping
+PASS unavailable selected subtitle track fails before replacing playback
+PASS ffprobe typed inventory discovers container subtitle track
+PASS container subtitle stream-copy branch preserves original subtitle stream independently of video encode
+PASS preserved container side channel remains probeable as subtitle media
+PASS capability/resource contract advertises completed P06 ordinary subtitle families
+P02 playback architecture: 34 PASS
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+DiscSourceSmoke PASS 7/7
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS VBR MPEG-TS seek uses observed PTS rather than duration/file-size ratio
+PASS pipe residual timestamp seek is placed after input and before mapping
+PASS unindexed source never invents a time-to-byte offset
+PASS completed EOF uses bounded final-tail settle and captures late visible bytes
+PASS source shrink/replacement invalidates old byte identity
+P11 timeline smoke PASS: 5
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS primitive draw opcode is implemented
+PASS transform opcode is explicitly negotiated off
+PASS unknown opcode is auditable rather than silently classified
+PASS opcode ledger retains encountered unsupported evidence
+PASS unified graphics is disabled by default
+PASS explicit session opt-in advertises UNIFIED
+PASS unsupported transform/batch families remain negotiated off
+PASS session diagnostics expose unified state and opcode ledger
+P13 GFX/lifecycle: 8 tests PASS
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS server sanitizer removes credentials and subtitle content
+PASS server sanitizer retains safe counters
+PASS diagnostic ZIP contains report/hash/readme entries
+PASS ZIP report is redacted without dropping safe stream counters
+PASS ZIP hash matches report bytes
+PASS external report writes are default-off
+PASS destination test supports cooperative cancellation before creating a probe
+PASS configured destination passes bounded write/read/hash/delete test
+PASS destination test deletes only its own temporary probe
+PASS report uses opt-in atomic external save
+PASS browser status reveals destination label but not full server path
+PASS failed configured destination falls back to bounded local spool
+PASS spool retry supports cooperative cancellation between bounded file steps
+PASS spooled report retries to recovered destination
+P14 diagnostic support: 14 tests PASS
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+P12 audio/quality policy: 6 PASS
+P12 streaming profile: 8 PASS
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+P12 generated A/V calibration PASS (onset -500=0.527, 0=1.027, +500=1.527)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+DVD native protocol smoke PASS (role gate, units, bounded input, probe detection, metadata, drain and FLUSH generations)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+MiniClient DVD wire smoke PASS (commands 0/1/17/22/23/29/32-37, exact reply alignment, probes and FLUSH)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+DvdPlaybackRuntimeSmoke PASS 5/5
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+legacy event-225 caption bridge: 4 PASS
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+MiniClient protocol smoke PASS (first-frame/explicit resize + repaint, commands, mouse, text and bounds)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS type-5 recovery, 0 initial rejection(s), partial header, retained media/cache
+PASS type-5 recovery, 2 initial rejection(s), partial body, retained media/cache
+PASS pre-first-frame reset is terminal
+PASS unnegotiated reset is terminal
+PASS three rejected reconnects fail visibly without a fourth handshake
+PASS close cancels an in-flight reconnect handshake and prevents resurrection
+PASS explicit close terminates media/GFX without reconnect
+PASS server DEINIT closes cleanly instead of reconnecting
+PASS rejected startup cleans up both media and pending GFX socket
+PASS diagnostic property trace is bounded and omits property values
+PASS same-ID refresh retires old native sockets; stale stop cannot kill replacement
+Native recovery tests: 11 PASS (real loopback sockets, synthetic SageTV peer)
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS INIT replies without resize/repaint while server UI is unconstructed
+PASS all property and filesystem replies still arrive during startup
+PASS first frame allocation replies remain live; STARTFRAME alone does not open gate
+PASS first completed frame ACK precedes one initial resize and repaint
+PASS startup resize flood coalesces to latest size and one full repaint
+PASS mouse keyboard text and Sage commands are dropped rather than replayed at login
+PASS media-update events are coalesced until video frame owner exists
+PASS media protocol replies are independent of GFX readiness
+PASS runtime resize repaint and input still work after readiness
+PASS later FLIPBUFFER does not repeat initial resize/repaint
+PASS driver re-INIT closes event gate until another completed frame
+PASS close before first frame discards deferred events and cannot reopen
+PASS invalid startup sizes are rejected before queuing
+Native startup ordering: 13 PASS (real TCP; synthetic server readiness boundary).
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS ordinary no-auth startup remains plaintext after capability query
+PASS RSA-1024 binary key exchange, encrypted properties, first GFX frame
+PASS RSA-2048 binary key exchange, encrypted properties, first GFX frame
+PASS premature enable and missing public key rejected without false success
+PASS unsupported algorithms, invalid RSA key, malformed boolean, unknown crypto rejected
+PASS truncated and mismatched property lengths rejected without changing mode
+PASS all outbound families use correct padding; empty payload stays empty
+PASS enable/disable ACK uses old mode atomically with concurrent keyboard input
+PASS active encrypted link rejects rekey/downgrade and keeps current cipher

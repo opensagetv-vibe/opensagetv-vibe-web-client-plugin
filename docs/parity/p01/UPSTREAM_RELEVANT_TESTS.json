@@ -1,0 +1,779 @@
+{
+  "schema_version": 1,
+  "reference_commit": "f1ba340e05fe18eaaba939253a933c3dfe6d6caf",
+  "git_tree": "06a4c99958b8e07f6ad84b0c0d721a7b92e71918",
+  "capture_method": "GitHub connector recursive tree at frozen commit; files under test/tests/src/test filtered by playback/media/caption/DVD/GFX/lifecycle keywords",
+  "all_test_files_in_tree": 162,
+  "relevant_test_files": 102,
+  "unclassified_relevant_test_files": 0,
+  "tests": [
+    {
+      "path": "mcp/tests/test_server_playback_health.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/android-shared/src/test/java/opensagetv/vibe/miniclient/android/video/EncodedPassthroughOffsetControllerTest.java",
+      "target_phases": [
+        "P14"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/android-shared/src/test/java/opensagetv/vibe/miniclient/android/video/GrowingPlaybackPositionGuardTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/android-shared/src/test/java/opensagetv/vibe/miniclient/android/video/PushTimelineContinuityTest.java",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/android-shared/src/test/java/opensagetv/vibe/miniclient/android/video/exoplayer2/Exo2PcmAudioProcessorTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/android-shared/src/test/java/opensagetv/vibe/miniclient/android/video/media3/Media3FfmpegAudioSupportTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/android-shared/src/test/java/opensagetv/vibe/miniclient/android/video/media3/Media3PcmAudioProcessorTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/ConnectionEventRouterTest.java",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/ConnectionFileTransferOwnerTest.java",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/ConnectionLifecycleDiagnosticsTest.java",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/ConnectionProtocolStreamsTest.java",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/ConnectionReconnectStateTest.java",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/ConnectionWorkerOwnerTest.java",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/GfxCommandFamilyTest.java",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/GfxFrameExchangeTest.java",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/GfxHandleAllocatorTest.java",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/GfxImageAllocationRecoveryTest.java",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/MediaCmdDetailedPushStatsTest.java",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/MediaCmdDvdProtocolTest.java",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/MediaCmdPlaybackRateTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/PlaybackStartupFrameGuardTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/ServerDiscoveryTest.java",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/StreamingModePolicyTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/dvd/DvdAudioStreamCodeSelfTest.java",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/dvd/DvdPtsClockSelfTest.java",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/dvd/DvdRleRoundTripSelfTest.java",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/dvd/DvdSpuAssemblerSelfTest.java",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/dvd/DvdSpuCompositorSelfTest.java",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/dvd/DvdSpuDecoderSelfTest.java",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/dvd/ImportedDvdPresentationCoreTest.java",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/dvd/IntegratedDvdSpuRobustnessTest.java",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/dvd/TestData.java",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/media/CaptionSlotPolicyTest.java",
+      "target_phases": [
+        "P05",
+        "P06"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/media/LegacyExtenderSubpictureCommandTest.java",
+      "target_phases": [
+        "P05",
+        "P06"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/media/MediaUrlContextTest.java",
+      "target_phases": [
+        "P14"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/media/PushTimelineAnchorEstimatorTest.java",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/media/SubtitleCodecTest.java",
+      "target_phases": [
+        "P05",
+        "P06"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/media/SubtitleTrackTest.java",
+      "target_phases": [
+        "P05",
+        "P06"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/media/TeletextPesProbeTest.java",
+      "target_phases": [
+        "P03"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/media/TeletextSubtitleEngineTest.java",
+      "target_phases": [
+        "P03"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/media/TrackPreferencePolicyTest.java",
+      "target_phases": [
+        "P14"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/media/audioCodecTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/net/BoundedCircularByteBufferTest.java",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/net/BufferedPullDataSourceTest.java",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/net/MockInputStream.java",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/net/PushBufferDataSourceTelemetryTest.java",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/net/ShadowMediaServerSessionTest.java",
+      "target_phases": [
+        "P14"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/net/SimplePullDataSourceTest.java",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/uibridge/RendererReadinessGateTest.java",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/DecoderAttemptTelemetryTest.java",
+      "target_phases": [
+        "P14"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/DiscPlaybackPolicyTest.java",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/DisplayRefreshRatePolicyTest.java",
+      "target_phases": [
+        "P14"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/FullscreenPlaybackPolicyTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/LegacyExtenderCaptionBridgeTest.java",
+      "target_phases": [
+        "P05",
+        "P06"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/LegacySubtitleCallbackPolicyTest.java",
+      "target_phases": [
+        "P05",
+        "P06"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/MediaReplacementPolicyTest.java",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/Mpeg2PictureTimestampCompleterTest.java",
+      "target_phases": [
+        "P14"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/PlaybackErrorPresentationPolicyTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/PlaybackFailureClassifierTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/PlaybackFrameStepPolicyTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/PlaybackMediaContextTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/PlaybackRatePolicyTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/PlaybackSeekPolicyTest.java",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/PlaybackSessionControllerTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/PlaybackSyncPointPolicyTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/PullSeekRecoveryPolicyTest.java",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/dev/core/src/test/java/opensagetv/vibe/miniclient/video/TeletextCea608BridgeTest.java",
+      "target_phases": [
+        "P03",
+        "P05"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/existing/core/src/test/java/sagex/miniclient/media/audioCodecTest.java",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/existing/core/src/test/java/sagex/miniclient/net/BufferedPullDataSourceTest.java",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/existing/core/src/test/java/sagex/miniclient/net/MockInputStream.java",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "source/existing/core/src/test/java/sagex/miniclient/net/SimplePullDataSourceTest.java",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_add_server_remote_navigation.py",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_audio_focus_controller.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_authored_dvd_fixture.py",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_backend_neutral_player_components.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_codec_capability_profile.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_connection_lifecycle_diagnostics.py",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_connection_protocol_characterization.py",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_disc_fixture_registry.py",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_dvd_protocol.py",
+      "target_phases": [
+        "P07",
+        "P08",
+        "P09",
+        "P10"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_dynamic_streaming_default.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_fullscreen_controller.py",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_hardware_codec_fixtures.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_lifecycle_scheduling.py",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_mcp_media3_comskip_matrix.py",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_mcp_media3_matrix.py",
+      "target_phases": [
+        "P14"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_mcp_playback_automation.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_mcp_player_matrix.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_mcp_seek_calibration.py",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_media3_fast_switch.py",
+      "target_phases": [
+        "P14"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_media_warm_cache.py",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_playback_rate_protocol.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_playback_session_controller.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_playback_trace_analysis.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_player_backends.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_player_runtime_tuning.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_player_telemetry.py",
+      "target_phases": [
+        "P12"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_push_telemetry.py",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_remote_long_press.py",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_remote_stop_key.py",
+      "target_phases": [
+        "P13"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_sagetv_caption_authority.py",
+      "target_phases": [
+        "P05",
+        "P06"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    },
+    {
+      "path": "tests/test_seek_fixture.py",
+      "target_phases": [
+        "P11"
+      ],
+      "status": "UPSTREAM_REFERENCE_NOT_EXECUTED_AS_WEBPLAYER_TEST"
+    }
+  ],
+  "important": "These are upstream Android/Core regression sources. Their existence or Android PASS state does not prove WebPlayer behavior."
+}

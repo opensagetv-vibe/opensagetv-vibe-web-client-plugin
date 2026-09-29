@@ -1,0 +1,13 @@
+PASS 1912x800 window uses full area below toolbar with all four GFX corners visible
+PASS initial server connection receives the actual usable UI dimensions
+PASS desktop, portrait, landscape and large windows resize without clipping or page overflow
+PASS window changes send real resize API requests and redraw at the new native size
+PASS image handle allocated only at connection remains valid after four native resizes
+PASS fixed 720p option contains the entire 16:9 UI rather than zooming/cropping
+PASS bottom-right pointer clicks map to the new native coordinates
+PASS render-only view and toolbar restoration renegotiate usable height
+PASS fullscreen entry and exit preserve the complete native drawing surface
+PASS video startup/control and reserve promotion do not wait behind a blocked GFX image decode
+PASS large GFX batch yields to browser tasks before completion while preserving draw order
+PASS no JavaScript exceptions in auto-resize, cache reuse or independent media scheduling
+Chromium layout/scheduling: 12 tests PASS (mock native transport, no live SageMC/video)

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "owner_task": "WP01-006",
+  "source": "user-supplied SageTV server log sagetv_0(8).txt; only non-secret startup facts copied",
+  "source_log_sha256": "154b75080ec8913009e0646cbe7bfc61dfcc0af3bd8e63cde5fe99d1420c23ae",
+  "observed_server": {
+    "sagetv_version": "9.2.10.1054",
+    "role": "server (client=false)",
+    "jvm": "11.0.32",
+    "os": "Linux 6.12.54-Unraid",
+    "server_root": "/opt/sagetv/server",
+    "core_classpath_entry": "Sage.jar",
+    "active_stv": "/opt/sagetv/server/STVs/SageTV7/SageTV7.xml",
+    "stock_core_classification": "STOCK_CORE_WITH_STANDARD_PLUGINS_AS_REPORTED_BY_RUNTIME_LOG",
+    "binary_core_sha256": null,
+    "stv_sha256": null
+  },
+  "plugin_boundary": {
+    "vibe_ffmpeg_plugin_present": true,
+    "vibe_ffmpeg_plugin_metadata_states": "uses stock Sage.jar without modification",
+    "vibe_core_mcp_plugin_present": true,
+    "vibe_core_mcp_is_standard_plugin_not_core_replacement": true,
+    "optional_extended_core_profile_approved": false,
+    "optional_extended_core_profile_used_for_stock_acceptance": false
+  },
+  "acceptance_boundary": "Runtime version, server role, classpath Core name and active STV path are identified from the live server log. No cryptographic Sage.jar/STV hashes were available, so this records runtime identity but not binary provenance. No extended/custom Core result is accepted as stock evidence.",
+  "sensitive_data_copied": false
+}

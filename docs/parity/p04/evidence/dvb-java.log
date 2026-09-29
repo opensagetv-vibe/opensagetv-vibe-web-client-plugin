@@ -1,0 +1,33 @@
+PASS DVB 2bpp discovers descriptor 0x59 identity
+PASS DVB 2bpp emits RGBA bitmap cue at first PTS
+PASS DVB 2bpp preserves canvas and region placement
+PASS DVB 2bpp RGBA/alpha pixels match independent golden hash
+PASS DVB 2bpp page clear emits a timed bitmap clear
+PASS DVB 4bpp discovers descriptor 0x59 identity
+PASS DVB 4bpp emits RGBA bitmap cue at first PTS
+PASS DVB 4bpp preserves canvas and region placement
+PASS DVB 4bpp RGBA/alpha pixels match independent golden hash
+PASS DVB 4bpp page clear emits a timed bitmap clear
+PASS DVB 8bpp discovers descriptor 0x59 identity
+PASS DVB 8bpp emits RGBA bitmap cue at first PTS
+PASS DVB 8bpp preserves canvas and region placement
+PASS DVB 8bpp RGBA/alpha pixels match independent golden hash
+PASS DVB 8bpp page clear emits a timed bitmap clear
+PASS DVB parser accepts 192-byte transport framing
+PASS DVB parser accepts 204-byte transport framing
+PASS saved DVB PID may be configured before asynchronous discovery
+PASS late PMT discovery reapplies saved DVB PID/composition selection
+PASS unknown ordinary-video DVB PID fails closed instead of choosing another track
+PASS media command PID may be accepted pending asynchronous PMT discovery
+PASS late discovery of other DVB services does not fall back from an explicitly requested unknown PID
+PASS media command 36/type 1 adapter selects DVB by physical source PID
+PASS media command 36 DVB disable sentinel 8192 clears local bitmap selection
+PASS DVB adapter rejects audio/DVD-unrelated stream type instead of reusing subtitle semantics
+PASS DVB cues exist before seek
+PASS seek generation reanchors DVB display set and retires stale cues
+PASS FLUSH retires prior DVB callbacks
+PASS EOS/stop emits final DVB clear
+PASS Teletext-only transport is not misclassified as DVB bitmap
+PASS DVB diagnostics expose bounded decode stages
+PASS DVB diagnostics do not export media or decoded pixel payloads
+P04 DVB bitmap subtitle: 32 PASS

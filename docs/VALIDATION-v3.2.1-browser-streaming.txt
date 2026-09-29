@@ -1,0 +1,14 @@
+PASS native connect sends explicit browser streaming profile and capabilities
+PASS source-derived language/codec/channel tracks and effective transcode values displayed
+PASS Save wires all video/audio/CC options; explicit track is not persisted for other recordings
+PASS Load defaults edits draft only, without overwriting saved profile
+PASS Prepare assets requests only version-pinned streaming library family
+PASS production playback adapter starts continuous TS with 180-second lazy reserve and byte resume
+PASS real production CEA decoder and video-clock controller display side-channel CC
+PASS Apply now carries selected quality/track, current timestamp and stale-session guard
+PASS invalid CEA-608 service rejected visibly instead of submitting a nonfunctional selector
+PASS streaming form and long track descriptions fit mobile viewport; all controls scroll into view
+PASS stop destroys TS owner and clears caption output
+PASS no uncaught JavaScript errors in production settings, playback adapter and caption UI
+Chromium streaming settings: 12 tests PASS (mock vendor/SageTV, real DOM/CC decoder)
+BROWSER_STREAMING_EXIT=0

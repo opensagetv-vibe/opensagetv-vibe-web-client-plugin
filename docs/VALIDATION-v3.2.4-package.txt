@@ -1,0 +1,6 @@
+PASS final source/static resource/WAR byte equality
+PASS all compiled Java classes match WAR; target52 and server3.2.4
+PASS 30 icons and license notices included
+PASS local installer contains identical WAR and correct XML MD5/version
+PASS only Java source change is PluginVersion.java
+WAR SHA-256 069ec4cd1b080f896311e98a63a6c9168bdc9091039f4326e1506f54f965742d

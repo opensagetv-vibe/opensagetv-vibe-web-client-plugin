@@ -1,0 +1,51 @@
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+3 warnings
+PASS async servlet streams complete original bytes, 200/no invented Content-Length
+PASS continuous transport has no-cache/no-proxy-buffer headers
+PASS lazy-load reconnect resumes exact byte suffix without restarting producer
+PASS negative, nonnumeric and overflowing resume offsets rejected before async work
+PASS unproduced resume offset rejected with 416
+PASS HTTP Range rejected rather than fabricating total growing length
+PASS path traversal and non-session stream URL rejected
+PASS unsupported Jetty async deployment gives actionable HLS fallback error
+PASS closing a full client buffer retains producer session for later reconnect
+PASS caption endpoint refuses disabled caption stream
+PASS caption endpoint rejects unknown session instead of accepting arbitrary media path
+PASS asset preparation rejects arbitrary families/URLs without network access
+PASS streaming prefetch allowlist is limited to two pinned player assets
+Streaming servlet tests: 13 PASS (mock Servlet API; real async workers/file IO)
+PASS validated per-browser options reject unsafe/invalid values and reset audio indices between recordings
+PASS codec-aware remux, preferred-language selection, actual stream index and strict compatibility validation
+PASS MPEG-2 A/53 extraction crosses fragmented TS chunks and preserves relative PTS
+PASS AVC and HEVC registered A/53 SEI extraction
+PASS caption PTS wrap handling does not jump by 26 hours
+PASS bounded binary caption sidecar, JSON packets and invalid cursor rejection
+PASS continuous stream follows growth and resumes exact bytes without re-running encoder
+PASS FFmpeg progress microseconds are converted to produced seconds
+PASS real ffprobe discovers MPEG-2 video and two language-tagged audio tracks
+PASS real MPEG-2 to H.264 MPEG-TS uses selected video bitrate/FPS and Spanish mono AAC settings
+PASS original-video CC side channel survives actual video transcode without asking encoder to preserve it
+PASS continuous stream status measures output duration/bytes and clean EOF without an HLS playlist
+PASS real compatible H.264/AAC remux uses video/audio copy without GPU encoder probe
+PASS real HLS compatibility path keeps user quality/audio-delay settings and server seek offset
+Streaming runtime: 14 tests PASS; real FFmpeg software path, no GPU or live SageTV test
+PASS web settings match validated server ranges and request names
+PASS MPEG-TS startup is independent of large reserve and never uses HLS segment gate
+PASS DVR lazy loading is enabled instead of live-edge chasing with unbounded download
+PASS MPEG-TS workers and backward-buffer cleanup are requested explicitly
+PASS progress/repeated status does not restart a healthy TS loader
+PASS pause keeps TS loader alive and never turns buffer refill into Play
+PASS TS error requests one guarded fallback at absolute recording position
+PASS strict no-fallback policy stops with useful error instead of changing codec
+PASS old asynchronous mpegts vendor load cannot attach over a replacement stream
+PASS TS seek tears down old MSE owner and preserves paused state
+PASS completed TS production with an unplayed reserve does not trigger recovery
+PASS unsupported MSE invokes compatibility fallback without claiming playback
+PASS CEA-608 side-channel triples reach the real decoder and render by media time
+PASS CEA-708 side-channel service selection remains separate from CC1
+PASS bounded caption history retains cursor position during long playback
+PASS real FFmpeg original-video sidecar renders HI using browser caption decoder
+PASS caption fetch responses from a stopped recording cannot paint the next video
+MPEG-TS/settings/captions: 17 tests PASS (mpegts.js adapter mocked; codec/CC parser tests real)

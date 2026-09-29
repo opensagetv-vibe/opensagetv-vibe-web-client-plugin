@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "checks": 1,
+  "expectedTextObserved": true,
+  "stats": {
+    "packets": 2743,
+    "continuityErrors": 0,
+    "pmtPid": 4096,
+    "videoPid": 256,
+    "videoStreamType": 2,
+    "cea608Pairs": 720,
+    "cea708Triples": 0,
+    "captionServices": [],
+    "queuedCues": 1,
+    "selectedService": "CC1"
+  },
+  "boundary": "Existing CEA-608 parser and generated TS only; no vendor MSE or field playback."
+}

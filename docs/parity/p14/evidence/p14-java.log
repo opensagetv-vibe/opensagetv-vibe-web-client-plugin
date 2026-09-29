@@ -1,0 +1,15 @@
+PASS server sanitizer removes credentials and subtitle content
+PASS server sanitizer retains safe counters
+PASS diagnostic ZIP contains report/hash/readme entries
+PASS ZIP report is redacted without dropping safe stream counters
+PASS ZIP hash matches report bytes
+PASS external report writes are default-off
+PASS destination test supports cooperative cancellation before creating a probe
+PASS configured destination passes bounded write/read/hash/delete test
+PASS destination test deletes only its own temporary probe
+PASS report uses opt-in atomic external save
+PASS browser status reveals destination label but not full server path
+PASS failed configured destination falls back to bounded local spool
+PASS spool retry supports cooperative cancellation between bounded file steps
+PASS spooled report retries to recovered destination
+P14 diagnostic support: 14 tests PASS

@@ -1,0 +1,2 @@
+PASS untouched 3.2.2 sends resize 192 then unsafe repaint 193 before any frame
+BASELINE: premature UI-event ordering reproduced with real TCP; no live SageTV used.

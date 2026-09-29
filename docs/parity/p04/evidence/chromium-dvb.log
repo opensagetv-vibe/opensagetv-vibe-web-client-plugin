@@ -1,0 +1,7 @@
+PASS live typed inventory populates explicit DVB PID/page/language selector
+PASS DVB service selection keeps physical PID and composition page distinct
+PASS production browser canvas renders straight-alpha DVB RGBA pixels at source coordinates
+PASS DVB bitmap surface follows the source aspect/cover transform while leaving the existing video bounds unchanged
+PASS DVB duration timeout clears bitmap without a new video/GFX segment
+PASS DVB bitmap path does not activate the text-caption renderer
+Chromium DVB P04: 6 tests PASS (mock native/vendor transport; production DOM/controller)

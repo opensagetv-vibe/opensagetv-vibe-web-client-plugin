@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "runtime_version": "3.2.4",
+  "war_sha256": "069ec4cd1b080f896311e98a63a6c9168bdc9091039f4326e1506f54f965742d",
+  "runtime_input_unchanged": true,
+  "browser_suite_requested": true,
+  "results": [
+    {
+      "name": "build",
+      "command": [
+        "bash",
+        "scripts/build-local.sh"
+      ],
+      "started_at": "2026-09-25T01:21:09.376944+00:00",
+      "finished_at": "2026-09-25T01:21:10.895356+00:00",
+      "exit_code": 0,
+      "log": "build.log",
+      "log_sha256": "5aae168e61afe39d6862104d4ff8d17e24011528f01f1658297c7fbb778c77aa"
+    },
+    {
+      "name": "validation",
+      "command": [
+        "bash",
+        "scripts/validate.sh"
+      ],
+      "started_at": "2026-09-25T01:21:10.895475+00:00",
+      "finished_at": "2026-09-25T01:22:31.884386+00:00",
+      "exit_code": 0,
+      "log": "validation.log",
+      "log_sha256": "a94a6cf61717e8303a0066e531814ec2a0319ac958708f39a13a8f4be7457fa2"
+    }
+  ],
+  "real_vendor_mse": false,
+  "real_stock_server": false
+}

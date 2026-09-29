@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "plan_revision": 3,
+  "date": "2026-09-24",
+  "upstream_repository": "opensagetv-vibe/opensagetv-vibe-android-client",
+  "upstream_branch_observed": "main",
+  "upstream_commit": "f1ba340e05fe18eaaba939253a933c3dfe6d6caf",
+  "upstream_tree": "06a4c99958b8e07f6ad84b0c0d721a7b92e71918",
+  "upstream_checkpoint": "v0.5.95",
+  "upstream_task_revision": 71,
+  "baseline_archive": "SageTV-WebPlayer-Local-Plugin-v3.2.4.zip",
+  "baseline_archive_sha256": "f7a6dc6c8b2b722ce0d0f87b6261b04ea10cb7d61075b0384dcfb8a3e9478673",
+  "baseline_war_sha256": "069ec4cd1b080f896311e98a63a6c9168bdc9091039f4326e1506f54f965742d",
+  "scope": "source/dev behavior at the pinned commit; P01 literal changelog and relevant-regression source intake completed, with real vendor MSE acceptance still external-pending",
+  "sources": [
+    {
+      "id": "U01",
+      "path": "TASKS.md",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/TASKS.md#L1-L740",
+      "blob_sha": "c1b0c3d9a838d5dff167731e5a03187503b09109",
+      "review": "reviewed_upstream",
+      "scope": "Durable checklist revision 71, completed foundation/caption fixes and explicitly open DVD/audio/seek/device gates."
+    },
+    {
+      "id": "U02",
+      "path": "CHANGELOG.md",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/CHANGELOG.md#L1-L355",
+      "blob_sha": "650e8a65d1407fa5a6529240078b41ada2f91afe",
+      "review": "literal_census_complete_normalized_functional_ledger_complete",
+      "scope": "1,066 top-level frozen changelog records scope-reconciled with zero unclassified; 248 normalized functional records retain detailed browser disposition/task mapping."
+    },
+    {
+      "id": "U03",
+      "path": "docs/PLAYER_SERVER_COMPATIBILITY.md",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/docs/PLAYER_SERVER_COMPATIBILITY.md#L1-L210",
+      "blob_sha": "91f936eac51d345bc0f4dac653674f7ea32b6065",
+      "review": "reviewed_upstream",
+      "scope": "Authoritative distinction between CC, DVB, ordinary subtitles, native DVD, optional Core and physical evidence."
+    },
+    {
+      "id": "U04",
+      "path": "source/dev/core/src/main/java/opensagetv/vibe/miniclient/MediaCmd.java",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/source/dev/core/src/main/java/opensagetv/vibe/miniclient/MediaCmd.java#L365-L1110",
+      "blob_sha": "c7373bd41b68842aca91b1e4eab38222fec828e1",
+      "review": "reviewed_upstream",
+      "scope": "Native DVD INIT/no-OPENURL, drain/FLUSH, exact reply lengths, commands32–37 and Push timestamp calibration."
+    },
+    {
+      "id": "U05",
+      "path": "source/dev/core/src/main/java/opensagetv/vibe/miniclient/media/TeletextSubtitleEngine.java",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/source/dev/core/src/main/java/opensagetv/vibe/miniclient/media/TeletextSubtitleEngine.java",
+      "blob_sha": "006ae6c511a205bf3adb002347f74b0c747c44e0",
+      "review": "reviewed_upstream",
+      "scope": "Level-1 Teletext parser, service discovery, page decoder and Android singleton ownership requiring per-session adaptation."
+    },
+    {
+      "id": "U06",
+      "path": "source/dev/core/src/main/java/opensagetv/vibe/miniclient/video/TeletextCea608Bridge.java",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/source/dev/core/src/main/java/opensagetv/vibe/miniclient/video/TeletextCea608Bridge.java",
+      "blob_sha": "d00f9e78afe9512b9340a19f64f9e66ebbc27469",
+      "review": "reviewed_upstream",
+      "scope": "Timed text-to-stock-CC bridge, serialized drains, explicit reset/flush and virtual-slot mapping."
+    },
+    {
+      "id": "U07",
+      "path": "source/dev/core/src/main/java/opensagetv/vibe/miniclient/media/CaptionSlotPolicy.java",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/source/dev/core/src/main/java/opensagetv/vibe/miniclient/media/CaptionSlotPolicy.java",
+      "blob_sha": "c9b31c68191061aeb7ff2c2c09dae9563ec0862d",
+      "review": "reviewed_upstream",
+      "scope": "Source-aware virtual slots; includeDvb must be false for current CC1/CC2 policy; latest TASKS supersedes older broad modes."
+    },
+    {
+      "id": "U08",
+      "path": "source/dev/core/src/main/java/opensagetv/vibe/miniclient/dvd/DvdSpuDecoder.java",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/source/dev/core/src/main/java/opensagetv/vibe/miniclient/dvd/DvdSpuDecoder.java",
+      "blob_sha": "7f336ae3ff2c70b4cf95402abb534802b3bdfd33",
+      "review": "reviewed_upstream",
+      "scope": "Bounds-checked SPU/RLE, commands, CHG_COLCON. Related core assembler/compositor/highlight/palette classes were also reviewed."
+    },
+    {
+      "id": "U09",
+      "path": "source/dev/android-shared/src/main/java/opensagetv/vibe/miniclient/android/video/DvdSubpictureDecoder.java",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/source/dev/android-shared/src/main/java/opensagetv/vibe/miniclient/android/video/DvdSubpictureDecoder.java",
+      "blob_sha": "b77dcd080bb8f8e1e47af85b9af4c3949407cdd6",
+      "review": "reviewed_upstream",
+      "scope": "Android adapter shows palette/selection/generation/highlight behavior; Bitmap output must be replaced for the web backend."
+    },
+    {
+      "id": "U10",
+      "path": "source/dev/core/src/main/java/opensagetv/vibe/miniclient/MiniClientConnection.java",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/source/dev/core/src/main/java/opensagetv/vibe/miniclient/MiniClientConnection.java#L1000-L1380",
+      "blob_sha": null,
+      "review": "reviewed_upstream",
+      "scope": "Reviewed capability negotiation, functional DVD_DISC_* names, native rate and caption callback properties."
+    },
+    {
+      "id": "U11",
+      "path": "source/dev/android-shared/src/main/java/opensagetv/vibe/miniclient/android/video/media3/DvdPsExtractor.java",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/source/dev/android-shared/src/main/java/opensagetv/vibe/miniclient/android/video/media3/DvdPsExtractor.java",
+      "blob_sha": "a94933d5d1da40b81019219b22f62e61156bed1c",
+      "review": "reviewed_upstream",
+      "scope": "Reviewed private-stream audio routing, sparse/still video behavior and SPU versus A/V rebasing; Media3-specific code is not a browser drop-in."
+    },
+    {
+      "id": "U12",
+      "path": "source/dev/core/src/main/java/opensagetv/vibe/miniclient/dvd/DvdSpuAssembler.java",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/source/dev/core/src/main/java/opensagetv/vibe/miniclient/dvd/DvdSpuAssembler.java",
+      "blob_sha": "2d6aaa3ead31536aaf2922f250eb2234d6bc5c69",
+      "review": "reviewed_upstream",
+      "scope": "Bounded per-substream fragmentation and PTS markers."
+    },
+    {
+      "id": "U13",
+      "path": "java/sage/MiniDVDPlayer.java",
+      "url": "https://github.com/google/sagetv/blob/master/java/sage/MiniDVDPlayer.java",
+      "blob_sha": "abee89b421e095ea3c09fbf19d204cc9effa2078",
+      "review": "reviewed_server_reference_not_installed_core_identity",
+      "scope": "Reviewed stock DVD VM, ISO mount prerequisite, four-byte DVD command replies and STC wire units. Re-pin the exact target Core in P01."
+    },
+    {
+      "id": "U14",
+      "path": "source/dev/android-shared/src/main/res/layout/navigation.xml",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/source/dev/android-shared/src/main/res/layout/navigation.xml",
+      "blob_sha": "b55d384b6dcb9c86bf2cfa771f1a9d615710ed77",
+      "review": "reviewed_upstream",
+      "scope": "Actual Vibe overlay baseline already ported in 3.2.4; retain icons/grouping while adding functional panels."
+    },
+    {
+      "id": "U15",
+      "path": "tests/test_dvd_protocol.py",
+      "url": "https://github.com/opensagetv-vibe/opensagetv-vibe-android-client/blob/f1ba340e05fe18eaaba939253a933c3dfe6d6caf/tests/test_dvd_protocol.py",
+      "blob_sha": "18e96f89e799f6ee54749864b67de3cd1f21dd91",
+      "review": "included_in_relevant_regression_source_census",
+      "scope": "Included among 102 relevant regression-source files from the frozen Git tree; upstream execution is not a WebPlayer pass."
+    },
+    {
+      "id": "E01",
+      "path": "FFmpeg decoder documentation",
+      "url": "https://ffmpeg.org/ffmpeg-codecs.html",
+      "review": "additional_primary_feasibility_reference",
+      "scope": "dvbsub/dvdsub palette behavior and build-dependent libzvbi support; not proof the installed FFmpeg includes a decoder."
+    },
+    {
+      "id": "E02",
+      "path": "FFmpeg DVD demuxer documentation",
+      "url": "https://github.com/FFmpeg/FFmpeg/blob/master/doc/demuxers.texi",
+      "review": "additional_primary_feasibility_reference",
+      "scope": "dvdvideo accepts titles, directory/ISO/device inputs with libdvdnav/libdvdread; extracting menu assets is not interactive menu navigation."
+    },
+    {
+      "id": "B01",
+      "paths": [
+        "README.md",
+        "handoff.md",
+        "BUILD_INFO.json",
+        "docs/RELEASE-v3.2.4.md",
+        "docs/ARCHITECTURE.md"
+      ],
+      "review": "reviewed_exact_uploaded_baseline",
+      "scope": "The exact 3.2.4 runtime, accepted overlay/display behavior, inherited tests and stated limitations.",
+      "sha256": {
+        "README.md": "d6e534e88a9a03b1d9b7f73feb668fb0fb59675cbf258d63ac8491e1152f1068",
+        "handoff.md": "471bf96d7aba95bf16ea2f49eb1c635503f11d0058e24079dd798a1a1f997d61",
+        "BUILD_INFO.json": "d9cf92b43deb29399afb2156a3d8c988bf00f8b82081a546bff9312551aad18e",
+        "docs/RELEASE-v3.2.4.md": "92b1b8beef7d24032440df068a0025be68290efaafff0efa5d73415dff87d2eb",
+        "docs/ARCHITECTURE.md": "745927dc250475fe81c7eafe199d450f6ba17fa314b09b805b8fbaa21f32597d"
+      }
+    },
+    {
+      "id": "B02",
+      "paths": [
+        "src/main/java/org/opensagetv/webplayer/MiniClientMediaBridge.java"
+      ],
+      "review": "reviewed_exact_uploaded_baseline",
+      "scope": "Lines43–71: INIT-only reply and discarded PUSHBUFFER data; lines90–103: frame-step unsupported/DVD32–37 rejected; lines114–156: source resolution, basename fallback and stream restart seeks.",
+      "sha256": {
+        "src/main/java/org/opensagetv/webplayer/MiniClientMediaBridge.java": "cc722f5bfeded98c60d1e75bbb21914e5f1c18a90b29bd26e487551650461f10"
+      }
+    },
+    {
+      "id": "B03",
+      "paths": [
+        "src/main/java/org/opensagetv/webplayer/StreamOptions.java",
+        "src/main/java/org/opensagetv/webplayer/MediaProbe.java"
+      ],
+      "review": "reviewed_exact_uploaded_baseline",
+      "scope": "Only off/608/708 caption modes; audio-oriented simple metadata without subtitle PID/page/forced fields.",
+      "sha256": {
+        "src/main/java/org/opensagetv/webplayer/StreamOptions.java": "863364bdfda58c11e168ee2cfd9bb48c8842a462ba2345848ff8a88d935dda24",
+        "src/main/java/org/opensagetv/webplayer/MediaProbe.java": "c184e00e01cc5efd4c811a328ed1d95a2be74a893762cd726d0380cb4dc35f02"
+      }
+    },
+    {
+      "id": "B04",
+      "paths": [
+        "src/main/java/org/opensagetv/webplayer/StreamCommand.java",
+        "src/main/java/org/opensagetv/webplayer/StreamPlan.java",
+        "src/main/java/org/opensagetv/webplayer/A53CaptionTap.java",
+        "src/main/java/org/opensagetv/webplayer/CaptionsServlet.java",
+        "src/main/webapp/js/miniclient-captions.js"
+      ],
+      "review": "reviewed_exact_uploaded_baseline",
+      "scope": "Original-video-only A/53 side branch and local timed CEA captions; no Teletext/DVB/PGS/SPU cue path.",
+      "sha256": {
+        "src/main/java/org/opensagetv/webplayer/StreamCommand.java": "9b933e6d8e459727f1e1fdd3fe33553c78797b9b2700b73231286c6a7c5d3cb0",
+        "src/main/java/org/opensagetv/webplayer/StreamPlan.java": "d1e9deaa5adac6816acc6258fc4c12e43146c8bcc4fff89b7a3a4164b266c17e",
+        "src/main/java/org/opensagetv/webplayer/A53CaptionTap.java": "3165945d87982b6ce389ef890ae58c3a01ff2f80601ab43ccd58b518ce253047",
+        "src/main/java/org/opensagetv/webplayer/CaptionsServlet.java": "beb04b6173694dd4eac2697bbfcd80b809de8d55e25f45d8c418027fcba65a72",
+        "src/main/webapp/js/miniclient-captions.js": "3b1fcfe5c800f97b0adc6d5c7088fe2c6a2fd4a536895783aeb1a11b6dede74d"
+      }
+    },
+    {
+      "id": "B05",
+      "paths": [
+        "src/main/java/org/opensagetv/webplayer/MiniClientSession.java"
+      ],
+      "review": "reviewed_exact_uploaded_baseline",
+      "scope": "Lines397–440: role/capability replies, PULL-only and no subtitle callbacks/unified; lines476–505: callback rejection and forwarded VIDEO_CC_STATE.",
+      "sha256": {
+        "src/main/java/org/opensagetv/webplayer/MiniClientSession.java": "7fea4a66495dd1967832f4550c4814b8fca2960dd9e09b06b5cd90f2e1e1d306"
+      }
+    },
+    {
+      "id": "B06",
+      "paths": [
+        "src/main/java/org/opensagetv/webplayer/MediaSourceFactory.java",
+        "src/main/java/org/opensagetv/webplayer/SageApiBridge.java"
+      ],
+      "review": "reviewed_exact_uploaded_baseline",
+      "scope": "Current MediaFile/source/public API bridge; disc path/mount and context-specific control need separate validation.",
+      "sha256": {
+        "src/main/java/org/opensagetv/webplayer/MediaSourceFactory.java": "3e5309f53d3e870263bba3f6ee3957a57c4dc49207d7c3f86d0a8cd540d2a0b4",
+        "src/main/java/org/opensagetv/webplayer/SageApiBridge.java": "32299dcc1c9b86129db57c0f9304c35b514734b249092c55cca27f67bb298047"
+      }
+    },
+    {
+      "id": "B07",
+      "paths": [
+        "src/main/java/org/opensagetv/webplayer/RecordingFollower.java",
+        "src/main/java/org/opensagetv/webplayer/HlsSessionManager.java",
+        "src/main/java/org/opensagetv/webplayer/SageMediaServerSource.java",
+        "src/main/webapp/js/miniclient-playback.js",
+        "README.md"
+      ],
+      "review": "reviewed_exact_uploaded_baseline",
+      "scope": "Existing source following, buffer recovery and documented proportional remote/pipe seeking limitation; retain or adapt rather than replace blindly.",
+      "sha256": {
+        "src/main/java/org/opensagetv/webplayer/RecordingFollower.java": "c9392d8cba680a432f1f2de113c5edfc401e05eb6ba115490d41ad85549f1e82",
+        "src/main/java/org/opensagetv/webplayer/HlsSessionManager.java": "40f33eb0019b1422e69347001a9710206f61c978f6d064d4a3ba14ca9cde5514",
+        "src/main/java/org/opensagetv/webplayer/SageMediaServerSource.java": "5aa33cfd2f8a0a59a244bc8706baf25db69736c1112480e10459b5c07d673422",
+        "src/main/webapp/js/miniclient-playback.js": "e20e99f64a0287734d9be5cd7e771840466e6daf458a777c6a57a44bc28668dc",
+        "README.md": "d6e534e88a9a03b1d9b7f73feb668fb0fb59675cbf258d63ac8491e1152f1068"
+      }
+    }
+  ],
+  "observed_head_commit": "f1ba340e05fe18eaaba939253a933c3dfe6d6caf",
+  "pin_advanced": false,
+  "exhaustive_fix_reconciliation_complete": false
+}

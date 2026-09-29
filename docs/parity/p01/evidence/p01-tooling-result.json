@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "unit_tests": 22,
+  "unit_log": "p01-tools-test.log",
+  "unit_log_sha256": "44e10ec5828bebbd3c02d2e4e64c44b58f9f79152c5425a98e5d3b6f41325461",
+  "source_sha256": {
+    "scripts/parity/generate_fixtures.py": "c20bbff97ce33909afcaf658f615d487bfb1b2756d4d432472b9c672bf533ecc",
+    "scripts/parity/p01_tools.py": "db544f7819f4b50d47da518f8c4d1bfc18c9c372f5e5093852dd0082b009e187",
+    "scripts/parity/validate_fixtures.py": "920bd44089f74432316b8faa4219422c517bef500db74d04659e0dfc678ad83a"
+  },
+  "baseline_helper_integration": "baseline-helper/result.json",
+  "baseline_helper_exit": 0,
+  "field_or_vendor_acceptance": false
+}

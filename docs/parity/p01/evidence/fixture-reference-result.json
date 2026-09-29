@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "checks": 30,
+  "runtime_version_unchanged": true,
+  "webplayer_feature_implemented": false,
+  "real_vendor_mse": false,
+  "tests": [
+    {
+      "name": "Hash F-TEXT-SRT",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-TEXT-VTT",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-TTX-188",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-TTX-192",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-TTX-204",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-DVB-2",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-DVB-4",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-DVB-8",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-PGS",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-EMPTY",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-TRUNCATED",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-MSE-TS",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-MSE-HLS",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-MSE-HLS-segment000",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-MSE-HLS-segment001",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-MSE-HLS-segment002",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-MSE-HLS-segment003",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-MSE-HLS-segment004",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-MSE-HLS-segment005",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-MSE-HLS-segment006",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-MSE-HLS-segment007",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-RESERVE",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "Hash F-CEA-AUDIO",
+      "status": "PASS",
+      "boundary": "Input integrity only."
+    },
+    {
+      "name": "libzvbi page888 188",
+      "status": "PASS",
+      "boundary": "Independent FFmpeg/libzvbi text decoding, using a 1000 ms decoder duration; not browser cue scheduling or broadcast field acceptance."
+    },
+    {
+      "name": "libzvbi page888 192",
+      "status": "PASS",
+      "boundary": "Independent FFmpeg/libzvbi text decoding, using a 1000 ms decoder duration; not browser cue scheduling or broadcast field acceptance."
+    },
+    {
+      "name": "libzvbi page888 204",
+      "status": "PASS",
+      "boundary": "Independent FFmpeg/libzvbi text decoding, using a 1000 ms decoder duration; not browser cue scheduling or broadcast field acceptance."
+    },
+    {
+      "name": "Independent bitmap pixels/show/clear dvb-2bpp.ts",
+      "status": "PASS",
+      "boundary": "Actual FFmpeg subtitle decode: exact RGB pixels, consecutive visible frames, preceding/following clear frames. One-fps framesync is not a browser clock synchronization test.",
+      "visible_frame_indices": [
+        2,
+        3
+      ]
+    },
+    {
+      "name": "Independent bitmap pixels/show/clear dvb-4bpp.ts",
+      "status": "PASS",
+      "boundary": "Actual FFmpeg subtitle decode: exact RGB pixels, consecutive visible frames, preceding/following clear frames. One-fps framesync is not a browser clock synchronization test.",
+      "visible_frame_indices": [
+        2,
+        3
+      ]
+    },
+    {
+      "name": "Independent bitmap pixels/show/clear dvb-8bpp.ts",
+      "status": "PASS",
+      "boundary": "Actual FFmpeg subtitle decode: exact RGB pixels, consecutive visible frames, preceding/following clear frames. One-fps framesync is not a browser clock synchronization test.",
+      "visible_frame_indices": [
+        2,
+        3
+      ]
+    },
+    {
+      "name": "Independent bitmap pixels/show/clear white-rectangle.sup",
+      "status": "PASS",
+      "boundary": "Actual FFmpeg subtitle decode: exact RGB pixels, consecutive visible frames, preceding/following clear frames. One-fps framesync is not a browser clock synchronization test.",
+      "visible_frame_indices": [
+        2,
+        3
+      ]
+    }
+  ]
+}

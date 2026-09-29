@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "revision": 3,
+  "status": "PASS",
+  "package_kind": "P01 audit completion checkpoint; runtime unchanged",
+  "runtime_version": "3.2.4",
+  "runtime_source_changes": false,
+  "runtime_war_sha256": "069ec4cd1b080f896311e98a63a6c9168bdc9091039f4326e1506f54f965742d",
+  "expected_runtime_war_sha256": "069ec4cd1b080f896311e98a63a6c9168bdc9091039f4326e1506f54f965742d",
+  "runtime_war_matches_expected": true,
+  "installer_contains_identical_war": true,
+  "p01_exit_gate_met": true,
+  "p01_tasks_done": 7,
+  "p01_external_acceptance_pending": 1,
+  "wp01_004_real_vendor_mse_pass": false,
+  "literal_changelog_records": 1066,
+  "literal_unclassified": 0,
+  "upstream_test_files_total": 162,
+  "upstream_relevant_test_files": 102,
+  "upstream_relevant_unclassified": 0,
+  "server_identity": {
+    "sagetv_version": "9.2.10.1054",
+    "active_stv": "/opt/sagetv/server/STVs/SageTV7/SageTV7.xml",
+    "core_sha256": null,
+    "stv_sha256": null
+  },
+  "github_writes": false,
+  "server_changes": false,
+  "user_settings_changes": false,
+  "private_server_log_included": false,
+  "notes": [
+    "WP01-004 remains external acceptance pending, not PASS.",
+    "PROJECT_MANIFEST.sha256 is regenerated after this report and independently rechecked after packaging."
+  ],
+  "manifest_entry_count_after_refresh": 330,
+  "completion_result": "docs/parity/p01/evidence/p01-r3-completion-result.json"
+}

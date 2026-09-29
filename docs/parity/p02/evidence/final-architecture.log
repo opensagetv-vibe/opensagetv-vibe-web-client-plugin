@@ -1,0 +1,34 @@
+PASS two browser playback sessions are isolated
+PASS seek retires only its own prior epoch
+PASS FLUSH has an independent generation
+PASS source replacement/stop invalidates stale callbacks without touching another client
+PASS text cue accepted inside current epoch
+PASS read-ahead cue does not render before presentation clock
+PASS due cue drains on presentation time
+PASS stale cue is rejected after seek
+PASS straight-alpha bitmap cue shares the versioned queue
+PASS bitmap dimension limit fails closed
+PASS text payload limit fails closed
+PASS 33-bit source PTS wrap maps to monotonic recording time
+PASS caption delay maps independently from source timestamps
+PASS cue-count backpressure is bounded
+PASS ffprobe inventory preserves source PID and disposition
+PASS CEA-608 language remains Unknown instead of inheriting guessed metadata
+PASS bounded PAT/PMT inventory discovers Teletext and DVB subtitle services
+PASS service inventory retains distinct descriptor identities instead of collapsing by UI ordinal
+PASS Teletext inventory preserves PID/language/type/magazine/page and observed evidence
+PASS DVB inventory preserves PID/composition/ancillary page identity
+PASS inventory reports capabilities without advertising unfinished decoders
+PASS 3.2.4 profile with no schema migrates to schema 2 without changing Off
+PASS literal CEA-608 CC4 and unrelated stream settings survive migration
+PASS per-recording audio/subtitle indices do not leak into the next recording
+PASS literal CEA-708 service selections remain addressable
+PASS TS source branch copies only selected original PID packets
+PASS subtitle branch does not duplicate source video packets
+PASS subtitle preservation is transport-independent from TS/HLS A/V outputs and video encoder stripping
+PASS unavailable selected subtitle track fails before replacing playback
+PASS ffprobe typed inventory discovers container subtitle track
+PASS container subtitle stream-copy branch preserves original subtitle stream independently of video encode
+PASS preserved container side channel remains probeable as subtitle media
+PASS capability/resource contract is truthful and bounded
+P02 playback architecture: 33 PASS

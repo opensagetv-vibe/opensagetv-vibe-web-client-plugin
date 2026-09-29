@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "reference_commit": "f1ba340e05fe18eaaba939253a933c3dfe6d6caf",
+  "changelog_blob_sha": "650e8a65d1407fa5a6529240078b41ada2f91afe",
+  "changelog_lines": 3960,
+  "literal_top_level_bullets": 1066,
+  "unclassified_literal_bullets": 0,
+  "normalization": "Every literal top-level changelog bullet was ingested from the frozen blob. Literal entries are scope-classified here and reconciled many-to-one to the 248 reviewed functional ledger records; the normalized ledger remains the authoritative per-fix browser disposition/task map.",
+  "scope_disposition_counts": {
+    "required_web_port_or_adaptation": 635,
+    "diagnostic_test_or_fixture_reference": 187,
+    "android_or_repo_workflow_only": 139,
+    "reviewed_non_runtime_or_repository_history": 97,
+    "optional_core_or_provider": 8
+  },
+  "primary_phase_family_counts": {
+    "P03": 12,
+    "P04": 2,
+    "P05": 24,
+    "P06": 35,
+    "P07": 4,
+    "P08": 30,
+    "P09": 14,
+    "P10": 8,
+    "P11": 289,
+    "P12": 108,
+    "P13": 116,
+    "P14": 187,
+    "P15": 1,
+    "P17": 236
+  },
+  "classification_method": "Deterministic source-intake classifier run inside the GitHub connector over the full frozen CHANGELOG content; every bullet receives exactly one scope disposition and primary phase family. Detailed browser dispositions/target WP IDs remain in UPSTREAM_FIX_LEDGER.json.",
+  "reproducibility": "p01_tools.py intake verifies the same Git blob SHA when a full checkout is available; this package records the connector-side census because the sandbox cannot materialize the complete upstream checkout.",
+  "implementation_claim": false,
+  "notes": [
+    "A release/publication/test-harness bullet can contain playback terminology; the literal scope class is an intake label, not an implementation verdict.",
+    "Older contradictory behavior is resolved by SUPERSESSION_DECISIONS.md and current upstream TASKS revision 71.",
+    "No unseen/local upstream changes are inferred."
+  ]
+}

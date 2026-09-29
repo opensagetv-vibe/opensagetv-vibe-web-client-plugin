@@ -1,0 +1,15 @@
+PASS validated per-browser options reject unsafe/invalid values and reset audio indices between recordings
+PASS codec-aware remux, preferred-language selection, actual stream index and strict compatibility validation
+PASS MPEG-2 A/53 extraction crosses fragmented TS chunks and preserves relative PTS
+PASS AVC and HEVC registered A/53 SEI extraction
+PASS caption PTS wrap handling does not jump by 26 hours
+PASS bounded binary caption sidecar, JSON packets and invalid cursor rejection
+PASS continuous stream follows growth and resumes exact bytes without re-running encoder
+PASS FFmpeg progress microseconds are converted to produced seconds
+PASS real ffprobe discovers MPEG-2 video and two language-tagged audio tracks
+PASS real MPEG-2 to H.264 MPEG-TS uses selected video bitrate/FPS and Spanish mono AAC settings
+PASS original-video CC side channel survives actual video transcode without asking encoder to preserve it
+PASS continuous stream status measures output duration/bytes and clean EOF without an HLS playlist
+PASS real compatible H.264/AAC remux uses video/audio copy without GPU encoder probe
+PASS real HLS compatibility path keeps user quality/audio-delay settings and server seek offset
+Streaming runtime: 14 tests PASS; real FFmpeg software path, no GPU or live SageTV test
