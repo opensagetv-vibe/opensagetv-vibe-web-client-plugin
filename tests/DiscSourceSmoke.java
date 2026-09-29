@@ -85,9 +85,17 @@ public final class DiscSourceSmoke {
     private static void testCapabilityProbe(String ffmpeg){
         DiscCapabilityProbe p=DiscCapabilityProbe.probe(ffmpeg);
         check(p.executable,"FFmpeg executable");
-        check(p.dvdvideoDemuxer,"dvdvideo demuxer");
-        check(p.libdvdread&&p.libdvdnav,"libdvdread/libdvdnav enabled");
-        check(p.movieOnlyAvailable(),"movie-only capability gate");
+        if(p.dvdvideoDemuxer&&p.libdvdread&&p.libdvdnav){
+            check(p.movieOnlyAvailable(),"complete DVD capability opens movie-only gate");
+        }else{
+            // Distribution FFmpeg builds (including Ubuntu's CI package) may
+            // omit dvdvideo/libdvdread/libdvdnav. That is a supported runtime
+            // state: the required Vibe FFmpeg plugin can provide the feature,
+            // while an incomplete executable must fail closed rather than
+            // advertise a DVD mode it cannot run.
+            check(!p.movieOnlyAvailable(),"incomplete DVD capability fails closed");
+            check(p.detail!=null&&!p.detail.trim().isEmpty(),"missing capability is explained");
+        }
     }
 
     private static void touch(File f)throws Exception{try(FileOutputStream o=new FileOutputStream(f)){o.write("fixture".getBytes(StandardCharsets.US_ASCII));}f.deleteOnExit();}
