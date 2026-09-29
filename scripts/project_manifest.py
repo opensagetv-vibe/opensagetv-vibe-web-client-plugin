@@ -25,9 +25,18 @@ def tracked(root: Path) -> list[str]:
 
 def digest(path: Path) -> str:
     value = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            value.update(chunk)
+    data = path.read_bytes()
+    # Git may materialize UTF-8 text with CRLF on Windows and LF on Linux.
+    # The source-integrity manifest describes logical source content, so text
+    # line endings are normalized while binary fixtures remain byte-exact.
+    if b"\0" not in data:
+        try:
+            data.decode("utf-8")
+        except UnicodeDecodeError:
+            pass
+        else:
+            data = data.replace(b"\r\n", b"\n")
+    value.update(data)
     return value.hexdigest()
 
 

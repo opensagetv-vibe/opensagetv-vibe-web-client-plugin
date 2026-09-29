@@ -32,6 +32,9 @@ jobs:
         with:
           python-version: '3.13'
 
+      - name: Verify tracked source manifest
+        run: python scripts/project_manifest.py --check
+
       - name: Install build dependencies
         run: sudo apt-get update && sudo apt-get install -y ffmpeg libservlet-api-java
 
@@ -51,4 +54,3 @@ jobs:
           test -x update.sh
           grep -Fq '<Plugin>SageTVFFmpegPluginLinux</Plugin>' dist/local-install/SageTVPluginsDev.d/sagetv-webplayer.xml
           grep -Fq '<Plugin>SageTVFFmpegPluginWinx64</Plugin>' dist/local-install/SageTVPluginsDev.d/sagetv-webplayer-windows.xml
-          python scripts/project_manifest.py --check
