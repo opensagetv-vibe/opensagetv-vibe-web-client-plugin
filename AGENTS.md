@@ -22,3 +22,13 @@ Release validation is impact-based: rerun only gates the release changes could
 affect. Do not repeat unrelated completed gates. Run the full gate suite only
 when the user explicitly requests it or a broad dependency/architecture change
 requires it, and document that reason and scope.
+
+## Pre-commit task-list maintenance
+
+Immediately before every repository commit, clean `TASKS.md`: move every
+completed `[x]` item out of the active task sections and into
+`## Checklist change ledger`. Preserve stable IDs, acceptance evidence, order,
+and enough source/parent context to understand the result. Never delete
+completion history. Active task sections must contain unchecked work only;
+checked boxes may appear only inside the checklist change ledger. Regenerate
+the project manifest when the repository tracks one.
